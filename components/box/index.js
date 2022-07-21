@@ -2,34 +2,38 @@ import {LitElement, css, html} from 'lit'
 
 export default class Box extends LitElement {
   static properties = {
+    invert: {type: Boolean}
   }
 
   static styles = css`
-    :host {
+    :host div {
       border: var(--border-thin) solid;
       color: var(--color-dark);
       background-color: var(--color-light);
       padding: var(--s1);
     }
 
-    :host ::slotted(*) {
+    :host div ::slotted(*) {
       color: inherit;
     }
 
-    :host.invert {
-      /* ↓ Dark becomes light, and light becomes dark */
-      color: var(--color-light);
+    :host div.invert {
       background-color: var(--color-dark);
+      color: var(--color-light);
     }
   `
 
   constructor() {
     super()
+    this.invert = false
   }
 
   render() {
+    const classes = this.invert ? `invert` : ``
     return html`
-      <slot></slot>
+      <div class=${classes}>
+        <slot></slot>
+      </div>
     `
   }
 }

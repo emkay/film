@@ -169,6 +169,9 @@ export class App extends LitElement {
               <p>A box with multiple children and some longer text.</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </film-box>
+            <film-box ?invert=${true}>
+              <p>This is an inverted box.</p>
+            </film-box>
           </film-stack>
 
           <h3 id="film-components-center">Center</h3>
