@@ -1,5 +1,5 @@
 {
-  "name": "mkwc",
+  "name": "@mk/film",
   "version": "1.0.0",
   "description": "Lit Web Component Template",
   "main": "index.js",
