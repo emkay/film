@@ -1,8 +1,8 @@
-import {LitElement, css, html} from 'lit'
+import { LitElement, css, html } from 'lit'
 
 export default class Box extends LitElement {
   static properties = {
-    invert: {type: Boolean}
+    invert: { type: Boolean }
   }
 
   static styles = css`
@@ -23,13 +23,13 @@ export default class Box extends LitElement {
     }
   `
 
-  constructor() {
+  constructor () {
     super()
     this.invert = false
   }
 
-  render() {
-    const classes = this.invert ? `invert` : ``
+  render () {
+    const classes = this.invert ? 'invert' : ''
     return html`
       <div class=${classes}>
         <slot></slot>

@@ -1,12 +1,12 @@
-import {LitElement, css, html} from 'lit'
+import { LitElement, css, html } from 'lit'
 
 export default class Stack extends LitElement {
   // TODO: figure out if this is the API we want to support and how to do it. We have some limitations because of the
   // shadow DOM.
   static properties = {
-    space: {type: String},
-    recursive: {type: Boolean},
-    splitAfter: {type: Number}
+    space: { type: String },
+    recursive: { type: Boolean },
+    splitAfter: { type: Number }
   }
 
   static styles = css`
@@ -17,14 +17,14 @@ export default class Stack extends LitElement {
     }
   `
 
-  constructor() {
+  constructor () {
     super()
-    this.space = `var(--s1)`
+    this.space = 'var(--s1)'
     this.recursive = false
     this.splitAfter = null
   }
 
-  render() {
+  render () {
     console.debug(this.space, this.recursive, this.splitAfter)
     return html`<slot></slot>`
   }

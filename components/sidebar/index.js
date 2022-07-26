@@ -1,4 +1,4 @@
-import {LitElement, css, html} from 'lit'
+import { LitElement, css, html } from 'lit'
 
 export default class Sidebar extends LitElement {
   static properties = {
@@ -8,7 +8,7 @@ export default class Sidebar extends LitElement {
     :host {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--s5);
+      gap: var(--s3);
     }
 
     :host > ::slotted(:first-child) {
@@ -22,15 +22,14 @@ export default class Sidebar extends LitElement {
     }
   `
 
-  constructor() {
+  constructor () {
     super()
   }
 
-  render() {
+  render () {
     return html`
       <slot></slot>
     `
-
   }
 }
 

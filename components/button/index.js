@@ -1,15 +1,14 @@
-import {LitElement, css, html} from 'lit'
+import { LitElement, css, html } from 'lit'
 
 export default class Button extends LitElement {
   static properties = {
-    invert: {type: Boolean}
+    invert: { type: Boolean }
   }
 
   static styles = css`
     :host button {
       background-color: var(--color-dark);
-      border-radius: var(--s1);
-      border-width: var(--border-thin);
+      border-radius: var(--s-3);
       box-shadow: 0.1em -0.1em 0.1em 0em #969696;
       color: var(--color-light);
       cursor: pointer;
@@ -23,13 +22,13 @@ export default class Button extends LitElement {
     }
 `
 
-  constructor() {
+  constructor () {
     super()
     this.invert = false
   }
 
-  render() {
-    const classes = this.invert ? `invert` : ``
+  render () {
+    const classes = this.invert ? 'invert' : ''
     return html`
       <button class=${classes}><slot></slot></button>
     `

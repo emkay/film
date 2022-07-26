@@ -1,4 +1,4 @@
-import {LitElement, css, html} from 'lit'
+import { LitElement, css, html } from 'lit'
 
 export default class Cluster extends LitElement {
   static properties = {
@@ -12,15 +12,14 @@ export default class Cluster extends LitElement {
     }
   `
 
-  constructor() {
+  constructor () {
     super()
   }
 
-  render() {
+  render () {
     return html`
       <slot></slot>
     `
-
   }
 }
 

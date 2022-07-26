@@ -3,8 +3,8 @@ export default {
   watch: true,
   appIndex: 'index.html',
   nodeResolve: {
-    exportConditions: ['development'],
-    //dedupe: true,
+    exportConditions: ['development']
+    // dedupe: true,
   },
   esbuildTarget: 'auto'
 }

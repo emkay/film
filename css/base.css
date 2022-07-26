@@ -6,11 +6,16 @@
   --border-thick: var(--s-2);
 
 
+/*   --color-dark: #000; */
+/*   --color-light: #eee; */
+/*   --color-links: #FFAD00; */
+
   --color-dark: #000;
-  --color-light: #eee;
+  --color-light: #F5EDE1;
+  --color-links: #0643d1;
 
   /* modular scaling */
-  --ratio: 1.5;
+  --ratio: 1.30;
   --s-5: calc(var(--s-4) / var(--ratio));
   --s-4: calc(var(--s-3) / var(--ratio));
   --s-3: calc(var(--s-2) / var(--ratio));
@@ -24,7 +29,7 @@
   --s5: calc(var(--s4) * var(--ratio));
 
   /* measure value */
-  --measure: 75ch;
+  --measure: 100ch;
 
   /* space used in cluster */
   --space: 1rem;
