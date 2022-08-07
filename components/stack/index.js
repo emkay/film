@@ -25,7 +25,6 @@ export default class Stack extends LitElement {
   }
 
   render () {
-    console.debug(this.space, this.recursive, this.splitAfter)
     return html`<slot></slot>`
   }
 }

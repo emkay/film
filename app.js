@@ -1,11 +1,5 @@
 import { LitElement, css, html } from 'lit'
-import Stack from './components/stack/index.js'
-import Box from './components/box/index.js'
-import Center from './components/center/index.js'
-import Cluster from './components/cluster/index.js'
-import Sidebar from './components/sidebar/index.js'
-import Button from './components/button/index.js'
-import Link from './components/link/index.js'
+import {Stack, Box, Center, Cluster, Sidebar, Button, Link} from './components'
 
 export class App extends LitElement {
   static properties = {}
