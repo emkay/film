@@ -1,5 +1,9 @@
 import { LitElement, css, html } from 'lit'
 import {Stack, Box, Center, Cluster, Sidebar, Button, Link} from './components'
+import { stackExample, boxExample, centerExample, clusterExample, sidebarExample, buttonExample, linkExample} from './examples'
+
+import { createBrowserHistory } from 'history'
+const history = createBrowserHistory()
 
 export class App extends LitElement {
   static properties = {}
@@ -7,6 +11,7 @@ export class App extends LitElement {
   static styles = css`
     * {
       font-family: "Fira Sans", sans-serif;
+      color: var(--font-color-primary)
       max-inline-size: var(--measure);
     }
 
@@ -131,10 +136,11 @@ export class App extends LitElement {
 
     nav h1.title a {
       color: var(--color-dark);
+      text-decoration: none;
     }
 
     img.logo {
-      width: 100px;
+      width: 15%;
     }
 
     /* hacks:
@@ -155,34 +161,54 @@ export class App extends LitElement {
     super()
     this.componentNavLinks = [
       {
-        href: '#film-components-stack',
+        href: '/stack',
         text: 'Stack'
       },
       {
-        href: '#film-components-box',
+        href: '/box',
         text: 'Box'
       },
       {
-        href: '#film-components-center',
+        href: '/center',
         text: 'Center'
       },
       {
-        href: '#film-components-cluster',
+        href: '/cluster',
         text: 'Cluster'
       },
       {
-        href: '#film-components-sidebar',
+        href: '/sidebar',
         text: 'Sidebar'
       },
       {
-        href: '#film-components-button',
+        href: '/button',
         text: 'Button'
       },
       {
-        href: '#film-components-link',
+        href: '/link',
         text: 'Link'
       }
     ]
+    console.log(`constructor:history.location`, history.location)
+    let unlisten = history.listen(({ location, action }) => {
+      console.log(action, location.pathname, location.state);
+    })
+  }
+
+  componentRouter () {
+    const pathname = history.location.pathname
+    switch (pathname) {
+      case '/stack': return stackExample()
+      case '/box': return boxExample()
+      case '/center': return centerExample()
+      case '/cluster': return clusterExample()
+      case '/sidebar': return sidebarExample()
+      case '/button': return buttonExample()
+      case '/link': return linkExample()
+      default: return html`
+        <p>Hello! This is the Film Design Language. These are opinionated and basic web components.</p>
+      `
+    }
   }
 
   render () {
@@ -207,98 +233,8 @@ export class App extends LitElement {
           <film-stack>
             <h1><span>Film Design</span></h1>
             <img class="logo" src="www/film.svg" />
-
-            <h2 id="film-components">Components</h2>
-            <film-box>
-              <h3 id="film-components-stack">Stack</h3>
-              <film-stack>
-                <p>Hello! This is the Film Design Language. These are opinionated and basic web components. This is an example of a paragraph in a Stack.</p>
-                <p>This is the second paragraph. This should stack and have some space between it and the first paragraph.</p>
-                <p>This is the third paragraph. This should stack and have some space between it and the second paragraph.</p>
-              </film-stack>
-            </film-box>
-
-            <film-box>
-              <h3 id="film-components-box">Box</h3>
-              <film-stack>
-                <h4>Simple Box</h4>
-                <film-box>
-                  <p>This is a box.</p>
-                </film-box>
-                <film-box>
-                  <p>This is another box.</p>
-                </film-box>
-                <film-box>
-                  <p>A box with multiple children and some longer text.</p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </film-box>
-
-                <h4>Inverted Box</h4>
-                <film-box ?invert=${true}>
-                  <p>This is an inverted box.</p>
-                </film-box>
-
-                <h4>Nested Box</h4>
-                <film-box>
-                  <p>A Box</p>
-                  <film-box>
-                    <p>within a Box</p>
-                    <film-box>
-                      <p>within a Box.</p>
-                    </film-box>
-                  </film-box>
-                </film-box>
-              </film-stack>
-            </film-box>
-
-            <film-box>
-              <h3 id="film-components-center">Center</h3>
-              <film-stack>
-                <film-center>
-                  <film-box>
-                    <p>This is a box that is centered.</p>
-                  </film-box>
-                </film-center>
-
-                <film-box>
-                  <film-center>
-                    <p>Content is centered.</p>
-                  </film-center>
-                </film-box>
-              </film-stack>
-            </film-box>
-
-            <film-box>
-              <h3 id="film-components-cluster">Cluster</h3>
-              <film-cluster>
-                <p>This is a paragraph inside a cluster.</p>
-                <p>This is another paragraph inside a cluster.</p>
-                <p>Below are two boxes in a cluster.</p>
-                <film-box>Hello</film-box>
-                <film-box>World</film-box>
-              </film-cluster>
-            </film-box>
-
-            <film-box>
-              <h3 id="film-components-sidebar">Sidebar</h3>
-              <film-stack>
-                <film-sidebar>
-                  <input type="text"/>
-                  <film-button>Search</flim-button>
-                </film-sidebar>
-              </film-stack>
-            </film-box>
-
-            <film-box>
-              <h3 id="film-components-button">Button</h3>
-              <film-button>Button</film-button>
-              <film-button ?invert=${true}>Invert Button</film-button>
-            </film-box>
-
-            <film-box>
-              <h3 id="film-components-link">Link</h3>
-              <film-link href="#">This is a link example</film-link>
-            </film-box>
+            <film-link href="https://github.com/emkay/film"><img class="logo" src="www/github.svg" /></film-link>
+            ${this.componentRouter()}
           </film-stack>
         </film-box>
       </film-sidebar>

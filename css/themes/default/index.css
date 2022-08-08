@@ -1,0 +1,8 @@
+@import '../../base.css';
+@import './application/colors.css';
+@import './application/font.css';
+
+:root {
+  --theme-color-background: var(--color-antique-white);
+  --theme-color-contant: var(--color-black);
+}

@@ -1,0 +1,25 @@
+@import '../definitions/colors.css';
+
+:root {
+  --primary-color: var(--color-antique-white);
+  --secondary-color: var(--color-azalea);
+
+  /* Button */
+  --button-primary-color: var(--color-tropical-blue);
+  --button-primary-color-invert: var(--color-jacko-bean);
+  --button-primary-color-text-invert: var(--color-antique-white);
+
+  /* Button Primary Hover */
+  --button-primary-color-hover: var(--color-wheat);
+  --button-primary-color-hover-invert: var(--color-downriver);
+
+  /* Button Primary Active */
+  --button-primary-color-active: var(--color-wheat);
+  --button-primary-color-active-invert: var(--color-downriver);
+
+  /* Button Primary Focus */
+  --button-primary-color-focus: var(--color-wheat);
+  --button-primary-color-focus-invert: var(--color-downriver);
+
+  --button-secondary-color: var(--color-selago);
+}
