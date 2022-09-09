@@ -1,6 +1,6 @@
 {
   "name": "@mk/film",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0",
   "description": "Lit Web Component Template",
   "main": "index.js",
   "scripts": {
