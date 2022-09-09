@@ -1,0 +1,6 @@
+@import '../definitions/colors.css';
+@import '../definitions/font.css';
+
+:root {
+  --font-color-primary: var(--color-tiber);
+}

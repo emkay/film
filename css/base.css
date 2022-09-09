@@ -5,14 +5,6 @@
   --border-thin: var(--s-5);
   --border-thick: var(--s-2);
 
-/*   --color-dark: #000; */
-/*   --color-light: #eee; */
-/*   --color-links: #FFAD00; */
-
-  --color-dark: #000;
-  --color-light: #F5EDE1;
-  --color-links: #0643d1;
-
   /* modular scaling */
   --ratio: 1.50;
   --s-5: calc(var(--s-4) / var(--ratio));
