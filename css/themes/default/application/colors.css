@@ -4,6 +4,11 @@
   --primary-color: var(--color-antique-white);
   --secondary-color: var(--color-azalea);
 
+  /* Surface + text roles consumed by the layout components */
+  --color-light: var(--color-antique-white);
+  --color-dark: var(--color-tiber);
+  --color-links: var(--color-downriver);
+
   /* Button */
   --button-primary-color: var(--color-tropical-blue);
   --button-primary-color-invert: var(--color-jacko-bean);

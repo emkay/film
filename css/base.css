@@ -1,29 +1,55 @@
 :root {
   /*
-   * border
+   * Modular scale
+   * -------------
+   * Every size in Film is a step on a single geometric scale, so the whole UI
+   * stays in proportion. `--ratio` is the multiplier between steps and `--s0`
+   * is the base (1rem). See https://every-layout.dev/rudiments/modular-scale/
+   *
+   * The calc() chain below is the widely-supported fallback. Where the CSS
+   * `pow()` function is available the scale is redefined more directly below.
    */
-  --border-thin: var(--s-5);
-  --border-thick: var(--s-2);
-
-  /* modular scaling */
-  --ratio: 1.50;
-  --s-5: calc(var(--s-4) / var(--ratio));
-  --s-4: calc(var(--s-3) / var(--ratio));
-  --s-3: calc(var(--s-2) / var(--ratio));
-  --s-2: calc(var(--s-1) / var(--ratio));
-  --s-1: calc(var(--s0) / var(--ratio));
+  --ratio: 1.5;
   --s0: 1rem;
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-3: calc(var(--s-2) / var(--ratio));
+  --s-4: calc(var(--s-3) / var(--ratio));
+  --s-5: calc(var(--s-4) / var(--ratio));
   --s1: calc(var(--s0) * var(--ratio));
   --s2: calc(var(--s1) * var(--ratio));
   --s3: calc(var(--s2) * var(--ratio));
   --s4: calc(var(--s3) * var(--ratio));
   --s5: calc(var(--s4) * var(--ratio));
 
-  /* measure value */
+  /* Borders derived from the scale. */
+  --border-thin: var(--s-5);
+  --border-thick: var(--s-2);
+
+  /* Ideal line length for readable text (a unit of measure, not px). */
   --measure: 200ch;
 
-  /* space used in cluster */
-  --space: 1rem;
+  /* Fluid base font size: grows gently with the viewport. */
+  font-size: calc(0.333vw + 1em);
+}
 
-  font-size: calc(.333vw + 1em);
+/*
+ * pow() upgrade. `pow(ratio, n)` is a number, so each step is that multiplier
+ * applied to the 1rem base. Only browsers that understand pow() apply these,
+ * everything else keeps the calc() chain above.
+ */
+@supports (font-size: pow(2, 3)) {
+  :root {
+    --s-5: calc(1rem / pow(var(--ratio), 5));
+    --s-4: calc(1rem / pow(var(--ratio), 4));
+    --s-3: calc(1rem / pow(var(--ratio), 3));
+    --s-2: calc(1rem / pow(var(--ratio), 2));
+    --s-1: calc(1rem / pow(var(--ratio), 1));
+    --s0: 1rem;
+    --s1: calc(1rem * pow(var(--ratio), 1));
+    --s2: calc(1rem * pow(var(--ratio), 2));
+    --s3: calc(1rem * pow(var(--ratio), 3));
+    --s4: calc(1rem * pow(var(--ratio), 4));
+    --s5: calc(1rem * pow(var(--ratio), 5));
+  }
 }

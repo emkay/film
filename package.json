@@ -1,45 +1,59 @@
 {
   "name": "@mk/film",
   "version": "1.0.0-alpha",
-  "description": "Lit Web Component Template",
-  "main": "index.js",
+  "description": "Film — an opinionated Lit web component library built on modular scale and every-layout primitives",
+  "type": "module",
+  "main": "./dist/film.js",
+  "module": "./dist/film.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/film.js"
+    },
+    "./css/*": "./css/*"
+  },
+  "files": [
+    "dist",
+    "css",
+    "src"
+  ],
+  "sideEffects": [
+    "**/*.css",
+    "./src/**/*.ts"
+  ],
   "scripts": {
-    "build": "rollup -c",
-    "fix": "standard --fix",
-    "start": "wds",
-    "lint": "standard",
+    "dev": "vite",
+    "build": "vite build",
+    "build:lib": "vite build --mode lib",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emkay/mkwc.git"
+    "url": "git+https://github.com/emkay/film.git"
   },
-  "keywords": [],
+  "keywords": [
+    "lit",
+    "web-components",
+    "every-layout",
+    "modular-scale",
+    "design-system"
+  ],
   "author": "",
-  "license": "",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/emkay/mkwc/issues"
+    "url": "https://github.com/emkay/film/issues"
   },
-  "homepage": "https://github.com/emkay/mkwc#readme",
+  "homepage": "https://github.com/emkay/film#readme",
   "dependencies": {
-    "lit": "^2.2.7"
+    "lit": "^3.2.1"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@rollup/plugin-replace": "^4.0.0",
-    "@web/dev-server": "^0.1.32",
-    "@web/dev-server-esbuild": "^0.3.1",
-    "@web/dev-server-rollup": "^0.3.19",
-    "@web/rollup-plugin-copy": "^0.3.0",
-    "@web/rollup-plugin-html": "^1.10.3",
-    "history": "^5.3.0",
-    "postcss": "^8.4.16",
-    "rollup": "^2.77.2",
-    "rollup-plugin-minify-html-literals": "^1.2.6",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-summary": "^1.4.3",
-    "rollup-plugin-terser": "^7.0.2",
-    "standard": "^17.0.0"
-  },
-  "type": "module"
+    "@types/node": "^22.20.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7",
+    "vite-plugin-dts": "^4.4.0"
+  }
 }
