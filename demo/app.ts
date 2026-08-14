@@ -1,8 +1,9 @@
 import { LitElement, css, html, type TemplateResult } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, state } from 'lit/decorators.js'
 
 // Registers every <film-*> element as a side effect.
 import '../src/index.js'
+import type { Switch } from '../src/index.js'
 
 import {
   alertExample,
@@ -150,10 +151,35 @@ const asset = (name: string): string => `${base}${name}`
 export class App extends LitElement {
   private readonly onHashChange = () => this.requestUpdate()
 
+  /** When on, the nav and content panes each scroll independently. */
+  @state() private independentScroll = true
+
+  private readonly onToggleScroll = (event: Event): void => {
+    this.independentScroll = (event.target as Switch).checked
+  }
+
   static styles = css`
     :host {
+      display: block;
       font-family: "Fira Sans", sans-serif;
       color: var(--font-color-primary);
+    }
+
+    /* App-shell height context so the Sidebar's panes have something to scroll
+       within. Only above the wrap breakpoint — narrow screens stack and flow. */
+    @media (min-width: 48rem) {
+      main.app-shell {
+        block-size: 100dvh;
+        overflow: hidden;
+      }
+
+      main.app-shell film-sidebar {
+        block-size: 100%;
+      }
+    }
+
+    .scroll-toggle {
+      font-size: var(--s-1);
     }
 
     *,
@@ -232,8 +258,8 @@ export class App extends LitElement {
 
   render () {
     return html`
-      <main>
-        <film-sidebar>
+      <main class=${this.independentScroll ? 'app-shell' : ''}>
+        <film-sidebar scroll=${this.independentScroll ? 'both' : 'none'}>
           <film-box>
             <nav>
               <film-stack space="var(--s1)">
@@ -245,6 +271,11 @@ export class App extends LitElement {
                     <img class="social" src=${asset('github.svg')} alt="GitHub" />
                   </film-link>
                 </film-stack>
+                <film-switch
+                  class="scroll-toggle"
+                  ?checked=${this.independentScroll}
+                  @change=${this.onToggleScroll}
+                >Independent scroll</film-switch>
                 ${sections.map(
                   (section) => html`
                     <div>

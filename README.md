@@ -38,7 +38,7 @@ import '@mk/film/css/themes/default/index.css'
 | `film-box`       | Padded, bordered box (`invert`).                            |
 | `film-center`    | Horizontally centres content within `--measure`.            |
 | `film-cluster`   | Wrapping row of items with an even gap.                     |
-| `film-sidebar`   | Two-part sidebar/content layout that collapses when tight.  |
+| `film-sidebar`   | Two-part sidebar/content layout that collapses when tight. `scroll="start\|end\|both"` gives a pane its own scrollbar (needs a bounded host height). |
 | `film-grid`      | Auto-fit responsive grid (`min`, `space`).                  |
 | `film-switcher`  | Row that flips to a stack below a `threshold` (or `limit`). |
 | `film-cover`     | Fills a min height and centres content, with top/bottom.    |
