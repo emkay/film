@@ -1,5 +1,6 @@
-import { LitElement, css, html, nothing } from 'lit'
+import { css, html, nothing } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { FilmElement } from '../internal/film-element.js'
 
 /**
  * Button — a themed button. Sizing is expressed in `em` so it scales with the
@@ -8,7 +9,7 @@ import { customElement, property } from 'lit/decorators.js'
  * @slot - The button label.
  */
 @customElement('film-button')
-export class Button extends LitElement {
+export class Button extends FilmElement {
   /** Use the inverted colour treatment. */
   @property({ type: Boolean, reflect: true })
   invert = false

@@ -1,5 +1,6 @@
-import { LitElement, css, html, nothing } from 'lit'
+import { css, html, nothing } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { FilmElement } from '../internal/film-element.js'
 
 /**
  * A padded box with a border. The padding and border derive from the modular
@@ -8,7 +9,7 @@ import { customElement, property } from 'lit/decorators.js'
  * @slot - Content placed inside the box.
  */
 @customElement('film-box')
-export class Box extends LitElement {
+export class Box extends FilmElement {
   /** Swap foreground and background colours. */
   @property({ type: Boolean, reflect: true })
   invert = false

@@ -1,5 +1,6 @@
-import { LitElement, css, html } from 'lit'
+import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { FilmElement } from '../internal/film-element.js'
 
 /**
  * Link — a themed anchor.
@@ -7,7 +8,7 @@ import { customElement, property } from 'lit/decorators.js'
  * @slot - The link text or content.
  */
 @customElement('film-link')
-export class Link extends LitElement {
+export class Link extends FilmElement {
   /** The destination URL. */
   @property({ type: String })
   href = ''

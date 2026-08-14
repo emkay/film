@@ -1,5 +1,6 @@
-import { LitElement, css, html } from 'lit'
+import { css, html } from 'lit'
 import { customElement } from 'lit/decorators.js'
+import { FilmElement } from '../internal/film-element.js'
 
 /**
  * Center — horizontally centres its content within a sane maximum measure.
@@ -7,7 +8,7 @@ import { customElement } from 'lit/decorators.js'
  * @slot - The content to centre.
  */
 @customElement('film-center')
-export class Center extends LitElement {
+export class Center extends FilmElement {
   static styles = css`
     :host {
       box-sizing: content-box;

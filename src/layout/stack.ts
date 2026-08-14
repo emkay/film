@@ -1,5 +1,6 @@
-import { LitElement, css, html } from 'lit'
+import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { FilmElement } from '../internal/film-element.js'
 
 /**
  * Stack — inserts even, scale-based spacing between its children and nothing
@@ -9,7 +10,7 @@ import { customElement, property } from 'lit/decorators.js'
  * @slot - The elements to space out vertically.
  */
 @customElement('film-stack')
-export class Stack extends LitElement {
+export class Stack extends FilmElement {
   /** The space between children. Any length; defaults to a modular-scale step. */
   @property({ type: String })
   space = 'var(--s1)'
@@ -42,7 +43,7 @@ export class Stack extends LitElement {
   }
 
   updated () {
-    this.style.setProperty('--stack-space', this.space)
+    this.reflectStyleProps({ '--stack-space': this.space })
   }
 
   render () {

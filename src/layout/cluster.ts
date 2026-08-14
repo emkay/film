@@ -1,5 +1,6 @@
-import { LitElement, css, html } from 'lit'
+import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { FilmElement } from '../internal/film-element.js'
 
 /**
  * Cluster — lays children out in a row that wraps, with even gaps in both axes.
@@ -8,7 +9,7 @@ import { customElement, property } from 'lit/decorators.js'
  * @slot - The items to cluster.
  */
 @customElement('film-cluster')
-export class Cluster extends LitElement {
+export class Cluster extends FilmElement {
   /** The gap between clustered items. Defaults to a modular-scale step. */
   @property({ type: String })
   space = 'var(--s0)'
@@ -23,7 +24,7 @@ export class Cluster extends LitElement {
   `
 
   updated () {
-    this.style.setProperty('--cluster-space', this.space)
+    this.reflectStyleProps({ '--cluster-space': this.space })
   }
 
   render () {

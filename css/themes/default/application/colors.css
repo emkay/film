@@ -9,6 +9,12 @@
   --color-dark: var(--color-tiber);
   --color-links: var(--color-downriver);
 
+  /* Status surfaces (alert, badge) */
+  --surface-info: var(--color-tropical-blue);
+  --surface-success: var(--color-feta);
+  --surface-warning: var(--color-wheat);
+  --surface-danger: var(--color-azalea);
+
   /* Button */
   --button-primary-color: var(--color-tropical-blue);
   --button-primary-color-invert: var(--color-jacko-bean);

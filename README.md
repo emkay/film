@@ -30,15 +30,27 @@ import '@mk/film/css/themes/default/index.css'
 
 ## Components
 
-| Element        | Purpose                                                    |
-| -------------- | ---------------------------------------------------------- |
-| `film-stack`   | Even, scale-based vertical spacing between children.       |
-| `film-box`     | Padded, bordered box (`invert` for reversed colours).      |
-| `film-center`  | Horizontally centres content within `--measure`.           |
-| `film-cluster` | Wrapping row of items with an even gap.                    |
-| `film-sidebar` | Two-part sidebar/content layout that collapses when tight. |
-| `film-link`    | A themed anchor (`href`).                                  |
-| `film-button`  | A themed button (`invert`, `disabled`).                    |
+**Layout** (`src/layout`)
+
+| Element          | Purpose                                                     |
+| ---------------- | ----------------------------------------------------------- |
+| `film-stack`     | Even, scale-based vertical spacing between children.        |
+| `film-box`       | Padded, bordered box (`invert`).                            |
+| `film-center`    | Horizontally centres content within `--measure`.            |
+| `film-cluster`   | Wrapping row of items with an even gap.                     |
+| `film-sidebar`   | Two-part sidebar/content layout that collapses when tight.  |
+| `film-grid`      | Auto-fit responsive grid (`min`, `space`).                  |
+| `film-switcher`  | Row that flips to a stack below a `threshold` (or `limit`). |
+| `film-cover`     | Fills a min height and centres content, with top/bottom.    |
+| `film-frame`     | Crops slotted media to a fixed `ratio`.                     |
+| `film-reel`      | Horizontally scrolling, snap-aligned strip.                 |
+| `film-imposter`  | Overlays content centred on a positioned ancestor.          |
+| `film-icon`      | Sizes a slotted SVG to the adjacent text.                   |
+
+**Actions** (`src/actions`) — `film-button`, `film-link`.
+**Typography** (`src/typography`) — `film-divider`, `film-visually-hidden`.
+**Data** (`src/data`) — `film-card` (with `media` / `footer` slots).
+**Feedback** (`src/feedback`) — `film-alert`, `film-badge` (both take a `variant`).
 
 ## Modular scale
 
@@ -57,5 +69,7 @@ npm run build      # build the demo site into dist/
 npm run build:lib  # build the publishable library into dist/
 ```
 
-Written in TypeScript with Lit decorators. The library source lives in `src/`,
-the demo site in `demo/`, and the theme/scale CSS in `css/`.
+Written in TypeScript with Lit decorators. The library source lives in `src/`
+(grouped into `layout`, `actions`, `typography`, `data`, `feedback`, with shared
+internals in `internal`), the demo site in `demo/`, and the theme/scale CSS in
+`css/`. Every component extends `FilmElement`.

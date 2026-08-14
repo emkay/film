@@ -1,5 +1,6 @@
-import { LitElement, css, html } from 'lit'
+import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { FilmElement } from '../internal/film-element.js'
 
 /**
  * Sidebar — a two-element layout where one element (the sidebar) keeps its
@@ -9,7 +10,7 @@ import { customElement, property } from 'lit/decorators.js'
  * @slot - Exactly two children: the sidebar and the main content.
  */
 @customElement('film-sidebar')
-export class Sidebar extends LitElement {
+export class Sidebar extends FilmElement {
   /** The gap between the sidebar and the main content. */
   @property({ type: String })
   space = 'var(--s3)'
@@ -37,8 +38,10 @@ export class Sidebar extends LitElement {
   `
 
   updated () {
-    this.style.setProperty('--sidebar-space', this.space)
-    this.style.setProperty('--sidebar-content-min', this.contentMin)
+    this.reflectStyleProps({
+      '--sidebar-space': this.space,
+      '--sidebar-content-min': this.contentMin
+    })
   }
 
   render () {
