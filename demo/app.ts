@@ -6,23 +6,44 @@ import '../src/index.js'
 
 import {
   alertExample,
+  avatarExample,
   badgeExample,
   boxExample,
+  breadcrumbExample,
   buttonExample,
   cardExample,
   centerExample,
+  checkboxExample,
   clusterExample,
+  colorPickerExample,
+  copyButtonExample,
   coverExample,
+  detailsExample,
+  dialogExample,
   dividerExample,
+  drawerExample,
+  dropdownExample,
   frameExample,
   gridExample,
   iconExample,
   imposterExample,
+  inputExample,
   linkExample,
+  menuExample,
+  progressBarExample,
+  radioExample,
+  rangeExample,
   reelExample,
   sidebarExample,
+  splitPanelExample,
   stackExample,
-  switcherExample
+  switchExample,
+  switcherExample,
+  tableExample,
+  tabsExample,
+  tagExample,
+  tooltipExample,
+  treeExample
 } from './examples/index.js'
 
 interface NavLink {
@@ -51,14 +72,45 @@ const sections: NavSection[] = [
       { slug: 'frame', text: 'Frame', render: frameExample },
       { slug: 'reel', text: 'Reel', render: reelExample },
       { slug: 'imposter', text: 'Imposter', render: imposterExample },
-      { slug: 'icon', text: 'Icon', render: iconExample }
+      { slug: 'icon', text: 'Icon', render: iconExample },
+      { slug: 'split-panel', text: 'Split Panel', render: splitPanelExample }
     ]
   },
   {
     title: 'Actions',
     links: [
       { slug: 'button', text: 'Button', render: buttonExample },
-      { slug: 'link', text: 'Link', render: linkExample }
+      { slug: 'link', text: 'Link', render: linkExample },
+      { slug: 'copy-button', text: 'Copy Button', render: copyButtonExample }
+    ]
+  },
+  {
+    title: 'Forms',
+    links: [
+      { slug: 'input', text: 'Input', render: inputExample },
+      { slug: 'checkbox', text: 'Checkbox', render: checkboxExample },
+      { slug: 'radio', text: 'Radio', render: radioExample },
+      { slug: 'switch', text: 'Switch', render: switchExample },
+      { slug: 'range', text: 'Range', render: rangeExample },
+      { slug: 'color-picker', text: 'Color Picker', render: colorPickerExample }
+    ]
+  },
+  {
+    title: 'Navigation',
+    links: [
+      { slug: 'breadcrumb', text: 'Breadcrumb', render: breadcrumbExample },
+      { slug: 'menu', text: 'Menu', render: menuExample },
+      { slug: 'tabs', text: 'Tabs', render: tabsExample },
+      { slug: 'tree', text: 'Tree', render: treeExample }
+    ]
+  },
+  {
+    title: 'Overlays',
+    links: [
+      { slug: 'dialog', text: 'Dialog', render: dialogExample },
+      { slug: 'drawer', text: 'Drawer', render: drawerExample },
+      { slug: 'dropdown', text: 'Dropdown', render: dropdownExample },
+      { slug: 'tooltip', text: 'Tooltip', render: tooltipExample }
     ]
   },
   {
@@ -67,13 +119,20 @@ const sections: NavSection[] = [
   },
   {
     title: 'Data',
-    links: [{ slug: 'card', text: 'Card', render: cardExample }]
+    links: [
+      { slug: 'card', text: 'Card', render: cardExample },
+      { slug: 'avatar', text: 'Avatar', render: avatarExample },
+      { slug: 'details', text: 'Details', render: detailsExample },
+      { slug: 'table', text: 'Table', render: tableExample }
+    ]
   },
   {
     title: 'Feedback',
     links: [
       { slug: 'alert', text: 'Alert', render: alertExample },
-      { slug: 'badge', text: 'Badge', render: badgeExample }
+      { slug: 'badge', text: 'Badge', render: badgeExample },
+      { slug: 'tag', text: 'Tag', render: tagExample },
+      { slug: 'progress-bar', text: 'Progress Bar', render: progressBarExample }
     ]
   }
 ]

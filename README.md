@@ -46,11 +46,21 @@ import '@mk/film/css/themes/default/index.css'
 | `film-reel`      | Horizontally scrolling, snap-aligned strip.                 |
 | `film-imposter`  | Overlays content centred on a positioned ancestor.          |
 | `film-icon`      | Sizes a slotted SVG to the adjacent text.                   |
+| `film-split-panel` | Two panes with a draggable, keyboard-operable divider.    |
 
-**Actions** (`src/actions`) — `film-button`, `film-link`.
+**Actions** (`src/actions`) — `film-button`, `film-link`, `film-copy-button`.
+
 **Typography** (`src/typography`) — `film-divider`, `film-visually-hidden`.
-**Data** (`src/data`) — `film-card` (with `media` / `footer` slots).
-**Feedback** (`src/feedback`) — `film-alert`, `film-badge` (both take a `variant`).
+
+**Forms** (`src/forms`) — form-associated controls (participate in a native `<form>` via `ElementInternals`): `film-input`, `film-checkbox`, `film-radio` / `film-radio-group`, `film-switch`, `film-range`, `film-color-picker`.
+
+**Navigation** (`src/navigation`) — `film-breadcrumb` / `film-breadcrumb-item`, `film-menu` / `film-menu-item`, `film-tabs` / `film-tab` / `film-tab-panel`, `film-tree` / `film-tree-item`.
+
+**Overlays** (`src/overlays`) — `film-dialog` and `film-drawer` (native `<dialog>` top layer), `film-dropdown` and `film-tooltip` (Popover API + a hand-rolled positioning helper).
+
+**Data** (`src/data`) — `film-card` (with `media` / `footer` slots), `film-avatar`, `film-details`, `film-table` (data-driven via `columns` / `rows`).
+
+**Feedback** (`src/feedback`) — `film-alert`, `film-badge`, `film-tag` (`variant`, `removable`), `film-progress-bar`.
 
 ## Modular scale
 
