@@ -30,16 +30,16 @@ export class Card extends FilmElement {
     .card {
       display: flex;
       flex-direction: column;
-      border: var(--border-thin) solid var(--color-dark);
-      border-radius: var(--s-1);
-      background-color: var(--color-light);
-      color: var(--color-dark);
+      border: var(--border-thin) solid var(--film-color-border);
+      border-radius: var(--film-radius-lg);
+      background-color: var(--film-color-surface);
+      color: var(--film-color-text);
       overflow: hidden;
     }
 
     :host([invert]) .card {
-      background-color: var(--color-dark);
-      color: var(--color-light);
+      background-color: var(--film-color-inverted-surface);
+      color: var(--film-color-inverted-text);
     }
 
     .media ::slotted(*) {

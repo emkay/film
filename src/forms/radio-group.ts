@@ -1,4 +1,4 @@
-import { css, html, nothing } from 'lit'
+import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
 import type { Radio } from './radio.js'
@@ -57,6 +57,14 @@ export class RadioGroup extends FilmFormControl {
     this.syncForm()
   }
 
+  updated (changed: PropertyValues<this>): void {
+    // Keep selection + form value in sync with programmatic `value` changes.
+    if (changed.has('value')) {
+      this.syncSelection()
+      this.syncForm()
+    }
+  }
+
   private readonly onClick = (event: MouseEvent): void => {
     if (this.disabled) return
     const radio = (event.target as Element).closest('film-radio') as Radio | null
@@ -72,8 +80,10 @@ export class RadioGroup extends FilmFormControl {
     if (options.length === 0) return
     const current = options.findIndex((radio) => radio.checked)
     const forward = event.key === 'ArrowDown' || event.key === 'ArrowRight'
-    const next = (current + (forward ? 1 : -1) + options.length) % options.length
-    const target = options[Math.max(0, next)]
+    const next = current === -1
+      ? (forward ? 0 : options.length - 1)
+      : (current + (forward ? 1 : -1) + options.length) % options.length
+    const target = options[next]
     if (target) this.select(target, true)
   }
 

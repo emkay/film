@@ -54,7 +54,7 @@ export class SplitPanel extends FilmElement {
     .divider {
       flex: 0 0 auto;
       inline-size: var(--s-2);
-      background-color: var(--color-dark);
+      background-color: var(--film-color-inverted-surface);
       cursor: col-resize;
       touch-action: none;
     }
@@ -66,7 +66,7 @@ export class SplitPanel extends FilmElement {
     }
 
     .divider:focus-visible {
-      outline: var(--border-thin) solid var(--color-links);
+      outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: 2px;
     }
   `

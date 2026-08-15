@@ -29,20 +29,20 @@ export class Dialog extends FilmElement {
       border: none;
       background: transparent;
       max-inline-size: min(90vw, 40rem);
-      color: var(--color-dark);
+      color: var(--film-color-text);
     }
 
     dialog::backdrop {
-      background-color: rgb(0 0 0 / 0.4);
+      background-color: var(--film-overlay-scrim);
     }
 
     .panel {
       display: flex;
       flex-direction: column;
       gap: var(--s0);
-      background-color: var(--color-light);
-      border: var(--border-thin) solid var(--color-dark);
-      border-radius: var(--s-1);
+      background-color: var(--film-color-surface);
+      border: var(--border-thin) solid var(--film-color-border);
+      border-radius: var(--film-radius-lg);
       padding: var(--s1);
     }
 

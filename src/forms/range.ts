@@ -34,11 +34,11 @@ export class Range extends FilmFormControl {
 
     input {
       inline-size: 100%;
-      accent-color: var(--color-dark);
+      accent-color: var(--film-color-text);
     }
 
     :host([disabled]) {
-      opacity: 0.6;
+      opacity: var(--film-disabled-opacity);
     }
   `
 
@@ -67,6 +67,11 @@ export class Range extends FilmFormControl {
     this.value = Number((event.target as HTMLInputElement).value)
   }
 
+  // The inner input's native `change` is not composed; re-emit a composed one.
+  private onChange (): void {
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }))
+  }
+
   render () {
     return html`
       ${this.label || this.showValue
@@ -81,6 +86,7 @@ export class Range extends FilmFormControl {
         ?disabled=${this.disabled}
         aria-label=${this.label || nothing}
         @input=${this.onInput}
+        @change=${this.onChange}
       />
     `
   }

@@ -30,7 +30,7 @@ export class BreadcrumbItem extends FilmElement {
     }
 
     a {
-      color: var(--color-links);
+      color: var(--film-color-link);
       text-decoration: none;
     }
 

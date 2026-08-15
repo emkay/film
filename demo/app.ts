@@ -158,11 +158,19 @@ export class App extends LitElement {
     this.independentScroll = (event.target as Switch).checked
   }
 
+  /** Reflects/forces the colour scheme via <html data-theme>. */
+  @state() private darkMode = false
+
+  private readonly onToggleTheme = (event: Event): void => {
+    this.darkMode = (event.target as Switch).checked
+    document.documentElement.setAttribute('data-theme', this.darkMode ? 'dark' : 'light')
+  }
+
   static styles = css`
     :host {
       display: block;
-      font-family: "Fira Sans", sans-serif;
-      color: var(--font-color-primary);
+      font-family: var(--film-font-sans);
+      color: var(--film-color-text);
     }
 
     /* App-shell height context so the Sidebar's panes have something to scroll
@@ -178,7 +186,7 @@ export class App extends LitElement {
       }
     }
 
-    .scroll-toggle {
+    .controls {
       font-size: var(--s-1);
     }
 
@@ -225,7 +233,7 @@ export class App extends LitElement {
     nav h2 { font-size: var(--s1); }
 
     nav a {
-      color: var(--color-links);
+      color: var(--film-color-link);
     }
 
     /* brand + social icons, sized on the modular scale */
@@ -241,6 +249,11 @@ export class App extends LitElement {
   connectedCallback () {
     super.connectedCallback()
     window.addEventListener('hashchange', this.onHashChange)
+    // Reflect the current scheme: an already-forced data-theme, else the OS.
+    const forced = document.documentElement.getAttribute('data-theme')
+    this.darkMode = forced
+      ? forced === 'dark'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches
   }
 
   disconnectedCallback () {
@@ -271,11 +284,16 @@ export class App extends LitElement {
                     <img class="social" src=${asset('github.svg')} alt="GitHub" />
                   </film-link>
                 </film-stack>
-                <film-switch
-                  class="scroll-toggle"
-                  ?checked=${this.independentScroll}
-                  @change=${this.onToggleScroll}
-                >Independent scroll</film-switch>
+                <film-stack class="controls" space="var(--s-2)">
+                  <film-switch
+                    ?checked=${this.darkMode}
+                    @change=${this.onToggleTheme}
+                  >Dark mode</film-switch>
+                  <film-switch
+                    ?checked=${this.independentScroll}
+                    @change=${this.onToggleScroll}
+                  >Independent scroll</film-switch>
+                </film-stack>
                 ${sections.map(
                   (section) => html`
                     <div>

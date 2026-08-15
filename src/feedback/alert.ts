@@ -1,14 +1,14 @@
-import { css, html } from 'lit'
+import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 
 export type AlertVariant = 'info' | 'success' | 'warning' | 'danger'
 
 const SURFACES: Record<AlertVariant, string> = {
-  info: 'var(--surface-info)',
-  success: 'var(--surface-success)',
-  warning: 'var(--surface-warning)',
-  danger: 'var(--surface-danger)'
+  info: 'var(--film-color-info)',
+  success: 'var(--film-color-success)',
+  warning: 'var(--film-color-warning)',
+  danger: 'var(--film-color-danger)'
 }
 
 /**
@@ -33,10 +33,10 @@ export class Alert extends FilmElement {
       display: flex;
       gap: var(--s0);
       padding: var(--s0);
-      border-inline-start: var(--border-thick) solid var(--color-dark);
-      border-radius: var(--s-2);
-      background-color: var(--alert-surface, var(--surface-info));
-      color: var(--color-dark);
+      border-inline-start: var(--border-thick) solid var(--film-color-border);
+      border-radius: var(--film-radius);
+      background-color: var(--alert-surface, var(--film-color-info));
+      color: var(--film-color-text);
     }
 
     .icon {
@@ -48,11 +48,20 @@ export class Alert extends FilmElement {
     }
   `
 
-  updated () {
+  private manageRole = true
+
+  connectedCallback (): void {
+    super.connectedCallback()
+    // Respect a consumer-provided role; otherwise derive it from `variant`.
+    this.manageRole = !this.hasAttribute('role')
+  }
+
+  updated (changed: PropertyValues<this>): void {
+    if (!changed.has('variant')) return
     this.reflectStyleProps({
       '--alert-surface': SURFACES[this.variant] ?? SURFACES.info
     })
-    if (!this.hasAttribute('role')) {
+    if (this.manageRole) {
       const assertive = this.variant === 'danger' || this.variant === 'warning'
       this.setAttribute('role', assertive ? 'alert' : 'status')
     }

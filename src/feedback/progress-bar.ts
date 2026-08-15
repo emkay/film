@@ -27,15 +27,15 @@ export class ProgressBar extends FilmElement {
     .track {
       block-size: var(--s0);
       inline-size: 100%;
-      background-color: var(--color-light);
-      border: var(--border-thin) solid var(--color-dark);
-      border-radius: 1em;
+      background-color: var(--film-color-surface);
+      border: var(--border-thin) solid var(--film-color-border);
+      border-radius: var(--film-radius-pill);
       overflow: hidden;
     }
 
     .fill {
       block-size: 100%;
-      background-color: var(--color-dark);
+      background-color: var(--film-color-inverted-surface);
       transition: inline-size 0.2s ease;
     }
 
@@ -73,7 +73,7 @@ export class ProgressBar extends FilmElement {
     } else {
       this.setAttribute('aria-valuemin', '0')
       this.setAttribute('aria-valuemax', String(this.max))
-      this.setAttribute('aria-valuenow', String(this.value))
+      this.setAttribute('aria-valuenow', String(Math.max(0, Math.min(this.value, this.max))))
     }
   }
 

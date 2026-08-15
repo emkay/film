@@ -30,10 +30,10 @@ export class ColorPicker extends FilmFormControl {
       display: inline-flex;
       align-items: center;
       gap: var(--s-1);
-      border: var(--border-thin) solid var(--color-dark);
-      border-radius: var(--s-2);
+      border: var(--border-thin) solid var(--film-color-border);
+      border-radius: var(--film-radius);
       padding: 0.2em;
-      background-color: var(--color-light);
+      background-color: var(--film-color-surface);
     }
 
     input[type='color'] {
@@ -41,7 +41,7 @@ export class ColorPicker extends FilmFormControl {
       block-size: 2em;
       padding: 0;
       border: none;
-      border-radius: var(--s-3);
+      border-radius: var(--film-radius-sm);
       background: none;
       cursor: pointer;
     }
@@ -53,15 +53,15 @@ export class ColorPicker extends FilmFormControl {
       text-transform: uppercase;
       border: none;
       background: none;
-      color: var(--color-dark);
+      color: var(--film-color-text);
     }
 
     input:focus-visible {
-      outline: var(--border-thin) solid var(--color-links);
+      outline: var(--border-thin) solid var(--film-color-focus);
     }
 
     :host([disabled]) {
-      opacity: 0.6;
+      opacity: var(--film-disabled-opacity);
     }
   `
 
@@ -92,7 +92,15 @@ export class ColorPicker extends FilmFormControl {
 
   private onHexInput (event: Event): void {
     const next = (event.target as HTMLInputElement).value
-    if (/^#[0-9a-fA-F]{6}$/.test(next)) this.commit(next)
+    if (/^#[0-9a-fA-F]{6}$/.test(next)) {
+      this.commit(next) // clears validity via syncForm -> updateValidity
+    } else {
+      this.internals.setValidity(
+        { customError: true },
+        'Enter a 6-digit hex colour, e.g. #1a2b3c',
+        this.colorInput
+      )
+    }
   }
 
   private commit (value: string): void {

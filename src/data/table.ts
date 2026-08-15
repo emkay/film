@@ -34,7 +34,7 @@ export class Table extends FilmElement {
     table {
       inline-size: 100%;
       border-collapse: collapse;
-      color: var(--color-dark);
+      color: var(--film-color-text);
     }
 
     caption {
@@ -48,7 +48,7 @@ export class Table extends FilmElement {
     td {
       padding: var(--s-2) var(--s0);
       text-align: start;
-      border-block-end: var(--border-thin) solid var(--color-dark);
+      border-block-end: var(--border-thin) solid var(--film-color-border);
     }
 
     th {
@@ -57,7 +57,7 @@ export class Table extends FilmElement {
     }
 
     tbody tr:hover {
-      background-color: var(--surface-info);
+      background-color: var(--film-color-info);
     }
 
     td[data-align='center'],

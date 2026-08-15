@@ -1,5 +1,5 @@
 import { css, html, type PropertyValues } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property, query } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
 
 /**
@@ -17,6 +17,12 @@ export class Checkbox extends FilmFormControl {
   /** The value submitted when checked. */
   @property({ type: String }) value = 'on'
 
+  @query('.box') private box!: HTMLElement
+
+  protected override get validationAnchor (): HTMLElement | undefined {
+    return this.box ?? undefined
+  }
+
   static styles = css`
     :host {
       display: inline-flex;
@@ -26,7 +32,7 @@ export class Checkbox extends FilmFormControl {
     }
 
     :host([disabled]) {
-      opacity: 0.6;
+      opacity: var(--film-disabled-opacity);
       cursor: not-allowed;
     }
 
@@ -34,21 +40,21 @@ export class Checkbox extends FilmFormControl {
       inline-size: 1.15em;
       block-size: 1.15em;
       flex: 0 0 auto;
-      border: var(--border-thin) solid var(--color-dark);
-      border-radius: var(--s-4);
-      background-color: var(--color-light);
+      border: var(--border-thin) solid var(--film-color-border);
+      border-radius: var(--film-radius-sm);
+      background-color: var(--film-color-surface);
       display: grid;
       place-content: center;
     }
 
     :host([checked]) .box {
-      background-color: var(--color-dark);
+      background-color: var(--film-color-inverted-surface);
     }
 
     .check {
       inline-size: 0.7em;
       block-size: 0.7em;
-      color: var(--color-light);
+      color: var(--film-color-inverted-text);
       visibility: hidden;
     }
 
@@ -61,7 +67,7 @@ export class Checkbox extends FilmFormControl {
     }
 
     :host(:focus-visible) .box {
-      outline: var(--border-thin) solid var(--color-links);
+      outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: 2px;
     }
   `

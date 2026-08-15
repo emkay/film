@@ -5,11 +5,11 @@ import { FilmElement } from '../internal/film-element.js'
 export type BadgeVariant = 'neutral' | 'accent' | 'success' | 'warning' | 'danger'
 
 const SURFACES: Record<BadgeVariant, string> = {
-  neutral: 'var(--color-dark)',
-  accent: 'var(--surface-info)',
-  success: 'var(--surface-success)',
-  warning: 'var(--surface-warning)',
-  danger: 'var(--surface-danger)'
+  neutral: 'var(--film-color-inverted-surface)',
+  accent: 'var(--film-color-info)',
+  success: 'var(--film-color-success)',
+  warning: 'var(--film-color-warning)',
+  danger: 'var(--film-color-danger)'
 }
 
 /**
@@ -29,19 +29,19 @@ export class Badge extends FilmElement {
       align-items: center;
       gap: 0.4em;
       padding: 0.2em 0.6em;
-      border-radius: 999px;
+      border-radius: var(--film-radius-pill);
       font-size: var(--s-1);
       line-height: 1;
       white-space: nowrap;
-      background-color: var(--badge-surface, var(--color-dark));
-      color: var(--badge-ink, var(--color-light));
+      background-color: var(--badge-surface, var(--film-color-inverted-surface));
+      color: var(--badge-ink, var(--film-color-inverted-text));
     }
   `
 
   updated () {
     this.reflectStyleProps({
       '--badge-surface': SURFACES[this.variant] ?? SURFACES.neutral,
-      '--badge-ink': this.variant === 'neutral' ? 'var(--color-light)' : 'var(--color-dark)'
+      '--badge-ink': this.variant === 'neutral' ? 'var(--film-color-inverted-text)' : 'var(--film-color-text)'
     })
   }
 

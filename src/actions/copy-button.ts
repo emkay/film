@@ -32,18 +32,18 @@ export class CopyButton extends FilmElement {
       align-items: center;
       gap: var(--s-2);
       padding: 0.4em 0.9em;
-      color: var(--font-color-primary);
-      background-color: var(--button-primary-color);
+      color: var(--film-color-primary-text);
+      background-color: var(--film-color-primary);
       border: none;
-      border-radius: var(--s-2);
+      border-radius: var(--film-radius);
     }
 
     button:hover {
-      background-color: var(--button-primary-color-hover);
+      background-color: var(--film-color-primary-hover);
     }
 
     button:focus-visible {
-      outline: var(--border-thin) solid var(--color-links);
+      outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: 2px;
     }
   `

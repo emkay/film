@@ -20,10 +20,10 @@ export class Button extends FilmElement {
 
   static styles = css`
     button {
-      background-color: var(--button-primary-color);
+      background-color: var(--film-color-primary);
       border: none;
-      border-radius: var(--s-2);
-      color: var(--font-color-primary);
+      border-radius: var(--film-radius);
+      color: var(--film-color-primary-text);
       cursor: pointer;
       font-size: var(--s0);
       padding: 0.5em 1.5em 0.7em;
@@ -31,34 +31,31 @@ export class Button extends FilmElement {
 
     button:focus {
       outline: solid;
-      background-color: var(--button-primary-color-focus);
+      background-color: var(--film-color-primary-hover);
     }
 
     button:hover {
       outline: solid;
-      background-color: var(--button-primary-color-hover);
+      background-color: var(--film-color-primary-hover);
     }
 
     button:active {
-      background-color: var(--button-primary-color-active);
+      background-color: var(--film-color-primary-active);
     }
 
     button[disabled] {
       cursor: not-allowed;
-      opacity: 0.6;
+      opacity: var(--film-disabled-opacity);
     }
 
     button.invert {
-      background-color: var(--button-primary-color-invert);
-      color: var(--button-primary-color-text-invert);
+      background-color: var(--film-color-inverted-surface);
+      color: var(--film-color-inverted-text);
     }
 
-    button.invert:hover {
-      background-color: var(--button-primary-color-hover-invert);
-    }
-
+    button.invert:hover,
     button.invert:focus {
-      background-color: var(--button-primary-color-focus-invert);
+      background-color: color-mix(in oklch, var(--film-color-inverted-surface), var(--film-color-primary) 30%);
     }
   `
 

@@ -1,5 +1,5 @@
-import { css, html } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { css, html, type PropertyValues } from 'lit'
+import { customElement, property, query } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 
 /**
@@ -44,17 +44,21 @@ export class Switcher extends FilmElement {
     }
   `
 
-  private onSlotChange (event: Event) {
-    const slot = event.target as HTMLSlotElement
-    const count = slot.assignedElements().length
+  @query('slot') private slotEl!: HTMLSlotElement
+
+  private applyLimit (): void {
+    const count = this.slotEl?.assignedElements().length ?? 0
     this.classList.toggle('over-limit', this.limit > 0 && count > this.limit)
   }
 
-  updated () {
+  private readonly onSlotChange = (): void => this.applyLimit()
+
+  updated (changed: PropertyValues<this>): void {
     this.reflectStyleProps({
       '--switcher-space': this.space,
       '--switcher-threshold': this.threshold
     })
+    if (changed.has('limit')) this.applyLimit()
   }
 
   render () {

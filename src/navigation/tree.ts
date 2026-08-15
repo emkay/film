@@ -35,7 +35,7 @@ export class Tree extends FilmElement {
 
   firstUpdated (): void {
     if (this.label) this.setAttribute('aria-label', this.label)
-    const first = this.items[0]
+    const first = this.items.find((item) => !item.disabled)
     if (first) first.tabIndex = 0
   }
 
@@ -75,7 +75,7 @@ export class Tree extends FilmElement {
       case 'ArrowRight':
         event.preventDefault()
         if (focused.childItems.length > 0 && !focused.expanded) focused.expanded = true
-        else this.focusItem(focused.childItems[0])
+        else this.focusItem(focused.childItems.find((child) => !child.disabled))
         break
       case 'ArrowLeft': {
         event.preventDefault()

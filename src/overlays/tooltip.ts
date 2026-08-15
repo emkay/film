@@ -39,10 +39,10 @@ export class Tooltip extends FilmElement {
       max-inline-size: 24ch;
       padding: var(--s-3) var(--s-1);
       font-size: var(--s-1);
-      color: var(--color-light);
-      background-color: var(--color-dark);
+      color: var(--film-color-inverted-text);
+      background-color: var(--film-color-inverted-surface);
       border: none;
-      border-radius: var(--s-3);
+      border-radius: var(--film-radius-sm);
     }
   `
 
@@ -56,6 +56,11 @@ export class Tooltip extends FilmElement {
   }
 
   disconnectedCallback (): void {
+    this.removeEventListener('mouseenter', this.show)
+    this.removeEventListener('mouseleave', this.hide)
+    this.removeEventListener('focusin', this.show)
+    this.removeEventListener('focusout', this.hide)
+    this.removeEventListener('keydown', this.onKeydown)
     this.cleanup?.()
     super.disconnectedCallback()
   }
@@ -78,7 +83,8 @@ export class Tooltip extends FilmElement {
 
   updated (changed: PropertyValues<this>): void {
     if (!changed.has('open')) return
-    this.target?.setAttribute('aria-describedby', this.open ? this.tipId : '')
+    if (this.open) this.target?.setAttribute('aria-describedby', this.tipId)
+    else this.target?.removeAttribute('aria-describedby')
     if (this.open) {
       this.tip.showPopover()
       this.cleanup = anchorPosition(this.target ?? this, this.tip, {

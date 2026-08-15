@@ -45,20 +45,20 @@ export class Input extends FilmFormControl {
     input {
       inline-size: 100%;
       font: inherit;
-      color: var(--color-dark);
-      background-color: var(--color-light);
-      border: var(--border-thin) solid var(--color-dark);
-      border-radius: var(--s-2);
+      color: var(--film-color-text);
+      background-color: var(--film-color-surface);
+      border: var(--border-thin) solid var(--film-color-border);
+      border-radius: var(--film-radius);
       padding: 0.4em 0.6em;
     }
 
     input:focus-visible {
-      outline: var(--border-thin) solid var(--color-links);
+      outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: 1px;
     }
 
     :host([disabled]) input {
-      opacity: 0.6;
+      opacity: var(--film-disabled-opacity);
       cursor: not-allowed;
     }
   `
@@ -88,6 +88,12 @@ export class Input extends FilmFormControl {
     this.value = (event.target as HTMLInputElement).value
   }
 
+  // The inner input's native `change` is not composed and stays in the shadow
+  // root; re-emit a composed one so external listeners hear it.
+  private onChange (): void {
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }))
+  }
+
   render () {
     return html`
       <div class="field">
@@ -102,6 +108,7 @@ export class Input extends FilmFormControl {
           ?readonly=${this.readonly}
           aria-label=${this.label || nothing}
           @input=${this.onInput}
+          @change=${this.onChange}
         />
       </div>
     `

@@ -17,9 +17,9 @@ export class Menu extends FilmElement {
       flex-direction: column;
       gap: var(--s-4);
       padding: var(--s-3);
-      background-color: var(--color-light);
-      border: var(--border-thin) solid var(--color-dark);
-      border-radius: var(--s-1);
+      background-color: var(--film-color-surface);
+      border: var(--border-thin) solid var(--film-color-border);
+      border-radius: var(--film-radius-lg);
       min-inline-size: 12ch;
     }
   `

@@ -27,7 +27,7 @@ export class Tabs extends FilmElement {
       display: flex;
       flex-wrap: wrap;
       gap: var(--s-1);
-      border-block-end: var(--border-thin) solid var(--color-dark);
+      border-block-end: var(--border-thin) solid var(--film-color-border);
     }
   `
 

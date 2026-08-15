@@ -25,22 +25,22 @@ export class Tab extends FilmElement {
       padding: var(--s-2) var(--s0);
       cursor: pointer;
       border-block-end: var(--border-thick) solid transparent;
-      color: var(--color-dark);
+      color: var(--film-color-text);
       white-space: nowrap;
     }
 
     :host([active]) {
-      border-block-end-color: var(--color-dark);
+      border-block-end-color: var(--film-color-border);
       font-weight: 600;
     }
 
     :host([disabled]) {
-      opacity: 0.5;
+      opacity: var(--film-disabled-opacity);
       cursor: not-allowed;
     }
 
     :host(:focus-visible) {
-      outline: var(--border-thin) solid var(--color-links);
+      outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: -2px;
     }
   `

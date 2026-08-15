@@ -29,9 +29,9 @@ export class Drawer extends FilmElement {
 
   static styles = css`
     dialog {
-      color: var(--color-dark);
-      background-color: var(--color-light);
-      border: var(--border-thin) solid var(--color-dark);
+      color: var(--film-color-text);
+      background-color: var(--film-color-surface);
+      border: var(--border-thin) solid var(--film-color-border);
       padding: var(--s1);
       margin: 0;
       block-size: 100dvh;
@@ -64,7 +64,7 @@ export class Drawer extends FilmElement {
     }
 
     dialog::backdrop {
-      background-color: rgb(0 0 0 / 0.4);
+      background-color: var(--film-overlay-scrim);
     }
 
     .panel {

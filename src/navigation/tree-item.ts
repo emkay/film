@@ -33,12 +33,12 @@ export class TreeItem extends FilmElement {
       align-items: center;
       gap: var(--s-2);
       padding: var(--s-3) var(--s-2);
-      border-radius: var(--s-3);
+      border-radius: var(--film-radius-sm);
       cursor: pointer;
     }
 
     :host([selected]) > .row {
-      background-color: var(--surface-info);
+      background-color: var(--film-color-info);
     }
 
     :host(:focus-visible) {
@@ -46,7 +46,7 @@ export class TreeItem extends FilmElement {
     }
 
     :host(:focus-visible) > .row {
-      outline: var(--border-thin) solid var(--color-links);
+      outline: var(--border-thin) solid var(--film-color-focus);
     }
 
     .twist {

@@ -21,8 +21,8 @@ export class Box extends FilmElement {
 
     div {
       border: var(--border-thin) solid;
-      color: var(--color-dark);
-      background-color: var(--color-light);
+      color: var(--film-color-text);
+      background-color: var(--film-color-surface);
       padding: var(--s1);
     }
 
@@ -31,8 +31,8 @@ export class Box extends FilmElement {
     }
 
     div.invert {
-      background-color: var(--color-dark);
-      color: var(--color-light);
+      background-color: var(--film-color-inverted-surface);
+      color: var(--film-color-inverted-text);
     }
   `
 

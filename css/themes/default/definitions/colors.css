@@ -1,15 +1,15 @@
+/*
+ * Raw palette primitives, in oklch. These are internal building blocks — theme
+ * Film through the semantic --film-color-* tokens (see application/theme.css)
+ * rather than referencing these directly.
+ */
 :root {
-  --color-antique-white: #FAEBD7;
-  --color-azalea: #FADAD7;
-  --color-black: #000000;
-  --color-citrine-white: #F7FAD7;
-  --color-classic-rose: #FAD7F8;
-  --color-downriver: #0B2B55;
-  --color-feta: #D7FADA;
-  --color-humming-bird: #D7FAEB;
-  --color-jacko-bean: #281905;
-  --color-selago: #EBD7FA;
-  --color-tiber: #052528;
-  --color-tropical-blue: #D7E6FA;
-  --color-wheat: #F4D4AA;
+  --film-palette-antique-white: oklch(0.94 0.028 83);
+  --film-palette-wheat: oklch(0.876 0.06 72);
+  --film-palette-azalea: oklch(0.899 0.036 22);
+  --film-palette-feta: oklch(0.949 0.052 158);
+  --film-palette-tropical-blue: oklch(0.912 0.033 249);
+  --film-palette-downriver: oklch(0.301 0.076 258);
+  --film-palette-jacko-bean: oklch(0.235 0.028 71);
+  --film-palette-tiber: oklch(0.293 0.031 195);
 }

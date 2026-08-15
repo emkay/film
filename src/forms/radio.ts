@@ -28,7 +28,7 @@ export class Radio extends FilmElement {
     }
 
     :host([disabled]) {
-      opacity: 0.6;
+      opacity: var(--film-disabled-opacity);
       cursor: not-allowed;
     }
 
@@ -36,9 +36,9 @@ export class Radio extends FilmElement {
       inline-size: 1.15em;
       block-size: 1.15em;
       flex: 0 0 auto;
-      border: var(--border-thin) solid var(--color-dark);
+      border: var(--border-thin) solid var(--film-color-border);
       border-radius: 50%;
-      background-color: var(--color-light);
+      background-color: var(--film-color-surface);
       display: grid;
       place-content: center;
     }
@@ -48,7 +48,7 @@ export class Radio extends FilmElement {
       inline-size: 0.6em;
       block-size: 0.6em;
       border-radius: 50%;
-      background-color: var(--color-dark);
+      background-color: var(--film-color-inverted-surface);
       transform: scale(0);
       transition: transform 0.1s ease;
     }
@@ -62,7 +62,7 @@ export class Radio extends FilmElement {
     }
 
     :host(:focus-visible) .dot {
-      outline: var(--border-thin) solid var(--color-links);
+      outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: 2px;
     }
   `

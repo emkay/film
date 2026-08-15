@@ -69,6 +69,58 @@ Sizes come from CSS custom properties `--s-5` … `--s5`, generated from a singl
 back to a `calc()` chain everywhere else. Override the whole system by setting
 `--ratio` and `--s0` on `:root`.
 
+## Theming
+
+Film is themed entirely through CSS custom properties — because custom
+properties inherit through the shadow DOM, anything you set on `:root` (or any
+subtree) reaches every component. All colours are authored in **oklch**.
+
+There are three layers:
+
+1. **Palette** (`--film-palette-*`) — raw oklch primitives. Internal; don't
+   reference these directly.
+2. **Semantic tokens** (`--film-*`) — the theming API. Components only ever read
+   from this layer.
+3. **Components** — consume the semantic tokens.
+
+To retheme, override the semantic tokens:
+
+```css
+:root {
+  --film-color-primary: oklch(0.72 0.15 250);
+  --film-color-link: oklch(0.55 0.16 250);
+  --film-color-danger: oklch(0.9 0.06 25);
+  --film-radius: 0.25rem;      /* squarer corners everywhere */
+  --film-font-sans: "Inter", system-ui, sans-serif;
+}
+```
+
+The main tokens:
+
+| Token | Purpose |
+|---|---|
+| `--film-color-text` / `--film-color-text-muted` | Body text / secondary text |
+| `--film-color-background` / `--film-color-surface` | Page / component surfaces |
+| `--film-color-border` | Borders and dividers |
+| `--film-color-primary` (`-hover` / `-active` / `-text`) | Buttons / accents |
+| `--film-color-inverted-surface` / `--film-color-inverted-text` | Dark-on-light pairs (inverted Box, tooltips, badges…) |
+| `--film-color-link` / `--film-color-focus` | Links / focus rings |
+| `--film-color-info` / `-success` / `-warning` / `-danger` | Status surfaces |
+| `--film-radius-sm` / `--film-radius` / `--film-radius-lg` / `--film-radius-pill` | Corner radii |
+| `--film-overlay-scrim` | Modal/drawer backdrop |
+| `--film-disabled-opacity` | Disabled-state opacity |
+| `--film-font-sans` / `-serif` / `-mono` | Font families |
+
+### Dark mode
+
+The theme ships light and dark values via the CSS `light-dark()` function, so it
+**follows the OS preference automatically**. Force a scheme on any subtree with
+a data attribute:
+
+```html
+<html data-theme="dark">   <!-- or "light" -->
+```
+
 ## Development
 
 ```sh
@@ -80,6 +132,8 @@ npm run build:lib  # build the publishable library into dist/
 ```
 
 Written in TypeScript with Lit decorators. The library source lives in `src/`
-(grouped into `layout`, `actions`, `typography`, `data`, `feedback`, with shared
-internals in `internal`), the demo site in `demo/`, and the theme/scale CSS in
-`css/`. Every component extends `FilmElement`.
+(grouped into `layout`, `actions`, `typography`, `forms`, `navigation`,
+`overlays`, `data`, `feedback`, with shared internals in `internal`), the demo
+site in `demo/`, and the theme/scale CSS in `css/` (palette in
+`definitions/colors.css`, semantic tokens in `application/theme.css`). Every
+component extends `FilmElement`; form controls extend `FilmFormControl`.

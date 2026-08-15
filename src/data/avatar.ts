@@ -29,14 +29,14 @@ export class Avatar extends FilmElement {
       block-size: var(--avatar-size, var(--s3));
       border-radius: 50%;
       overflow: hidden;
-      background-color: var(--color-dark);
-      color: var(--color-light);
+      background-color: var(--film-color-inverted-surface);
+      color: var(--film-color-inverted-text);
       font-size: var(--s-1);
       user-select: none;
     }
 
     :host([shape='square']) {
-      border-radius: var(--s-2);
+      border-radius: var(--film-radius);
     }
 
     img {

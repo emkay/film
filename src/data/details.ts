@@ -24,10 +24,10 @@ export class Details extends FilmElement {
     }
 
     details {
-      border: var(--border-thin) solid var(--color-dark);
-      border-radius: var(--s-1);
-      background-color: var(--color-light);
-      color: var(--color-dark);
+      border: var(--border-thin) solid var(--film-color-border);
+      border-radius: var(--film-radius-lg);
+      background-color: var(--film-color-surface);
+      color: var(--film-color-text);
     }
 
     summary {
@@ -38,7 +38,7 @@ export class Details extends FilmElement {
     }
 
     summary:focus-visible {
-      outline: var(--border-thin) solid var(--color-links);
+      outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: -2px;
     }
 

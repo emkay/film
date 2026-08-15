@@ -15,7 +15,7 @@ export class Link extends FilmElement {
 
   static styles = css`
     a {
-      color: var(--color-links);
+      color: var(--film-color-link);
       text-decoration: none;
     }
 

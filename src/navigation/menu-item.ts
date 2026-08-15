@@ -24,19 +24,19 @@ export class MenuItem extends FilmElement {
       gap: var(--s-1);
       padding: var(--s-2) var(--s0);
       cursor: pointer;
-      border-radius: var(--s-3);
-      color: var(--color-dark);
+      border-radius: var(--film-radius-sm);
+      color: var(--film-color-text);
       white-space: nowrap;
     }
 
     :host(:hover:not([disabled])),
     :host(:focus-visible) {
-      background-color: var(--surface-info);
+      background-color: var(--film-color-info);
       outline: none;
     }
 
     :host([disabled]) {
-      opacity: 0.5;
+      opacity: var(--film-disabled-opacity);
       cursor: not-allowed;
     }
   `
