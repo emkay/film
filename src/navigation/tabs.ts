@@ -63,7 +63,7 @@ export class Tabs extends FilmElement {
     event.preventDefault()
 
     const current = enabled.findIndex((tab) => tab.panel === this.active)
-    let index = current
+    let index: number
     if (event.key === 'ArrowRight') index = (current + 1) % enabled.length
     else if (event.key === 'ArrowLeft') index = (current - 1 + enabled.length) % enabled.length
     else if (event.key === 'Home') index = 0

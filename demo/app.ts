@@ -25,6 +25,8 @@ import {
   dividerExample,
   drawerExample,
   dropdownExample,
+  fieldExample,
+  formExample,
   frameExample,
   gridExample,
   iconExample,
@@ -38,6 +40,7 @@ import {
   radioExample,
   rangeExample,
   reelExample,
+  selectExample,
   sidebarExample,
   skeletonExample,
   spinnerExample,
@@ -49,6 +52,7 @@ import {
   tabsExample,
   tagExample,
   textareaExample,
+  toastExample,
   tooltipExample,
   treeExample
 } from './examples/index.js'
@@ -98,11 +102,14 @@ const sections: NavSection[] = [
     links: [
       { slug: 'input', text: 'Input', render: inputExample },
       { slug: 'textarea', text: 'Textarea', render: textareaExample },
+      { slug: 'select', text: 'Select', render: selectExample },
       { slug: 'checkbox', text: 'Checkbox', render: checkboxExample },
       { slug: 'radio', text: 'Radio', render: radioExample },
       { slug: 'switch', text: 'Switch', render: switchExample },
       { slug: 'range', text: 'Range', render: rangeExample },
-      { slug: 'color-picker', text: 'Color Picker', render: colorPickerExample }
+      { slug: 'color-picker', text: 'Color Picker', render: colorPickerExample },
+      { slug: 'field', text: 'Field', render: fieldExample },
+      { slug: 'form', text: 'Form', render: formExample }
     ]
   },
   {
@@ -145,7 +152,8 @@ const sections: NavSection[] = [
       { slug: 'tag', text: 'Tag', render: tagExample },
       { slug: 'progress-bar', text: 'Progress Bar', render: progressBarExample },
       { slug: 'spinner', text: 'Spinner', render: spinnerExample },
-      { slug: 'skeleton', text: 'Skeleton', render: skeletonExample }
+      { slug: 'skeleton', text: 'Skeleton', render: skeletonExample },
+      { slug: 'toast', text: 'Toast', render: toastExample }
     ]
   }
 ]

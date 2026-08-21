@@ -7,10 +7,10 @@ Checked items are implemented (component + demo example + build passing).
 ## Components
 
 ### Forms
-- [ ] `film-field` — label + hint + error + required marker wrapper, wired to validity (P1)
-- [ ] `film-form` — aggregates validity, submit/reset, validation summary (P1)
+- [x] `film-field` — label + hint + error + required marker wrapper, wired to validity (P1)
+- [x] `film-form` — aggregates validity, submit/reset (P1)
 - [x] `film-textarea` — multi-line, auto-grow, form-associated (P1)
-- [ ] `film-select` — form-associated select (trigger + listbox) (P1)
+- [x] `film-select` — form-associated select (trigger + listbox) (P1)
 - [ ] `film-combobox` — filterable / autocomplete select (P2)
 - [ ] `film-search` — input with clear button (P2)
 - [ ] `film-number-input` — with steppers (P2)
@@ -29,7 +29,7 @@ Checked items are implemented (component + demo example + build passing).
 - [ ] `film-split-button` — button + dropdown (P3)
 
 ### Feedback
-- [ ] `film-toast` + toast controller — transient, stacked, auto-dismiss (P1)
+- [x] `film-toast` + `toast()` controller — transient, stacked, auto-dismiss (P1)
 - [x] `film-spinner` — indeterminate loader (P1)
 - [x] `film-skeleton` — loading placeholder (P2)
 - [ ] `film-empty-state` (P3)
@@ -63,10 +63,10 @@ Checked items are implemented (component + demo example + build passing).
 - [ ] an icon set for `film-icon` (P2)
 
 ## Infrastructure & features
-- [ ] Tests — `@web/test-runner` + `@open-wc/testing` (P1)
-- [ ] Linting/formatting — ESLint + Prettier (P1)
-- [ ] Custom Elements Manifest — `custom-elements.json` (P1)
-- [ ] CI — typecheck + lint + test + build + size (P1)
+- [x] Tests — `@web/test-runner` + `@open-wc/testing` (P1) — harness + starter suite (11 tests)
+- [x] Linting/formatting — ESLint (flat) + Prettier (P1)
+- [x] Custom Elements Manifest — `custom-elements.json` (P1)
+- [x] CI — typecheck + lint + manifest + build + test (P1)
 - [ ] Framework wrappers — `@lit/react`, Vue/Angular types (P2)
 - [ ] SSR / Declarative Shadow DOM — `@lit-labs/ssr` (P2)
 - [ ] Docs site generated from the CEM (P2)

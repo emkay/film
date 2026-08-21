@@ -52,7 +52,7 @@ import '@mk/film/css/themes/default/index.css'
 
 **Typography** (`src/typography`) — `film-divider`, `film-visually-hidden`.
 
-**Forms** (`src/forms`) — form-associated controls (participate in a native `<form>` via `ElementInternals`): `film-input`, `film-textarea`, `film-checkbox`, `film-radio` / `film-radio-group`, `film-switch`, `film-range`, `film-color-picker`.
+**Forms** (`src/forms`) — form-associated controls (participate in a native `<form>` via `ElementInternals`): `film-input`, `film-textarea`, `film-select` / `film-select-option`, `film-checkbox`, `film-radio` / `film-radio-group`, `film-switch`, `film-range`, `film-color-picker`. Plus `film-field` (label/hint/error wrapper) and `film-form` (validation + submit).
 
 **Navigation** (`src/navigation`) — `film-breadcrumb` / `film-breadcrumb-item`, `film-menu` / `film-menu-item`, `film-tabs` / `film-tab` / `film-tab-panel`, `film-tree` / `film-tree-item`, `film-pagination`.
 
@@ -60,7 +60,7 @@ import '@mk/film/css/themes/default/index.css'
 
 **Data** (`src/data`) — `film-card` (with `media` / `footer` slots), `film-avatar`, `film-details`, `film-table` (data-driven via `columns` / `rows`).
 
-**Feedback** (`src/feedback`) — `film-alert`, `film-badge`, `film-tag` (`variant`, `removable`), `film-progress-bar`, `film-spinner`, `film-skeleton`.
+**Feedback** (`src/feedback`) — `film-alert`, `film-badge`, `film-tag` (`variant`, `removable`), `film-progress-bar`, `film-spinner`, `film-skeleton`, plus `film-toast` + the imperative `toast(message, options)` helper.
 
 See [ROADMAP.md](ROADMAP.md) for planned components and features.
 

@@ -7,7 +7,7 @@ import dts from 'vite-plugin-dts'
 export default defineConfig(({ mode }) => {
   if (mode === 'lib') {
     return {
-      plugins: [dts({ include: ['src'], rollupTypes: true })],
+      plugins: [dts({ include: ['src'], exclude: ['src/**/*.test.ts'], rollupTypes: true })],
       build: {
         copyPublicDir: false,
         lib: {
