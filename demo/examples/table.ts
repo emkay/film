@@ -2,9 +2,9 @@ import { html, type TemplateResult } from 'lit'
 import type { TableColumn, TableRow } from '../../src/index.js'
 
 const columns: TableColumn[] = [
-  { key: 'name', label: 'Name' },
-  { key: 'role', label: 'Role' },
-  { key: 'commits', label: 'Commits', align: 'end' }
+  { key: 'name', label: 'Name', sortable: true },
+  { key: 'role', label: 'Role', sortable: true },
+  { key: 'commits', label: 'Commits', align: 'end', sortable: true }
 ]
 
 const rows: TableRow[] = [
@@ -16,6 +16,7 @@ const rows: TableRow[] = [
 export const tableExample = (): TemplateResult => html`
   <film-box>
     <h3 id="film-components-table">Table</h3>
-    <film-table caption="Contributors" .columns=${columns} .rows=${rows}></film-table>
+    <p>Click a column header to sort; tick rows to select.</p>
+    <film-table caption="Contributors" selectable .columns=${columns} .rows=${rows}></film-table>
   </film-box>
 `

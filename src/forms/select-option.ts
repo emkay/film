@@ -28,6 +28,10 @@ export class SelectOption extends FilmElement {
       border-radius: var(--film-radius-sm);
     }
 
+    :host([hidden]) {
+      display: none;
+    }
+
     :host([selected]) {
       font-weight: 600;
     }

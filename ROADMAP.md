@@ -11,11 +11,11 @@ Checked items are implemented (component + demo example + build passing).
 - [x] `film-form` — aggregates validity, submit/reset (P1)
 - [x] `film-textarea` — multi-line, auto-grow, form-associated (P1)
 - [x] `film-select` — form-associated select (trigger + listbox) (P1)
-- [ ] `film-combobox` — filterable / autocomplete select (P2)
-- [ ] `film-search` — input with clear button (P2)
-- [ ] `film-number-input` — with steppers (P2)
+- [x] `film-combobox` — filterable / autocomplete select (P2)
+- [x] `film-search` — input with clear button (P2)
+- [x] `film-number-input` — with steppers (P2)
 - [ ] `film-slider` — two-thumb range (extend `range`) (P2)
-- [ ] `film-file-input` — file / dropzone (P2)
+- [x] `film-file-input` — file / dropzone (P2)
 - [ ] `film-date-picker` + `film-calendar` (P2)
 - [ ] `film-time-picker` (P3)
 - [ ] `film-rating` — stars (P3)
@@ -35,8 +35,8 @@ Checked items are implemented (component + demo example + build passing).
 - [ ] `film-empty-state` (P3)
 
 ### Overlays
-- [ ] `film-popover` — generic anchored container (generalize dropdown/tooltip) (P2)
-- [ ] `film-popconfirm` (P3)
+- [x] `film-popover` — generic anchored container (generalize dropdown/tooltip) (P2)
+- [x] `film-popconfirm` (P3)
 - [ ] `film-context-menu` (P3)
 
 ### Navigation
@@ -47,14 +47,14 @@ Checked items are implemented (component + demo example + build passing).
 - [ ] `film-command-palette` — ⌘K (P3)
 
 ### Data display
-- [ ] `film-accordion` + `-item` — grouped disclosure (P2)
-- [ ] `film-list` + `-item` (P2)
-- [ ] data-grid upgrade to `table` — sorting, selection, sticky header (P2)
-- [ ] `film-code` — code block with copy (P2)
+- [x] `film-accordion` + `-item` — grouped disclosure (P2)
+- [x] `film-list` + `-item` (P2)
+- [x] data-grid upgrade to `table` — sorting, selection, sticky header (P2)
+- [x] `film-code` — code block with copy (P2)
 - [ ] `film-stat` (P3)
 - [ ] `film-timeline` (P3)
 - [ ] `film-carousel` — build on `reel` (P3)
-- [ ] `film-kbd` (P3)
+- [x] `film-kbd` (P3)
 - [ ] `film-description-list` (P3)
 
 ### Typography & media

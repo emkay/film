@@ -6,6 +6,7 @@ import '../src/index.js'
 import type { RadioGroup, Switch } from '../src/index.js'
 
 import {
+  accordionExample,
   alertExample,
   avatarExample,
   badgeExample,
@@ -17,7 +18,9 @@ import {
   centerExample,
   checkboxExample,
   clusterExample,
+  codeExample,
   colorPickerExample,
+  comboboxExample,
   copyButtonExample,
   coverExample,
   detailsExample,
@@ -26,6 +29,7 @@ import {
   drawerExample,
   dropdownExample,
   fieldExample,
+  fileInputExample,
   formExample,
   frameExample,
   gridExample,
@@ -33,13 +37,19 @@ import {
   iconButtonExample,
   imposterExample,
   inputExample,
+  kbdExample,
   linkExample,
+  listExample,
   menuExample,
+  numberInputExample,
   paginationExample,
+  popconfirmExample,
+  popoverExample,
   progressBarExample,
   radioExample,
   rangeExample,
   reelExample,
+  searchExample,
   selectExample,
   sidebarExample,
   skeletonExample,
@@ -102,12 +112,16 @@ const sections: NavSection[] = [
     links: [
       { slug: 'input', text: 'Input', render: inputExample },
       { slug: 'textarea', text: 'Textarea', render: textareaExample },
+      { slug: 'number-input', text: 'Number Input', render: numberInputExample },
+      { slug: 'search', text: 'Search', render: searchExample },
       { slug: 'select', text: 'Select', render: selectExample },
+      { slug: 'combobox', text: 'Combobox', render: comboboxExample },
       { slug: 'checkbox', text: 'Checkbox', render: checkboxExample },
       { slug: 'radio', text: 'Radio', render: radioExample },
       { slug: 'switch', text: 'Switch', render: switchExample },
       { slug: 'range', text: 'Range', render: rangeExample },
       { slug: 'color-picker', text: 'Color Picker', render: colorPickerExample },
+      { slug: 'file-input', text: 'File Input', render: fileInputExample },
       { slug: 'field', text: 'Field', render: fieldExample },
       { slug: 'form', text: 'Form', render: formExample }
     ]
@@ -128,12 +142,17 @@ const sections: NavSection[] = [
       { slug: 'dialog', text: 'Dialog', render: dialogExample },
       { slug: 'drawer', text: 'Drawer', render: drawerExample },
       { slug: 'dropdown', text: 'Dropdown', render: dropdownExample },
+      { slug: 'popover', text: 'Popover', render: popoverExample },
+      { slug: 'popconfirm', text: 'Popconfirm', render: popconfirmExample },
       { slug: 'tooltip', text: 'Tooltip', render: tooltipExample }
     ]
   },
   {
     title: 'Typography',
-    links: [{ slug: 'divider', text: 'Divider', render: dividerExample }]
+    links: [
+      { slug: 'divider', text: 'Divider', render: dividerExample },
+      { slug: 'kbd', text: 'Kbd', render: kbdExample }
+    ]
   },
   {
     title: 'Data',
@@ -141,7 +160,10 @@ const sections: NavSection[] = [
       { slug: 'card', text: 'Card', render: cardExample },
       { slug: 'avatar', text: 'Avatar', render: avatarExample },
       { slug: 'details', text: 'Details', render: detailsExample },
-      { slug: 'table', text: 'Table', render: tableExample }
+      { slug: 'accordion', text: 'Accordion', render: accordionExample },
+      { slug: 'list', text: 'List', render: listExample },
+      { slug: 'table', text: 'Table', render: tableExample },
+      { slug: 'code', text: 'Code', render: codeExample }
     ]
   },
   {

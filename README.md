@@ -50,15 +50,15 @@ import '@mk/film/css/themes/default/index.css'
 
 **Actions** (`src/actions`) — `film-button`, `film-button-group`, `film-icon-button`, `film-link`, `film-copy-button`.
 
-**Typography** (`src/typography`) — `film-divider`, `film-visually-hidden`.
+**Typography** (`src/typography`) — `film-divider`, `film-visually-hidden`, `film-kbd`.
 
-**Forms** (`src/forms`) — form-associated controls (participate in a native `<form>` via `ElementInternals`): `film-input`, `film-textarea`, `film-select` / `film-select-option`, `film-checkbox`, `film-radio` / `film-radio-group`, `film-switch`, `film-range`, `film-color-picker`. Plus `film-field` (label/hint/error wrapper) and `film-form` (validation + submit).
+**Forms** (`src/forms`) — form-associated controls (participate in a native `<form>` via `ElementInternals`): `film-input`, `film-textarea`, `film-number-input`, `film-search`, `film-select` / `film-select-option`, `film-combobox`, `film-checkbox`, `film-radio` / `film-radio-group`, `film-switch`, `film-range`, `film-color-picker`, `film-file-input`. Plus `film-field` (label/hint/error wrapper) and `film-form` (validation + submit).
 
 **Navigation** (`src/navigation`) — `film-breadcrumb` / `film-breadcrumb-item`, `film-menu` / `film-menu-item`, `film-tabs` / `film-tab` / `film-tab-panel`, `film-tree` / `film-tree-item`, `film-pagination`.
 
-**Overlays** (`src/overlays`) — `film-dialog` and `film-drawer` (native `<dialog>` top layer), `film-dropdown` and `film-tooltip` (Popover API + a hand-rolled positioning helper).
+**Overlays** (`src/overlays`) — `film-dialog` and `film-drawer` (native `<dialog>` top layer), `film-dropdown`, `film-tooltip`, `film-popover` and `film-popconfirm` (Popover API + a hand-rolled positioning helper).
 
-**Data** (`src/data`) — `film-card` (with `media` / `footer` slots), `film-avatar`, `film-details`, `film-table` (data-driven via `columns` / `rows`).
+**Data** (`src/data`) — `film-card` (with `media` / `footer` slots), `film-avatar`, `film-details`, `film-accordion` / `film-accordion-item`, `film-list` / `film-list-item`, `film-code`, `film-table` (data-driven, with optional sorting / selection / sticky header).
 
 **Feedback** (`src/feedback`) — `film-alert`, `film-badge`, `film-tag` (`variant`, `removable`), `film-progress-bar`, `film-spinner`, `film-skeleton`, plus `film-toast` + the imperative `toast(message, options)` helper.
 

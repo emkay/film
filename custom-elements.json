@@ -584,6 +584,226 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/data/accordion-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "AccordionItem — a single collapsible panel within an Accordion.",
+          "name": "AccordionItem",
+          "slots": [
+            {
+              "description": "The panel content.",
+              "name": ""
+            },
+            {
+              "description": "The header content (overrides `summary`).",
+              "name": "summary"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the panel is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "summary",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The header text.",
+              "attribute": "summary"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the item is disabled.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "headerId",
+              "privacy": "private",
+              "readonly": true,
+              "default": "`film-accordion-header-${(uid += 1)}`"
+            },
+            {
+              "kind": "field",
+              "name": "panelId",
+              "privacy": "private",
+              "readonly": true,
+              "default": "`film-accordion-panel-${uid}`"
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "film-toggle",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When opened or closed. `detail.open` reflects the state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the panel is open.",
+              "fieldName": "open"
+            },
+            {
+              "name": "summary",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The header text.",
+              "fieldName": "summary"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the item is disabled.",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-accordion-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "AccordionItem",
+          "declaration": {
+            "name": "AccordionItem",
+            "module": "src/data/accordion-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-accordion-item",
+          "declaration": {
+            "name": "AccordionItem",
+            "module": "src/data/accordion-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/data/accordion.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Accordion — a group of AccordionItems. By default opening one closes\nthe others; set `multiple` to allow several open at once.",
+          "name": "Accordion",
+          "slots": [
+            {
+              "description": "The `film-accordion-item` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Allow more than one item open at a time.",
+              "attribute": "multiple"
+            },
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "AccordionItem[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onToggle",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Allow more than one item open at a time.",
+              "fieldName": "multiple"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-accordion",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Accordion",
+          "declaration": {
+            "name": "Accordion",
+            "module": "src/data/accordion.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-accordion",
+          "declaration": {
+            "name": "Accordion",
+            "module": "src/data/accordion.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/data/avatar.ts",
       "declarations": [
         {
@@ -855,6 +1075,83 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/data/code.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Code — a code block with a copy button.",
+          "name": "Code",
+          "members": [
+            {
+              "kind": "field",
+              "name": "code",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The code to display and copy.",
+              "attribute": "code"
+            },
+            {
+              "kind": "field",
+              "name": "language",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An optional language hint (used as a label).",
+              "attribute": "language"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "code",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The code to display and copy.",
+              "fieldName": "code"
+            },
+            {
+              "name": "language",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An optional language hint (used as a label).",
+              "fieldName": "language"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-code",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Code",
+          "declaration": {
+            "name": "Code",
+            "module": "src/data/code.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-code",
+          "declaration": {
+            "name": "Code",
+            "module": "src/data/code.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/data/details.ts",
       "declarations": [
         {
@@ -975,6 +1272,22 @@
       "exports": [
         {
           "kind": "js",
+          "name": "Accordion",
+          "declaration": {
+            "name": "Accordion",
+            "module": "./accordion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "AccordionItem",
+          "declaration": {
+            "name": "AccordionItem",
+            "module": "./accordion-item.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "Avatar",
           "declaration": {
             "name": "Avatar",
@@ -991,10 +1304,34 @@
         },
         {
           "kind": "js",
+          "name": "Code",
+          "declaration": {
+            "name": "Code",
+            "module": "./code.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "Details",
           "declaration": {
             "name": "Details",
             "module": "./details.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "List",
+          "declaration": {
+            "name": "List",
+            "module": "./list.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ListItem",
+          "declaration": {
+            "name": "ListItem",
+            "module": "./list-item.js"
           }
         },
         {
@@ -1025,11 +1362,148 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/data/list-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "ListItem — a row within a List. Renders as a link when `href` is set.",
+          "name": "ListItem",
+          "slots": [
+            {
+              "description": "The primary content.",
+              "name": ""
+            },
+            {
+              "description": "Leading content (icon, avatar).",
+              "name": "start"
+            },
+            {
+              "description": "Trailing content (badge, action), pushed to the far edge.",
+              "name": "end"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Makes the item a link to this URL.",
+              "attribute": "href"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Makes the item a link to this URL.",
+              "fieldName": "href"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-list-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ListItem",
+          "declaration": {
+            "name": "ListItem",
+            "module": "src/data/list-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-list-item",
+          "declaration": {
+            "name": "ListItem",
+            "module": "src/data/list-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/data/list.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "List — a vertical list of ListItems with dividers between them.",
+          "name": "List",
+          "slots": [
+            {
+              "description": "The `film-list-item` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "bordered",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draw a border around the list.",
+              "attribute": "bordered",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "bordered",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draw a border around the list.",
+              "fieldName": "bordered"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-list",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "List",
+          "declaration": {
+            "name": "List",
+            "module": "src/data/list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-list",
+          "declaration": {
+            "name": "List",
+            "module": "src/data/list.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/data/table.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "Table — a themed, data-driven table. Provide `columns` and `rows` as\nproperties.",
+          "description": "Table — a themed, data-driven table with optional sorting, row selection and\na sticky header. Provide `columns` and `rows` as properties.",
           "name": "Table",
           "members": [
             {
@@ -1059,6 +1533,167 @@
               "default": "''",
               "description": "An optional caption.",
               "attribute": "caption"
+            },
+            {
+              "kind": "field",
+              "name": "selectable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a checkbox column for selecting rows.",
+              "attribute": "selectable"
+            },
+            {
+              "kind": "field",
+              "name": "stickyHeader",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Keep the header visible while the body scrolls.",
+              "attribute": "sticky-header",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "sortKey",
+              "type": {
+                "text": "string | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "sortDir",
+              "type": {
+                "text": "'asc' | 'desc'"
+              },
+              "privacy": "private",
+              "default": "'asc'"
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "privacy": "private",
+              "default": "new Set<number>()"
+            },
+            {
+              "kind": "field",
+              "name": "displayRows",
+              "type": {
+                "text": "Array<{ row: TableRow; index: number }>"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "toggleSort",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "allSelected",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "toggleAll",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "checked",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleRow",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "emitSelection",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "sortIndicator",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "film-sort",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When the sort changes. `detail` is `{ key, direction }`."
+            },
+            {
+              "name": "film-selection-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When row selection changes. `detail.rows` is the selected rows."
             }
           ],
           "attributes": [
@@ -1070,6 +1705,24 @@
               "default": "''",
               "description": "An optional caption.",
               "fieldName": "caption"
+            },
+            {
+              "name": "selectable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a checkbox column for selecting rows.",
+              "fieldName": "selectable"
+            },
+            {
+              "name": "sticky-header",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Keep the header visible while the body scrolls.",
+              "fieldName": "stickyHeader"
             }
           ],
           "superclass": {
@@ -1095,2103 +1748,6 @@
           "declaration": {
             "name": "Table",
             "module": "src/data/table.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/checkbox.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Checkbox — a form-associated checkbox. The host element is the control, so it\ncarries the `checkbox` role and keyboard behaviour.",
-          "name": "Checkbox",
-          "slots": [
-            {
-              "description": "The label.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "toggleRole",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "protected",
-              "readonly": true,
-              "default": "'checkbox'"
-            },
-            {
-              "kind": "field",
-              "name": "box",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            }
-          ],
-          "events": [
-            {
-              "description": "When the checked state changes.",
-              "name": "change"
-            }
-          ],
-          "superclass": {
-            "name": "FilmToggleControl",
-            "module": "/src/internal/toggle-control.js"
-          },
-          "tagName": "film-checkbox",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Checkbox",
-          "declaration": {
-            "name": "Checkbox",
-            "module": "src/forms/checkbox.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-checkbox",
-          "declaration": {
-            "name": "Checkbox",
-            "module": "src/forms/checkbox.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/color-picker.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "ColorPicker — a form-associated colour input pairing the native colour picker\nwith an editable hex field.",
-          "name": "ColorPicker",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "'#000000'",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "colorInput",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onColorInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onHexInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "commit",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "value",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            }
-          ],
-          "events": [
-            {
-              "name": "change",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the colour changes."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "'#000000'",
-              "fieldName": "value"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmFormControl",
-            "module": "/src/internal/form-control.js"
-          },
-          "tagName": "film-color-picker",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "ColorPicker",
-          "declaration": {
-            "name": "ColorPicker",
-            "module": "src/forms/color-picker.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-color-picker",
-          "declaration": {
-            "name": "ColorPicker",
-            "module": "src/forms/color-picker.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/field.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Field — wraps a single form control with a label, optional hint, a required\nmarker, and an error message that appears when the control reports invalid\n(via the native `invalid` event). Set `error` to show a message manually.\n\nNote: because the control is slotted (light DOM) while the label lives in the\nshadow root, cross-root `aria-describedby` isn't possible yet, so the error\nregion is marked `role=\"alert\"` (announced when it appears) and the label is\napplied as the control's `aria-label`. For controls that render their own\ninner input (input, textarea, select), their own `label` still gives the most\nprecise accessible name.",
-          "name": "Field",
-          "slots": [
-            {
-              "description": "The single form control.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The field label.",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "hint",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Helper text shown below the control (hidden while an error is showing).",
-              "attribute": "hint"
-            },
-            {
-              "kind": "field",
-              "name": "error",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "A manually-set error message (overrides the control's own).",
-              "attribute": "error"
-            },
-            {
-              "kind": "field",
-              "name": "autoError",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "controlRequired",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "control",
-              "type": {
-                "text": "FieldControl | null"
-              },
-              "privacy": "private",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "shownError",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onInvalid",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onControlInput",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "onSlotChange",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "nameControl",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The field label.",
-              "fieldName": "label"
-            },
-            {
-              "name": "hint",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Helper text shown below the control (hidden while an error is showing).",
-              "fieldName": "hint"
-            },
-            {
-              "name": "error",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "A manually-set error message (overrides the control's own).",
-              "fieldName": "error"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-field",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Field",
-          "declaration": {
-            "name": "Field",
-            "module": "src/forms/field.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-field",
-          "declaration": {
-            "name": "Field",
-            "module": "src/forms/field.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/form.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Form — aggregates Film's form-associated controls. Slotted custom elements\ncan't associate with a shadow `<form>`, so this manages them directly: it\ncollects values by `name`, validates, and exposes `submit`/`reset`.\n\nTrigger submit/reset by calling the methods, or by clicking a slotted element\ncarrying `type=\"submit\"` / `data-film-submit` (or `type=\"reset\"` /\n`data-film-reset`); Enter inside a `film-input` also submits.",
-          "name": "Form",
-          "slots": [
-            {
-              "description": "The form content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "novalidate",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Skip validation before submitting.",
-              "attribute": "novalidate"
-            },
-            {
-              "kind": "field",
-              "name": "controls",
-              "type": {
-                "text": "FormControl[]"
-              },
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "getValues",
-              "return": {
-                "type": {
-                  "text": "Record<string, unknown>"
-                }
-              },
-              "description": "The current values, keyed by each control's `name`."
-            },
-            {
-              "kind": "method",
-              "name": "checkValidity",
-              "return": {
-                "type": {
-                  "text": "boolean"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "reportValidity",
-              "return": {
-                "type": {
-                  "text": "boolean"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "submit",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "reset",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
-            }
-          ],
-          "events": [
-            {
-              "name": "film-invalid",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When submit is blocked by validation."
-            },
-            {
-              "name": "film-submit",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "On a valid submit. `detail.values` is the collected data."
-            },
-            {
-              "name": "film-reset",
-              "type": {
-                "text": "Event"
-              },
-              "description": "After a reset."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "novalidate",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Skip validation before submitting.",
-              "fieldName": "novalidate"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-form",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Form",
-          "declaration": {
-            "name": "Form",
-            "module": "src/forms/form.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-form",
-          "declaration": {
-            "name": "Form",
-            "module": "src/forms/form.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Checkbox",
-          "declaration": {
-            "name": "Checkbox",
-            "module": "./checkbox.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ColorPicker",
-          "declaration": {
-            "name": "ColorPicker",
-            "module": "./color-picker.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Field",
-          "declaration": {
-            "name": "Field",
-            "module": "./field.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Form",
-          "declaration": {
-            "name": "Form",
-            "module": "./form.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Input",
-          "declaration": {
-            "name": "Input",
-            "module": "./input.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "InputType",
-          "declaration": {
-            "name": "InputType",
-            "module": "./input.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Radio",
-          "declaration": {
-            "name": "Radio",
-            "module": "./radio.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "RadioGroup",
-          "declaration": {
-            "name": "RadioGroup",
-            "module": "./radio-group.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Range",
-          "declaration": {
-            "name": "Range",
-            "module": "./range.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Select",
-          "declaration": {
-            "name": "Select",
-            "module": "./select.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "SelectOption",
-          "declaration": {
-            "name": "SelectOption",
-            "module": "./select-option.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Switch",
-          "declaration": {
-            "name": "Switch",
-            "module": "./switch.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Textarea",
-          "declaration": {
-            "name": "Textarea",
-            "module": "./textarea.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/input.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Input — a themed, form-associated text input.",
-          "name": "Input",
-          "members": [
-            {
-              "kind": "field",
-              "name": "type",
-              "type": {
-                "text": "InputType"
-              },
-              "default": "'text'",
-              "attribute": "type"
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "placeholder",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "placeholder"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "readonly",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "readonly"
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onChange",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "change",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the value is committed."
-            },
-            {
-              "description": "When the value changes.",
-              "name": "input"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "type",
-              "type": {
-                "text": "InputType"
-              },
-              "default": "'text'",
-              "fieldName": "type"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "value"
-            },
-            {
-              "name": "placeholder",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "placeholder"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "label"
-            },
-            {
-              "name": "readonly",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "readonly"
-            }
-          ],
-          "superclass": {
-            "name": "FilmFormControl",
-            "module": "/src/internal/form-control.js"
-          },
-          "tagName": "film-input",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Input",
-          "declaration": {
-            "name": "Input",
-            "module": "src/forms/input.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-input",
-          "declaration": {
-            "name": "Input",
-            "module": "src/forms/input.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/radio-group.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "RadioGroup — a form-associated group of Radio options. Manages\nselection, roving tab focus and arrow-key navigation.",
-          "name": "RadioGroup",
-          "slots": [
-            {
-              "description": "The `film-radio` options.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The value of the selected option.",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "An accessible label for the group.",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "radios",
-              "type": {
-                "text": "Radio[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "enabledRadios",
-              "type": {
-                "text": "Radio[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string | null"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "select",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "radio",
-                  "type": {
-                    "text": "Radio"
-                  }
-                },
-                {
-                  "name": "focus",
-                  "type": {
-                    "text": "boolean"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "syncSelection",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "change",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the selected value changes."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The value of the selected option.",
-              "fieldName": "value"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "An accessible label for the group.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmFormControl",
-            "module": "/src/internal/form-control.js"
-          },
-          "tagName": "film-radio-group",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "RadioGroup",
-          "declaration": {
-            "name": "RadioGroup",
-            "module": "src/forms/radio-group.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-radio-group",
-          "declaration": {
-            "name": "RadioGroup",
-            "module": "src/forms/radio-group.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/radio.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Radio — a single option within a RadioGroup. Selection, roving focus\nand form value are all managed by the parent `film-radio-group`.",
-          "name": "Radio",
-          "slots": [
-            {
-              "description": "The label.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The value contributed to the group when this option is selected.",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "checked",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this option is selected. Managed by the group.",
-              "attribute": "checked",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this option is disabled.",
-              "attribute": "disabled",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The value contributed to the group when this option is selected.",
-              "fieldName": "value"
-            },
-            {
-              "name": "checked",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this option is selected. Managed by the group.",
-              "fieldName": "checked"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this option is disabled.",
-              "fieldName": "disabled"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-radio",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Radio",
-          "declaration": {
-            "name": "Radio",
-            "module": "src/forms/radio.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-radio",
-          "declaration": {
-            "name": "Radio",
-            "module": "src/forms/radio.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/range.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Range — a form-associated slider.",
-          "name": "Range",
-          "members": [
-            {
-              "kind": "field",
-              "name": "min",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "attribute": "min"
-            },
-            {
-              "kind": "field",
-              "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "100",
-              "attribute": "max"
-            },
-            {
-              "kind": "field",
-              "name": "step",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "attribute": "step"
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "number"
-              },
-              "default": "50",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "showValue",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show the current value beside the label.",
-              "attribute": "show-value"
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onChange",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "change",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the value is committed."
-            },
-            {
-              "description": "While dragging.",
-              "name": "input"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "min",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "fieldName": "min"
-            },
-            {
-              "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "100",
-              "fieldName": "max"
-            },
-            {
-              "name": "step",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "fieldName": "step"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "number"
-              },
-              "default": "50",
-              "fieldName": "value"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "label"
-            },
-            {
-              "name": "show-value",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show the current value beside the label.",
-              "fieldName": "showValue"
-            }
-          ],
-          "superclass": {
-            "name": "FilmFormControl",
-            "module": "/src/internal/form-control.js"
-          },
-          "tagName": "film-range",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Range",
-          "declaration": {
-            "name": "Range",
-            "module": "src/forms/range.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-range",
-          "declaration": {
-            "name": "Range",
-            "module": "src/forms/range.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/select-option.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "SelectOption — one option within a Select.",
-          "name": "SelectOption",
-          "slots": [
-            {
-              "description": "The option label.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The value contributed to the select when chosen.",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this option is selected. Managed by the select.",
-              "attribute": "selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this option is disabled.",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "description": "The visible text of the option.",
-              "readonly": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The value contributed to the select when chosen.",
-              "fieldName": "value"
-            },
-            {
-              "name": "selected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this option is selected. Managed by the select.",
-              "fieldName": "selected"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this option is disabled.",
-              "fieldName": "disabled"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-select-option",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SelectOption",
-          "declaration": {
-            "name": "SelectOption",
-            "module": "src/forms/select-option.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-select-option",
-          "declaration": {
-            "name": "SelectOption",
-            "module": "src/forms/select-option.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/select.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Select — a form-associated select: a trigger showing the current choice and a\nlistbox of SelectOptions promoted to the top layer via the Popover\nAPI. Keyboard: arrows move, Enter/Space choose, Escape closes.",
-          "name": "Select",
-          "slots": [
-            {
-              "description": "The `film-select-option` children.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The value of the selected option.",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "An accessible label.",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "placeholder",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Select…'",
-              "description": "Text shown when nothing is selected.",
-              "attribute": "placeholder"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the listbox is open.",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "trigger",
-              "type": {
-                "text": "HTMLButtonElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "listbox",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "options",
-              "type": {
-                "text": "SelectOption[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "enabledOptions",
-              "type": {
-                "text": "SelectOption[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "selectedOption",
-              "type": {
-                "text": "SelectOption | undefined"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string | null"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "syncOptions",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "toggle",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "openListbox",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "closeListbox",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onToggle",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "select",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "SelectOption"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "onListboxClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onTriggerKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onListboxKeydown",
-              "privacy": "private",
-              "readonly": true
-            }
-          ],
-          "events": [
-            {
-              "name": "change",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the selected value changes."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The value of the selected option.",
-              "fieldName": "value"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "An accessible label.",
-              "fieldName": "label"
-            },
-            {
-              "name": "placeholder",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Select…'",
-              "description": "Text shown when nothing is selected.",
-              "fieldName": "placeholder"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the listbox is open.",
-              "fieldName": "open"
-            }
-          ],
-          "superclass": {
-            "name": "FilmFormControl",
-            "module": "/src/internal/form-control.js"
-          },
-          "tagName": "film-select",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Select",
-          "declaration": {
-            "name": "Select",
-            "module": "src/forms/select.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-select",
-          "declaration": {
-            "name": "Select",
-            "module": "src/forms/select.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/switch.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Switch — a form-associated on/off toggle (`switch` role).",
-          "name": "Switch",
-          "slots": [
-            {
-              "description": "The label.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "toggleRole",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "protected",
-              "readonly": true,
-              "default": "'switch'"
-            },
-            {
-              "kind": "field",
-              "name": "track",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            }
-          ],
-          "events": [
-            {
-              "description": "When the checked state changes.",
-              "name": "change"
-            }
-          ],
-          "superclass": {
-            "name": "FilmToggleControl",
-            "module": "/src/internal/toggle-control.js"
-          },
-          "tagName": "film-switch",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Switch",
-          "declaration": {
-            "name": "Switch",
-            "module": "src/forms/switch.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-switch",
-          "declaration": {
-            "name": "Switch",
-            "module": "src/forms/switch.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/forms/textarea.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Textarea — a form-associated multi-line text control.",
-          "name": "Textarea",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "placeholder",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "placeholder"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "rows",
-              "type": {
-                "text": "number"
-              },
-              "default": "3",
-              "attribute": "rows"
-            },
-            {
-              "kind": "field",
-              "name": "readonly",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "readonly"
-            },
-            {
-              "kind": "field",
-              "name": "autoGrow",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Grow to fit content instead of scrolling.",
-              "attribute": "auto-grow"
-            },
-            {
-              "kind": "field",
-              "name": "textarea",
-              "type": {
-                "text": "HTMLTextAreaElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onChange",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "grow",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "change",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the value is committed."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "value"
-            },
-            {
-              "name": "placeholder",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "placeholder"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "label"
-            },
-            {
-              "name": "rows",
-              "type": {
-                "text": "number"
-              },
-              "default": "3",
-              "fieldName": "rows"
-            },
-            {
-              "name": "readonly",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "readonly"
-            },
-            {
-              "name": "auto-grow",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Grow to fit content instead of scrolling.",
-              "fieldName": "autoGrow"
-            }
-          ],
-          "superclass": {
-            "name": "FilmFormControl",
-            "module": "/src/internal/form-control.js"
-          },
-          "tagName": "film-textarea",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Textarea",
-          "declaration": {
-            "name": "Textarea",
-            "module": "src/forms/textarea.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-textarea",
-          "declaration": {
-            "name": "Textarea",
-            "module": "src/forms/textarea.ts"
           }
         }
       ]
@@ -4057,6 +2613,3136 @@
           "declaration": {
             "name": "toast",
             "module": "src/feedback/toaster.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/checkbox.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Checkbox — a form-associated checkbox. The host element is the control, so it\ncarries the `checkbox` role and keyboard behaviour.",
+          "name": "Checkbox",
+          "slots": [
+            {
+              "description": "The label.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "toggleRole",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "default": "'checkbox'"
+            },
+            {
+              "kind": "field",
+              "name": "box",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "validationAnchor",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "protected",
+              "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "description": "When the checked state changes.",
+              "name": "change"
+            }
+          ],
+          "superclass": {
+            "name": "FilmToggleControl",
+            "module": "/src/internal/toggle-control.js"
+          },
+          "tagName": "film-checkbox",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Checkbox",
+          "declaration": {
+            "name": "Checkbox",
+            "module": "src/forms/checkbox.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-checkbox",
+          "declaration": {
+            "name": "Checkbox",
+            "module": "src/forms/checkbox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/color-picker.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "ColorPicker — a form-associated colour input pairing the native colour picker\nwith an editable hex field.",
+          "name": "ColorPicker",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "'#000000'",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "colorInput",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationAnchor",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "protected",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onColorInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onHexInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "commit",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the colour changes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "'#000000'",
+              "fieldName": "value"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmFormControl",
+            "module": "/src/internal/form-control.js"
+          },
+          "tagName": "film-color-picker",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ColorPicker",
+          "declaration": {
+            "name": "ColorPicker",
+            "module": "src/forms/color-picker.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-color-picker",
+          "declaration": {
+            "name": "ColorPicker",
+            "module": "src/forms/color-picker.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/combobox.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Combobox — a form-associated select with type-to-filter autocomplete. Options\nare SelectOption children (shared with `film-select`); typing filters\nthem and choosing one sets the value.",
+          "name": "Combobox",
+          "slots": [
+            {
+              "description": "The `film-select-option` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The value of the selected option.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Type to search…'",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the listbox is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "text",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "listbox",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "cleanup",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "SelectOption[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "visibleOptions",
+              "type": {
+                "text": "SelectOption[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "selectedOption",
+              "type": {
+                "text": "SelectOption | undefined"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string | null"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationAnchor",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "protected",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "syncOptions",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "filter",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "openListbox",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "closeListbox",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onToggle",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "onInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "select",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "SelectOption"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onListboxClick",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onKeydown",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the selected value changes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The value of the selected option.",
+              "fieldName": "value"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "fieldName": "label"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Type to search…'",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the listbox is open.",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "FilmFormControl",
+            "module": "/src/internal/form-control.js"
+          },
+          "tagName": "film-combobox",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Combobox",
+          "declaration": {
+            "name": "Combobox",
+            "module": "src/forms/combobox.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-combobox",
+          "declaration": {
+            "name": "Combobox",
+            "module": "src/forms/combobox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/field.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Field — wraps a single form control with a label, optional hint, a required\nmarker, and an error message that appears when the control reports invalid\n(via the native `invalid` event). Set `error` to show a message manually.\n\nNote: because the control is slotted (light DOM) while the label lives in the\nshadow root, cross-root `aria-describedby` isn't possible yet, so the error\nregion is marked `role=\"alert\"` (announced when it appears) and the label is\napplied as the control's `aria-label`. For controls that render their own\ninner input (input, textarea, select), their own `label` still gives the most\nprecise accessible name.",
+          "name": "Field",
+          "slots": [
+            {
+              "description": "The single form control.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The field label.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control (hidden while an error is showing).",
+              "attribute": "hint"
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A manually-set error message (overrides the control's own).",
+              "attribute": "error"
+            },
+            {
+              "kind": "field",
+              "name": "autoError",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "controlRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "control",
+              "type": {
+                "text": "FieldControl | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "shownError",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onInvalid",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onControlInput",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "nameControl",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The field label.",
+              "fieldName": "label"
+            },
+            {
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control (hidden while an error is showing).",
+              "fieldName": "hint"
+            },
+            {
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A manually-set error message (overrides the control's own).",
+              "fieldName": "error"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-field",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Field",
+          "declaration": {
+            "name": "Field",
+            "module": "src/forms/field.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-field",
+          "declaration": {
+            "name": "Field",
+            "module": "src/forms/field.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/file-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "FileInput — a form-associated file picker with drag-and-drop.",
+          "name": "FileInput",
+          "members": [
+            {
+              "kind": "field",
+              "name": "accept",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Accepted file types (the native `accept` list).",
+              "attribute": "accept"
+            },
+            {
+              "kind": "field",
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Allow selecting more than one file.",
+              "attribute": "multiple"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A label for the control.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "files",
+              "type": {
+                "text": "File[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "dragging",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string | File | FormData | null"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setFiles",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "list",
+                  "type": {
+                    "text": "FileList | null"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "browse",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onKeydown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onDragOver",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "DragEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onDrop",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "DragEvent"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the selected files change."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "accept",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Accepted file types (the native `accept` list).",
+              "fieldName": "accept"
+            },
+            {
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Allow selecting more than one file.",
+              "fieldName": "multiple"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A label for the control.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmFormControl",
+            "module": "/src/internal/form-control.js"
+          },
+          "tagName": "film-file-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FileInput",
+          "declaration": {
+            "name": "FileInput",
+            "module": "src/forms/file-input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-file-input",
+          "declaration": {
+            "name": "FileInput",
+            "module": "src/forms/file-input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/form.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Form — aggregates Film's form-associated controls. Slotted custom elements\ncan't associate with a shadow `<form>`, so this manages them directly: it\ncollects values by `name`, validates, and exposes `submit`/`reset`.\n\nTrigger submit/reset by calling the methods, or by clicking a slotted element\ncarrying `type=\"submit\"` / `data-film-submit` (or `type=\"reset\"` /\n`data-film-reset`); Enter inside a `film-input` also submits.",
+          "name": "Form",
+          "slots": [
+            {
+              "description": "The form content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "novalidate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Skip validation before submitting.",
+              "attribute": "novalidate"
+            },
+            {
+              "kind": "field",
+              "name": "controls",
+              "type": {
+                "text": "FormControl[]"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "getValues",
+              "return": {
+                "type": {
+                  "text": "Record<string, unknown>"
+                }
+              },
+              "description": "The current values, keyed by each control's `name`."
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "submit",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reset",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onKeydown",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "name": "film-invalid",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When submit is blocked by validation."
+            },
+            {
+              "name": "film-submit",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "On a valid submit. `detail.values` is the collected data."
+            },
+            {
+              "name": "film-reset",
+              "type": {
+                "text": "Event"
+              },
+              "description": "After a reset."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "novalidate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Skip validation before submitting.",
+              "fieldName": "novalidate"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-form",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Form",
+          "declaration": {
+            "name": "Form",
+            "module": "src/forms/form.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-form",
+          "declaration": {
+            "name": "Form",
+            "module": "src/forms/form.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Checkbox",
+          "declaration": {
+            "name": "Checkbox",
+            "module": "./checkbox.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ColorPicker",
+          "declaration": {
+            "name": "ColorPicker",
+            "module": "./color-picker.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Combobox",
+          "declaration": {
+            "name": "Combobox",
+            "module": "./combobox.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Field",
+          "declaration": {
+            "name": "Field",
+            "module": "./field.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FileInput",
+          "declaration": {
+            "name": "FileInput",
+            "module": "./file-input.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Form",
+          "declaration": {
+            "name": "Form",
+            "module": "./form.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Input",
+          "declaration": {
+            "name": "Input",
+            "module": "./input.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "InputType",
+          "declaration": {
+            "name": "InputType",
+            "module": "./input.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "NumberInput",
+          "declaration": {
+            "name": "NumberInput",
+            "module": "./number-input.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Radio",
+          "declaration": {
+            "name": "Radio",
+            "module": "./radio.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RadioGroup",
+          "declaration": {
+            "name": "RadioGroup",
+            "module": "./radio-group.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Range",
+          "declaration": {
+            "name": "Range",
+            "module": "./range.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Search",
+          "declaration": {
+            "name": "Search",
+            "module": "./search.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Select",
+          "declaration": {
+            "name": "Select",
+            "module": "./select.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SelectOption",
+          "declaration": {
+            "name": "SelectOption",
+            "module": "./select-option.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Switch",
+          "declaration": {
+            "name": "Switch",
+            "module": "./switch.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Textarea",
+          "declaration": {
+            "name": "Textarea",
+            "module": "./textarea.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Input — a themed, form-associated text input.",
+          "name": "Input",
+          "members": [
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "InputType"
+              },
+              "default": "'text'",
+              "attribute": "type"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "readonly"
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationAnchor",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "protected",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the value is committed."
+            },
+            {
+              "description": "When the value changes.",
+              "name": "input"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "type",
+              "type": {
+                "text": "InputType"
+              },
+              "default": "'text'",
+              "fieldName": "type"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "readonly"
+            }
+          ],
+          "superclass": {
+            "name": "FilmFormControl",
+            "module": "/src/internal/form-control.js"
+          },
+          "tagName": "film-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Input",
+          "declaration": {
+            "name": "Input",
+            "module": "src/forms/input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-input",
+          "declaration": {
+            "name": "Input",
+            "module": "src/forms/input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/number-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "NumberInput — a form-associated number field with stepper buttons.",
+          "name": "NumberInput",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "-Infinity",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "default": "Infinity",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "step",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "step"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationAnchor",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "protected",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "clamp",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "n",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "stepBy",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "direction",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the value changes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "value"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "-Infinity",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "default": "Infinity",
+              "fieldName": "max"
+            },
+            {
+              "name": "step",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "step"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "placeholder"
+            }
+          ],
+          "superclass": {
+            "name": "FilmFormControl",
+            "module": "/src/internal/form-control.js"
+          },
+          "tagName": "film-number-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "NumberInput",
+          "declaration": {
+            "name": "NumberInput",
+            "module": "src/forms/number-input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-number-input",
+          "declaration": {
+            "name": "NumberInput",
+            "module": "src/forms/number-input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/radio-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "RadioGroup — a form-associated group of Radio options. Manages\nselection, roving tab focus and arrow-key navigation.",
+          "name": "RadioGroup",
+          "slots": [
+            {
+              "description": "The `film-radio` options.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The value of the selected option.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label for the group.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "radios",
+              "type": {
+                "text": "Radio[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "enabledRadios",
+              "type": {
+                "text": "Radio[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string | null"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onKeydown",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "select",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "radio",
+                  "type": {
+                    "text": "Radio"
+                  }
+                },
+                {
+                  "name": "focus",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "syncSelection",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the selected value changes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The value of the selected option.",
+              "fieldName": "value"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label for the group.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmFormControl",
+            "module": "/src/internal/form-control.js"
+          },
+          "tagName": "film-radio-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "RadioGroup",
+          "declaration": {
+            "name": "RadioGroup",
+            "module": "src/forms/radio-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-radio-group",
+          "declaration": {
+            "name": "RadioGroup",
+            "module": "src/forms/radio-group.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/radio.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Radio — a single option within a RadioGroup. Selection, roving focus\nand form value are all managed by the parent `film-radio-group`.",
+          "name": "Radio",
+          "slots": [
+            {
+              "description": "The label.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The value contributed to the group when this option is selected.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this option is selected. Managed by the group.",
+              "attribute": "checked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this option is disabled.",
+              "attribute": "disabled",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The value contributed to the group when this option is selected.",
+              "fieldName": "value"
+            },
+            {
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this option is selected. Managed by the group.",
+              "fieldName": "checked"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this option is disabled.",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-radio",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Radio",
+          "declaration": {
+            "name": "Radio",
+            "module": "src/forms/radio.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-radio",
+          "declaration": {
+            "name": "Radio",
+            "module": "src/forms/radio.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/range.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Range — a form-associated slider.",
+          "name": "Range",
+          "members": [
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "step",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "step"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "50",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "showValue",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show the current value beside the label.",
+              "attribute": "show-value"
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationAnchor",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "protected",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the value is committed."
+            },
+            {
+              "description": "While dragging.",
+              "name": "input"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "fieldName": "max"
+            },
+            {
+              "name": "step",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "step"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "50",
+              "fieldName": "value"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "show-value",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show the current value beside the label.",
+              "fieldName": "showValue"
+            }
+          ],
+          "superclass": {
+            "name": "FilmFormControl",
+            "module": "/src/internal/form-control.js"
+          },
+          "tagName": "film-range",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Range",
+          "declaration": {
+            "name": "Range",
+            "module": "src/forms/range.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-range",
+          "declaration": {
+            "name": "Range",
+            "module": "src/forms/range.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/search.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Search — a form-associated search field with a clear button.",
+          "name": "Search",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Search…'",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationAnchor",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "protected",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "emitSearch",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onKeydown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "clear",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the value is committed."
+            },
+            {
+              "name": "film-search",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "On Enter or clear. `detail.value` is the query."
+            },
+            {
+              "name": "input",
+              "type": {
+                "text": "Event"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Search…'",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmFormControl",
+            "module": "/src/internal/form-control.js"
+          },
+          "tagName": "film-search",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Search",
+          "declaration": {
+            "name": "Search",
+            "module": "src/forms/search.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-search",
+          "declaration": {
+            "name": "Search",
+            "module": "src/forms/search.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/select-option.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "SelectOption — one option within a Select.",
+          "name": "SelectOption",
+          "slots": [
+            {
+              "description": "The option label.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The value contributed to the select when chosen.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this option is selected. Managed by the select.",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this option is disabled.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "The visible text of the option.",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The value contributed to the select when chosen.",
+              "fieldName": "value"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this option is selected. Managed by the select.",
+              "fieldName": "selected"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this option is disabled.",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-select-option",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SelectOption",
+          "declaration": {
+            "name": "SelectOption",
+            "module": "src/forms/select-option.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-select-option",
+          "declaration": {
+            "name": "SelectOption",
+            "module": "src/forms/select-option.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/select.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Select — a form-associated select: a trigger showing the current choice and a\nlistbox of SelectOptions promoted to the top layer via the Popover\nAPI. Keyboard: arrows move, Enter/Space choose, Escape closes.",
+          "name": "Select",
+          "slots": [
+            {
+              "description": "The `film-select-option` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The value of the selected option.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Select…'",
+              "description": "Text shown when nothing is selected.",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the listbox is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "trigger",
+              "type": {
+                "text": "HTMLButtonElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "listbox",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "cleanup",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "SelectOption[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "enabledOptions",
+              "type": {
+                "text": "SelectOption[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "selectedOption",
+              "type": {
+                "text": "SelectOption | undefined"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string | null"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationAnchor",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "protected",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "syncOptions",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "openListbox",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "closeListbox",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onToggle",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "select",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "SelectOption"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onListboxClick",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onTriggerKeydown",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onListboxKeydown",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the selected value changes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The value of the selected option.",
+              "fieldName": "value"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "fieldName": "label"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Select…'",
+              "description": "Text shown when nothing is selected.",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the listbox is open.",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "FilmFormControl",
+            "module": "/src/internal/form-control.js"
+          },
+          "tagName": "film-select",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Select",
+          "declaration": {
+            "name": "Select",
+            "module": "src/forms/select.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-select",
+          "declaration": {
+            "name": "Select",
+            "module": "src/forms/select.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/switch.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Switch — a form-associated on/off toggle (`switch` role).",
+          "name": "Switch",
+          "slots": [
+            {
+              "description": "The label.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "toggleRole",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "default": "'switch'"
+            },
+            {
+              "kind": "field",
+              "name": "track",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "validationAnchor",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "protected",
+              "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "description": "When the checked state changes.",
+              "name": "change"
+            }
+          ],
+          "superclass": {
+            "name": "FilmToggleControl",
+            "module": "/src/internal/toggle-control.js"
+          },
+          "tagName": "film-switch",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Switch",
+          "declaration": {
+            "name": "Switch",
+            "module": "src/forms/switch.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-switch",
+          "declaration": {
+            "name": "Switch",
+            "module": "src/forms/switch.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/textarea.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Textarea — a form-associated multi-line text control.",
+          "name": "Textarea",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "rows",
+              "type": {
+                "text": "number"
+              },
+              "default": "3",
+              "attribute": "rows"
+            },
+            {
+              "kind": "field",
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "readonly"
+            },
+            {
+              "kind": "field",
+              "name": "autoGrow",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Grow to fit content instead of scrolling.",
+              "attribute": "auto-grow"
+            },
+            {
+              "kind": "field",
+              "name": "textarea",
+              "type": {
+                "text": "HTMLTextAreaElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationAnchor",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "protected",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "grow",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the value is committed."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "rows",
+              "type": {
+                "text": "number"
+              },
+              "default": "3",
+              "fieldName": "rows"
+            },
+            {
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "readonly"
+            },
+            {
+              "name": "auto-grow",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Grow to fit content instead of scrolling.",
+              "fieldName": "autoGrow"
+            }
+          ],
+          "superclass": {
+            "name": "FilmFormControl",
+            "module": "/src/internal/form-control.js"
+          },
+          "tagName": "film-textarea",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Textarea",
+          "declaration": {
+            "name": "Textarea",
+            "module": "src/forms/textarea.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-textarea",
+          "declaration": {
+            "name": "Textarea",
+            "module": "src/forms/textarea.ts"
           }
         }
       ]
@@ -7016,10 +8702,428 @@
         },
         {
           "kind": "js",
+          "name": "Popconfirm",
+          "declaration": {
+            "name": "Popconfirm",
+            "module": "./popconfirm.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Popover",
+          "declaration": {
+            "name": "Popover",
+            "module": "./popover.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "Tooltip",
           "declaration": {
             "name": "Tooltip",
             "module": "./tooltip.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/overlays/popconfirm.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Popconfirm — a confirmation bubble anchored to a trigger. Composes\nPopover with a message and confirm/cancel buttons.",
+          "name": "Popconfirm",
+          "slots": [
+            {
+              "description": "The element that opens the confirmation.",
+              "name": "trigger"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "message",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Are you sure?'",
+              "description": "The confirmation prompt.",
+              "attribute": "message"
+            },
+            {
+              "kind": "field",
+              "name": "confirmLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Confirm'",
+              "description": "Confirm button label.",
+              "attribute": "confirm-label"
+            },
+            {
+              "kind": "field",
+              "name": "cancelLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Cancel'",
+              "description": "Cancel button label.",
+              "attribute": "cancel-label"
+            },
+            {
+              "kind": "field",
+              "name": "popoverEl",
+              "type": {
+                "text": "Popover"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onConfirm",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onCancel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "film-confirm",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the confirm button is activated."
+            },
+            {
+              "name": "film-cancel",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When cancelled (button or dismissal)."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "message",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Are you sure?'",
+              "description": "The confirmation prompt.",
+              "fieldName": "message"
+            },
+            {
+              "name": "confirm-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Confirm'",
+              "description": "Confirm button label.",
+              "fieldName": "confirmLabel"
+            },
+            {
+              "name": "cancel-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Cancel'",
+              "description": "Cancel button label.",
+              "fieldName": "cancelLabel"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-popconfirm",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Popconfirm",
+          "declaration": {
+            "name": "Popconfirm",
+            "module": "src/overlays/popconfirm.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-popconfirm",
+          "declaration": {
+            "name": "Popconfirm",
+            "module": "src/overlays/popconfirm.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/overlays/popover.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Popover — a generic anchored panel promoted to the top layer via the Popover\nAPI and positioned by the shared anchoring helper. Open it on `click`\n(light-dismiss), on `hover`, or drive it manually via the `open` property.",
+          "name": "Popover",
+          "slots": [
+            {
+              "description": "The element the popover is anchored to.",
+              "name": "trigger"
+            },
+            {
+              "description": "The popover content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the popover is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "Placement"
+              },
+              "default": "'bottom'",
+              "description": "Preferred side of the trigger.",
+              "attribute": "placement"
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "Align"
+              },
+              "default": "'center'",
+              "description": "Alignment along the trigger.",
+              "attribute": "align"
+            },
+            {
+              "kind": "field",
+              "name": "trigger",
+              "type": {
+                "text": "'click' | 'hover' | 'manual'"
+              },
+              "default": "'click'",
+              "description": "How the popover is triggered.",
+              "attribute": "trigger"
+            },
+            {
+              "kind": "field",
+              "name": "panel",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "triggerSlot",
+              "type": {
+                "text": "HTMLSlotElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "cleanup",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "triggerEl",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "openPanel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "closePanel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onToggle",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onTriggerClick",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onTriggerEnter",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onTriggerLeave",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "name": "film-open",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the popover opens."
+            },
+            {
+              "name": "film-close",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the popover closes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the popover is open.",
+              "fieldName": "open"
+            },
+            {
+              "name": "placement",
+              "type": {
+                "text": "Placement"
+              },
+              "default": "'bottom'",
+              "description": "Preferred side of the trigger.",
+              "fieldName": "placement"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "Align"
+              },
+              "default": "'center'",
+              "description": "Alignment along the trigger.",
+              "fieldName": "align"
+            },
+            {
+              "name": "trigger",
+              "type": {
+                "text": "'click' | 'hover' | 'manual'"
+              },
+              "default": "'click'",
+              "description": "How the popover is triggered.",
+              "fieldName": "trigger"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-popover",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Popover",
+          "declaration": {
+            "name": "Popover",
+            "module": "src/overlays/popover.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-popover",
+          "declaration": {
+            "name": "Popover",
+            "module": "src/overlays/popover.ts"
           }
         }
       ]
@@ -7295,10 +9399,60 @@
         },
         {
           "kind": "js",
+          "name": "Kbd",
+          "declaration": {
+            "name": "Kbd",
+            "module": "./kbd.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "VisuallyHidden",
           "declaration": {
             "name": "VisuallyHidden",
             "module": "./visually-hidden.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/typography/kbd.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Kbd — displays a keyboard key or shortcut.",
+          "name": "Kbd",
+          "slots": [
+            {
+              "description": "The key label (e.g. `⌘`, `Enter`).",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-kbd",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Kbd",
+          "declaration": {
+            "name": "Kbd",
+            "module": "src/typography/kbd.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-kbd",
+          "declaration": {
+            "name": "Kbd",
+            "module": "src/typography/kbd.ts"
           }
         }
       ]
