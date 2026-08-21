@@ -30,11 +30,9 @@ export class Grid extends FilmElement {
     }
   `
 
-  updated () {
-    this.reflectStyleProps({
-      '--grid-space': this.space,
-      '--grid-min': this.min
-    })
+  static styleProps: Record<string, string> = {
+    '--grid-space': 'space',
+    '--grid-min': 'min'
   }
 
   render () {

@@ -33,9 +33,7 @@ export class Icon extends FilmElement {
     }
   `
 
-  updated () {
-    this.reflectStyleProps({ '--icon-space': this.space })
-  }
+  static styleProps: Record<string, string> = { '--icon-space': 'space' }
 
   render () {
     return html`

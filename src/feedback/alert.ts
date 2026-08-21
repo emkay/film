@@ -1,15 +1,9 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { variantSurface } from '../internal/variant-surface.js'
 
 export type AlertVariant = 'info' | 'success' | 'warning' | 'danger'
-
-const SURFACES: Record<AlertVariant, string> = {
-  info: 'var(--film-color-info)',
-  success: 'var(--film-color-success)',
-  warning: 'var(--film-color-warning)',
-  danger: 'var(--film-color-danger)'
-}
 
 /**
  * Alert — a callout for contextual messages. Sets an appropriate ARIA role so
@@ -59,7 +53,7 @@ export class Alert extends FilmElement {
   updated (changed: PropertyValues<this>): void {
     if (!changed.has('variant')) return
     this.reflectStyleProps({
-      '--alert-surface': SURFACES[this.variant] ?? SURFACES.info
+      '--alert-surface': variantSurface(this.variant, 'var(--film-color-info)')
     })
     if (this.manageRole) {
       const assertive = this.variant === 'danger' || this.variant === 'warning'

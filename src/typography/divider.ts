@@ -45,9 +45,7 @@ export class Divider extends FilmElement {
     }
   `
 
-  updated () {
-    this.reflectStyleProps({ '--divider-space': this.space })
-  }
+  static styleProps: Record<string, string> = { '--divider-space': 'space' }
 
   render () {
     return html`

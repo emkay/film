@@ -1,51 +1,23 @@
 /*
- * Film's semantic theming API. Override any of these --film-* tokens on :root
- * (or any subtree) to retheme the whole library — components only ever read
- * from this layer, never from the raw palette.
+ * Film's structural theme tokens — everything that isn't a palette colour.
+ * The colour roles (--film-color-*) live in ./palettes.css so themes can be
+ * swapped independently. `--film-color-text-muted` is derived here so it tracks
+ * whichever palette is active.
  *
- * Dark mode is handled with the CSS light-dark() function: it follows the OS
- * preference automatically, and can be forced per subtree with
+ * Dark mode uses the CSS light-dark() function: it follows the OS preference
+ * automatically, and can be forced per subtree with
  * `data-theme="light"` / `data-theme="dark"`.
  */
 :root {
   color-scheme: light dark;
 
-  /* Text */
-  --film-color-text: light-dark(var(--film-palette-tiber), var(--film-palette-antique-white));
+  /* Muted text, derived from the active palette. */
   --film-color-text-muted: color-mix(in oklch, var(--film-color-text) 62%, var(--film-color-surface));
 
-  /* Surfaces */
-  --film-color-background: light-dark(var(--film-palette-antique-white), oklch(0.205 0.018 200));
-  --film-color-surface: light-dark(var(--film-palette-antique-white), oklch(0.255 0.022 200));
-  --film-color-border: light-dark(
-    var(--film-palette-tiber),
-    color-mix(in oklch, var(--film-palette-antique-white) 42%, transparent)
-  );
-
-  /* Links + focus */
-  --film-color-link: light-dark(var(--film-palette-downriver), oklch(0.8 0.09 250));
-  --film-color-focus: light-dark(var(--film-palette-downriver), oklch(0.8 0.09 250));
-
-  /* Primary / accent */
-  --film-color-primary: var(--film-palette-tropical-blue);
-  --film-color-primary-hover: var(--film-palette-wheat);
-  --film-color-primary-active: var(--film-palette-wheat);
-  --film-color-primary-text: var(--film-palette-tiber);
-
-  /* Inverted pair — a dark surface with light content (and vice versa in dark mode) */
-  --film-color-inverted-surface: light-dark(var(--film-palette-tiber), var(--film-palette-antique-white));
-  --film-color-inverted-text: light-dark(var(--film-palette-antique-white), var(--film-palette-tiber));
-
-  /* Status surfaces */
-  --film-color-info: light-dark(var(--film-palette-tropical-blue), oklch(0.42 0.055 249));
-  --film-color-success: light-dark(var(--film-palette-feta), oklch(0.45 0.065 158));
-  --film-color-warning: light-dark(var(--film-palette-wheat), oklch(0.5 0.07 72));
-  --film-color-danger: light-dark(var(--film-palette-azalea), oklch(0.46 0.085 22));
-
-  /* Radii — proportional to the modular scale */
-  --film-radius-sm: var(--s-4);
-  --film-radius: var(--s-2);
-  --film-radius-lg: var(--s-1);
+  /* Radii — square by default; the pill stays a capsule (switch, progress). */
+  --film-radius-sm: 0;
+  --film-radius: 0;
+  --film-radius-lg: 0;
   --film-radius-pill: 9999px;
 
   /* Effects */

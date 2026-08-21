@@ -23,9 +23,7 @@ export class Cluster extends FilmElement {
     }
   `
 
-  updated () {
-    this.reflectStyleProps({ '--cluster-space': this.space })
-  }
+  static styleProps: Record<string, string> = { '--cluster-space': 'space' }
 
   render () {
     return html`<slot></slot>`

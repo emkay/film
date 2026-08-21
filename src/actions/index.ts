@@ -1,3 +1,5 @@
 export { Button } from './button.js'
+export { ButtonGroup } from './button-group.js'
 export { CopyButton } from './copy-button.js'
+export { IconButton } from './icon-button.js'
 export { Link } from './link.js'

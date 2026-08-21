@@ -44,6 +44,11 @@ export class Switcher extends FilmElement {
     }
   `
 
+  static styleProps: Record<string, string> = {
+    '--switcher-space': 'space',
+    '--switcher-threshold': 'threshold'
+  }
+
   @query('slot') private slotEl!: HTMLSlotElement
 
   private applyLimit (): void {
@@ -54,10 +59,7 @@ export class Switcher extends FilmElement {
   private readonly onSlotChange = (): void => this.applyLimit()
 
   updated (changed: PropertyValues<this>): void {
-    this.reflectStyleProps({
-      '--switcher-space': this.space,
-      '--switcher-threshold': this.threshold
-    })
+    super.updated(changed)
     if (changed.has('limit')) this.applyLimit()
   }
 

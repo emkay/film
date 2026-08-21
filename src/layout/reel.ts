@@ -34,11 +34,9 @@ export class Reel extends FilmElement {
     }
   `
 
-  updated () {
-    this.reflectStyleProps({
-      '--reel-space': this.space,
-      '--reel-item-width': this.itemWidth
-    })
+  static styleProps: Record<string, string> = {
+    '--reel-space': 'space',
+    '--reel-item-width': 'itemWidth'
   }
 
   render () {

@@ -1,4 +1,5 @@
-/* The default Film theme: modular scale + palette + semantic tokens. */
+/* The default Film theme: scale + palette primitives + structural tokens + palettes. */
 @import '../../base.css';
 @import './definitions/colors.css';
 @import './application/theme.css';
+@import './application/palettes.css';

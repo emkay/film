@@ -1,0 +1,170 @@
+/*
+ * Film colour palettes (theme config).
+ *
+ * Each block sets the semantic --film-color-* roles. The bare :root block is the
+ * default ("paper"); the others activate when `data-film-theme` is set on the
+ * root (or any subtree), which a theme picker can toggle:
+ *
+ *     <html data-film-theme="kodachrome">
+ *
+ * Available ids: paper (default), classic, and the film-stock set —
+ * kodachrome ('60s), polaroid ('70s), ektachrome ('80s), velvia ('90s).
+ * Each works in light and dark mode via light-dark(); `data-theme` still
+ * controls the light/dark scheme independently.
+ *
+ * Most themes derive the inverted pair from text/surface and the primary
+ * hover/active from `primary`, so the accent is a single knob. Film-stock
+ * themes also nudge the corner radius to match the era.
+ */
+
+/* ── Paper — warm neutral + terracotta accent (default) ───────────────────── */
+:root,
+:root[data-film-theme='paper'] {
+  --film-color-text: light-dark(oklch(0.28 0.02 60), oklch(0.94 0.01 80));
+  --film-color-surface: light-dark(oklch(0.98 0.012 85), oklch(0.27 0.012 60));
+  --film-color-background: light-dark(oklch(0.955 0.016 85), oklch(0.21 0.012 60));
+  --film-color-border: light-dark(oklch(0.86 0.02 75), oklch(0.4 0.015 60));
+
+  --film-color-primary: light-dark(oklch(0.56 0.13 45), oklch(0.66 0.13 45));
+  --film-color-primary-hover: color-mix(in oklch, var(--film-color-primary), black 12%);
+  --film-color-primary-active: color-mix(in oklch, var(--film-color-primary), black 22%);
+  --film-color-primary-text: oklch(0.99 0.01 85);
+
+  --film-color-inverted-surface: var(--film-color-text);
+  --film-color-inverted-text: var(--film-color-surface);
+  --film-color-link: var(--film-color-primary);
+  --film-color-focus: var(--film-color-primary);
+
+  --film-color-info: light-dark(oklch(0.93 0.03 230), oklch(0.42 0.05 230));
+  --film-color-success: light-dark(oklch(0.93 0.05 150), oklch(0.45 0.07 150));
+  --film-color-warning: light-dark(oklch(0.92 0.08 75), oklch(0.5 0.08 75));
+  --film-color-danger: light-dark(oklch(0.9 0.07 30), oklch(0.47 0.09 30));
+}
+
+/* ── Classic — the original pastel palette (warm cream + deep teal) ────────── */
+:root[data-film-theme='classic'] {
+  --film-color-text: light-dark(var(--film-palette-tiber), var(--film-palette-antique-white));
+  --film-color-surface: light-dark(var(--film-palette-antique-white), oklch(0.255 0.022 200));
+  --film-color-background: light-dark(var(--film-palette-antique-white), oklch(0.205 0.018 200));
+  --film-color-border: light-dark(
+    var(--film-palette-tiber),
+    color-mix(in oklch, var(--film-palette-antique-white) 42%, transparent)
+  );
+
+  --film-color-primary: var(--film-palette-tropical-blue);
+  --film-color-primary-hover: var(--film-palette-wheat);
+  --film-color-primary-active: var(--film-palette-wheat);
+  --film-color-primary-text: var(--film-palette-tiber);
+
+  --film-color-inverted-surface: light-dark(var(--film-palette-tiber), var(--film-palette-antique-white));
+  --film-color-inverted-text: light-dark(var(--film-palette-antique-white), var(--film-palette-tiber));
+  --film-color-link: light-dark(var(--film-palette-downriver), oklch(0.8 0.09 250));
+  --film-color-focus: light-dark(var(--film-palette-downriver), oklch(0.8 0.09 250));
+
+  --film-color-info: light-dark(var(--film-palette-tropical-blue), oklch(0.42 0.055 249));
+  --film-color-success: light-dark(var(--film-palette-feta), oklch(0.45 0.065 158));
+  --film-color-warning: light-dark(var(--film-palette-wheat), oklch(0.5 0.07 72));
+  --film-color-danger: light-dark(var(--film-palette-azalea), oklch(0.46 0.085 22));
+}
+
+/* ── Kodachrome — '60s Kodak: warm, saturated reds & golds, deep contrast ─── */
+:root[data-film-theme='kodachrome'] {
+  --film-color-text: light-dark(oklch(0.23 0.03 40), oklch(0.93 0.02 75));
+  --film-color-surface: light-dark(oklch(0.96 0.022 75), oklch(0.25 0.02 45));
+  --film-color-background: light-dark(oklch(0.93 0.026 72), oklch(0.19 0.02 45));
+  --film-color-border: light-dark(oklch(0.8 0.04 55), oklch(0.4 0.03 50));
+
+  --film-color-primary: light-dark(oklch(0.51 0.19 33), oklch(0.58 0.19 33));
+  --film-color-primary-hover: color-mix(in oklch, var(--film-color-primary), black 12%);
+  --film-color-primary-active: color-mix(in oklch, var(--film-color-primary), black 22%);
+  --film-color-primary-text: oklch(0.98 0.02 80);
+
+  --film-color-inverted-surface: var(--film-color-text);
+  --film-color-inverted-text: var(--film-color-surface);
+  --film-color-link: var(--film-color-primary);
+  --film-color-focus: var(--film-color-primary);
+
+  --film-color-info: light-dark(oklch(0.9 0.045 250), oklch(0.42 0.07 250));
+  --film-color-success: light-dark(oklch(0.9 0.08 140), oklch(0.46 0.09 140));
+  --film-color-warning: light-dark(oklch(0.9 0.1 75), oklch(0.52 0.1 75));
+  --film-color-danger: light-dark(oklch(0.87 0.09 28), oklch(0.46 0.1 28));
+}
+
+/* ── Polaroid — '70s SX-70: faded creamy warmth, low contrast, soft corners ─ */
+:root[data-film-theme='polaroid'] {
+  --film-color-text: light-dark(oklch(0.36 0.03 65), oklch(0.9 0.02 85));
+  --film-color-surface: light-dark(oklch(0.95 0.03 90), oklch(0.28 0.02 65));
+  --film-color-background: light-dark(oklch(0.92 0.035 88), oklch(0.22 0.02 65));
+  --film-color-border: light-dark(oklch(0.82 0.04 80), oklch(0.42 0.03 70));
+
+  --film-color-primary: light-dark(oklch(0.62 0.11 62), oklch(0.66 0.11 62));
+  --film-color-primary-hover: color-mix(in oklch, var(--film-color-primary), black 12%);
+  --film-color-primary-active: color-mix(in oklch, var(--film-color-primary), black 22%);
+  --film-color-primary-text: light-dark(oklch(0.26 0.03 65), oklch(0.22 0.03 65));
+
+  --film-color-inverted-surface: var(--film-color-text);
+  --film-color-inverted-text: var(--film-color-surface);
+  --film-color-link: light-dark(oklch(0.52 0.07 195), oklch(0.68 0.08 195));
+  --film-color-focus: light-dark(oklch(0.52 0.07 195), oklch(0.68 0.08 195));
+
+  --film-color-info: light-dark(oklch(0.9 0.03 200), oklch(0.42 0.05 200));
+  --film-color-success: light-dark(oklch(0.9 0.05 140), oklch(0.45 0.07 140));
+  --film-color-warning: light-dark(oklch(0.9 0.07 80), oklch(0.5 0.08 80));
+  --film-color-danger: light-dark(oklch(0.87 0.06 35), oklch(0.47 0.08 35));
+
+  /* soft, rounded — Polaroid frames */
+  --film-radius-sm: var(--s-2);
+  --film-radius: var(--s-1);
+  --film-radius-lg: var(--s0);
+}
+
+/* ── Ektachrome — '80s Kodak: cool crisp cyan-blue, sharp geometric corners ─ */
+:root[data-film-theme='ektachrome'] {
+  --film-color-text: light-dark(oklch(0.24 0.02 240), oklch(0.95 0.008 232));
+  --film-color-surface: light-dark(oklch(0.98 0.006 230), oklch(0.25 0.014 240));
+  --film-color-background: light-dark(oklch(0.95 0.01 232), oklch(0.19 0.014 240));
+  --film-color-border: light-dark(oklch(0.86 0.015 235), oklch(0.4 0.012 238));
+
+  --film-color-primary: light-dark(oklch(0.54 0.15 232), oklch(0.62 0.15 232));
+  --film-color-primary-hover: color-mix(in oklch, var(--film-color-primary), black 12%);
+  --film-color-primary-active: color-mix(in oklch, var(--film-color-primary), black 22%);
+  --film-color-primary-text: oklch(0.99 0 0);
+
+  --film-color-inverted-surface: var(--film-color-text);
+  --film-color-inverted-text: var(--film-color-surface);
+  --film-color-link: var(--film-color-primary);
+  --film-color-focus: var(--film-color-primary);
+
+  --film-color-info: light-dark(oklch(0.93 0.04 232), oklch(0.42 0.06 232));
+  --film-color-success: light-dark(oklch(0.92 0.07 175), oklch(0.45 0.08 175));
+  --film-color-warning: light-dark(oklch(0.92 0.08 85), oklch(0.5 0.08 85));
+  --film-color-danger: light-dark(oklch(0.9 0.07 25), oklch(0.46 0.09 25));
+
+  /* sharp, geometric — '80s */
+  --film-radius-sm: 0px;
+  --film-radius: var(--s-4);
+  --film-radius-lg: var(--s-3);
+}
+
+/* ── Velvia — '90s Fujichrome: ultra-saturated emerald + punchy chroma ─────── */
+:root[data-film-theme='velvia'] {
+  --film-color-text: light-dark(oklch(0.23 0.02 160), oklch(0.95 0.01 150));
+  --film-color-surface: light-dark(oklch(0.98 0.006 150), oklch(0.24 0.018 160));
+  --film-color-background: light-dark(oklch(0.96 0.012 150), oklch(0.18 0.018 160));
+  --film-color-border: light-dark(oklch(0.85 0.02 155), oklch(0.4 0.02 158));
+
+  --film-color-primary: light-dark(oklch(0.53 0.17 155), oklch(0.62 0.17 155));
+  --film-color-primary-hover: color-mix(in oklch, var(--film-color-primary), black 12%);
+  --film-color-primary-active: color-mix(in oklch, var(--film-color-primary), black 22%);
+  --film-color-primary-text: oklch(0.99 0 0);
+
+  --film-color-inverted-surface: var(--film-color-text);
+  --film-color-inverted-text: var(--film-color-surface);
+  --film-color-link: var(--film-color-primary);
+  --film-color-focus: var(--film-color-primary);
+
+  --film-color-info: light-dark(oklch(0.92 0.06 235), oklch(0.43 0.08 235));
+  --film-color-success: light-dark(oklch(0.88 0.14 150), oklch(0.5 0.13 150));
+  --film-color-warning: light-dark(oklch(0.89 0.12 80), oklch(0.53 0.11 80));
+  --film-color-danger: light-dark(oklch(0.86 0.14 18), oklch(0.5 0.13 18));
+}

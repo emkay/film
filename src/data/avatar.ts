@@ -55,9 +55,7 @@ export class Avatar extends FilmElement {
       .join('')
   }
 
-  updated (): void {
-    this.reflectStyleProps({ '--avatar-size': this.size })
-  }
+  static styleProps: Record<string, string> = { '--avatar-size': 'size' }
 
   private onError (): void {
     this.src = ''

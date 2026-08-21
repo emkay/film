@@ -1,16 +1,9 @@
-import { css, html } from 'lit'
+import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { variantSurface } from '../internal/variant-surface.js'
 
 export type BadgeVariant = 'neutral' | 'accent' | 'success' | 'warning' | 'danger'
-
-const SURFACES: Record<BadgeVariant, string> = {
-  neutral: 'var(--film-color-inverted-surface)',
-  accent: 'var(--film-color-info)',
-  success: 'var(--film-color-success)',
-  warning: 'var(--film-color-warning)',
-  danger: 'var(--film-color-danger)'
-}
 
 /**
  * Badge — a small pill for counts, statuses and tags.
@@ -38,9 +31,10 @@ export class Badge extends FilmElement {
     }
   `
 
-  updated () {
+  updated (changed: PropertyValues<this>): void {
+    if (!changed.has('variant')) return
     this.reflectStyleProps({
-      '--badge-surface': SURFACES[this.variant] ?? SURFACES.neutral,
+      '--badge-surface': variantSurface(this.variant, 'var(--film-color-inverted-surface)'),
       '--badge-ink': this.variant === 'neutral' ? 'var(--film-color-inverted-text)' : 'var(--film-color-text)'
     })
   }

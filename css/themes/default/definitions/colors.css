@@ -1,7 +1,7 @@
 /*
- * Raw palette primitives, in oklch. These are internal building blocks — theme
- * Film through the semantic --film-color-* tokens (see application/theme.css)
- * rather than referencing these directly.
+ * Raw palette primitives for the "classic" theme, in oklch. Internal building
+ * blocks referenced by the classic palette in application/palettes.css — theme
+ * Film through the semantic --film-color-* tokens rather than these directly.
  */
 :root {
   --film-palette-antique-white: oklch(0.94 0.028 83);
@@ -10,6 +10,5 @@
   --film-palette-feta: oklch(0.949 0.052 158);
   --film-palette-tropical-blue: oklch(0.912 0.033 249);
   --film-palette-downriver: oklch(0.301 0.076 258);
-  --film-palette-jacko-bean: oklch(0.235 0.028 71);
   --film-palette-tiber: oklch(0.293 0.031 195);
 }

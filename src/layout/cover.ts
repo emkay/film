@@ -35,11 +35,9 @@ export class Cover extends FilmElement {
     }
   `
 
-  updated () {
-    this.reflectStyleProps({
-      '--cover-space': this.space,
-      '--cover-min-height': this.minHeight
-    })
+  static styleProps: Record<string, string> = {
+    '--cover-space': 'space',
+    '--cover-min-height': 'minHeight'
   }
 
   render () {

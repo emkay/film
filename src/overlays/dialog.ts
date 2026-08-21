@@ -1,6 +1,6 @@
-import { css, html, nothing, type PropertyValues } from 'lit'
-import { customElement, property, query } from 'lit/decorators.js'
-import { FilmElement } from '../internal/film-element.js'
+import { css, html, nothing } from 'lit'
+import { customElement } from 'lit/decorators.js'
+import { FilmModal } from '../internal/modal.js'
 
 /**
  * Dialog — a modal built on the native `<dialog>` element, so it gets top-layer
@@ -10,19 +10,9 @@ import { FilmElement } from '../internal/film-element.js'
  * @slot - The dialog body.
  * @slot header - The header content (defaults to `label`).
  * @slot footer - The footer content.
- * @fires film-open - When the dialog opens.
- * @fires film-close - When the dialog closes.
  */
 @customElement('film-dialog')
-export class Dialog extends FilmElement {
-  /** Whether the dialog is open. */
-  @property({ type: Boolean, reflect: true }) open = false
-
-  /** An accessible label / default heading. */
-  @property({ type: String }) label = ''
-
-  @query('dialog') private dialog!: HTMLDialogElement
-
+export class Dialog extends FilmModal {
   static styles = css`
     dialog {
       padding: 0;
@@ -74,35 +64,6 @@ export class Dialog extends FilmElement {
       display: none;
     }
   `
-
-  show (): void {
-    this.open = true
-  }
-
-  close (): void {
-    this.open = false
-  }
-
-  updated (changed: PropertyValues<this>): void {
-    if (!changed.has('open')) return
-    if (this.open && !this.dialog.open) {
-      this.dialog.showModal()
-      this.dispatchEvent(new Event('film-open'))
-    } else if (!this.open && this.dialog.open) {
-      this.dialog.close()
-    }
-  }
-
-  private readonly onClose = (): void => {
-    if (this.open) {
-      this.open = false
-      this.dispatchEvent(new Event('film-close'))
-    }
-  }
-
-  private readonly onClick = (event: MouseEvent): void => {
-    if (event.target === this.dialog) this.close()
-  }
 
   render () {
     return html`

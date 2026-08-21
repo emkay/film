@@ -1,6 +1,6 @@
-import { css, html, nothing, type PropertyValues } from 'lit'
-import { customElement, property, query } from 'lit/decorators.js'
-import { FilmElement } from '../internal/film-element.js'
+import { css, html, nothing } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
+import { FilmModal } from '../internal/modal.js'
 
 export type DrawerPlacement = 'start' | 'end' | 'top' | 'bottom'
 
@@ -11,21 +11,11 @@ export type DrawerPlacement = 'start' | 'end' | 'top' | 'bottom'
  *
  * @slot - The drawer body.
  * @slot header - The header content (defaults to `label`).
- * @fires film-open - When the drawer opens.
- * @fires film-close - When the drawer closes.
  */
 @customElement('film-drawer')
-export class Drawer extends FilmElement {
-  /** Whether the drawer is open. */
-  @property({ type: Boolean, reflect: true }) open = false
-
+export class Drawer extends FilmModal {
   /** The edge the drawer slides in from. */
   @property({ type: String, reflect: true }) placement: DrawerPlacement = 'end'
-
-  /** An accessible label / default heading. */
-  @property({ type: String }) label = ''
-
-  @query('dialog') private dialog!: HTMLDialogElement
 
   static styles = css`
     dialog {
@@ -92,35 +82,6 @@ export class Drawer extends FilmElement {
       padding: 0.2em;
     }
   `
-
-  show (): void {
-    this.open = true
-  }
-
-  close (): void {
-    this.open = false
-  }
-
-  updated (changed: PropertyValues<this>): void {
-    if (!changed.has('open')) return
-    if (this.open && !this.dialog.open) {
-      this.dialog.showModal()
-      this.dispatchEvent(new Event('film-open'))
-    } else if (!this.open && this.dialog.open) {
-      this.dialog.close()
-    }
-  }
-
-  private readonly onClose = (): void => {
-    if (this.open) {
-      this.open = false
-      this.dispatchEvent(new Event('film-close'))
-    }
-  }
-
-  private readonly onClick = (event: MouseEvent): void => {
-    if (event.target === this.dialog) this.close()
-  }
 
   render () {
     return html`

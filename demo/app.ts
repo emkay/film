@@ -3,7 +3,7 @@ import { customElement, state } from 'lit/decorators.js'
 
 // Registers every <film-*> element as a side effect.
 import '../src/index.js'
-import type { Switch } from '../src/index.js'
+import type { RadioGroup, Switch } from '../src/index.js'
 
 import {
   alertExample,
@@ -12,6 +12,7 @@ import {
   boxExample,
   breadcrumbExample,
   buttonExample,
+  buttonGroupExample,
   cardExample,
   centerExample,
   checkboxExample,
@@ -27,15 +28,19 @@ import {
   frameExample,
   gridExample,
   iconExample,
+  iconButtonExample,
   imposterExample,
   inputExample,
   linkExample,
   menuExample,
+  paginationExample,
   progressBarExample,
   radioExample,
   rangeExample,
   reelExample,
   sidebarExample,
+  skeletonExample,
+  spinnerExample,
   splitPanelExample,
   stackExample,
   switchExample,
@@ -43,6 +48,7 @@ import {
   tableExample,
   tabsExample,
   tagExample,
+  textareaExample,
   tooltipExample,
   treeExample
 } from './examples/index.js'
@@ -81,6 +87,8 @@ const sections: NavSection[] = [
     title: 'Actions',
     links: [
       { slug: 'button', text: 'Button', render: buttonExample },
+      { slug: 'button-group', text: 'Button Group', render: buttonGroupExample },
+      { slug: 'icon-button', text: 'Icon Button', render: iconButtonExample },
       { slug: 'link', text: 'Link', render: linkExample },
       { slug: 'copy-button', text: 'Copy Button', render: copyButtonExample }
     ]
@@ -89,6 +97,7 @@ const sections: NavSection[] = [
     title: 'Forms',
     links: [
       { slug: 'input', text: 'Input', render: inputExample },
+      { slug: 'textarea', text: 'Textarea', render: textareaExample },
       { slug: 'checkbox', text: 'Checkbox', render: checkboxExample },
       { slug: 'radio', text: 'Radio', render: radioExample },
       { slug: 'switch', text: 'Switch', render: switchExample },
@@ -102,7 +111,8 @@ const sections: NavSection[] = [
       { slug: 'breadcrumb', text: 'Breadcrumb', render: breadcrumbExample },
       { slug: 'menu', text: 'Menu', render: menuExample },
       { slug: 'tabs', text: 'Tabs', render: tabsExample },
-      { slug: 'tree', text: 'Tree', render: treeExample }
+      { slug: 'tree', text: 'Tree', render: treeExample },
+      { slug: 'pagination', text: 'Pagination', render: paginationExample }
     ]
   },
   {
@@ -133,7 +143,9 @@ const sections: NavSection[] = [
       { slug: 'alert', text: 'Alert', render: alertExample },
       { slug: 'badge', text: 'Badge', render: badgeExample },
       { slug: 'tag', text: 'Tag', render: tagExample },
-      { slug: 'progress-bar', text: 'Progress Bar', render: progressBarExample }
+      { slug: 'progress-bar', text: 'Progress Bar', render: progressBarExample },
+      { slug: 'spinner', text: 'Spinner', render: spinnerExample },
+      { slug: 'skeleton', text: 'Skeleton', render: skeletonExample }
     ]
   }
 ]
@@ -146,6 +158,21 @@ const routes: Record<string, () => TemplateResult> = Object.fromEntries(
 
 const base = import.meta.env.BASE_URL
 const asset = (name: string): string => `${base}${name}`
+
+interface ThemeOption {
+  id: string
+  label: string
+}
+
+// Mirrors the palettes in css/themes/default/application/palettes.css.
+const themes: ThemeOption[] = [
+  { id: 'paper', label: 'Paper' },
+  { id: 'classic', label: 'Classic' },
+  { id: 'kodachrome', label: "Kodachrome · '60s" },
+  { id: 'polaroid', label: "Polaroid · '70s" },
+  { id: 'ektachrome', label: "Ektachrome · '80s" },
+  { id: 'velvia', label: "Velvia · '90s" }
+]
 
 @customElement('film-app')
 export class App extends LitElement {
@@ -164,6 +191,14 @@ export class App extends LitElement {
   private readonly onToggleTheme = (event: Event): void => {
     this.darkMode = (event.target as Switch).checked
     document.documentElement.setAttribute('data-theme', this.darkMode ? 'dark' : 'light')
+  }
+
+  /** The active colour palette (data-film-theme). */
+  @state() private theme = 'paper'
+
+  private readonly onSelectTheme = (event: Event): void => {
+    this.theme = (event.target as RadioGroup).value
+    document.documentElement.setAttribute('data-film-theme', this.theme)
   }
 
   static styles = css`
@@ -190,6 +225,12 @@ export class App extends LitElement {
       font-size: var(--s-1);
     }
 
+    .picker-label {
+      display: block;
+      font-weight: 600;
+      margin-block-end: var(--s-2);
+    }
+
     *,
     *::before,
     *::after {
@@ -200,6 +241,12 @@ export class App extends LitElement {
       list-style: none;
       margin: 0;
       padding: 0;
+    }
+
+    /* Let the layout primitives (Stack gap, Box padding) own spacing —
+       slotted content stays margin-free (every-layout composition). */
+    :where(h1, h2, h3, h4, h5, h6, p, pre, figure, blockquote) {
+      margin: 0;
     }
 
     img,
@@ -254,6 +301,7 @@ export class App extends LitElement {
     this.darkMode = forced
       ? forced === 'dark'
       : window.matchMedia('(prefers-color-scheme: dark)').matches
+    this.theme = document.documentElement.getAttribute('data-film-theme') ?? 'paper'
   }
 
   disconnectedCallback () {
@@ -284,7 +332,19 @@ export class App extends LitElement {
                     <img class="social" src=${asset('github.svg')} alt="GitHub" />
                   </film-link>
                 </film-stack>
-                <film-stack class="controls" space="var(--s-2)">
+                <film-stack class="controls" space="var(--s-1)">
+                  <div class="picker">
+                    <span class="picker-label">Theme</span>
+                    <film-radio-group
+                      label="Theme"
+                      value=${this.theme}
+                      @change=${this.onSelectTheme}
+                    >
+                      ${themes.map(
+                        (t) => html`<film-radio value=${t.id}>${t.label}</film-radio>`
+                      )}
+                    </film-radio-group>
+                  </div>
                   <film-switch
                     ?checked=${this.darkMode}
                     @change=${this.onToggleTheme}

@@ -1,6 +1,6 @@
-import { css, html, type PropertyValues } from 'lit'
-import { customElement, property, query } from 'lit/decorators.js'
-import { FilmFormControl } from '../internal/form-control.js'
+import { css, html } from 'lit'
+import { customElement, query } from 'lit/decorators.js'
+import { FilmToggleControl } from '../internal/toggle-control.js'
 
 /**
  * Switch — a form-associated on/off toggle (`switch` role).
@@ -9,12 +9,8 @@ import { FilmFormControl } from '../internal/form-control.js'
  * @fires change - When the checked state changes.
  */
 @customElement('film-switch')
-export class Switch extends FilmFormControl {
-  /** Whether the switch is on. */
-  @property({ type: Boolean, reflect: true }) checked = false
-
-  /** The value submitted when on. */
-  @property({ type: String }) value = 'on'
+export class Switch extends FilmToggleControl {
+  protected readonly toggleRole = 'switch'
 
   @query('.track') private track!: HTMLElement
 
@@ -73,53 +69,6 @@ export class Switch extends FilmFormControl {
       outline-offset: 2px;
     }
   `
-
-  constructor () {
-    super()
-    this.addEventListener('click', () => this.toggle())
-    this.addEventListener('keydown', (event) => {
-      if (event.key === ' ' || event.key === 'Enter') {
-        event.preventDefault()
-        this.toggle()
-      }
-    })
-  }
-
-  connectedCallback (): void {
-    super.connectedCallback()
-    this.setAttribute('role', this.getAttribute('role') ?? 'switch')
-    if (!this.hasAttribute('tabindex')) this.tabIndex = 0
-  }
-
-  protected getFormValue (): string | null {
-    return this.checked ? this.value : null
-  }
-
-  formResetCallback (): void {
-    this.checked = this.hasAttribute('checked')
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
-    this.syncForm()
-  }
-
-  updated (changed: PropertyValues<this>): void {
-    if (changed.has('checked')) {
-      this.setAttribute('aria-checked', String(this.checked))
-      this.syncForm()
-    }
-    if (changed.has('disabled')) {
-      this.setAttribute('aria-disabled', String(this.disabled))
-      this.tabIndex = this.disabled ? -1 : 0
-    }
-  }
-
-  private toggle (): void {
-    if (this.disabled) return
-    this.checked = !this.checked
-    this.dispatchEvent(new Event('change', { bubbles: true }))
-  }
 
   render () {
     return html`

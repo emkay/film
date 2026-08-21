@@ -1,16 +1,9 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { variantSurface } from '../internal/variant-surface.js'
 
 export type TagVariant = 'neutral' | 'accent' | 'success' | 'warning' | 'danger'
-
-const SURFACES: Record<TagVariant, string> = {
-  neutral: 'var(--film-color-surface)',
-  accent: 'var(--film-color-info)',
-  success: 'var(--film-color-success)',
-  warning: 'var(--film-color-warning)',
-  danger: 'var(--film-color-danger)'
-}
 
 /**
  * Tag — a labelled chip, optionally removable.
@@ -62,7 +55,7 @@ export class Tag extends FilmElement {
 
   updated (changed: PropertyValues<this>): void {
     if (changed.has('variant')) {
-      this.reflectStyleProps({ '--tag-surface': SURFACES[this.variant] ?? SURFACES.neutral })
+      this.reflectStyleProps({ '--tag-surface': variantSurface(this.variant, 'var(--film-color-surface)') })
     }
   }
 

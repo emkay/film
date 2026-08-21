@@ -42,9 +42,7 @@ export class Stack extends FilmElement {
     `
   }
 
-  updated () {
-    this.reflectStyleProps({ '--stack-space': this.space })
-  }
+  static styleProps: Record<string, string> = { '--stack-space': 'space' }
 
   render () {
     return html`${this.splitStyles}<slot></slot>`

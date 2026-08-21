@@ -15,7 +15,9 @@ export { switcherExample } from './switcher.js'
 
 // Actions
 export { buttonExample } from './button.js'
+export { buttonGroupExample } from './button-group.js'
 export { copyButtonExample } from './copy-button.js'
+export { iconButtonExample } from './icon-button.js'
 export { linkExample } from './link.js'
 
 // Typography
@@ -28,10 +30,12 @@ export { inputExample } from './input.js'
 export { radioExample } from './radio.js'
 export { rangeExample } from './range.js'
 export { switchExample } from './switch.js'
+export { textareaExample } from './textarea.js'
 
 // Navigation
 export { breadcrumbExample } from './breadcrumb.js'
 export { menuExample } from './menu.js'
+export { paginationExample } from './pagination.js'
 export { tabsExample } from './tabs.js'
 export { treeExample } from './tree.js'
 
@@ -51,4 +55,6 @@ export { tableExample } from './table.js'
 export { alertExample } from './alert.js'
 export { badgeExample } from './badge.js'
 export { progressBarExample } from './progress-bar.js'
+export { skeletonExample } from './skeleton.js'
+export { spinnerExample } from './spinner.js'
 export { tagExample } from './tag.js'

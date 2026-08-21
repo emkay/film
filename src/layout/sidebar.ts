@@ -64,11 +64,9 @@ export class Sidebar extends FilmElement {
     }
   `
 
-  updated () {
-    this.reflectStyleProps({
-      '--sidebar-space': this.space,
-      '--sidebar-content-min': this.contentMin
-    })
+  static styleProps: Record<string, string> = {
+    '--sidebar-space': 'space',
+    '--sidebar-content-min': 'contentMin'
   }
 
   render () {

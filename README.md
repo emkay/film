@@ -48,19 +48,21 @@ import '@mk/film/css/themes/default/index.css'
 | `film-icon`      | Sizes a slotted SVG to the adjacent text.                   |
 | `film-split-panel` | Two panes with a draggable, keyboard-operable divider.    |
 
-**Actions** (`src/actions`) — `film-button`, `film-link`, `film-copy-button`.
+**Actions** (`src/actions`) — `film-button`, `film-button-group`, `film-icon-button`, `film-link`, `film-copy-button`.
 
 **Typography** (`src/typography`) — `film-divider`, `film-visually-hidden`.
 
-**Forms** (`src/forms`) — form-associated controls (participate in a native `<form>` via `ElementInternals`): `film-input`, `film-checkbox`, `film-radio` / `film-radio-group`, `film-switch`, `film-range`, `film-color-picker`.
+**Forms** (`src/forms`) — form-associated controls (participate in a native `<form>` via `ElementInternals`): `film-input`, `film-textarea`, `film-checkbox`, `film-radio` / `film-radio-group`, `film-switch`, `film-range`, `film-color-picker`.
 
-**Navigation** (`src/navigation`) — `film-breadcrumb` / `film-breadcrumb-item`, `film-menu` / `film-menu-item`, `film-tabs` / `film-tab` / `film-tab-panel`, `film-tree` / `film-tree-item`.
+**Navigation** (`src/navigation`) — `film-breadcrumb` / `film-breadcrumb-item`, `film-menu` / `film-menu-item`, `film-tabs` / `film-tab` / `film-tab-panel`, `film-tree` / `film-tree-item`, `film-pagination`.
 
 **Overlays** (`src/overlays`) — `film-dialog` and `film-drawer` (native `<dialog>` top layer), `film-dropdown` and `film-tooltip` (Popover API + a hand-rolled positioning helper).
 
 **Data** (`src/data`) — `film-card` (with `media` / `footer` slots), `film-avatar`, `film-details`, `film-table` (data-driven via `columns` / `rows`).
 
-**Feedback** (`src/feedback`) — `film-alert`, `film-badge`, `film-tag` (`variant`, `removable`), `film-progress-bar`.
+**Feedback** (`src/feedback`) — `film-alert`, `film-badge`, `film-tag` (`variant`, `removable`), `film-progress-bar`, `film-spinner`, `film-skeleton`.
+
+See [ROADMAP.md](ROADMAP.md) for planned components and features.
 
 ## Modular scale
 
@@ -120,6 +122,29 @@ a data attribute:
 ```html
 <html data-theme="dark">   <!-- or "light" -->
 ```
+
+### Palettes
+
+Colour palettes live in `css/themes/default/application/palettes.css` and are
+selected with `data-film-theme` (independent of the light/dark scheme). The
+default is **paper**; the rest are period film stocks:
+
+| `data-film-theme` | Look |
+| --- | --- |
+| `paper` *(default)* | Warm neutral + terracotta accent |
+| `classic` | The original pastel cream + teal |
+| `kodachrome` | '60s Kodak — warm, saturated reds & golds |
+| `polaroid` | '70s SX-70 — faded creamy warmth, soft rounded corners |
+| `ektachrome` | '80s Kodak — cool crisp cyan-blue, sharp corners |
+| `velvia` | '90s Fujichrome — ultra-saturated emerald + punchy chroma |
+
+```html
+<html data-film-theme="kodachrome" data-theme="dark">
+```
+
+Each palette only overrides the `--film-color-*` roles (and, for some, the
+corner radius), so adding a new one is a single CSS block. That file is the
+config a theme picker can enumerate.
 
 ## Development
 

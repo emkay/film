@@ -42,9 +42,7 @@ export class Imposter extends FilmElement {
     }
   `
 
-  updated () {
-    this.reflectStyleProps({ '--imposter-margin': this.margin })
-  }
+  static styleProps: Record<string, string> = { '--imposter-margin': 'margin' }
 
   render () {
     return html`<slot></slot>`
