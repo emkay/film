@@ -35,6 +35,7 @@ import {
   formExample,
   frameExample,
   gridExample,
+  headingExample,
   iconExample,
   iconButtonExample,
   imposterExample,
@@ -43,6 +44,7 @@ import {
   linkExample,
   listExample,
   menuExample,
+  navExample,
   numberInputExample,
   paginationExample,
   popconfirmExample,
@@ -59,12 +61,15 @@ import {
   spinnerExample,
   splitPanelExample,
   stackExample,
+  stepsExample,
   switchExample,
   switcherExample,
   tableExample,
   tabsExample,
   tagExample,
+  textExample,
   textareaExample,
+  proseExample,
   toastExample,
   tooltipExample,
   treeExample
@@ -136,9 +141,11 @@ const sections: NavSection[] = [
     title: 'Navigation',
     links: [
       { slug: 'breadcrumb', text: 'Breadcrumb', render: breadcrumbExample },
+      { slug: 'nav', text: 'Nav', render: navExample },
       { slug: 'menu', text: 'Menu', render: menuExample },
       { slug: 'tabs', text: 'Tabs', render: tabsExample },
       { slug: 'tree', text: 'Tree', render: treeExample },
+      { slug: 'steps', text: 'Steps', render: stepsExample },
       { slug: 'pagination', text: 'Pagination', render: paginationExample }
     ]
   },
@@ -156,6 +163,9 @@ const sections: NavSection[] = [
   {
     title: 'Typography',
     links: [
+      { slug: 'heading', text: 'Heading', render: headingExample },
+      { slug: 'text', text: 'Text', render: textExample },
+      { slug: 'prose', text: 'Prose', render: proseExample },
       { slug: 'divider', text: 'Divider', render: dividerExample },
       { slug: 'kbd', text: 'Kbd', render: kbdExample }
     ]

@@ -20,6 +20,7 @@ export class Menu extends FilmElement {
       background-color: var(--film-color-surface);
       border: var(--border-thin) solid var(--film-color-border);
       border-radius: var(--film-radius-lg);
+      box-shadow: var(--film-shadow-2);
       min-inline-size: 12ch;
     }
   `

@@ -43,6 +43,7 @@ export class Tooltip extends FilmElement {
       background-color: var(--film-color-inverted-surface);
       border: none;
       border-radius: var(--film-radius-sm);
+      box-shadow: var(--film-shadow-1);
     }
   `
 

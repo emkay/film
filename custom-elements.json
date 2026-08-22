@@ -584,871 +584,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/feedback/alert.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Alert — a callout for contextual messages. Sets an appropriate ARIA role so\nscreen readers announce it (`alert` for warning/danger, `status` otherwise).",
-          "name": "Alert",
-          "slots": [
-            {
-              "description": "The message content.",
-              "name": ""
-            },
-            {
-              "description": "An optional leading icon.",
-              "name": "icon"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The severity / colour treatment.",
-              "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "manageRole",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "true"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The severity / colour treatment.",
-              "fieldName": "variant"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-alert",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "src/feedback/alert.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "src/feedback/alert.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/badge.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Badge — a small pill for counts, statuses and tags.",
-          "name": "Badge",
-          "slots": [
-            {
-              "description": "The badge content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "BadgeVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "BadgeVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-badge",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "src/feedback/badge.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "src/feedback/badge.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "./alert.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "AlertVariant",
-          "declaration": {
-            "name": "AlertVariant",
-            "module": "./alert.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "./badge.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "BadgeVariant",
-          "declaration": {
-            "name": "BadgeVariant",
-            "module": "./badge.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ProgressBar",
-          "declaration": {
-            "name": "ProgressBar",
-            "module": "./progress-bar.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "./skeleton.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "./spinner.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "./tag.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TagVariant",
-          "declaration": {
-            "name": "TagVariant",
-            "module": "./tag.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "./toast.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "toast",
-          "declaration": {
-            "name": "toast",
-            "module": "./toaster.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ToastOptions",
-          "declaration": {
-            "name": "ToastOptions",
-            "module": "./toaster.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/progress-bar.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "ProgressBar — a determinate or indeterminate progress indicator.",
-          "name": "ProgressBar",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "description": "The current value.",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "100",
-              "description": "The maximum value.",
-              "attribute": "max"
-            },
-            {
-              "kind": "field",
-              "name": "indeterminate",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show an indeterminate animation instead of a value.",
-              "attribute": "indeterminate",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "An accessible label.",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "percent",
-              "type": {
-                "text": "number"
-              },
-              "privacy": "private",
-              "readonly": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "description": "The current value.",
-              "fieldName": "value"
-            },
-            {
-              "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "100",
-              "description": "The maximum value.",
-              "fieldName": "max"
-            },
-            {
-              "name": "indeterminate",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show an indeterminate animation instead of a value.",
-              "fieldName": "indeterminate"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "An accessible label.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-progress-bar",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "ProgressBar",
-          "declaration": {
-            "name": "ProgressBar",
-            "module": "src/feedback/progress-bar.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-progress-bar",
-          "declaration": {
-            "name": "ProgressBar",
-            "module": "src/feedback/progress-bar.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/skeleton.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Skeleton — a placeholder shown while content loads. Purely decorative\n(hidden from assistive tech); mark the surrounding region busy instead.",
-          "name": "Skeleton",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "'text' | 'circle' | 'rect'"
-              },
-              "default": "'text'",
-              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "string"
-              },
-              "default": "'100%'",
-              "description": "Width, as any length.",
-              "attribute": "width"
-            },
-            {
-              "kind": "field",
-              "name": "height",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Height, as any length. Defaults to the current line height for text.",
-              "attribute": "height"
-            },
-            {
-              "kind": "field",
-              "name": "styleProps",
-              "type": {
-                "text": "Record<string, string>"
-              },
-              "static": true,
-              "default": "{ '--skeleton-width': 'width', '--skeleton-height': 'height' }"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "'text' | 'circle' | 'rect'"
-              },
-              "default": "'text'",
-              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
-              "fieldName": "variant"
-            },
-            {
-              "name": "width",
-              "type": {
-                "text": "string"
-              },
-              "default": "'100%'",
-              "description": "Width, as any length.",
-              "fieldName": "width"
-            },
-            {
-              "name": "height",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Height, as any length. Defaults to the current line height for text.",
-              "fieldName": "height"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-skeleton",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "src/feedback/skeleton.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "src/feedback/skeleton.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/spinner.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Spinner — an indeterminate loading indicator.",
-          "name": "Spinner",
-          "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "'var(--s1)'",
-              "description": "The diameter, as any length. Defaults to a modular-scale step.",
-              "attribute": "size"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Loading'",
-              "description": "Accessible label announced to assistive tech.",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "styleProps",
-              "type": {
-                "text": "Record<string, string>"
-              },
-              "static": true,
-              "default": "{ '--spinner-size': 'size' }"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "'var(--s1)'",
-              "description": "The diameter, as any length. Defaults to a modular-scale step.",
-              "fieldName": "size"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Loading'",
-              "description": "Accessible label announced to assistive tech.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-spinner",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "src/feedback/spinner.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "src/feedback/spinner.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/tag.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Tag — a labelled chip, optionally removable.",
-          "name": "Tag",
-          "slots": [
-            {
-              "description": "The tag content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "TagVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "removable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show a remove button.",
-              "attribute": "removable",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "onRemove",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "film-remove",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the remove button is activated."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "TagVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            },
-            {
-              "name": "removable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show a remove button.",
-              "fieldName": "removable"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-tag",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "src/feedback/tag.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "src/feedback/tag.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/toast.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Toast — a single transient notification. Usually created via the toast\nhelper rather than authored directly. Auto-dismisses after `duration` ms\n(0 keeps it until dismissed); hovering pauses the timer.",
-          "name": "Toast",
-          "slots": [
-            {
-              "description": "The message.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "duration",
-              "type": {
-                "text": "number"
-              },
-              "default": "4000",
-              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
-              "attribute": "duration"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the toast is shown (drives the enter/exit transition).",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "timer",
-              "type": {
-                "text": "ReturnType<typeof setTimeout> | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "show",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "close",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "restart",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onEnter",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onLeave",
-              "privacy": "private",
-              "readonly": true
-            }
-          ],
-          "events": [
-            {
-              "name": "film-close",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When dismissed (after the exit transition)."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            },
-            {
-              "name": "duration",
-              "type": {
-                "text": "number"
-              },
-              "default": "4000",
-              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
-              "fieldName": "duration"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the toast is shown (drives the enter/exit transition).",
-              "fieldName": "open"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-toast",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "src/feedback/toast.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "src/feedback/toast.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/toaster.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "toast",
-          "return": {
-            "type": {
-              "text": "Toast"
-            }
-          },
-          "parameters": [
-            {
-              "name": "message",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "options",
-              "default": "{}",
-              "type": {
-                "text": "ToastOptions"
-              }
-            }
-          ],
-          "description": "Show a toast notification. Lazily creates a single fixed-position live region\nappended to `document.body` and stacks toasts within it. Returns the created\n`film-toast` element."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "toast",
-          "declaration": {
-            "name": "toast",
-            "module": "src/feedback/toaster.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/data/accordion-item.ts",
       "declarations": [
         {
@@ -2613,6 +1748,871 @@
           "declaration": {
             "name": "Table",
             "module": "src/data/table.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/alert.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Alert — a callout for contextual messages. Sets an appropriate ARIA role so\nscreen readers announce it (`alert` for warning/danger, `status` otherwise).",
+          "name": "Alert",
+          "slots": [
+            {
+              "description": "The message content.",
+              "name": ""
+            },
+            {
+              "description": "An optional leading icon.",
+              "name": "icon"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The severity / colour treatment.",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "manageRole",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "true"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The severity / colour treatment.",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-alert",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "src/feedback/alert.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "src/feedback/alert.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/badge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Badge — a small pill for counts, statuses and tags.",
+          "name": "Badge",
+          "slots": [
+            {
+              "description": "The badge content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "BadgeVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "BadgeVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-badge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "src/feedback/badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "src/feedback/badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "./alert.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "AlertVariant",
+          "declaration": {
+            "name": "AlertVariant",
+            "module": "./alert.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "./badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BadgeVariant",
+          "declaration": {
+            "name": "BadgeVariant",
+            "module": "./badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ProgressBar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "./progress-bar.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "./skeleton.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "./spinner.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "./tag.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TagVariant",
+          "declaration": {
+            "name": "TagVariant",
+            "module": "./tag.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "./toast.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "toast",
+          "declaration": {
+            "name": "toast",
+            "module": "./toaster.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ToastOptions",
+          "declaration": {
+            "name": "ToastOptions",
+            "module": "./toaster.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/progress-bar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "ProgressBar — a determinate or indeterminate progress indicator.",
+          "name": "ProgressBar",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The maximum value.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show an indeterminate animation instead of a value.",
+              "attribute": "indeterminate",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "percent",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value.",
+              "fieldName": "value"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The maximum value.",
+              "fieldName": "max"
+            },
+            {
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show an indeterminate animation instead of a value.",
+              "fieldName": "indeterminate"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-progress-bar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ProgressBar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "src/feedback/progress-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-progress-bar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "src/feedback/progress-bar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/skeleton.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Skeleton — a placeholder shown while content loads. Purely decorative\n(hidden from assistive tech); mark the surrounding region busy instead.",
+          "name": "Skeleton",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "'text' | 'circle' | 'rect'"
+              },
+              "default": "'text'",
+              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'100%'",
+              "description": "Width, as any length.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Height, as any length. Defaults to the current line height for text.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "styleProps",
+              "type": {
+                "text": "Record<string, string>"
+              },
+              "static": true,
+              "default": "{ '--skeleton-width': 'width', '--skeleton-height': 'height' }"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "'text' | 'circle' | 'rect'"
+              },
+              "default": "'text'",
+              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
+              "fieldName": "variant"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'100%'",
+              "description": "Width, as any length.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Height, as any length. Defaults to the current line height for text.",
+              "fieldName": "height"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-skeleton",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "src/feedback/skeleton.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "src/feedback/skeleton.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/spinner.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Spinner — an indeterminate loading indicator.",
+          "name": "Spinner",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--s1)'",
+              "description": "The diameter, as any length. Defaults to a modular-scale step.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "description": "Accessible label announced to assistive tech.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "styleProps",
+              "type": {
+                "text": "Record<string, string>"
+              },
+              "static": true,
+              "default": "{ '--spinner-size': 'size' }"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--s1)'",
+              "description": "The diameter, as any length. Defaults to a modular-scale step.",
+              "fieldName": "size"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "description": "Accessible label announced to assistive tech.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-spinner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "src/feedback/spinner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "src/feedback/spinner.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/tag.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tag — a labelled chip, optionally removable.",
+          "name": "Tag",
+          "slots": [
+            {
+              "description": "The tag content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "TagVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "removable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a remove button.",
+              "attribute": "removable",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "onRemove",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "film-remove",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the remove button is activated."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "TagVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "removable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a remove button.",
+              "fieldName": "removable"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-tag",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "src/feedback/tag.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "src/feedback/tag.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/toast.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Toast — a single transient notification. Usually created via the toast\nhelper rather than authored directly. Auto-dismisses after `duration` ms\n(0 keeps it until dismissed); hovering pauses the timer.",
+          "name": "Toast",
+          "slots": [
+            {
+              "description": "The message.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "4000",
+              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
+              "attribute": "duration"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the toast is shown (drives the enter/exit transition).",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "timer",
+              "type": {
+                "text": "ReturnType<typeof setTimeout> | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "restart",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onEnter",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onLeave",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "name": "film-close",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When dismissed (after the exit transition)."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "4000",
+              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
+              "fieldName": "duration"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the toast is shown (drives the enter/exit transition).",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-toast",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "src/feedback/toast.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "src/feedback/toast.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/toaster.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "toast",
+          "return": {
+            "type": {
+              "text": "Toast"
+            }
+          },
+          "parameters": [
+            {
+              "name": "message",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "options",
+              "default": "{}",
+              "type": {
+                "text": "ToastOptions"
+              }
+            }
+          ],
+          "description": "Show a toast notification. Lazily creates a single fixed-position live region\nappended to `document.body` and stacks toasts within it. Returns the created\n`film-toast` element."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "toast",
+          "declaration": {
+            "name": "toast",
+            "module": "src/feedback/toaster.ts"
           }
         }
       ]
@@ -7871,1193 +7871,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/navigation/breadcrumb-item.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "BreadcrumbItem — one step in a Breadcrumb. Renders a link unless it is\nthe `current` page. A separator is inserted automatically before every item\nexcept the first (override via the `--breadcrumb-separator` custom property).",
-          "name": "BreadcrumbItem",
-          "slots": [
-            {
-              "description": "The item label.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "href",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The destination URL. Omitted for the current page.",
-              "attribute": "href"
-            },
-            {
-              "kind": "field",
-              "name": "current",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Marks this item as the current page.",
-              "attribute": "current",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "href",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The destination URL. Omitted for the current page.",
-              "fieldName": "href"
-            },
-            {
-              "name": "current",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Marks this item as the current page.",
-              "fieldName": "current"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-breadcrumb-item",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "BreadcrumbItem",
-          "declaration": {
-            "name": "BreadcrumbItem",
-            "module": "src/navigation/breadcrumb-item.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-breadcrumb-item",
-          "declaration": {
-            "name": "BreadcrumbItem",
-            "module": "src/navigation/breadcrumb-item.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/navigation/breadcrumb.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Breadcrumb — a navigation trail of BreadcrumbItems.",
-          "name": "Breadcrumb",
-          "slots": [
-            {
-              "description": "The `film-breadcrumb-item` children.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Breadcrumb'",
-              "description": "The accessible label for the navigation landmark.",
-              "attribute": "label"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Breadcrumb'",
-              "description": "The accessible label for the navigation landmark.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-breadcrumb",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Breadcrumb",
-          "declaration": {
-            "name": "Breadcrumb",
-            "module": "src/navigation/breadcrumb.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-breadcrumb",
-          "declaration": {
-            "name": "Breadcrumb",
-            "module": "src/navigation/breadcrumb.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/navigation/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Breadcrumb",
-          "declaration": {
-            "name": "Breadcrumb",
-            "module": "./breadcrumb.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "BreadcrumbItem",
-          "declaration": {
-            "name": "BreadcrumbItem",
-            "module": "./breadcrumb-item.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Menu",
-          "declaration": {
-            "name": "Menu",
-            "module": "./menu.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "MenuItem",
-          "declaration": {
-            "name": "MenuItem",
-            "module": "./menu-item.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Pagination",
-          "declaration": {
-            "name": "Pagination",
-            "module": "./pagination.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Tab",
-          "declaration": {
-            "name": "Tab",
-            "module": "./tab.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TabPanel",
-          "declaration": {
-            "name": "TabPanel",
-            "module": "./tab-panel.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Tabs",
-          "declaration": {
-            "name": "Tabs",
-            "module": "./tabs.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Tree",
-          "declaration": {
-            "name": "Tree",
-            "module": "./tree.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TreeItem",
-          "declaration": {
-            "name": "TreeItem",
-            "module": "./tree-item.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/navigation/menu-item.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "MenuItem — a single actionable item within a Menu.",
-          "name": "MenuItem",
-          "slots": [
-            {
-              "description": "The item label.",
-              "name": ""
-            },
-            {
-              "description": "Content before the label (e.g. an icon).",
-              "name": "start"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "A value identifying the item, surfaced in the `film-select` event.",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the item is disabled.",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "onActivate",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
-            }
-          ],
-          "events": [
-            {
-              "description": "When the item is activated. `detail.value` is the item's value.",
-              "name": "film-select"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "A value identifying the item, surfaced in the `film-select` event.",
-              "fieldName": "value"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the item is disabled.",
-              "fieldName": "disabled"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-menu-item",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "MenuItem",
-          "declaration": {
-            "name": "MenuItem",
-            "module": "src/navigation/menu-item.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-menu-item",
-          "declaration": {
-            "name": "MenuItem",
-            "module": "src/navigation/menu-item.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/navigation/menu.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Menu — a themed list of MenuItems with arrow-key navigation. Can be\nused on its own or as the panel of a Dropdown.",
-          "name": "Menu",
-          "slots": [
-            {
-              "description": "The `film-menu-item` children.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "items",
-              "type": {
-                "text": "MenuItem[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "focusFirst",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "description": "Move focus to the first item."
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-menu",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Menu",
-          "declaration": {
-            "name": "Menu",
-            "module": "src/navigation/menu.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-menu",
-          "declaration": {
-            "name": "Menu",
-            "module": "src/navigation/menu.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/navigation/pagination.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Pagination — page navigation with a first/last anchor, a window around the\ncurrent page, and ellipses for the gaps.",
-          "name": "Pagination",
-          "members": [
-            {
-              "kind": "field",
-              "name": "total",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "description": "Total number of pages.",
-              "attribute": "total"
-            },
-            {
-              "kind": "field",
-              "name": "page",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "description": "The current page (1-based).",
-              "attribute": "page"
-            },
-            {
-              "kind": "field",
-              "name": "siblingCount",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "description": "How many pages to show either side of the current one.",
-              "attribute": "sibling-count"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Pagination'",
-              "description": "Accessible label for the navigation landmark.",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "items",
-              "type": {
-                "text": "Array<number | 'ellipsis'>"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "go",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "page",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            }
-          ],
-          "events": [
-            {
-              "name": "film-page-change",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "When a page is chosen. `detail.page` is the new page."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "total",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "description": "Total number of pages.",
-              "fieldName": "total"
-            },
-            {
-              "name": "page",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "description": "The current page (1-based).",
-              "fieldName": "page"
-            },
-            {
-              "name": "sibling-count",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "description": "How many pages to show either side of the current one.",
-              "fieldName": "siblingCount"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Pagination'",
-              "description": "Accessible label for the navigation landmark.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-pagination",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Pagination",
-          "declaration": {
-            "name": "Pagination",
-            "module": "src/navigation/pagination.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-pagination",
-          "declaration": {
-            "name": "Pagination",
-            "module": "src/navigation/pagination.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/navigation/tab-panel.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "TabPanel — the content shown for a matching Tab, identified by `name`.",
-          "name": "TabPanel",
-          "slots": [
-            {
-              "description": "The panel content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The panel's identifier, matched against a tab's `panel`.",
-              "attribute": "name"
-            },
-            {
-              "kind": "field",
-              "name": "active",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this panel is active. Managed by the group.",
-              "attribute": "active",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The panel's identifier, matched against a tab's `panel`.",
-              "fieldName": "name"
-            },
-            {
-              "name": "active",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this panel is active. Managed by the group.",
-              "fieldName": "active"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-tab-panel",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "TabPanel",
-          "declaration": {
-            "name": "TabPanel",
-            "module": "src/navigation/tab-panel.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-tab-panel",
-          "declaration": {
-            "name": "TabPanel",
-            "module": "src/navigation/tab-panel.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/navigation/tab.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Tab — a single tab within a Tabs group. Selection state is managed by\nthe parent `film-tabs`.",
-          "name": "Tab",
-          "slots": [
-            {
-              "description": "The tab label.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "panel",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The `name` of the panel this tab controls.",
-              "attribute": "panel"
-            },
-            {
-              "kind": "field",
-              "name": "active",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this tab is active. Managed by the group.",
-              "attribute": "active",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this tab is disabled.",
-              "attribute": "disabled",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "panel",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The `name` of the panel this tab controls.",
-              "fieldName": "panel"
-            },
-            {
-              "name": "active",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this tab is active. Managed by the group.",
-              "fieldName": "active"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether this tab is disabled.",
-              "fieldName": "disabled"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-tab",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Tab",
-          "declaration": {
-            "name": "Tab",
-            "module": "src/navigation/tab.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-tab",
-          "declaration": {
-            "name": "Tab",
-            "module": "src/navigation/tab.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/navigation/tabs.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Tabs — a tabbed interface. Place `film-tab` elements in the `nav` slot and\nmatching `film-tab-panel` elements in the default slot, linked by\n`panel`/`name`. Supports arrow-key navigation.",
-          "name": "Tabs",
-          "slots": [
-            {
-              "description": "The `film-tab` elements.",
-              "name": "nav"
-            },
-            {
-              "description": "The `film-tab-panel` elements.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "active",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The `name` of the active panel.",
-              "attribute": "active"
-            },
-            {
-              "kind": "field",
-              "name": "tabs",
-              "type": {
-                "text": "Tab[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "panels",
-              "type": {
-                "text": "TabPanel[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "activate",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "name",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "focus",
-                  "optional": true,
-                  "type": {
-                    "text": "Tab"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "sync",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "film-tab-change",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "When the active tab changes. `detail.name` is the active panel."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "active",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The `name` of the active panel.",
-              "fieldName": "active"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-tabs",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Tabs",
-          "declaration": {
-            "name": "Tabs",
-            "module": "src/navigation/tabs.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-tabs",
-          "declaration": {
-            "name": "Tabs",
-            "module": "src/navigation/tabs.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/navigation/tree-item.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "TreeItem — a node in a Tree. Nest `film-tree-item`s in the default\nslot to create children; selection and keyboard navigation are managed by the\nparent `film-tree`.",
-          "name": "TreeItem",
-          "slots": [
-            {
-              "description": "The node label.",
-              "name": "label"
-            },
-            {
-              "description": "Nested `film-tree-item` children.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "expanded",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the node is expanded.",
-              "attribute": "expanded",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the node is selected. Managed by the tree.",
-              "attribute": "selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the node is disabled.",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "hasChildren",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "childItems",
-              "type": {
-                "text": "TreeItem[]"
-              },
-              "description": "The immediate child tree items.",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onSlotChange",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onTwist",
-              "privacy": "private",
-              "readonly": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "expanded",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the node is expanded.",
-              "fieldName": "expanded"
-            },
-            {
-              "name": "selected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the node is selected. Managed by the tree.",
-              "fieldName": "selected"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the node is disabled.",
-              "fieldName": "disabled"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-tree-item",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "TreeItem",
-          "declaration": {
-            "name": "TreeItem",
-            "module": "src/navigation/tree-item.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-tree-item",
-          "declaration": {
-            "name": "TreeItem",
-            "module": "src/navigation/tree-item.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/navigation/tree.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Tree — a hierarchical list of TreeItems with single selection and\nkeyboard navigation (up/down to move, left/right to collapse/expand,\nEnter/Space to select).",
-          "name": "Tree",
-          "slots": [
-            {
-              "description": "The top-level `film-tree-item`s.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The accessible label for the tree.",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "items",
-              "type": {
-                "text": "TreeItem[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "isVisible",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "boolean"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "item",
-                  "type": {
-                    "text": "TreeItem"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "visibleItems",
-              "type": {
-                "text": "TreeItem[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "focusItem",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "item",
-                  "optional": true,
-                  "type": {
-                    "text": "TreeItem"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "select",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "item",
-                  "type": {
-                    "text": "TreeItem"
-                  }
-                }
-              ]
-            }
-          ],
-          "events": [
-            {
-              "name": "film-tree-select",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "When a node is selected. `detail.item` is the node."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The accessible label for the tree.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-tree",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Tree",
-          "declaration": {
-            "name": "Tree",
-            "module": "src/navigation/tree.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-tree",
-          "declaration": {
-            "name": "Tree",
-            "module": "src/navigation/tree.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/overlays/dialog.ts",
       "declarations": [
         {
@@ -10020,6 +8833,2431 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/navigation/breadcrumb-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "BreadcrumbItem — one step in a Breadcrumb. Renders a link unless it is\nthe `current` page. A separator is inserted automatically before every item\nexcept the first (override via the `--breadcrumb-separator` custom property).",
+          "name": "BreadcrumbItem",
+          "slots": [
+            {
+              "description": "The item label.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The destination URL. Omitted for the current page.",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "current",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Marks this item as the current page.",
+              "attribute": "current",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The destination URL. Omitted for the current page.",
+              "fieldName": "href"
+            },
+            {
+              "name": "current",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Marks this item as the current page.",
+              "fieldName": "current"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-breadcrumb-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BreadcrumbItem",
+          "declaration": {
+            "name": "BreadcrumbItem",
+            "module": "src/navigation/breadcrumb-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-breadcrumb-item",
+          "declaration": {
+            "name": "BreadcrumbItem",
+            "module": "src/navigation/breadcrumb-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/breadcrumb.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Breadcrumb — a navigation trail of BreadcrumbItems.",
+          "name": "Breadcrumb",
+          "slots": [
+            {
+              "description": "The `film-breadcrumb-item` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Breadcrumb'",
+              "description": "The accessible label for the navigation landmark.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Breadcrumb'",
+              "description": "The accessible label for the navigation landmark.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-breadcrumb",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Breadcrumb",
+          "declaration": {
+            "name": "Breadcrumb",
+            "module": "src/navigation/breadcrumb.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-breadcrumb",
+          "declaration": {
+            "name": "Breadcrumb",
+            "module": "src/navigation/breadcrumb.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Breadcrumb",
+          "declaration": {
+            "name": "Breadcrumb",
+            "module": "./breadcrumb.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BreadcrumbItem",
+          "declaration": {
+            "name": "BreadcrumbItem",
+            "module": "./breadcrumb-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Menu",
+          "declaration": {
+            "name": "Menu",
+            "module": "./menu.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MenuItem",
+          "declaration": {
+            "name": "MenuItem",
+            "module": "./menu-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Nav",
+          "declaration": {
+            "name": "Nav",
+            "module": "./nav.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "NavItem",
+          "declaration": {
+            "name": "NavItem",
+            "module": "./nav-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Pagination",
+          "declaration": {
+            "name": "Pagination",
+            "module": "./pagination.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Step",
+          "declaration": {
+            "name": "Step",
+            "module": "./step.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Steps",
+          "declaration": {
+            "name": "Steps",
+            "module": "./steps.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Tab",
+          "declaration": {
+            "name": "Tab",
+            "module": "./tab.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TabPanel",
+          "declaration": {
+            "name": "TabPanel",
+            "module": "./tab-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Tabs",
+          "declaration": {
+            "name": "Tabs",
+            "module": "./tabs.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Tree",
+          "declaration": {
+            "name": "Tree",
+            "module": "./tree.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TreeItem",
+          "declaration": {
+            "name": "TreeItem",
+            "module": "./tree-item.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/menu-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "MenuItem — a single actionable item within a Menu.",
+          "name": "MenuItem",
+          "slots": [
+            {
+              "description": "The item label.",
+              "name": ""
+            },
+            {
+              "description": "Content before the label (e.g. an icon).",
+              "name": "start"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A value identifying the item, surfaced in the `film-select` event.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the item is disabled.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "onActivate",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onKeydown",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "description": "When the item is activated. `detail.value` is the item's value.",
+              "name": "film-select"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A value identifying the item, surfaced in the `film-select` event.",
+              "fieldName": "value"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the item is disabled.",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-menu-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "MenuItem",
+          "declaration": {
+            "name": "MenuItem",
+            "module": "src/navigation/menu-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-menu-item",
+          "declaration": {
+            "name": "MenuItem",
+            "module": "src/navigation/menu-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/menu.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Menu — a themed list of MenuItems with arrow-key navigation. Can be\nused on its own or as the panel of a Dropdown.",
+          "name": "Menu",
+          "slots": [
+            {
+              "description": "The `film-menu-item` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "MenuItem[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "focusFirst",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Move focus to the first item."
+            },
+            {
+              "kind": "field",
+              "name": "onKeydown",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-menu",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Menu",
+          "declaration": {
+            "name": "Menu",
+            "module": "src/navigation/menu.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-menu",
+          "declaration": {
+            "name": "Menu",
+            "module": "src/navigation/menu.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/nav-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "NavItem — a link within a Nav. Marks itself as the current page when\n`active`.",
+          "name": "NavItem",
+          "slots": [
+            {
+              "description": "The link label.",
+              "name": ""
+            },
+            {
+              "description": "Leading content (e.g. an icon).",
+              "name": "start"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The destination URL.",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Marks this item as the active/current page.",
+              "attribute": "active",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The destination URL.",
+              "fieldName": "href"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Marks this item as the active/current page.",
+              "fieldName": "active"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-nav-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "NavItem",
+          "declaration": {
+            "name": "NavItem",
+            "module": "src/navigation/nav-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-nav-item",
+          "declaration": {
+            "name": "NavItem",
+            "module": "src/navigation/nav-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/nav.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Nav — a vertical navigation list of NavItems inside a labelled\n`nav` landmark.",
+          "name": "Nav",
+          "slots": [
+            {
+              "description": "The `film-nav-item` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Navigation'",
+              "description": "The accessible label for the navigation landmark.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Navigation'",
+              "description": "The accessible label for the navigation landmark.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-nav",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Nav",
+          "declaration": {
+            "name": "Nav",
+            "module": "src/navigation/nav.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-nav",
+          "declaration": {
+            "name": "Nav",
+            "module": "src/navigation/nav.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/pagination.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Pagination — page navigation with a first/last anchor, a window around the\ncurrent page, and ellipses for the gaps.",
+          "name": "Pagination",
+          "members": [
+            {
+              "kind": "field",
+              "name": "total",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "Total number of pages.",
+              "attribute": "total"
+            },
+            {
+              "kind": "field",
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "The current page (1-based).",
+              "attribute": "page"
+            },
+            {
+              "kind": "field",
+              "name": "siblingCount",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "How many pages to show either side of the current one.",
+              "attribute": "sibling-count"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Pagination'",
+              "description": "Accessible label for the navigation landmark.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "Array<number | 'ellipsis'>"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "go",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "page",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "film-page-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When a page is chosen. `detail.page` is the new page."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "total",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "Total number of pages.",
+              "fieldName": "total"
+            },
+            {
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "The current page (1-based).",
+              "fieldName": "page"
+            },
+            {
+              "name": "sibling-count",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "How many pages to show either side of the current one.",
+              "fieldName": "siblingCount"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Pagination'",
+              "description": "Accessible label for the navigation landmark.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-pagination",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Pagination",
+          "declaration": {
+            "name": "Pagination",
+            "module": "src/navigation/pagination.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-pagination",
+          "declaration": {
+            "name": "Pagination",
+            "module": "src/navigation/pagination.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/step.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Step — a single step within a Steps. Its index and state are managed\nby the parent `film-steps`.",
+          "name": "Step",
+          "slots": [
+            {
+              "description": "The step label (overrides `label`).",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The step label.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The 0-based position. Managed by the parent.",
+              "attribute": "index",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "'complete' | 'active' | 'upcoming'"
+              },
+              "default": "'upcoming'",
+              "description": "Managed by the parent.",
+              "attribute": "state",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The step label.",
+              "fieldName": "label"
+            },
+            {
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The 0-based position. Managed by the parent.",
+              "fieldName": "index"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "'complete' | 'active' | 'upcoming'"
+              },
+              "default": "'upcoming'",
+              "description": "Managed by the parent.",
+              "fieldName": "state"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-step",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Step",
+          "declaration": {
+            "name": "Step",
+            "module": "src/navigation/step.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-step",
+          "declaration": {
+            "name": "Step",
+            "module": "src/navigation/step.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/steps.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Steps — a horizontal progress stepper. Marks each Step as complete,\nactive, or upcoming based on `current`.",
+          "name": "Steps",
+          "slots": [
+            {
+              "description": "The `film-step` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "current",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The 0-based index of the active step.",
+              "attribute": "current"
+            },
+            {
+              "kind": "field",
+              "name": "steps",
+              "type": {
+                "text": "Step[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "sync",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "current",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The 0-based index of the active step.",
+              "fieldName": "current"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-steps",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Steps",
+          "declaration": {
+            "name": "Steps",
+            "module": "src/navigation/steps.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-steps",
+          "declaration": {
+            "name": "Steps",
+            "module": "src/navigation/steps.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/tab-panel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "TabPanel — the content shown for a matching Tab, identified by `name`.",
+          "name": "TabPanel",
+          "slots": [
+            {
+              "description": "The panel content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The panel's identifier, matched against a tab's `panel`.",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this panel is active. Managed by the group.",
+              "attribute": "active",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The panel's identifier, matched against a tab's `panel`.",
+              "fieldName": "name"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this panel is active. Managed by the group.",
+              "fieldName": "active"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-tab-panel",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TabPanel",
+          "declaration": {
+            "name": "TabPanel",
+            "module": "src/navigation/tab-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-tab-panel",
+          "declaration": {
+            "name": "TabPanel",
+            "module": "src/navigation/tab-panel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/tab.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tab — a single tab within a Tabs group. Selection state is managed by\nthe parent `film-tabs`.",
+          "name": "Tab",
+          "slots": [
+            {
+              "description": "The tab label.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "panel",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The `name` of the panel this tab controls.",
+              "attribute": "panel"
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this tab is active. Managed by the group.",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this tab is disabled.",
+              "attribute": "disabled",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "panel",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The `name` of the panel this tab controls.",
+              "fieldName": "panel"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this tab is active. Managed by the group.",
+              "fieldName": "active"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether this tab is disabled.",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-tab",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Tab",
+          "declaration": {
+            "name": "Tab",
+            "module": "src/navigation/tab.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-tab",
+          "declaration": {
+            "name": "Tab",
+            "module": "src/navigation/tab.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/tabs.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tabs — a tabbed interface. Place `film-tab` elements in the `nav` slot and\nmatching `film-tab-panel` elements in the default slot, linked by\n`panel`/`name`. Supports arrow-key navigation.",
+          "name": "Tabs",
+          "slots": [
+            {
+              "description": "The `film-tab` elements.",
+              "name": "nav"
+            },
+            {
+              "description": "The `film-tab-panel` elements.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The `name` of the active panel.",
+              "attribute": "active"
+            },
+            {
+              "kind": "field",
+              "name": "tabs",
+              "type": {
+                "text": "Tab[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "panels",
+              "type": {
+                "text": "TabPanel[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onKeydown",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "activate",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "name",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "focus",
+                  "optional": true,
+                  "type": {
+                    "text": "Tab"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "film-tab-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When the active tab changes. `detail.name` is the active panel."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The `name` of the active panel.",
+              "fieldName": "active"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-tabs",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Tabs",
+          "declaration": {
+            "name": "Tabs",
+            "module": "src/navigation/tabs.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-tabs",
+          "declaration": {
+            "name": "Tabs",
+            "module": "src/navigation/tabs.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/tree-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "TreeItem — a node in a Tree. Nest `film-tree-item`s in the default\nslot to create children; selection and keyboard navigation are managed by the\nparent `film-tree`.",
+          "name": "TreeItem",
+          "slots": [
+            {
+              "description": "The node label.",
+              "name": "label"
+            },
+            {
+              "description": "Nested `film-tree-item` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "expanded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the node is expanded.",
+              "attribute": "expanded",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the node is selected. Managed by the tree.",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the node is disabled.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hasChildren",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "childItems",
+              "type": {
+                "text": "TreeItem[]"
+              },
+              "description": "The immediate child tree items.",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onSlotChange",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onTwist",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "expanded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the node is expanded.",
+              "fieldName": "expanded"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the node is selected. Managed by the tree.",
+              "fieldName": "selected"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the node is disabled.",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-tree-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TreeItem",
+          "declaration": {
+            "name": "TreeItem",
+            "module": "src/navigation/tree-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-tree-item",
+          "declaration": {
+            "name": "TreeItem",
+            "module": "src/navigation/tree-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/navigation/tree.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tree — a hierarchical list of TreeItems with single selection and\nkeyboard navigation (up/down to move, left/right to collapse/expand,\nEnter/Space to select).",
+          "name": "Tree",
+          "slots": [
+            {
+              "description": "The top-level `film-tree-item`s.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible label for the tree.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "TreeItem[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "isVisible",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "item",
+                  "type": {
+                    "text": "TreeItem"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "visibleItems",
+              "type": {
+                "text": "TreeItem[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onKeydown",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "focusItem",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "item",
+                  "optional": true,
+                  "type": {
+                    "text": "TreeItem"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "select",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "item",
+                  "type": {
+                    "text": "TreeItem"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "film-tree-select",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When a node is selected. `detail.item` is the node."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible label for the tree.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-tree",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Tree",
+          "declaration": {
+            "name": "Tree",
+            "module": "src/navigation/tree.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-tree",
+          "declaration": {
+            "name": "Tree",
+            "module": "src/navigation/tree.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/react/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "FilmAccordion"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmAccordionItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmAlert"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmAvatar"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmBadge"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmBox"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmBreadcrumb"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmBreadcrumbItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmButton"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmButtonGroup"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCalendar"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCard"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCenter"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCheckbox"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCluster"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCode"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmColorPicker"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCombobox"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCopyButton"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCover"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDatePicker"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDetails"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDialog"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDivider"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDrawer"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDropdown"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmField"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmFileInput"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmForm"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmFrame"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmGrid"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmIcon"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmIconButton"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmImposter"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmInput"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmKbd"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmLink"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmList"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmListItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmMenu"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmMenuItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmNumberInput"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmPagination"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmPopconfirm"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmPopover"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmProgressBar"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmRadio"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmRadioGroup"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmRange"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmReel"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSearch"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSelect"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSelectOption"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSidebar"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSkeleton"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSlider"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSpinner"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSplitPanel"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmStack"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSwitch"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSwitcher"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTab"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTabPanel"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTable"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTabs"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTag"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTextarea"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmToast"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTooltip"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTree"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTreeItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmVisuallyHidden"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FilmAccordion",
+          "declaration": {
+            "name": "FilmAccordion",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmAccordionItem",
+          "declaration": {
+            "name": "FilmAccordionItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmAlert",
+          "declaration": {
+            "name": "FilmAlert",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmAvatar",
+          "declaration": {
+            "name": "FilmAvatar",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmBadge",
+          "declaration": {
+            "name": "FilmBadge",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmBox",
+          "declaration": {
+            "name": "FilmBox",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmBreadcrumb",
+          "declaration": {
+            "name": "FilmBreadcrumb",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmBreadcrumbItem",
+          "declaration": {
+            "name": "FilmBreadcrumbItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmButton",
+          "declaration": {
+            "name": "FilmButton",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmButtonGroup",
+          "declaration": {
+            "name": "FilmButtonGroup",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCalendar",
+          "declaration": {
+            "name": "FilmCalendar",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCard",
+          "declaration": {
+            "name": "FilmCard",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCenter",
+          "declaration": {
+            "name": "FilmCenter",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCheckbox",
+          "declaration": {
+            "name": "FilmCheckbox",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCluster",
+          "declaration": {
+            "name": "FilmCluster",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCode",
+          "declaration": {
+            "name": "FilmCode",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmColorPicker",
+          "declaration": {
+            "name": "FilmColorPicker",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCombobox",
+          "declaration": {
+            "name": "FilmCombobox",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCopyButton",
+          "declaration": {
+            "name": "FilmCopyButton",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCover",
+          "declaration": {
+            "name": "FilmCover",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDatePicker",
+          "declaration": {
+            "name": "FilmDatePicker",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDetails",
+          "declaration": {
+            "name": "FilmDetails",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDialog",
+          "declaration": {
+            "name": "FilmDialog",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDivider",
+          "declaration": {
+            "name": "FilmDivider",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDrawer",
+          "declaration": {
+            "name": "FilmDrawer",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDropdown",
+          "declaration": {
+            "name": "FilmDropdown",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmField",
+          "declaration": {
+            "name": "FilmField",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmFileInput",
+          "declaration": {
+            "name": "FilmFileInput",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmForm",
+          "declaration": {
+            "name": "FilmForm",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmFrame",
+          "declaration": {
+            "name": "FilmFrame",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmGrid",
+          "declaration": {
+            "name": "FilmGrid",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmIcon",
+          "declaration": {
+            "name": "FilmIcon",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmIconButton",
+          "declaration": {
+            "name": "FilmIconButton",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmImposter",
+          "declaration": {
+            "name": "FilmImposter",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmInput",
+          "declaration": {
+            "name": "FilmInput",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmKbd",
+          "declaration": {
+            "name": "FilmKbd",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmLink",
+          "declaration": {
+            "name": "FilmLink",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmList",
+          "declaration": {
+            "name": "FilmList",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmListItem",
+          "declaration": {
+            "name": "FilmListItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmMenu",
+          "declaration": {
+            "name": "FilmMenu",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmMenuItem",
+          "declaration": {
+            "name": "FilmMenuItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmNumberInput",
+          "declaration": {
+            "name": "FilmNumberInput",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmPagination",
+          "declaration": {
+            "name": "FilmPagination",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmPopconfirm",
+          "declaration": {
+            "name": "FilmPopconfirm",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmPopover",
+          "declaration": {
+            "name": "FilmPopover",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmProgressBar",
+          "declaration": {
+            "name": "FilmProgressBar",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmRadio",
+          "declaration": {
+            "name": "FilmRadio",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmRadioGroup",
+          "declaration": {
+            "name": "FilmRadioGroup",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmRange",
+          "declaration": {
+            "name": "FilmRange",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmReel",
+          "declaration": {
+            "name": "FilmReel",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSearch",
+          "declaration": {
+            "name": "FilmSearch",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSelect",
+          "declaration": {
+            "name": "FilmSelect",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSelectOption",
+          "declaration": {
+            "name": "FilmSelectOption",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSidebar",
+          "declaration": {
+            "name": "FilmSidebar",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSkeleton",
+          "declaration": {
+            "name": "FilmSkeleton",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSlider",
+          "declaration": {
+            "name": "FilmSlider",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSpinner",
+          "declaration": {
+            "name": "FilmSpinner",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSplitPanel",
+          "declaration": {
+            "name": "FilmSplitPanel",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmStack",
+          "declaration": {
+            "name": "FilmStack",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSwitch",
+          "declaration": {
+            "name": "FilmSwitch",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSwitcher",
+          "declaration": {
+            "name": "FilmSwitcher",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTab",
+          "declaration": {
+            "name": "FilmTab",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTabPanel",
+          "declaration": {
+            "name": "FilmTabPanel",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTable",
+          "declaration": {
+            "name": "FilmTable",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTabs",
+          "declaration": {
+            "name": "FilmTabs",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTag",
+          "declaration": {
+            "name": "FilmTag",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTextarea",
+          "declaration": {
+            "name": "FilmTextarea",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmToast",
+          "declaration": {
+            "name": "FilmToast",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTooltip",
+          "declaration": {
+            "name": "FilmTooltip",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTree",
+          "declaration": {
+            "name": "FilmTree",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTreeItem",
+          "declaration": {
+            "name": "FilmTreeItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmVisuallyHidden",
+          "declaration": {
+            "name": "FilmVisuallyHidden",
+            "module": "src/react/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/typography/divider.ts",
       "declarations": [
         {
@@ -10107,6 +11345,89 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/typography/heading.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Heading — a semantic `h1`–`h6` sized from the modular scale.",
+          "name": "Heading",
+          "slots": [
+            {
+              "description": "The heading text.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "level",
+              "type": {
+                "text": "number"
+              },
+              "default": "2",
+              "description": "The heading level (1–6), controlling both the tag and the default size.",
+              "attribute": "level"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Override the size with a scale step, e.g. `s5` or `s-1`.",
+              "attribute": "size"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "level",
+              "type": {
+                "text": "number"
+              },
+              "default": "2",
+              "description": "The heading level (1–6), controlling both the tag and the default size.",
+              "fieldName": "level"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Override the size with a scale step, e.g. `s5` or `s-1`.",
+              "fieldName": "size"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-heading",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Heading",
+          "declaration": {
+            "name": "Heading",
+            "module": "src/typography/heading.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-heading",
+          "declaration": {
+            "name": "Heading",
+            "module": "src/typography/heading.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/typography/index.ts",
       "declarations": [],
       "exports": [
@@ -10120,10 +11441,34 @@
         },
         {
           "kind": "js",
+          "name": "Heading",
+          "declaration": {
+            "name": "Heading",
+            "module": "./heading.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "Kbd",
           "declaration": {
             "name": "Kbd",
             "module": "./kbd.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Prose",
+          "declaration": {
+            "name": "Prose",
+            "module": "./prose.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Text",
+          "declaration": {
+            "name": "Text",
+            "module": "./text.js"
           }
         },
         {
@@ -10174,6 +11519,151 @@
           "declaration": {
             "name": "Kbd",
             "module": "src/typography/kbd.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/typography/prose.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Prose — a readable flow container for long-form HTML: constrains line length\nto `--measure` and adds vertical rhythm between top-level blocks.\n\nNote: because slotted content lives in the light DOM, only the direct\nchildren can be styled here (`::slotted` can't reach their descendants), so\nthis handles block rhythm, measure and top-level element styles.",
+          "name": "Prose",
+          "slots": [
+            {
+              "description": "The long-form content (headings, paragraphs, lists, etc.).",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-prose",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Prose",
+          "declaration": {
+            "name": "Prose",
+            "module": "src/typography/prose.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-prose",
+          "declaration": {
+            "name": "Prose",
+            "module": "src/typography/prose.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/typography/text.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Text — a block of body text sized from the modular scale, with an optional\nmuted tone and weight.",
+          "name": "Text",
+          "slots": [
+            {
+              "description": "The text content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'s0'",
+              "description": "A modular-scale step, e.g. `s0` (default), `s-1`, `s1`.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'default' | 'muted'"
+              },
+              "default": "'default'",
+              "description": "Text tone.",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "weight",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Optional font weight (e.g. `600`, `bold`).",
+              "attribute": "weight"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'s0'",
+              "description": "A modular-scale step, e.g. `s0` (default), `s-1`, `s1`.",
+              "fieldName": "size"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "'default' | 'muted'"
+              },
+              "default": "'default'",
+              "description": "Text tone.",
+              "fieldName": "tone"
+            },
+            {
+              "name": "weight",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Optional font weight (e.g. `600`, `bold`).",
+              "fieldName": "weight"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-text",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Text",
+          "declaration": {
+            "name": "Text",
+            "module": "src/typography/text.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-text",
+          "declaration": {
+            "name": "Text",
+            "module": "src/typography/text.ts"
           }
         }
       ]

@@ -64,7 +64,7 @@ export class AccordionItem extends FilmElement {
     }
 
     .marker {
-      transition: transform 0.15s ease;
+      transition: transform var(--film-duration-fast) var(--film-ease);
     }
 
     :host([open]) .marker {

@@ -54,6 +54,7 @@ export class Popover extends FilmElement {
       background-color: var(--film-color-surface);
       border: var(--border-thin) solid var(--film-color-border);
       border-radius: var(--film-radius);
+      box-shadow: var(--film-shadow-2);
     }
 
     .panel:popover-open {

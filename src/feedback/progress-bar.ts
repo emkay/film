@@ -36,7 +36,7 @@ export class ProgressBar extends FilmElement {
     .fill {
       block-size: 100%;
       background-color: var(--film-color-inverted-surface);
-      transition: inline-size 0.2s ease;
+      transition: inline-size var(--film-duration) var(--film-ease);
     }
 
     :host([indeterminate]) .fill {

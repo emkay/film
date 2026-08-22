@@ -85,6 +85,7 @@ export class Select extends FilmFormControl {
       border-radius: var(--film-radius);
       overflow: auto;
       max-block-size: 16rem;
+      box-shadow: var(--film-shadow-2);
     }
 
     .listbox:popover-open {

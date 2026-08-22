@@ -41,7 +41,8 @@ export class Toast extends FilmElement {
       background-color: var(--toast-surface, var(--film-color-info));
       border: var(--border-thin) solid var(--film-color-border);
       border-radius: var(--film-radius);
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      box-shadow: var(--film-shadow-2);
+      transition: opacity var(--film-duration) var(--film-ease), transform var(--film-duration) var(--film-ease);
     }
 
     :host(:not([open])) .toast {

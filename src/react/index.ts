@@ -34,6 +34,7 @@ import { FileInput } from '../forms/file-input.js'
 import { Form } from '../forms/form.js'
 import { Frame } from '../layout/frame.js'
 import { Grid } from '../layout/grid.js'
+import { Heading } from '../typography/heading.js'
 import { Icon } from '../layout/icon.js'
 import { IconButton } from '../actions/icon-button.js'
 import { Imposter } from '../layout/imposter.js'
@@ -44,11 +45,14 @@ import { List } from '../data/list.js'
 import { ListItem } from '../data/list-item.js'
 import { Menu } from '../navigation/menu.js'
 import { MenuItem } from '../navigation/menu-item.js'
+import { Nav } from '../navigation/nav.js'
+import { NavItem } from '../navigation/nav-item.js'
 import { NumberInput } from '../forms/number-input.js'
 import { Pagination } from '../navigation/pagination.js'
 import { Popconfirm } from '../overlays/popconfirm.js'
 import { Popover } from '../overlays/popover.js'
 import { ProgressBar } from '../feedback/progress-bar.js'
+import { Prose } from '../typography/prose.js'
 import { Radio } from '../forms/radio.js'
 import { RadioGroup } from '../forms/radio-group.js'
 import { Range } from '../forms/range.js'
@@ -62,6 +66,8 @@ import { Slider } from '../forms/slider.js'
 import { Spinner } from '../feedback/spinner.js'
 import { SplitPanel } from '../layout/split-panel.js'
 import { Stack } from '../layout/stack.js'
+import { Step } from '../navigation/step.js'
+import { Steps } from '../navigation/steps.js'
 import { Switch } from '../forms/switch.js'
 import { Switcher } from '../layout/switcher.js'
 import { Tab } from '../navigation/tab.js'
@@ -69,6 +75,7 @@ import { TabPanel } from '../navigation/tab-panel.js'
 import { Table } from '../data/table.js'
 import { Tabs } from '../navigation/tabs.js'
 import { Tag } from '../feedback/tag.js'
+import { Text } from '../typography/text.js'
 import { Textarea } from '../forms/textarea.js'
 import { Toast } from '../feedback/toast.js'
 import { Tooltip } from '../overlays/tooltip.js'
@@ -299,6 +306,12 @@ export const FilmGrid = createComponent({
   elementClass: Grid
 })
 
+export const FilmHeading = createComponent({
+  react: React,
+  tagName: "film-heading",
+  elementClass: Heading
+})
+
 export const FilmIcon = createComponent({
   react: React,
   tagName: "film-icon",
@@ -366,6 +379,18 @@ export const FilmMenuItem = createComponent({
   }
 })
 
+export const FilmNav = createComponent({
+  react: React,
+  tagName: "film-nav",
+  elementClass: Nav
+})
+
+export const FilmNavItem = createComponent({
+  react: React,
+  tagName: "film-nav-item",
+  elementClass: NavItem
+})
+
 export const FilmNumberInput = createComponent({
   react: React,
   tagName: "film-number-input",
@@ -408,6 +433,12 @@ export const FilmProgressBar = createComponent({
   react: React,
   tagName: "film-progress-bar",
   elementClass: ProgressBar
+})
+
+export const FilmProse = createComponent({
+  react: React,
+  tagName: "film-prose",
+  elementClass: Prose
 })
 
 export const FilmRadio = createComponent({
@@ -509,6 +540,18 @@ export const FilmStack = createComponent({
   elementClass: Stack
 })
 
+export const FilmStep = createComponent({
+  react: React,
+  tagName: "film-step",
+  elementClass: Step
+})
+
+export const FilmSteps = createComponent({
+  react: React,
+  tagName: "film-steps",
+  elementClass: Steps
+})
+
 export const FilmSwitch = createComponent({
   react: React,
   tagName: "film-switch",
@@ -562,6 +605,12 @@ export const FilmTag = createComponent({
   events: {
       "onFilmRemove": "film-remove"
   }
+})
+
+export const FilmText = createComponent({
+  react: React,
+  tagName: "film-text",
+  elementClass: Text
 })
 
 export const FilmTextarea = createComponent({

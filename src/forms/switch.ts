@@ -40,7 +40,7 @@ export class Switch extends FilmToggleControl {
       border: var(--border-thin) solid var(--film-color-border);
       padding: 0.1em;
       display: flex;
-      transition: background-color 0.15s ease;
+      transition: background-color var(--film-duration-fast) var(--film-ease);
     }
 
     :host([checked]) .track {
@@ -52,7 +52,7 @@ export class Switch extends FilmToggleControl {
       block-size: 1em;
       border-radius: 50%;
       background-color: var(--film-color-inverted-surface);
-      transition: transform 0.15s ease, background-color 0.15s ease;
+      transition: transform var(--film-duration-fast) var(--film-ease), background-color var(--film-duration-fast) var(--film-ease);
     }
 
     :host([checked]) .thumb {

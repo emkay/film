@@ -25,6 +25,21 @@
   --film-disabled-opacity: 0.6;
   --film-focus-ring-width: var(--border-thin);
 
+  /* Elevation — shadows for floating surfaces (menus, dialogs, toasts…). */
+  --film-shadow-color: light-dark(oklch(0 0 0 / 0.14), oklch(0 0 0 / 0.5));
+  --film-shadow-1: 0 1px 2px var(--film-shadow-color);
+  --film-shadow-2: 0 6px 16px var(--film-shadow-color), 0 2px 6px var(--film-shadow-color);
+
+  /* Stacking — for elements outside the top layer (e.g. the toast region). */
+  --film-z-sticky: 100;
+  --film-z-overlay: 1000;
+  --film-z-toast: 1100;
+
+  /* Motion */
+  --film-duration-fast: 120ms;
+  --film-duration: 200ms;
+  --film-ease: cubic-bezier(0.2, 0, 0, 1);
+
   /* Type */
   --film-font-sans: "Fira Sans", system-ui, sans-serif;
   --film-font-serif: "Serif 420", Georgia, serif;

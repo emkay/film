@@ -50,7 +50,7 @@ export class Radio extends FilmElement {
       border-radius: 50%;
       background-color: var(--film-color-inverted-surface);
       transform: scale(0);
-      transition: transform 0.1s ease;
+      transition: transform var(--film-duration-fast) var(--film-ease);
     }
 
     :host([checked]) .dot::after {

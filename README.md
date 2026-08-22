@@ -75,11 +75,11 @@ tooling.
 
 **Actions** (`src/actions`) — `film-button`, `film-button-group`, `film-icon-button`, `film-link`, `film-copy-button`.
 
-**Typography** (`src/typography`) — `film-divider`, `film-visually-hidden`, `film-kbd`.
+**Typography** (`src/typography`) — `film-heading`, `film-text`, `film-prose`, `film-divider`, `film-visually-hidden`, `film-kbd`.
 
 **Forms** (`src/forms`) — form-associated controls (participate in a native `<form>` via `ElementInternals`): `film-input`, `film-textarea`, `film-number-input`, `film-search`, `film-select` / `film-select-option`, `film-combobox`, `film-checkbox`, `film-radio` / `film-radio-group`, `film-switch`, `film-range`, `film-slider`, `film-color-picker`, `film-date-picker` / `film-calendar`, `film-file-input`. Plus `film-field` (label/hint/error wrapper) and `film-form` (validation + submit).
 
-**Navigation** (`src/navigation`) — `film-breadcrumb` / `film-breadcrumb-item`, `film-menu` / `film-menu-item`, `film-tabs` / `film-tab` / `film-tab-panel`, `film-tree` / `film-tree-item`, `film-pagination`.
+**Navigation** (`src/navigation`) — `film-breadcrumb` / `film-breadcrumb-item`, `film-menu` / `film-menu-item`, `film-tabs` / `film-tab` / `film-tab-panel`, `film-tree` / `film-tree-item`, `film-pagination`, `film-steps` / `film-step`, `film-nav` / `film-nav-item`.
 
 **Overlays** (`src/overlays`) — `film-dialog` and `film-drawer` (native `<dialog>` top layer), `film-dropdown`, `film-tooltip`, `film-popover` and `film-popconfirm` (Popover API + a hand-rolled positioning helper).
 
@@ -134,8 +134,11 @@ The main tokens:
 | `--film-color-link` / `--film-color-focus` | Links / focus rings |
 | `--film-color-info` / `-success` / `-warning` / `-danger` | Status surfaces |
 | `--film-radius-sm` / `--film-radius` / `--film-radius-lg` / `--film-radius-pill` | Corner radii |
+| `--film-shadow-1` / `--film-shadow-2` (`--film-shadow-color`) | Elevation for floating surfaces |
 | `--film-overlay-scrim` | Modal/drawer backdrop |
 | `--film-disabled-opacity` | Disabled-state opacity |
+| `--film-z-sticky` / `--film-z-overlay` / `--film-z-toast` | Stacking scale (non-top-layer elements) |
+| `--film-duration-fast` / `--film-duration` / `--film-ease` | Motion |
 | `--film-font-sans` / `-serif` / `-mono` | Font families |
 
 ### Dark mode

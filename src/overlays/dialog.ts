@@ -34,6 +34,7 @@ export class Dialog extends FilmModal {
       border: var(--border-thin) solid var(--film-color-border);
       border-radius: var(--film-radius-lg);
       padding: var(--s1);
+      box-shadow: var(--film-shadow-2);
     }
 
     header {

@@ -1,3 +1,6 @@
 export { Divider } from './divider.js'
+export { Heading } from './heading.js'
 export { Kbd } from './kbd.js'
+export { Prose } from './prose.js'
+export { Text } from './text.js'
 export { VisuallyHidden } from './visually-hidden.js'

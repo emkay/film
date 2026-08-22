@@ -27,6 +27,7 @@ export class Drawer extends FilmModal {
       block-size: 100dvh;
       max-block-size: 100dvh;
       inline-size: min(90vw, 22rem);
+      box-shadow: var(--film-shadow-2);
     }
 
     :host([placement='start']) dialog {

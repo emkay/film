@@ -41,8 +41,8 @@ Checked items are implemented (component + demo example + build passing).
 
 ### Navigation
 - [x] `film-pagination` (P1)
-- [ ] `film-steps` — stepper (P2)
-- [ ] `film-nav` — nav list with active state (P2)
+- [x] `film-steps` — stepper (P2)
+- [x] `film-nav` — nav list with active state (P2)
 - [ ] submenus for `film-menu` (P3)
 - [ ] `film-command-palette` — ⌘K (P3)
 
@@ -58,7 +58,7 @@ Checked items are implemented (component + demo example + build passing).
 - [ ] `film-description-list` (P3)
 
 ### Typography & media
-- [ ] `film-heading` / `film-text` / `film-prose` (P2)
+- [x] `film-heading` / `film-text` / `film-prose` (P2)
 - [ ] `film-image` — lazy / fallback (P2)
 - [ ] an icon set for `film-icon` (P2)
 
@@ -71,7 +71,7 @@ Checked items are implemented (component + demo example + build passing).
 - [ ] SSR / Declarative Shadow DOM — `@lit-labs/ssr` (P2)
 - [ ] Docs site generated from the CEM (P2)
 - [x] Per-component subpath exports (tree-shaking) (P2)
-- [ ] Token expansion — elevation/shadow, z-index, motion tokens (P2)
+- [x] Token expansion — elevation/shadow, z-index, motion tokens (P2)
 - [ ] Accessibility hardening — full keyboard nav for tree/table/menu (P2)
 - [ ] RTL story (P3)
 - [ ] Overlay enter/exit transitions honoring reduced-motion (P3)

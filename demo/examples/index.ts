@@ -22,7 +22,10 @@ export { linkExample } from './link.js'
 
 // Typography
 export { dividerExample } from './divider.js'
+export { headingExample } from './heading.js'
 export { kbdExample } from './kbd.js'
+export { proseExample } from './prose.js'
+export { textExample } from './text.js'
 
 // Forms
 export { calendarExample } from './calendar.js'
@@ -46,7 +49,9 @@ export { textareaExample } from './textarea.js'
 // Navigation
 export { breadcrumbExample } from './breadcrumb.js'
 export { menuExample } from './menu.js'
+export { navExample } from './nav.js'
 export { paginationExample } from './pagination.js'
+export { stepsExample } from './steps.js'
 export { tabsExample } from './tabs.js'
 export { treeExample } from './tree.js'
 

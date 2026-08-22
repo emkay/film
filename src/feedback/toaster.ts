@@ -25,9 +25,10 @@ function ensureContainer (): HTMLElement {
     display: 'flex',
     flexDirection: 'column',
     gap: '0.5rem',
-    zIndex: '9999',
     pointerEvents: 'none'
   })
+  // Uses the theme token when present, with a sensible fallback.
+  region.style.setProperty('z-index', 'var(--film-z-toast, 1100)')
   document.body.appendChild(region)
   container = region
   return region
