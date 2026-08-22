@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/emkay/film/compare/v1.1.0...v1.1.1) (2026-08-22)
+
+
+### Bug Fixes
+
+* row activation in table ([d2167f7](https://github.com/emkay/film/commit/d2167f7ea1c147b0a9f3d7a60ebd86d82fcfc452))
+
 ## [1.1.0](https://github.com/emkay/film/compare/v1.0.0...v1.1.0) (2026-08-22)
 
 
