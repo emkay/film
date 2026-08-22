@@ -584,6 +584,871 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/feedback/alert.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Alert — a callout for contextual messages. Sets an appropriate ARIA role so\nscreen readers announce it (`alert` for warning/danger, `status` otherwise).",
+          "name": "Alert",
+          "slots": [
+            {
+              "description": "The message content.",
+              "name": ""
+            },
+            {
+              "description": "An optional leading icon.",
+              "name": "icon"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The severity / colour treatment.",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "manageRole",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "true"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The severity / colour treatment.",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-alert",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "src/feedback/alert.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "src/feedback/alert.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/badge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Badge — a small pill for counts, statuses and tags.",
+          "name": "Badge",
+          "slots": [
+            {
+              "description": "The badge content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "BadgeVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "BadgeVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-badge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "src/feedback/badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "src/feedback/badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "./alert.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "AlertVariant",
+          "declaration": {
+            "name": "AlertVariant",
+            "module": "./alert.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "./badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BadgeVariant",
+          "declaration": {
+            "name": "BadgeVariant",
+            "module": "./badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ProgressBar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "./progress-bar.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "./skeleton.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "./spinner.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "./tag.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TagVariant",
+          "declaration": {
+            "name": "TagVariant",
+            "module": "./tag.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "./toast.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "toast",
+          "declaration": {
+            "name": "toast",
+            "module": "./toaster.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ToastOptions",
+          "declaration": {
+            "name": "ToastOptions",
+            "module": "./toaster.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/progress-bar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "ProgressBar — a determinate or indeterminate progress indicator.",
+          "name": "ProgressBar",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The maximum value.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show an indeterminate animation instead of a value.",
+              "attribute": "indeterminate",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "percent",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value.",
+              "fieldName": "value"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The maximum value.",
+              "fieldName": "max"
+            },
+            {
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show an indeterminate animation instead of a value.",
+              "fieldName": "indeterminate"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-progress-bar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ProgressBar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "src/feedback/progress-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-progress-bar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "src/feedback/progress-bar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/skeleton.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Skeleton — a placeholder shown while content loads. Purely decorative\n(hidden from assistive tech); mark the surrounding region busy instead.",
+          "name": "Skeleton",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "'text' | 'circle' | 'rect'"
+              },
+              "default": "'text'",
+              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'100%'",
+              "description": "Width, as any length.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Height, as any length. Defaults to the current line height for text.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "styleProps",
+              "type": {
+                "text": "Record<string, string>"
+              },
+              "static": true,
+              "default": "{ '--skeleton-width': 'width', '--skeleton-height': 'height' }"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "'text' | 'circle' | 'rect'"
+              },
+              "default": "'text'",
+              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
+              "fieldName": "variant"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'100%'",
+              "description": "Width, as any length.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Height, as any length. Defaults to the current line height for text.",
+              "fieldName": "height"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-skeleton",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "src/feedback/skeleton.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "src/feedback/skeleton.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/spinner.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Spinner — an indeterminate loading indicator.",
+          "name": "Spinner",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--s1)'",
+              "description": "The diameter, as any length. Defaults to a modular-scale step.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "description": "Accessible label announced to assistive tech.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "styleProps",
+              "type": {
+                "text": "Record<string, string>"
+              },
+              "static": true,
+              "default": "{ '--spinner-size': 'size' }"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--s1)'",
+              "description": "The diameter, as any length. Defaults to a modular-scale step.",
+              "fieldName": "size"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "description": "Accessible label announced to assistive tech.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-spinner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "src/feedback/spinner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "src/feedback/spinner.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/tag.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tag — a labelled chip, optionally removable.",
+          "name": "Tag",
+          "slots": [
+            {
+              "description": "The tag content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "TagVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "removable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a remove button.",
+              "attribute": "removable",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "onRemove",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "film-remove",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the remove button is activated."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "TagVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "removable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a remove button.",
+              "fieldName": "removable"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-tag",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "src/feedback/tag.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "src/feedback/tag.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/toast.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Toast — a single transient notification. Usually created via the toast\nhelper rather than authored directly. Auto-dismisses after `duration` ms\n(0 keeps it until dismissed); hovering pauses the timer.",
+          "name": "Toast",
+          "slots": [
+            {
+              "description": "The message.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "4000",
+              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
+              "attribute": "duration"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the toast is shown (drives the enter/exit transition).",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "timer",
+              "type": {
+                "text": "ReturnType<typeof setTimeout> | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "restart",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onEnter",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onLeave",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "name": "film-close",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When dismissed (after the exit transition)."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "4000",
+              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
+              "fieldName": "duration"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the toast is shown (drives the enter/exit transition).",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-toast",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "src/feedback/toast.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "src/feedback/toast.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/toaster.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "toast",
+          "return": {
+            "type": {
+              "text": "Toast"
+            }
+          },
+          "parameters": [
+            {
+              "name": "message",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "options",
+              "default": "{}",
+              "type": {
+                "text": "ToastOptions"
+              }
+            }
+          ],
+          "description": "Show a toast notification. Lazily creates a single fixed-position live region\nappended to `document.body` and stacks toasts within it. Returns the created\n`film-toast` element."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "toast",
+          "declaration": {
+            "name": "toast",
+            "module": "src/feedback/toaster.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/data/accordion-item.ts",
       "declarations": [
         {
@@ -1754,865 +2619,219 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/feedback/alert.ts",
+      "path": "src/forms/calendar.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "Alert — a callout for contextual messages. Sets an appropriate ARIA role so\nscreen readers announce it (`alert` for warning/danger, `status` otherwise).",
-          "name": "Alert",
-          "slots": [
-            {
-              "description": "The message content.",
-              "name": ""
-            },
-            {
-              "description": "An optional leading icon.",
-              "name": "icon"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The severity / colour treatment.",
-              "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "manageRole",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "true"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The severity / colour treatment.",
-              "fieldName": "variant"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-alert",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "src/feedback/alert.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "src/feedback/alert.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/badge.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Badge — a small pill for counts, statuses and tags.",
-          "name": "Badge",
-          "slots": [
-            {
-              "description": "The badge content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "BadgeVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "BadgeVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-badge",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "src/feedback/badge.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "src/feedback/badge.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "./alert.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "AlertVariant",
-          "declaration": {
-            "name": "AlertVariant",
-            "module": "./alert.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "./badge.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "BadgeVariant",
-          "declaration": {
-            "name": "BadgeVariant",
-            "module": "./badge.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ProgressBar",
-          "declaration": {
-            "name": "ProgressBar",
-            "module": "./progress-bar.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "./skeleton.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "./spinner.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "./tag.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TagVariant",
-          "declaration": {
-            "name": "TagVariant",
-            "module": "./tag.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "./toast.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "toast",
-          "declaration": {
-            "name": "toast",
-            "module": "./toaster.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ToastOptions",
-          "declaration": {
-            "name": "ToastOptions",
-            "module": "./toaster.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/progress-bar.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "ProgressBar — a determinate or indeterminate progress indicator.",
-          "name": "ProgressBar",
+          "description": "Calendar — a month grid for choosing a date. Keyboard: arrows move by day,\nHome/End jump to the week edges, PageUp/PageDown change month, Enter selects.",
+          "name": "Calendar",
           "members": [
             {
               "kind": "field",
               "name": "value",
               "type": {
-                "text": "number"
+                "text": "string"
               },
-              "default": "0",
-              "description": "The current value.",
+              "default": "''",
+              "description": "The selected date, as `YYYY-MM-DD`.",
               "attribute": "value"
             },
             {
               "kind": "field",
-              "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "100",
-              "description": "The maximum value.",
-              "attribute": "max"
-            },
-            {
-              "kind": "field",
-              "name": "indeterminate",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show an indeterminate animation instead of a value.",
-              "attribute": "indeterminate",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "label",
+              "name": "min",
               "type": {
                 "text": "string"
               },
               "default": "''",
-              "description": "An accessible label.",
-              "attribute": "label"
+              "description": "Earliest selectable date, as `YYYY-MM-DD`.",
+              "attribute": "min"
             },
             {
               "kind": "field",
-              "name": "percent",
+              "name": "max",
               "type": {
-                "text": "number"
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Latest selectable date, as `YYYY-MM-DD`.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "cursor",
+              "type": {
+                "text": "Date"
+              },
+              "privacy": "private",
+              "default": "new Date()"
+            },
+            {
+              "kind": "field",
+              "name": "pendingFocus",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "selectedDate",
+              "type": {
+                "text": "Date | null"
+              },
+              "description": "The currently selected date, if valid.",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "isDisabled",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "date",
+                  "type": {
+                    "text": "Date"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "moveCursor",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "days",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "moveMonth",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "months",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "selectDate",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "date",
+                  "type": {
+                    "text": "Date"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onGridKeydown",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "grid",
+              "type": {
+                "text": "Date[]"
               },
               "privacy": "private",
               "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "name": "film-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When a date is chosen. `detail.value` is `YYYY-MM-DD`."
             }
           ],
           "attributes": [
             {
               "name": "value",
               "type": {
-                "text": "number"
+                "text": "string"
               },
-              "default": "0",
-              "description": "The current value.",
+              "default": "''",
+              "description": "The selected date, as `YYYY-MM-DD`.",
               "fieldName": "value"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Earliest selectable date, as `YYYY-MM-DD`.",
+              "fieldName": "min"
             },
             {
               "name": "max",
               "type": {
-                "text": "number"
+                "text": "string"
               },
-              "default": "100",
-              "description": "The maximum value.",
+              "default": "''",
+              "description": "Latest selectable date, as `YYYY-MM-DD`.",
               "fieldName": "max"
-            },
-            {
-              "name": "indeterminate",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show an indeterminate animation instead of a value.",
-              "fieldName": "indeterminate"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "An accessible label.",
-              "fieldName": "label"
             }
           ],
           "superclass": {
             "name": "FilmElement",
             "module": "/src/internal/film-element.js"
           },
-          "tagName": "film-progress-bar",
+          "tagName": "film-calendar",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "ProgressBar",
+          "name": "Calendar",
           "declaration": {
-            "name": "ProgressBar",
-            "module": "src/feedback/progress-bar.ts"
+            "name": "Calendar",
+            "module": "src/forms/calendar.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "film-progress-bar",
+          "name": "film-calendar",
           "declaration": {
-            "name": "ProgressBar",
-            "module": "src/feedback/progress-bar.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/skeleton.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Skeleton — a placeholder shown while content loads. Purely decorative\n(hidden from assistive tech); mark the surrounding region busy instead.",
-          "name": "Skeleton",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "'text' | 'circle' | 'rect'"
-              },
-              "default": "'text'",
-              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "string"
-              },
-              "default": "'100%'",
-              "description": "Width, as any length.",
-              "attribute": "width"
-            },
-            {
-              "kind": "field",
-              "name": "height",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Height, as any length. Defaults to the current line height for text.",
-              "attribute": "height"
-            },
-            {
-              "kind": "field",
-              "name": "styleProps",
-              "type": {
-                "text": "Record<string, string>"
-              },
-              "static": true,
-              "default": "{ '--skeleton-width': 'width', '--skeleton-height': 'height' }"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "'text' | 'circle' | 'rect'"
-              },
-              "default": "'text'",
-              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
-              "fieldName": "variant"
-            },
-            {
-              "name": "width",
-              "type": {
-                "text": "string"
-              },
-              "default": "'100%'",
-              "description": "Width, as any length.",
-              "fieldName": "width"
-            },
-            {
-              "name": "height",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Height, as any length. Defaults to the current line height for text.",
-              "fieldName": "height"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-skeleton",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "src/feedback/skeleton.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "src/feedback/skeleton.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/spinner.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Spinner — an indeterminate loading indicator.",
-          "name": "Spinner",
-          "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "'var(--s1)'",
-              "description": "The diameter, as any length. Defaults to a modular-scale step.",
-              "attribute": "size"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Loading'",
-              "description": "Accessible label announced to assistive tech.",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "styleProps",
-              "type": {
-                "text": "Record<string, string>"
-              },
-              "static": true,
-              "default": "{ '--spinner-size': 'size' }"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "'var(--s1)'",
-              "description": "The diameter, as any length. Defaults to a modular-scale step.",
-              "fieldName": "size"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Loading'",
-              "description": "Accessible label announced to assistive tech.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-spinner",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "src/feedback/spinner.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "src/feedback/spinner.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/tag.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Tag — a labelled chip, optionally removable.",
-          "name": "Tag",
-          "slots": [
-            {
-              "description": "The tag content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "TagVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "removable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show a remove button.",
-              "attribute": "removable",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "onRemove",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "film-remove",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the remove button is activated."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "TagVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            },
-            {
-              "name": "removable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show a remove button.",
-              "fieldName": "removable"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-tag",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "src/feedback/tag.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "src/feedback/tag.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/toast.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Toast — a single transient notification. Usually created via the toast\nhelper rather than authored directly. Auto-dismisses after `duration` ms\n(0 keeps it until dismissed); hovering pauses the timer.",
-          "name": "Toast",
-          "slots": [
-            {
-              "description": "The message.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "duration",
-              "type": {
-                "text": "number"
-              },
-              "default": "4000",
-              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
-              "attribute": "duration"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the toast is shown (drives the enter/exit transition).",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "timer",
-              "type": {
-                "text": "ReturnType<typeof setTimeout> | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "show",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "close",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "restart",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onEnter",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onLeave",
-              "privacy": "private",
-              "readonly": true
-            }
-          ],
-          "events": [
-            {
-              "name": "film-close",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When dismissed (after the exit transition)."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            },
-            {
-              "name": "duration",
-              "type": {
-                "text": "number"
-              },
-              "default": "4000",
-              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
-              "fieldName": "duration"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the toast is shown (drives the enter/exit transition).",
-              "fieldName": "open"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-toast",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "src/feedback/toast.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "src/feedback/toast.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/toaster.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "toast",
-          "return": {
-            "type": {
-              "text": "Toast"
-            }
-          },
-          "parameters": [
-            {
-              "name": "message",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "options",
-              "default": "{}",
-              "type": {
-                "text": "ToastOptions"
-              }
-            }
-          ],
-          "description": "Show a toast notification. Lazily creates a single fixed-position live region\nappended to `document.body` and stacks toasts within it. Returns the created\n`film-toast` element."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "toast",
-          "declaration": {
-            "name": "toast",
-            "module": "src/feedback/toaster.ts"
+            "name": "Calendar",
+            "module": "src/forms/calendar.ts"
           }
         }
       ]
@@ -3172,6 +3391,251 @@
           "declaration": {
             "name": "Combobox",
             "module": "src/forms/combobox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/date-picker.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "DatePicker — a form-associated date field. Shows the selected date on a\ntrigger and opens a Calendar in a top-layer popover to choose one.",
+          "name": "DatePicker",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The selected date, as `YYYY-MM-DD`.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Select a date'",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the calendar is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "trigger",
+              "type": {
+                "text": "HTMLButtonElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "panel",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "cleanup",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string | null"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationAnchor",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "protected",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "display",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "openPanel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "closePanel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onToggle",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onCalendarChange",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "description": "When the date changes.",
+              "name": "change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The selected date, as `YYYY-MM-DD`.",
+              "fieldName": "value"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Select a date'",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "max"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the calendar is open.",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "FilmFormControl",
+            "module": "/src/internal/form-control.js"
+          },
+          "tagName": "film-date-picker",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DatePicker",
+          "declaration": {
+            "name": "DatePicker",
+            "module": "src/forms/date-picker.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-date-picker",
+          "declaration": {
+            "name": "DatePicker",
+            "module": "src/forms/date-picker.ts"
           }
         }
       ]
@@ -3746,6 +4210,14 @@
       "exports": [
         {
           "kind": "js",
+          "name": "Calendar",
+          "declaration": {
+            "name": "Calendar",
+            "module": "./calendar.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "Checkbox",
           "declaration": {
             "name": "Checkbox",
@@ -3766,6 +4238,14 @@
           "declaration": {
             "name": "Combobox",
             "module": "./combobox.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "DatePicker",
+          "declaration": {
+            "name": "DatePicker",
+            "module": "./date-picker.js"
           }
         },
         {
@@ -3854,6 +4334,14 @@
           "declaration": {
             "name": "Select",
             "module": "./select.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Slider",
+          "declaration": {
+            "name": "Slider",
+            "module": "./slider.js"
           }
         },
         {
@@ -5441,6 +5929,239 @@
           "declaration": {
             "name": "Select",
             "module": "src/forms/select.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/forms/slider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Slider — a two-thumb range slider producing a `[valueMin, valueMax]` range.",
+          "name": "Slider",
+          "members": [
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "step",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "step"
+            },
+            {
+              "kind": "field",
+              "name": "valueMin",
+              "type": {
+                "text": "number"
+              },
+              "default": "20",
+              "attribute": "value-min"
+            },
+            {
+              "kind": "field",
+              "name": "valueMax",
+              "type": {
+                "text": "number"
+              },
+              "default": "80",
+              "attribute": "value-max"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "showValues",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show the current range beside the label.",
+              "attribute": "show-values"
+            },
+            {
+              "kind": "method",
+              "name": "percent",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "emit",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "onMinInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onMaxInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "film-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When either thumb moves. `detail` is `{ min, max }`."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "fieldName": "max"
+            },
+            {
+              "name": "step",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "step"
+            },
+            {
+              "name": "value-min",
+              "type": {
+                "text": "number"
+              },
+              "default": "20",
+              "fieldName": "valueMin"
+            },
+            {
+              "name": "value-max",
+              "type": {
+                "text": "number"
+              },
+              "default": "80",
+              "fieldName": "valueMax"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "show-values",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show the current range beside the label.",
+              "fieldName": "showValues"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-slider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Slider",
+          "declaration": {
+            "name": "Slider",
+            "module": "src/forms/slider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-slider",
+          "declaration": {
+            "name": "Slider",
+            "module": "src/forms/slider.ts"
           }
         }
       ]
