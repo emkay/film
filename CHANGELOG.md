@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/emkay/film/compare/v1.0.0...v1.1.0) (2026-08-22)
+
+
+### Features
+
+* components needed for film-os and bug fixes ([0598879](https://github.com/emkay/film/commit/0598879d7711a27c5a10e65f1dfc3b0b9d90dbab))
+
 ## 1.0.0 (2026-08-22)
 
 
