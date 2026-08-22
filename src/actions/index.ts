@@ -1,4 +1,4 @@
-export { Button } from './button.js'
+export { Button, type ButtonSize } from './button.js'
 export { ButtonGroup } from './button-group.js'
 export { CopyButton } from './copy-button.js'
 export { IconButton } from './icon-button.js'

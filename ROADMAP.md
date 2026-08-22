@@ -43,7 +43,7 @@ Checked items are implemented (component + demo example + build passing).
 - [x] `film-pagination` (P1)
 - [x] `film-steps` — stepper (P2)
 - [x] `film-nav` — nav list with active state (P2)
-- [ ] submenus for `film-menu` (P3)
+- [x] submenus for `film-menu` (P3)
 - [ ] `film-command-palette` — ⌘K (P3)
 
 ### Data display
@@ -75,3 +75,19 @@ Checked items are implemented (component + demo example + build passing).
 - [ ] Accessibility hardening — full keyboard nav for tree/table/menu (P2)
 - [ ] RTL story (P3)
 - [ ] Overlay enter/exit transitions honoring reduced-motion (P3)
+
+## Requested (film-os)
+
+From feedback building [film-os](https://github.com/emkay/film-os). Ordered by
+the recommended sequence.
+
+- [x] Fix `sideEffects` to cover `dist/**/*.js` (blocking — bundlers dropped registration)
+- [x] CI bundle smoke-test — assert a bundled consumer still registers an element
+- [x] `film-button` size — `small` / `medium` / `large`
+- [x] `film-tree` lazy children — `hasChildren` / `loading` / error + `film-tree-expand` event
+- [x] `DragController` — reusable pointer/keyboard drag mechanics (controller)
+- [x] `film-window` — non-modal, stackable, draggable/resizable positioned panel
+- [x] `film-workspace` — window container: z-order, focus, floating + grid-tiled layout, layout event
+- [x] `film-workspace` drag-to-snap + recursive tiling (follow-up)
+- [x] `film-table` virtualisation — opt-in `virtualized` for large row counts
+- [x] `film-menu-bar` — horizontal app menu with roving focus (builds on `film-menu` submenus)

@@ -72,6 +72,10 @@ export { detailsExample } from './details.js'
 export { listExample } from './list.js'
 export { tableExample } from './table.js'
 
+// Windowing
+export { windowExample } from './window.js'
+export { workspaceExample } from './workspace.js'
+
 // Feedback
 export { alertExample } from './alert.js'
 export { badgeExample } from './badge.js'

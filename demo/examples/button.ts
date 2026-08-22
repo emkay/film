@@ -10,6 +10,12 @@ export const buttonExample = (): TemplateResult => html`
         <film-button invert>Invert Button</film-button>
         <film-button disabled>Disabled Button</film-button>
       </film-cluster>
+      <h4>Sizes</h4>
+      <film-cluster>
+        <film-button size="small">Small</film-button>
+        <film-button size="medium">Medium</film-button>
+        <film-button size="large">Large</film-button>
+      </film-cluster>
     </film-stack>
   </film-box>
 `

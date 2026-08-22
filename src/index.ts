@@ -9,3 +9,7 @@ export * from './feedback/index.js'
 export * from './forms/index.js'
 export * from './navigation/index.js'
 export * from './overlays/index.js'
+export * from './windowing/index.js'
+
+// Shared controllers
+export { DragController, type DragCallbacks } from './internal/drag-controller.js'

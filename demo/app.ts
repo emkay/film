@@ -72,7 +72,9 @@ import {
   proseExample,
   toastExample,
   tooltipExample,
-  treeExample
+  treeExample,
+  windowExample,
+  workspaceExample
 } from './examples/index.js'
 
 interface NavLink {
@@ -158,6 +160,13 @@ const sections: NavSection[] = [
       { slug: 'popover', text: 'Popover', render: popoverExample },
       { slug: 'popconfirm', text: 'Popconfirm', render: popconfirmExample },
       { slug: 'tooltip', text: 'Tooltip', render: tooltipExample }
+    ]
+  },
+  {
+    title: 'Windowing',
+    links: [
+      { slug: 'window', text: 'Window', render: windowExample },
+      { slug: 'workspace', text: 'Workspace', render: workspaceExample }
     ]
   },
   {

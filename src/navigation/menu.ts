@@ -26,7 +26,9 @@ export class Menu extends FilmElement {
   `
 
   private get items (): MenuItem[] {
-    return Array.from(this.querySelectorAll('film-menu-item')).filter(
+    // Direct children only, so a nested submenu's items don't leak into this
+    // menu's own arrow navigation.
+    return Array.from(this.querySelectorAll<MenuItem>(':scope > film-menu-item')).filter(
       (item) => !item.disabled
     )
   }
@@ -42,6 +44,12 @@ export class Menu extends FilmElement {
     this.items[0]?.focus()
   }
 
+  /** Move focus to the last item. */
+  focusLast (): void {
+    const items = this.items
+    items[items.length - 1]?.focus()
+  }
+
   private readonly onKeydown = (event: KeyboardEvent): void => {
     const items = this.items
     if (items.length === 0) return
@@ -50,18 +58,22 @@ export class Menu extends FilmElement {
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault()
+        event.stopPropagation()
         items[(current + 1) % items.length]?.focus()
         break
       case 'ArrowUp':
         event.preventDefault()
+        event.stopPropagation()
         items[(current - 1 + items.length) % items.length]?.focus()
         break
       case 'Home':
         event.preventDefault()
+        event.stopPropagation()
         items[0]?.focus()
         break
       case 'End':
         event.preventDefault()
+        event.stopPropagation()
         items[items.length - 1]?.focus()
         break
     }

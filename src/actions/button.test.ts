@@ -19,4 +19,12 @@ describe('film-button', () => {
     const el = await fixture<Button>(html`<film-button disabled>x</film-button>`)
     expect(el.shadowRoot?.querySelector('button')?.disabled).to.equal(true)
   })
+
+  it('defaults to medium size and reflects the size attribute', async () => {
+    const el = await fixture<Button>(html`<film-button>x</film-button>`)
+    expect(el.size).to.equal('medium')
+    el.size = 'small'
+    await el.updateComplete
+    expect(el.getAttribute('size')).to.equal('small')
+  })
 })

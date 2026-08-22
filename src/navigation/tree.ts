@@ -74,7 +74,7 @@ export class Tree extends FilmElement {
         break
       case 'ArrowRight':
         event.preventDefault()
-        if (focused.childItems.length > 0 && !focused.expanded) focused.expanded = true
+        if (focused.hasChildren && !focused.expanded) focused.expanded = true
         else this.focusItem(focused.childItems.find((child) => !child.disabled))
         break
       case 'ArrowLeft': {

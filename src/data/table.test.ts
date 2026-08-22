@@ -36,4 +36,23 @@ describe('film-table', () => {
     const event = await oneEvent(el, 'film-selection-change')
     expect(event.detail.rows.length).to.equal(1)
   })
+
+  it('only renders a window of rows when virtualized', async () => {
+    const many: TableRow[] = Array.from({ length: 1000 }, (_, i) => ({ name: `row ${i}` }))
+    const el = await fixture<Table>(html`
+      <film-table
+        virtualized
+        row-height="20"
+        style="display:block;height:200px"
+        .columns=${[{ key: 'name', label: 'Name' }]}
+        .rows=${many}
+      ></film-table>
+    `)
+    await el.updateComplete
+    await el.updateComplete
+    const dataRows = el.shadowRoot?.querySelectorAll('tbody tr:not([aria-hidden])') ?? []
+    expect(dataRows.length).to.be.greaterThan(0)
+    expect(dataRows.length).to.be.lessThan(60)
+    expect(el.shadowRoot?.querySelector('table')?.getAttribute('aria-rowcount')).to.equal('1001')
+  })
 })

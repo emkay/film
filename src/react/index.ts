@@ -44,6 +44,8 @@ import { Link } from '../actions/link.js'
 import { List } from '../data/list.js'
 import { ListItem } from '../data/list-item.js'
 import { Menu } from '../navigation/menu.js'
+import { MenuBar } from '../navigation/menu-bar.js'
+import { MenuBarItem } from '../navigation/menu-bar-item.js'
 import { MenuItem } from '../navigation/menu-item.js'
 import { Nav } from '../navigation/nav.js'
 import { NavItem } from '../navigation/nav-item.js'
@@ -82,6 +84,8 @@ import { Tooltip } from '../overlays/tooltip.js'
 import { Tree } from '../navigation/tree.js'
 import { TreeItem } from '../navigation/tree-item.js'
 import { VisuallyHidden } from '../typography/visually-hidden.js'
+import { Window } from '../windowing/window.js'
+import { Workspace } from '../windowing/workspace.js'
 
 export const FilmAccordion = createComponent({
   react: React,
@@ -370,6 +374,22 @@ export const FilmMenu = createComponent({
   elementClass: Menu
 })
 
+export const FilmMenuBar = createComponent({
+  react: React,
+  tagName: "film-menu-bar",
+  elementClass: MenuBar
+})
+
+export const FilmMenuBarItem = createComponent({
+  react: React,
+  tagName: "film-menu-bar-item",
+  elementClass: MenuBarItem,
+  events: {
+      "onFilmMenubarOpen": "film-menubar-open",
+      "onFilmMenubarClose": "film-menubar-close"
+  }
+})
+
 export const FilmMenuItem = createComponent({
   react: React,
   tagName: "film-menu-item",
@@ -649,11 +669,39 @@ export const FilmTree = createComponent({
 export const FilmTreeItem = createComponent({
   react: React,
   tagName: "film-tree-item",
-  elementClass: TreeItem
+  elementClass: TreeItem,
+  events: {
+      "onFilmTreeExpand": "film-tree-expand"
+  }
 })
 
 export const FilmVisuallyHidden = createComponent({
   react: React,
   tagName: "film-visually-hidden",
   elementClass: VisuallyHidden
+})
+
+export const FilmWindow = createComponent({
+  react: React,
+  tagName: "film-window",
+  elementClass: Window,
+  events: {
+      "onFilmWindowMove": "film-window-move",
+      "onFilmWindowResize": "film-window-resize",
+      "onFilmWindowMinimise": "film-window-minimise",
+      "onFilmWindowMaximise": "film-window-maximise",
+      "onFilmWindowClose": "film-window-close",
+      "onFilmWindowMovestart": "film-window-movestart",
+      "onFilmWindowMoveend": "film-window-moveend",
+      "onFilmWindowFocus": "film-window-focus"
+  }
+})
+
+export const FilmWorkspace = createComponent({
+  react: React,
+  tagName: "film-workspace",
+  elementClass: Workspace,
+  events: {
+      "onFilmWorkspaceLayout": "film-workspace-layout"
+  }
 })

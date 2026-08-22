@@ -30,6 +30,8 @@ jobs:
           git diff --exit-code custom-elements.json src/react/index.ts
       - name: Build
         run: npm run build && npm run build:lib
+      - name: Bundle smoke test
+        run: npm run check:bundle
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
       - name: Test

@@ -2,6 +2,8 @@ import { css, html, nothing } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 
+export type ButtonSize = 'small' | 'medium' | 'large'
+
 /**
  * Button — a themed button. Sizing is expressed in `em` so it scales with the
  * surrounding font size, and its radius comes from the modular scale.
@@ -18,6 +20,10 @@ export class Button extends FilmElement {
   @property({ type: Boolean, reflect: true })
   disabled = false
 
+  /** The button size (drives `font-size` on the modular scale). */
+  @property({ type: String, reflect: true })
+  size: ButtonSize = 'medium'
+
   static styles = css`
     button {
       background-color: var(--film-color-primary);
@@ -27,6 +33,14 @@ export class Button extends FilmElement {
       cursor: pointer;
       font-size: var(--s0);
       padding: 0.5em 1.5em 0.7em;
+    }
+
+    :host([size='small']) button {
+      font-size: var(--s-1);
+    }
+
+    :host([size='large']) button {
+      font-size: var(--s1);
     }
 
     button:focus {

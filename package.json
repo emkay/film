@@ -30,7 +30,8 @@
   ],
   "sideEffects": [
     "**/*.css",
-    "./src/**/*.ts"
+    "./src/**/*.ts",
+    "./dist/**/*.js"
   ],
   "scripts": {
     "dev": "vite",
@@ -40,6 +41,7 @@
     "typecheck": "tsc --noEmit",
     "analyze": "cem analyze",
     "gen:react": "node scripts/gen-react.mjs",
+    "check:bundle": "node scripts/check-bundle.mjs",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,js,css,md,json}\"",
     "test": "wtr"

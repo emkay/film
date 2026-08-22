@@ -1,4 +1,4 @@
-import { css, html, nothing } from 'lit'
+import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 
@@ -12,9 +12,21 @@ export interface TableColumn {
 
 export type TableRow = Record<string, unknown>
 
+interface IndexedRow {
+  row: TableRow
+  index: number
+}
+
+const OVERSCAN = 4
+
 /**
- * Table — a themed, data-driven table with optional sorting, row selection and
- * a sticky header. Provide `columns` and `rows` as properties.
+ * Table — a themed, data-driven table with optional sorting, row selection, a
+ * sticky header, and opt-in row virtualisation for large datasets. Provide
+ * `columns` and `rows` as properties.
+ *
+ * For `virtualized`, give the table a bounded height (e.g. `style="height:20rem"`)
+ * so it scrolls; a fixed `row-height` drives the windowing. Pair it with
+ * `sticky-header` for the best result.
  *
  * @fires film-sort - When the sort changes. `detail` is `{ key, direction }`.
  * @fires film-selection-change - When row selection changes. `detail.rows` is the selected rows.
@@ -36,9 +48,19 @@ export class Table extends FilmElement {
   /** Keep the header visible while the body scrolls. */
   @property({ type: Boolean, reflect: true, attribute: 'sticky-header' }) stickyHeader = false
 
+  /** Only render the visible rows (needs a bounded height + fixed `row-height`). */
+  @property({ type: Boolean, reflect: true }) virtualized = false
+
+  /** Fixed row height in pixels, used for virtualisation. */
+  @property({ type: Number, attribute: 'row-height' }) rowHeight = 36
+
   @state() private sortKey: string | null = null
   @state() private sortDir: 'asc' | 'desc' = 'asc'
   @state() private selected = new Set<number>()
+  @state() private scrollOffset = 0
+
+  private resizeObserver?: ResizeObserver
+  private rafPending = false
 
   static styles = css`
     :host {
@@ -46,7 +68,8 @@ export class Table extends FilmElement {
       overflow-x: auto;
     }
 
-    :host([sticky-header]) {
+    :host([sticky-header]),
+    :host([virtualized]) {
       overflow: auto;
     }
 
@@ -86,6 +109,16 @@ export class Table extends FilmElement {
       background-color: var(--film-color-info);
     }
 
+    :host([virtualized]) tbody tr {
+      block-size: var(--film-row-height, 36px);
+    }
+
+    :host([virtualized]) td {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
     .sort {
       display: inline-flex;
       align-items: center;
@@ -114,7 +147,54 @@ export class Table extends FilmElement {
     }
   `
 
-  private get displayRows (): Array<{ row: TableRow; index: number }> {
+  connectedCallback (): void {
+    super.connectedCallback()
+    if (this.virtualized) this.enableVirtual()
+  }
+
+  disconnectedCallback (): void {
+    this.disableVirtual()
+    super.disconnectedCallback()
+  }
+
+  firstUpdated (): void {
+    // Re-render now that clientHeight is known, so the initial window is right.
+    if (this.virtualized) this.requestUpdate()
+  }
+
+  updated (changed: PropertyValues<this>): void {
+    super.updated(changed)
+    if (changed.has('rowHeight')) this.style.setProperty('--film-row-height', `${this.rowHeight}px`)
+    if (changed.has('virtualized')) {
+      if (this.virtualized) this.enableVirtual()
+      else this.disableVirtual()
+    }
+  }
+
+  /** Attach the scroll listener + ResizeObserver that drive windowing. */
+  private enableVirtual (): void {
+    if (this.resizeObserver) return
+    this.addEventListener('scroll', this.onScroll)
+    this.resizeObserver = new ResizeObserver(() => this.requestUpdate())
+    this.resizeObserver.observe(this)
+  }
+
+  private disableVirtual (): void {
+    this.removeEventListener('scroll', this.onScroll)
+    this.resizeObserver?.disconnect()
+    this.resizeObserver = undefined
+  }
+
+  private readonly onScroll = (): void => {
+    if (!this.virtualized || this.rafPending) return
+    this.rafPending = true
+    requestAnimationFrame(() => {
+      this.rafPending = false
+      this.scrollOffset = this.scrollTop
+    })
+  }
+
+  private get displayRows (): IndexedRow[] {
     const rows = this.rows.map((row, index) => ({ row, index }))
     if (!this.sortKey) return rows
     const key = this.sortKey
@@ -172,13 +252,61 @@ export class Table extends FilmElement {
     return this.sortDir === 'asc' ? ' ▲' : ' ▼'
   }
 
+  private renderRow ({ row, index }: IndexedRow, ariaRowIndex?: number) {
+    return html`
+      <tr aria-rowindex=${ariaRowIndex ?? nothing}>
+        ${this.selectable
+          ? html`<td>
+              <input
+                type="checkbox"
+                aria-label="Select row"
+                .checked=${this.selected.has(index)}
+                @change=${() => this.toggleRow(index)}
+              />
+            </td>`
+          : nothing}
+        ${this.columns.map(
+          (column) => html`<td data-align=${column.align ?? nothing}>${String(row[column.key] ?? '')}</td>`
+        )}
+      </tr>
+    `
+  }
+
+  private renderBody () {
+    const rows = this.displayRows
+    if (!this.virtualized) {
+      return html`<tbody>${rows.map((r) => this.renderRow(r))}</tbody>`
+    }
+
+    const total = rows.length
+    const viewport = this.clientHeight || 400
+    const start = Math.max(0, Math.floor(this.scrollOffset / this.rowHeight) - OVERSCAN)
+    const count = Math.ceil(viewport / this.rowHeight) + OVERSCAN * 2
+    const end = Math.min(total, start + count)
+    const colspan = this.columns.length + (this.selectable ? 1 : 0)
+    const topPad = start * this.rowHeight
+    const bottomPad = (total - end) * this.rowHeight
+
+    return html`
+      <tbody>
+        ${topPad > 0
+          ? html`<tr aria-hidden="true" style="block-size:${topPad}px"><td colspan=${colspan}></td></tr>`
+          : nothing}
+        ${rows.slice(start, end).map((r, i) => this.renderRow(r, start + i + 2))}
+        ${bottomPad > 0
+          ? html`<tr aria-hidden="true" style="block-size:${bottomPad}px"><td colspan=${colspan}></td></tr>`
+          : nothing}
+      </tbody>
+    `
+  }
+
   render () {
     const someSelected = this.selected.size > 0 && !this.allSelected
     return html`
-      <table>
+      <table aria-rowcount=${this.virtualized ? this.rows.length + 1 : nothing}>
         ${this.caption ? html`<caption>${this.caption}</caption>` : nothing}
         <thead>
-          <tr>
+          <tr aria-rowindex=${this.virtualized ? 1 : nothing}>
             ${this.selectable
               ? html`<th scope="col">
                   <input
@@ -211,27 +339,7 @@ export class Table extends FilmElement {
             )}
           </tr>
         </thead>
-        <tbody>
-          ${this.displayRows.map(
-            ({ row, index }) => html`
-              <tr>
-                ${this.selectable
-                  ? html`<td>
-                      <input
-                        type="checkbox"
-                        aria-label="Select row"
-                        .checked=${this.selected.has(index)}
-                        @change=${() => this.toggleRow(index)}
-                      />
-                    </td>`
-                  : nothing}
-                ${this.columns.map(
-                  (column) => html`<td data-align=${column.align ?? nothing}>${String(row[column.key] ?? '')}</td>`
-                )}
-              </tr>
-            `
-          )}
-        </tbody>
+        ${this.renderBody()}
       </table>
     `
   }
