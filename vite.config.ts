@@ -7,17 +7,27 @@ import dts from 'vite-plugin-dts'
 export default defineConfig(({ mode }) => {
   if (mode === 'lib') {
     return {
-      plugins: [dts({ include: ['src'], exclude: ['src/**/*.test.ts'], rollupTypes: true })],
+      plugins: [dts({ include: ['src'], exclude: ['src/**/*.test.ts'] })],
       build: {
         copyPublicDir: false,
         lib: {
-          entry: 'src/index.ts',
-          formats: ['es'],
-          fileName: () => 'film.js'
+          // Full barrel + a React-wrappers entry.
+          entry: {
+            index: 'src/index.ts',
+            'react/index': 'src/react/index.ts'
+          },
+          formats: ['es']
         },
         rollupOptions: {
-          // Lit is a peer of the consumer app; don't bundle it in.
-          external: /^lit(\/.*)?$/
+          // Peers of the consumer app; don't bundle them in.
+          external: [/^lit(\/.*)?$/, 'react', 'react-dom', '@lit/react'],
+          output: {
+            // Preserve the source module structure so consumers can import
+            // individual components (e.g. `@mk/film/actions/button`) and tree-shake.
+            preserveModules: true,
+            preserveModulesRoot: 'src',
+            entryFileNames: '[name].js'
+          }
         }
       }
     }

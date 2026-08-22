@@ -5,7 +5,7 @@ import globals from 'globals'
 
 export default tseslint.config(
   {
-    ignores: ['dist/**', 'build/**', 'node_modules/**', 'custom-elements.json']
+    ignores: ['dist/**', 'build/**', 'node_modules/**', 'custom-elements.json', 'src/react/index.ts']
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -26,7 +26,7 @@ export default tseslint.config(
     }
   },
   {
-    files: ['**/*.js', 'vite.config.ts', 'custom-elements-manifest.config.js'],
+    files: ['**/*.js', '**/*.mjs', 'scripts/**', 'vite.config.ts', 'custom-elements-manifest.config.js'],
     languageOptions: {
       globals: { ...globals.node }
     }

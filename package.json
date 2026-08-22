@@ -3,15 +3,24 @@
   "version": "1.0.0-alpha",
   "description": "Film — an opinionated Lit web component library built on modular scale and every-layout primitives",
   "type": "module",
-  "main": "./dist/film.js",
-  "module": "./dist/film.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/film.js"
+      "import": "./dist/index.js"
     },
-    "./css/*": "./css/*"
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    },
+    "./css/*": "./css/*",
+    "./package.json": "./package.json",
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js"
+    }
   },
   "files": [
     "dist",
@@ -30,6 +39,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "analyze": "cem analyze",
+    "gen:react": "node scripts/gen-react.mjs",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,js,css,md,json}\"",
     "test": "wtr"
@@ -52,19 +62,32 @@
   },
   "homepage": "https://github.com/emkay/film#readme",
   "dependencies": {
-    "lit": "^3.2.1"
+    "lit": "^3.2.1",
+    "@lit/react": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true },
+    "react-dom": { "optional": true }
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
     "@eslint/js": "^10.0.1",
+    "@lit/react": "^1.0.8",
     "@open-wc/testing": "^5.0.0",
     "@types/node": "^22.20.1",
+    "@types/react": "^19.2.18",
     "@web/dev-server-esbuild": "^2.0.0",
     "@web/test-runner": "^1.0.0",
     "eslint": "^10.8.1",
     "eslint-plugin-lit": "^2.3.1",
     "globals": "^17.11.0",
     "prettier": "^3.9.6",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.67.0",
     "vite": "^6.0.7",

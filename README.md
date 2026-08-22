@@ -28,6 +28,31 @@ import '@mk/film/css/themes/default/index.css'
 </film-stack>
 ```
 
+### Individual imports (tree-shaking)
+
+The package ships as preserved ES modules, so you can import only what you use:
+
+```js
+import '@mk/film/actions/button'   // registers just <film-button>
+import '@mk/film/layout/stack'
+```
+
+### React
+
+Typed React wrappers (generated with `@lit/react`) are available at `@mk/film/react`:
+
+```jsx
+import { FilmButton, FilmDialog } from '@mk/film/react'
+
+<FilmButton invert onClick={save}>Save</FilmButton>
+```
+
+### Tooling
+
+A [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)
+(`custom-elements.json`) is published for IDE autocomplete and documentation
+tooling.
+
 ## Components
 
 **Layout** (`src/layout`)

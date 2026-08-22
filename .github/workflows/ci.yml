@@ -23,10 +23,11 @@ jobs:
         run: npm run typecheck
       - name: Lint
         run: npm run lint
-      - name: Verify custom-elements manifest is up to date
+      - name: Verify manifest + React wrappers are up to date
         run: |
           npm run analyze
-          git diff --exit-code custom-elements.json
+          npm run gen:react
+          git diff --exit-code custom-elements.json src/react/index.ts
       - name: Build
         run: npm run build && npm run build:lib
       - name: Install Chrome
