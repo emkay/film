@@ -605,7 +605,8 @@ export const FilmTable = createComponent({
   elementClass: Table,
   events: {
       "onFilmSort": "film-sort",
-      "onFilmSelectionChange": "film-selection-change"
+      "onFilmSelectionChange": "film-selection-change",
+      "onFilmRowActivate": "film-row-activate"
   }
 })
 

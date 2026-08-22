@@ -8,6 +8,12 @@ export interface TableColumn {
   align?: 'start' | 'center' | 'end'
   /** Allow sorting by this column. */
   sortable?: boolean
+  /**
+   * Custom cell renderer — return a string, a Lit `TemplateResult`, or a DOM
+   * node (e.g. to inject a control). Receives the raw value, the row, and its
+   * index. Without it the raw `row[key]` value is rendered directly.
+   */
+  render?: (value: unknown, row: TableRow, index: number) => unknown
 }
 
 export type TableRow = Record<string, unknown>
@@ -28,8 +34,13 @@ const OVERSCAN = 4
  * so it scrolls; a fixed `row-height` drives the windowing. Pair it with
  * `sticky-header` for the best result.
  *
+ * Cells render the raw `row[key]` value directly, so a `TemplateResult` or DOM
+ * node passes through; use `column.render` for a per-column cell renderer. Set
+ * `activatable` to make rows focusable and clickable (fires `film-row-activate`).
+ *
  * @fires film-sort - When the sort changes. `detail` is `{ key, direction }`.
  * @fires film-selection-change - When row selection changes. `detail.rows` is the selected rows.
+ * @fires film-row-activate - When an activatable row is clicked or Enter/Space is pressed. `detail` is `{ row, index }`.
  */
 @customElement('film-table')
 export class Table extends FilmElement {
@@ -44,6 +55,9 @@ export class Table extends FilmElement {
 
   /** Show a checkbox column for selecting rows. */
   @property({ type: Boolean }) selectable = false
+
+  /** Make rows focusable and activatable (click / Enter / Space) — fires `film-row-activate`. */
+  @property({ type: Boolean, reflect: true }) activatable = false
 
   /** Keep the header visible while the body scrolls. */
   @property({ type: Boolean, reflect: true, attribute: 'sticky-header' }) stickyHeader = false
@@ -107,6 +121,15 @@ export class Table extends FilmElement {
 
     tbody tr:hover {
       background-color: var(--film-color-info);
+    }
+
+    :host([activatable]) tbody tr {
+      cursor: pointer;
+    }
+
+    :host([activatable]) tbody tr:focus-visible {
+      outline: var(--border-thin) solid var(--film-color-focus);
+      outline-offset: -2px;
     }
 
     :host([virtualized]) tbody tr {
@@ -252,9 +275,43 @@ export class Table extends FilmElement {
     return this.sortDir === 'asc' ? ' ▲' : ' ▼'
   }
 
+  private cellContent (column: TableColumn, row: TableRow, index: number): unknown {
+    const value = row[column.key]
+    if (column.render) return column.render(value, row, index)
+    // Render the raw value directly: Lit handles strings/numbers, TemplateResults
+    // and DOM nodes; null/undefined render as empty.
+    return value ?? nothing
+  }
+
+  private isInteractive (target: EventTarget | null): boolean {
+    return (target as HTMLElement | null)?.closest('button, a, input, select, textarea, label') != null
+  }
+
+  private readonly onRowClick = (row: TableRow, index: number, event: MouseEvent): void => {
+    // Let controls inside the row (checkbox, buttons, links) handle their own clicks.
+    if (this.isInteractive(event.target)) return
+    this.activateRow(row, index)
+  }
+
+  private readonly onRowKeydown = (row: TableRow, index: number, event: KeyboardEvent): void => {
+    if (event.key !== 'Enter' && event.key !== ' ') return
+    if (this.isInteractive(event.target)) return
+    event.preventDefault()
+    this.activateRow(row, index)
+  }
+
+  private activateRow (row: TableRow, index: number): void {
+    this.dispatchEvent(new CustomEvent('film-row-activate', { detail: { row, index }, bubbles: true }))
+  }
+
   private renderRow ({ row, index }: IndexedRow, ariaRowIndex?: number) {
     return html`
-      <tr aria-rowindex=${ariaRowIndex ?? nothing}>
+      <tr
+        aria-rowindex=${ariaRowIndex ?? nothing}
+        tabindex=${this.activatable ? 0 : nothing}
+        @click=${this.activatable ? (e: MouseEvent) => this.onRowClick(row, index, e) : nothing}
+        @keydown=${this.activatable ? (e: KeyboardEvent) => this.onRowKeydown(row, index, e) : nothing}
+      >
         ${this.selectable
           ? html`<td>
               <input
@@ -266,7 +323,7 @@ export class Table extends FilmElement {
             </td>`
           : nothing}
         ${this.columns.map(
-          (column) => html`<td data-align=${column.align ?? nothing}>${String(row[column.key] ?? '')}</td>`
+          (column) => html`<td data-align=${column.align ?? nothing}>${this.cellContent(column, row, index)}</td>`
         )}
       </tr>
     `

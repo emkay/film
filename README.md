@@ -85,7 +85,7 @@ tooling.
 
 **Windowing** (`src/windowing`) — `film-window` (non-modal, stackable, draggable/resizable panel, not top-layer) and `film-workspace` (its container: z-order, focus, floating with drag-to-snap, and grid or recursive-BSP tiling). Built on the exported `DragController`.
 
-**Data** (`src/data`) — `film-card` (with `media` / `footer` slots), `film-avatar`, `film-details`, `film-accordion` / `film-accordion-item`, `film-list` / `film-list-item`, `film-code`, `film-table` (data-driven, with optional sorting / selection / sticky header / row virtualisation).
+**Data** (`src/data`) — `film-card` (with `media` / `footer` slots), `film-avatar`, `film-details`, `film-accordion` / `film-accordion-item`, `film-list` / `film-list-item`, `film-code`, `film-table` (data-driven, with optional sorting / selection / sticky header / row virtualisation / activatable rows / custom cell renderers).
 
 **Feedback** (`src/feedback`) — `film-alert`, `film-badge`, `film-tag` (`variant`, `removable`), `film-progress-bar`, `film-spinner`, `film-skeleton`, plus `film-toast` + the imperative `toast(message, options)` helper.
 

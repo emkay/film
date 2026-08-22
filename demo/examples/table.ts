@@ -1,5 +1,5 @@
 import { html, type TemplateResult } from 'lit'
-import type { TableColumn, TableRow } from '../../src/index.js'
+import { toast, type TableColumn, type TableRow } from '../../src/index.js'
 
 const columns: TableColumn[] = [
   { key: 'name', label: 'Name', sortable: true },
@@ -25,6 +25,28 @@ const bigRows: TableRow[] = Array.from({ length: 5000 }, (_, i) => ({
   size: `${(i * 7) % 900} KB`
 }))
 
+const navColumns: TableColumn[] = [
+  { key: 'name', label: 'Folder', sortable: true },
+  { key: 'count', label: 'Unread', align: 'end', sortable: true },
+  {
+    key: 'status',
+    label: 'Sync',
+    render: (value) =>
+      html`<film-tag variant=${value === 'synced' ? 'success' : 'warning'}>${value}</film-tag>`
+  }
+]
+
+const navRows: TableRow[] = [
+  { name: 'Inbox', count: 12, status: 'synced' },
+  { name: 'Drafts', count: 2, status: 'pending' },
+  { name: 'Archive', count: 0, status: 'synced' }
+]
+
+const onActivate = (event: Event): void => {
+  const { row } = (event as CustomEvent<{ row: TableRow }>).detail
+  toast(`Opened ${String(row.name)}`)
+}
+
 export const tableExample = (): TemplateResult => html`
   <film-box>
     <h3 id="film-components-table">Table</h3>
@@ -32,6 +54,18 @@ export const tableExample = (): TemplateResult => html`
       <div>
         <p>Click a column header to sort; tick rows to select.</p>
         <film-table caption="Contributors" selectable .columns=${columns} .rows=${rows}></film-table>
+      </div>
+      <div>
+        <h4>Activatable rows</h4>
+        <p>Rows are focusable and clickable — <code>film-row-activate</code> fires with the row. A
+        column's <code>render</code> can return any content, like the status tag below.</p>
+        <film-table
+          activatable
+          caption="Mailboxes"
+          .columns=${navColumns}
+          .rows=${navRows}
+          @film-row-activate=${onActivate}
+        ></film-table>
       </div>
       <div>
         <h4>Virtualised (5,000 rows)</h4>

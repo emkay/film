@@ -91,3 +91,4 @@ the recommended sequence.
 - [x] `film-workspace` drag-to-snap + recursive tiling (follow-up)
 - [x] `film-table` virtualisation — opt-in `virtualized` for large row counts
 - [x] `film-menu-bar` — horizontal app menu with roving focus (builds on `film-menu` submenus)
+- [x] `film-table` row activation (`activatable` + `film-row-activate`) & custom cell renderers (`column.render`)

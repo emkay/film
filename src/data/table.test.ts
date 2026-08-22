@@ -37,6 +37,42 @@ describe('film-table', () => {
     expect(event.detail.rows.length).to.equal(1)
   })
 
+  it('fires film-row-activate on row click when activatable', async () => {
+    const el = await fixture<Table>(
+      html`<film-table activatable .columns=${columns} .rows=${rows}></film-table>`
+    )
+    const firstRow = el.shadowRoot?.querySelector('tbody tr') as HTMLTableRowElement
+    setTimeout(() => firstRow.click())
+    const event = await oneEvent(el, 'film-row-activate')
+    expect(event.detail.index).to.equal(0)
+    expect(event.detail.row).to.equal(rows[0])
+  })
+
+  it('does not activate a row when its select checkbox is clicked', async () => {
+    const el = await fixture<Table>(
+      html`<film-table activatable selectable .columns=${columns} .rows=${rows}></film-table>`
+    )
+    let activated = false
+    el.addEventListener('film-row-activate', () => {
+      activated = true
+    })
+    const checkbox = el.shadowRoot?.querySelector('tbody input[type="checkbox"]') as HTMLInputElement
+    checkbox.click()
+    await el.updateComplete
+    expect(activated).to.equal(false)
+  })
+
+  it('renders custom cell content via column.render', async () => {
+    const cols: TableColumn[] = [
+      { key: 'name', label: 'Name' },
+      { key: 'n', label: 'Action', render: (_v, row) => html`<button type="button">Go ${row.name}</button>` }
+    ]
+    const el = await fixture<Table>(html`<film-table .columns=${cols} .rows=${rows}></film-table>`)
+    const button = el.shadowRoot?.querySelector('tbody button')
+    expect(button).to.exist
+    expect(button?.textContent).to.contain('Go b')
+  })
+
   it('only renders a window of rows when virtualized', async () => {
     const many: TableRow[] = Array.from({ length: 1000 }, (_, i) => ({ name: `row ${i}` }))
     const el = await fixture<Table>(html`

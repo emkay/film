@@ -1555,7 +1555,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Table — a themed, data-driven table with optional sorting, row selection, a\nsticky header, and opt-in row virtualisation for large datasets. Provide\n`columns` and `rows` as properties.\n\nFor `virtualized`, give the table a bounded height (e.g. `style=\"height:20rem\"`)\nso it scrolls; a fixed `row-height` drives the windowing. Pair it with\n`sticky-header` for the best result.",
+          "description": "Table — a themed, data-driven table with optional sorting, row selection, a\nsticky header, and opt-in row virtualisation for large datasets. Provide\n`columns` and `rows` as properties.\n\nFor `virtualized`, give the table a bounded height (e.g. `style=\"height:20rem\"`)\nso it scrolls; a fixed `row-height` drives the windowing. Pair it with\n`sticky-header` for the best result.\n\nCells render the raw `row[key]` value directly, so a `TemplateResult` or DOM\nnode passes through; use `column.render` for a per-column cell renderer. Set\n`activatable` to make rows focusable and clickable (fires `film-row-activate`).",
           "name": "Table",
           "members": [
             {
@@ -1595,6 +1595,17 @@
               "default": "false",
               "description": "Show a checkbox column for selecting rows.",
               "attribute": "selectable"
+            },
+            {
+              "kind": "field",
+              "name": "activatable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Make rows focusable and activatable (click / Enter / Space) — fires `film-row-activate`.",
+              "attribute": "activatable",
+              "reflects": true
             },
             {
               "kind": "field",
@@ -1807,6 +1818,90 @@
             },
             {
               "kind": "method",
+              "name": "cellContent",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "unknown"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "column",
+                  "type": {
+                    "text": "TableColumn"
+                  }
+                },
+                {
+                  "name": "row",
+                  "type": {
+                    "text": "TableRow"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "isInteractive",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "target",
+                  "type": {
+                    "text": "EventTarget | null"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onRowClick",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onRowKeydown",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "activateRow",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "row",
+                  "type": {
+                    "text": "TableRow"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
               "name": "renderRow",
               "privacy": "private",
               "parameters": [
@@ -1845,6 +1940,13 @@
                 "text": "CustomEvent"
               },
               "description": "When row selection changes. `detail.rows` is the selected rows."
+            },
+            {
+              "name": "film-row-activate",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When an activatable row is clicked or Enter/Space is pressed. `detail` is `{ row, index }`."
             }
           ],
           "attributes": [
@@ -1865,6 +1967,15 @@
               "default": "false",
               "description": "Show a checkbox column for selecting rows.",
               "fieldName": "selectable"
+            },
+            {
+              "name": "activatable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Make rows focusable and activatable (click / Enter / Space) — fires `film-row-activate`.",
+              "fieldName": "activatable"
             },
             {
               "name": "sticky-header",
@@ -11229,1010 +11340,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/react/index.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "FilmAccordion"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmAccordionItem"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmAlert"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmAvatar"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmBadge"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmBox"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmBreadcrumb"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmBreadcrumbItem"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmButton"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmButtonGroup"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmCalendar"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmCard"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmCenter"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmCheckbox"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmCluster"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmCode"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmColorPicker"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmCombobox"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmCopyButton"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmCover"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmDatePicker"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmDetails"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmDialog"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmDivider"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmDrawer"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmDropdown"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmField"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmFileInput"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmForm"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmFrame"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmGrid"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmHeading"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmIcon"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmIconButton"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmImposter"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmInput"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmKbd"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmLink"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmList"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmListItem"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmMenu"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmMenuBar"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmMenuBarItem"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmMenuItem"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmNav"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmNavItem"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmNumberInput"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmPagination"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmPopconfirm"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmPopover"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmProgressBar"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmProse"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmRadio"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmRadioGroup"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmRange"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmReel"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmSearch"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmSelect"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmSelectOption"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmSidebar"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmSkeleton"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmSlider"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmSpinner"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmSplitPanel"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmStack"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmStep"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmSteps"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmSwitch"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmSwitcher"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmTab"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmTabPanel"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmTable"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmTabs"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmTag"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmText"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmTextarea"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmToast"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmTooltip"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmTree"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmTreeItem"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmVisuallyHidden"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmWindow"
-        },
-        {
-          "kind": "variable",
-          "name": "FilmWorkspace"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FilmAccordion",
-          "declaration": {
-            "name": "FilmAccordion",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmAccordionItem",
-          "declaration": {
-            "name": "FilmAccordionItem",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmAlert",
-          "declaration": {
-            "name": "FilmAlert",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmAvatar",
-          "declaration": {
-            "name": "FilmAvatar",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmBadge",
-          "declaration": {
-            "name": "FilmBadge",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmBox",
-          "declaration": {
-            "name": "FilmBox",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmBreadcrumb",
-          "declaration": {
-            "name": "FilmBreadcrumb",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmBreadcrumbItem",
-          "declaration": {
-            "name": "FilmBreadcrumbItem",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmButton",
-          "declaration": {
-            "name": "FilmButton",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmButtonGroup",
-          "declaration": {
-            "name": "FilmButtonGroup",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmCalendar",
-          "declaration": {
-            "name": "FilmCalendar",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmCard",
-          "declaration": {
-            "name": "FilmCard",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmCenter",
-          "declaration": {
-            "name": "FilmCenter",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmCheckbox",
-          "declaration": {
-            "name": "FilmCheckbox",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmCluster",
-          "declaration": {
-            "name": "FilmCluster",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmCode",
-          "declaration": {
-            "name": "FilmCode",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmColorPicker",
-          "declaration": {
-            "name": "FilmColorPicker",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmCombobox",
-          "declaration": {
-            "name": "FilmCombobox",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmCopyButton",
-          "declaration": {
-            "name": "FilmCopyButton",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmCover",
-          "declaration": {
-            "name": "FilmCover",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmDatePicker",
-          "declaration": {
-            "name": "FilmDatePicker",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmDetails",
-          "declaration": {
-            "name": "FilmDetails",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmDialog",
-          "declaration": {
-            "name": "FilmDialog",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmDivider",
-          "declaration": {
-            "name": "FilmDivider",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmDrawer",
-          "declaration": {
-            "name": "FilmDrawer",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmDropdown",
-          "declaration": {
-            "name": "FilmDropdown",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmField",
-          "declaration": {
-            "name": "FilmField",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmFileInput",
-          "declaration": {
-            "name": "FilmFileInput",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmForm",
-          "declaration": {
-            "name": "FilmForm",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmFrame",
-          "declaration": {
-            "name": "FilmFrame",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmGrid",
-          "declaration": {
-            "name": "FilmGrid",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmHeading",
-          "declaration": {
-            "name": "FilmHeading",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmIcon",
-          "declaration": {
-            "name": "FilmIcon",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmIconButton",
-          "declaration": {
-            "name": "FilmIconButton",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmImposter",
-          "declaration": {
-            "name": "FilmImposter",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmInput",
-          "declaration": {
-            "name": "FilmInput",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmKbd",
-          "declaration": {
-            "name": "FilmKbd",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmLink",
-          "declaration": {
-            "name": "FilmLink",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmList",
-          "declaration": {
-            "name": "FilmList",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmListItem",
-          "declaration": {
-            "name": "FilmListItem",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmMenu",
-          "declaration": {
-            "name": "FilmMenu",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmMenuBar",
-          "declaration": {
-            "name": "FilmMenuBar",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmMenuBarItem",
-          "declaration": {
-            "name": "FilmMenuBarItem",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmMenuItem",
-          "declaration": {
-            "name": "FilmMenuItem",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmNav",
-          "declaration": {
-            "name": "FilmNav",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmNavItem",
-          "declaration": {
-            "name": "FilmNavItem",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmNumberInput",
-          "declaration": {
-            "name": "FilmNumberInput",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmPagination",
-          "declaration": {
-            "name": "FilmPagination",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmPopconfirm",
-          "declaration": {
-            "name": "FilmPopconfirm",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmPopover",
-          "declaration": {
-            "name": "FilmPopover",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmProgressBar",
-          "declaration": {
-            "name": "FilmProgressBar",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmProse",
-          "declaration": {
-            "name": "FilmProse",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmRadio",
-          "declaration": {
-            "name": "FilmRadio",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmRadioGroup",
-          "declaration": {
-            "name": "FilmRadioGroup",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmRange",
-          "declaration": {
-            "name": "FilmRange",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmReel",
-          "declaration": {
-            "name": "FilmReel",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmSearch",
-          "declaration": {
-            "name": "FilmSearch",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmSelect",
-          "declaration": {
-            "name": "FilmSelect",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmSelectOption",
-          "declaration": {
-            "name": "FilmSelectOption",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmSidebar",
-          "declaration": {
-            "name": "FilmSidebar",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmSkeleton",
-          "declaration": {
-            "name": "FilmSkeleton",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmSlider",
-          "declaration": {
-            "name": "FilmSlider",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmSpinner",
-          "declaration": {
-            "name": "FilmSpinner",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmSplitPanel",
-          "declaration": {
-            "name": "FilmSplitPanel",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmStack",
-          "declaration": {
-            "name": "FilmStack",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmStep",
-          "declaration": {
-            "name": "FilmStep",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmSteps",
-          "declaration": {
-            "name": "FilmSteps",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmSwitch",
-          "declaration": {
-            "name": "FilmSwitch",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmSwitcher",
-          "declaration": {
-            "name": "FilmSwitcher",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmTab",
-          "declaration": {
-            "name": "FilmTab",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmTabPanel",
-          "declaration": {
-            "name": "FilmTabPanel",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmTable",
-          "declaration": {
-            "name": "FilmTable",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmTabs",
-          "declaration": {
-            "name": "FilmTabs",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmTag",
-          "declaration": {
-            "name": "FilmTag",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmText",
-          "declaration": {
-            "name": "FilmText",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmTextarea",
-          "declaration": {
-            "name": "FilmTextarea",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmToast",
-          "declaration": {
-            "name": "FilmToast",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmTooltip",
-          "declaration": {
-            "name": "FilmTooltip",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmTree",
-          "declaration": {
-            "name": "FilmTree",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmTreeItem",
-          "declaration": {
-            "name": "FilmTreeItem",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmVisuallyHidden",
-          "declaration": {
-            "name": "FilmVisuallyHidden",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmWindow",
-          "declaration": {
-            "name": "FilmWindow",
-            "module": "src/react/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "FilmWorkspace",
-          "declaration": {
-            "name": "FilmWorkspace",
-            "module": "src/react/index.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/typography/divider.ts",
       "declarations": [
         {
@@ -13593,6 +12700,1010 @@
           "declaration": {
             "name": "Workspace",
             "module": "src/windowing/workspace.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/react/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "FilmAccordion"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmAccordionItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmAlert"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmAvatar"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmBadge"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmBox"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmBreadcrumb"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmBreadcrumbItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmButton"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmButtonGroup"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCalendar"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCard"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCenter"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCheckbox"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCluster"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCode"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmColorPicker"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCombobox"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCopyButton"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmCover"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDatePicker"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDetails"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDialog"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDivider"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDrawer"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmDropdown"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmField"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmFileInput"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmForm"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmFrame"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmGrid"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmHeading"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmIcon"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmIconButton"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmImposter"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmInput"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmKbd"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmLink"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmList"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmListItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmMenu"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmMenuBar"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmMenuBarItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmMenuItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmNav"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmNavItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmNumberInput"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmPagination"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmPopconfirm"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmPopover"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmProgressBar"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmProse"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmRadio"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmRadioGroup"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmRange"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmReel"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSearch"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSelect"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSelectOption"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSidebar"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSkeleton"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSlider"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSpinner"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSplitPanel"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmStack"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmStep"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSteps"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSwitch"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmSwitcher"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTab"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTabPanel"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTable"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTabs"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTag"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmText"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTextarea"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmToast"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTooltip"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTree"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmTreeItem"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmVisuallyHidden"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmWindow"
+        },
+        {
+          "kind": "variable",
+          "name": "FilmWorkspace"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FilmAccordion",
+          "declaration": {
+            "name": "FilmAccordion",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmAccordionItem",
+          "declaration": {
+            "name": "FilmAccordionItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmAlert",
+          "declaration": {
+            "name": "FilmAlert",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmAvatar",
+          "declaration": {
+            "name": "FilmAvatar",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmBadge",
+          "declaration": {
+            "name": "FilmBadge",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmBox",
+          "declaration": {
+            "name": "FilmBox",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmBreadcrumb",
+          "declaration": {
+            "name": "FilmBreadcrumb",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmBreadcrumbItem",
+          "declaration": {
+            "name": "FilmBreadcrumbItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmButton",
+          "declaration": {
+            "name": "FilmButton",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmButtonGroup",
+          "declaration": {
+            "name": "FilmButtonGroup",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCalendar",
+          "declaration": {
+            "name": "FilmCalendar",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCard",
+          "declaration": {
+            "name": "FilmCard",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCenter",
+          "declaration": {
+            "name": "FilmCenter",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCheckbox",
+          "declaration": {
+            "name": "FilmCheckbox",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCluster",
+          "declaration": {
+            "name": "FilmCluster",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCode",
+          "declaration": {
+            "name": "FilmCode",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmColorPicker",
+          "declaration": {
+            "name": "FilmColorPicker",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCombobox",
+          "declaration": {
+            "name": "FilmCombobox",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCopyButton",
+          "declaration": {
+            "name": "FilmCopyButton",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmCover",
+          "declaration": {
+            "name": "FilmCover",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDatePicker",
+          "declaration": {
+            "name": "FilmDatePicker",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDetails",
+          "declaration": {
+            "name": "FilmDetails",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDialog",
+          "declaration": {
+            "name": "FilmDialog",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDivider",
+          "declaration": {
+            "name": "FilmDivider",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDrawer",
+          "declaration": {
+            "name": "FilmDrawer",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmDropdown",
+          "declaration": {
+            "name": "FilmDropdown",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmField",
+          "declaration": {
+            "name": "FilmField",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmFileInput",
+          "declaration": {
+            "name": "FilmFileInput",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmForm",
+          "declaration": {
+            "name": "FilmForm",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmFrame",
+          "declaration": {
+            "name": "FilmFrame",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmGrid",
+          "declaration": {
+            "name": "FilmGrid",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmHeading",
+          "declaration": {
+            "name": "FilmHeading",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmIcon",
+          "declaration": {
+            "name": "FilmIcon",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmIconButton",
+          "declaration": {
+            "name": "FilmIconButton",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmImposter",
+          "declaration": {
+            "name": "FilmImposter",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmInput",
+          "declaration": {
+            "name": "FilmInput",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmKbd",
+          "declaration": {
+            "name": "FilmKbd",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmLink",
+          "declaration": {
+            "name": "FilmLink",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmList",
+          "declaration": {
+            "name": "FilmList",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmListItem",
+          "declaration": {
+            "name": "FilmListItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmMenu",
+          "declaration": {
+            "name": "FilmMenu",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmMenuBar",
+          "declaration": {
+            "name": "FilmMenuBar",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmMenuBarItem",
+          "declaration": {
+            "name": "FilmMenuBarItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmMenuItem",
+          "declaration": {
+            "name": "FilmMenuItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmNav",
+          "declaration": {
+            "name": "FilmNav",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmNavItem",
+          "declaration": {
+            "name": "FilmNavItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmNumberInput",
+          "declaration": {
+            "name": "FilmNumberInput",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmPagination",
+          "declaration": {
+            "name": "FilmPagination",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmPopconfirm",
+          "declaration": {
+            "name": "FilmPopconfirm",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmPopover",
+          "declaration": {
+            "name": "FilmPopover",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmProgressBar",
+          "declaration": {
+            "name": "FilmProgressBar",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmProse",
+          "declaration": {
+            "name": "FilmProse",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmRadio",
+          "declaration": {
+            "name": "FilmRadio",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmRadioGroup",
+          "declaration": {
+            "name": "FilmRadioGroup",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmRange",
+          "declaration": {
+            "name": "FilmRange",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmReel",
+          "declaration": {
+            "name": "FilmReel",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSearch",
+          "declaration": {
+            "name": "FilmSearch",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSelect",
+          "declaration": {
+            "name": "FilmSelect",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSelectOption",
+          "declaration": {
+            "name": "FilmSelectOption",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSidebar",
+          "declaration": {
+            "name": "FilmSidebar",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSkeleton",
+          "declaration": {
+            "name": "FilmSkeleton",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSlider",
+          "declaration": {
+            "name": "FilmSlider",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSpinner",
+          "declaration": {
+            "name": "FilmSpinner",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSplitPanel",
+          "declaration": {
+            "name": "FilmSplitPanel",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmStack",
+          "declaration": {
+            "name": "FilmStack",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmStep",
+          "declaration": {
+            "name": "FilmStep",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSteps",
+          "declaration": {
+            "name": "FilmSteps",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSwitch",
+          "declaration": {
+            "name": "FilmSwitch",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmSwitcher",
+          "declaration": {
+            "name": "FilmSwitcher",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTab",
+          "declaration": {
+            "name": "FilmTab",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTabPanel",
+          "declaration": {
+            "name": "FilmTabPanel",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTable",
+          "declaration": {
+            "name": "FilmTable",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTabs",
+          "declaration": {
+            "name": "FilmTabs",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTag",
+          "declaration": {
+            "name": "FilmTag",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmText",
+          "declaration": {
+            "name": "FilmText",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTextarea",
+          "declaration": {
+            "name": "FilmTextarea",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmToast",
+          "declaration": {
+            "name": "FilmToast",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTooltip",
+          "declaration": {
+            "name": "FilmTooltip",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTree",
+          "declaration": {
+            "name": "FilmTree",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmTreeItem",
+          "declaration": {
+            "name": "FilmTreeItem",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmVisuallyHidden",
+          "declaration": {
+            "name": "FilmVisuallyHidden",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmWindow",
+          "declaration": {
+            "name": "FilmWindow",
+            "module": "src/react/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FilmWorkspace",
+          "declaration": {
+            "name": "FilmWorkspace",
+            "module": "src/react/index.ts"
           }
         }
       ]
