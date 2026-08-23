@@ -27,7 +27,7 @@ const MIN_HEIGHT = 100
  * @slot actions - Extra title-bar controls, before minimise/maximise/close.
  * @fires film-window-movestart - When a pointer move drag begins (for snap previews).
  * @fires film-window-move - `detail` is `{ x, y }`.
- * @fires film-window-moveend - When a pointer move drag ends (commit a snap here).
+ * @fires film-window-moveend - When a pointer move drag ends (the commit point). `detail` is `{ x, y, width, height }`.
  * @fires film-window-resize - `detail` is `{ x, y, width, height }`.
  * @fires film-window-focus - When the window requests focus (for raising).
  * @fires film-window-minimise - When minimised state toggles.
@@ -58,7 +58,13 @@ export class Window extends FilmElement {
     },
     onDrag: (dx, dy) => this.setPosition(this.base.x + dx, this.base.y + dy),
     onStep: (dx, dy) => this.setPosition(this.x + dx, this.y + dy),
-    onEnd: () => this.dispatchEvent(new CustomEvent('film-window-moveend', { bubbles: true }))
+    onEnd: () =>
+      this.dispatchEvent(
+        new CustomEvent('film-window-moveend', {
+          detail: { x: this.x, y: this.y, width: this.width, height: this.height },
+          bubbles: true
+        })
+      )
   })
 
   private readonly resizeDrag = new DragController(this, {
@@ -77,6 +83,9 @@ export class Window extends FilmElement {
       position: absolute;
       display: block;
       box-sizing: border-box;
+      /* Contain descendant z-index (e.g. a sticky header inside the window) so
+         it can't paint over sibling windows. */
+      isolation: isolate;
     }
 
     :host([minimised]) {

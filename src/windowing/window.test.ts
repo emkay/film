@@ -34,6 +34,20 @@ describe('film-window', () => {
     expect(el.shadowRoot?.querySelector('.handle')).to.not.exist
   })
 
+  it('fires film-window-moveend with the committed geometry', async () => {
+    const el = await fixture<Window>(html`<film-window x="10" y="10" width="200" height="150">body</film-window>`)
+    await el.updateComplete
+    const titlebar = el.shadowRoot?.querySelector('.titlebar') as HTMLElement
+    titlebar.dispatchEvent(new PointerEvent('pointerdown', { button: 0, clientX: 0, clientY: 0, pointerId: 1, bubbles: true }))
+    titlebar.dispatchEvent(new PointerEvent('pointermove', { clientX: 20, clientY: 15, pointerId: 1, bubbles: true }))
+    const settled = oneEvent(el, 'film-window-moveend')
+    titlebar.dispatchEvent(new PointerEvent('pointerup', { pointerId: 1, bubbles: true }))
+    const event = await settled
+    expect(event.detail).to.have.all.keys('x', 'y', 'width', 'height')
+    expect(event.detail.width).to.equal(200)
+    expect(event.detail.height).to.equal(150)
+  })
+
   it('fires film-window-close', async () => {
     const el = await fixture<Window>(html`<film-window>body</film-window>`)
     const closeBtn = Array.from(el.shadowRoot?.querySelectorAll('button') ?? []).find(

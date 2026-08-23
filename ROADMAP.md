@@ -92,3 +92,6 @@ the recommended sequence.
 - [x] `film-table` virtualisation — opt-in `virtualized` for large row counts
 - [x] `film-menu-bar` — horizontal app menu with roving focus (builds on `film-menu` submenus)
 - [x] `film-table` row activation (`activatable` + `film-row-activate`) & custom cell renderers (`column.render`)
+- [x] `film-window-moveend` carries `{ x, y, width, height }` (the layout commit point)
+- [x] Manifest hides private members (CEM plugin) — advertises only the public API surface
+- [x] `film-window` establishes a stacking context (`isolation: isolate`) so descendant `z-index` stays contained

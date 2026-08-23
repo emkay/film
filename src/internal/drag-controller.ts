@@ -54,7 +54,13 @@ export class DragController implements ReactiveController {
     this.startY = event.clientY
     this.pointerId = event.pointerId
     this.target = event.currentTarget as HTMLElement
-    this.target.setPointerCapture(event.pointerId)
+    // Best-effort: capture keeps events flowing if the pointer leaves the handle,
+    // but can throw for a stale/synthetic pointer id — degrade gracefully.
+    try {
+      this.target.setPointerCapture(event.pointerId)
+    } catch {
+      /* no capture — dragging still works while the pointer stays over the handle */
+    }
     this.callbacks.onStart?.()
     event.preventDefault()
   }

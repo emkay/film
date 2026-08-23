@@ -330,33 +330,6 @@
               "default": "'Copied'",
               "description": "The label shown briefly after copying.",
               "attribute": "copied-label"
-            },
-            {
-              "kind": "field",
-              "name": "copied",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "timer",
-              "type": {
-                "text": "ReturnType<typeof setTimeout> | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "onClick",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "Promise<void>"
-                }
-              }
             }
           ],
           "events": [
@@ -684,30 +657,6 @@
               "description": "Whether the item is disabled.",
               "attribute": "disabled",
               "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "headerId",
-              "privacy": "private",
-              "readonly": true,
-              "default": "`film-accordion-header-${(uid += 1)}`"
-            },
-            {
-              "kind": "field",
-              "name": "panelId",
-              "privacy": "private",
-              "readonly": true,
-              "default": "`film-accordion-panel-${uid}`"
-            },
-            {
-              "kind": "method",
-              "name": "toggle",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
             }
           ],
           "events": [
@@ -799,21 +748,6 @@
               "default": "false",
               "description": "Allow more than one item open at a time.",
               "attribute": "multiple"
-            },
-            {
-              "kind": "field",
-              "name": "items",
-              "type": {
-                "text": "AccordionItem[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onToggle",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "attributes": [
@@ -906,31 +840,12 @@
             },
             {
               "kind": "field",
-              "name": "initials",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
               "name": "styleProps",
               "type": {
                 "text": "Record<string, string>"
               },
               "static": true,
               "default": "{ '--avatar-size': 'size' }"
-            },
-            {
-              "kind": "method",
-              "name": "onError",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
             }
           ],
           "attributes": [
@@ -1041,50 +956,6 @@
               "description": "Swap foreground and background colours.",
               "attribute": "invert",
               "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "hasMedia",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "hasFooter",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "method",
-              "name": "onMediaChange",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onFooterChange",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
             }
           ],
           "attributes": [
@@ -1241,24 +1112,6 @@
               "default": "''",
               "description": "The summary text.",
               "attribute": "summary"
-            },
-            {
-              "kind": "method",
-              "name": "onToggle",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
             }
           ],
           "events": [
@@ -1638,292 +1491,6 @@
               "default": "36",
               "description": "Fixed row height in pixels, used for virtualisation.",
               "attribute": "row-height"
-            },
-            {
-              "kind": "field",
-              "name": "sortKey",
-              "type": {
-                "text": "string | null"
-              },
-              "privacy": "private",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "sortDir",
-              "type": {
-                "text": "'asc' | 'desc'"
-              },
-              "privacy": "private",
-              "default": "'asc'"
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "privacy": "private",
-              "default": "new Set<number>()"
-            },
-            {
-              "kind": "field",
-              "name": "scrollOffset",
-              "type": {
-                "text": "number"
-              },
-              "privacy": "private",
-              "default": "0"
-            },
-            {
-              "kind": "field",
-              "name": "resizeObserver",
-              "type": {
-                "text": "ResizeObserver | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "rafPending",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "method",
-              "name": "enableVirtual",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "description": "Attach the scroll listener + ResizeObserver that drive windowing."
-            },
-            {
-              "kind": "method",
-              "name": "disableVirtual",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onScroll",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "displayRows",
-              "type": {
-                "text": "IndexedRow[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "toggleSort",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "key",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "allSelected",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "toggleAll",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "checked",
-                  "type": {
-                    "text": "boolean"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "toggleRow",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "emitSelection",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "sortIndicator",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "key",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "cellContent",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "unknown"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "column",
-                  "type": {
-                    "text": "TableColumn"
-                  }
-                },
-                {
-                  "name": "row",
-                  "type": {
-                    "text": "TableRow"
-                  }
-                },
-                {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "isInteractive",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "boolean"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "target",
-                  "type": {
-                    "text": "EventTarget | null"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "onRowClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onRowKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "activateRow",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "row",
-                  "type": {
-                    "text": "TableRow"
-                  }
-                },
-                {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "renderRow",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "{ row, index }",
-                  "type": {
-                    "text": "IndexedRow"
-                  }
-                },
-                {
-                  "name": "ariaRowIndex",
-                  "optional": true,
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "renderBody",
-              "privacy": "private"
             }
           ],
           "events": [
@@ -2060,15 +1627,6 @@
               "default": "'info'",
               "description": "The severity / colour treatment.",
               "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "manageRole",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "true"
             }
           ],
           "attributes": [
@@ -2325,15 +1883,6 @@
               "default": "''",
               "description": "An accessible label.",
               "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "percent",
-              "type": {
-                "text": "number"
-              },
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "attributes": [
@@ -2628,16 +2177,6 @@
               "description": "Show a remove button.",
               "attribute": "removable",
               "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "onRemove",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
             }
           ],
           "events": [
@@ -2743,14 +2282,6 @@
               "reflects": true
             },
             {
-              "kind": "field",
-              "name": "timer",
-              "type": {
-                "text": "ReturnType<typeof setTimeout> | undefined"
-              },
-              "privacy": "private"
-            },
-            {
               "kind": "method",
               "name": "show",
               "return": {
@@ -2767,28 +2298,6 @@
                   "text": "void"
                 }
               }
-            },
-            {
-              "kind": "method",
-              "name": "restart",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onEnter",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onLeave",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "events": [
@@ -2938,116 +2447,11 @@
             },
             {
               "kind": "field",
-              "name": "cursor",
-              "type": {
-                "text": "Date"
-              },
-              "privacy": "private",
-              "default": "new Date()"
-            },
-            {
-              "kind": "field",
-              "name": "pendingFocus",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
               "name": "selectedDate",
               "type": {
                 "text": "Date | null"
               },
               "description": "The currently selected date, if valid.",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "isDisabled",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "boolean"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "date",
-                  "type": {
-                    "text": "Date"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "moveCursor",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "days",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "moveMonth",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "months",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "selectDate",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "date",
-                  "type": {
-                    "text": "Date"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "onGridKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "grid",
-              "type": {
-                "text": "Date[]"
-              },
-              "privacy": "private",
               "readonly": true
             }
           ],
@@ -3143,14 +2547,6 @@
             },
             {
               "kind": "field",
-              "name": "box",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
               "name": "validationAnchor",
               "type": {
                 "text": "HTMLElement | undefined"
@@ -3220,14 +2616,6 @@
               "attribute": "label"
             },
             {
-              "kind": "field",
-              "name": "colorInput",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "privacy": "private"
-            },
-            {
               "kind": "method",
               "name": "getFormValue",
               "privacy": "protected",
@@ -3254,60 +2642,6 @@
                   "text": "void"
                 }
               }
-            },
-            {
-              "kind": "method",
-              "name": "onColorInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onHexInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "commit",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "value",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
             }
           ],
           "events": [
@@ -3420,66 +2754,6 @@
               "reflects": true
             },
             {
-              "kind": "field",
-              "name": "text",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "listbox",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "options",
-              "type": {
-                "text": "SelectOption[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "visibleOptions",
-              "type": {
-                "text": "SelectOption[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "selectedOption",
-              "type": {
-                "text": "SelectOption | undefined"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
               "kind": "method",
               "name": "getFormValue",
               "privacy": "protected",
@@ -3506,100 +2780,6 @@
                   "text": "void"
                 }
               }
-            },
-            {
-              "kind": "method",
-              "name": "syncOptions",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "filter",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "openListbox",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "closeListbox",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onToggle",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "onInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "select",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "SelectOption"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "onListboxClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "events": [
@@ -3742,30 +2922,6 @@
               "reflects": true
             },
             {
-              "kind": "field",
-              "name": "trigger",
-              "type": {
-                "text": "HTMLButtonElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "panel",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "privacy": "private"
-            },
-            {
               "kind": "method",
               "name": "getFormValue",
               "privacy": "protected",
@@ -3792,47 +2948,6 @@
                   "text": "void"
                 }
               }
-            },
-            {
-              "kind": "field",
-              "name": "display",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "openPanel",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "closePanel",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onToggle",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onCalendarChange",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "events": [
@@ -3964,82 +3079,6 @@
               "default": "''",
               "description": "A manually-set error message (overrides the control's own).",
               "attribute": "error"
-            },
-            {
-              "kind": "field",
-              "name": "autoError",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "controlRequired",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "control",
-              "type": {
-                "text": "FieldControl | null"
-              },
-              "privacy": "private",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "shownError",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onInvalid",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onControlInput",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "onSlotChange",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "nameControl",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
             }
           ],
           "attributes": [
@@ -4138,32 +3177,6 @@
               "attribute": "label"
             },
             {
-              "kind": "field",
-              "name": "files",
-              "type": {
-                "text": "File[]"
-              },
-              "privacy": "private",
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "dragging",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "privacy": "private"
-            },
-            {
               "kind": "method",
               "name": "getFormValue",
               "privacy": "protected",
@@ -4181,88 +3194,6 @@
                   "text": "void"
                 }
               }
-            },
-            {
-              "kind": "method",
-              "name": "setFiles",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "list",
-                  "type": {
-                    "text": "FileList | null"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "browse",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onKeydown",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "KeyboardEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onDragOver",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "DragEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onDrop",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "DragEvent"
-                  }
-                }
-              ]
             }
           ],
           "events": [
@@ -4408,18 +3339,6 @@
                   "text": "void"
                 }
               }
-            },
-            {
-              "kind": "field",
-              "name": "onClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "events": [
@@ -4705,14 +3624,6 @@
               "attribute": "readonly"
             },
             {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "privacy": "private"
-            },
-            {
               "kind": "method",
               "name": "getFormValue",
               "privacy": "protected",
@@ -4734,34 +3645,6 @@
             {
               "kind": "method",
               "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onChange",
-              "privacy": "private",
               "return": {
                 "type": {
                   "text": "void"
@@ -4912,14 +3795,6 @@
               "attribute": "placeholder"
             },
             {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "privacy": "private"
-            },
-            {
               "kind": "method",
               "name": "getFormValue",
               "privacy": "protected",
@@ -4941,70 +3816,6 @@
             {
               "kind": "method",
               "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "clamp",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "number"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "n",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "stepBy",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "direction",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onChange",
-              "privacy": "private",
               "return": {
                 "type": {
                   "text": "void"
@@ -5131,24 +3942,6 @@
               "attribute": "label"
             },
             {
-              "kind": "field",
-              "name": "radios",
-              "type": {
-                "text": "Radio[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "enabledRadios",
-              "type": {
-                "text": "Radio[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
               "kind": "method",
               "name": "getFormValue",
               "privacy": "protected",
@@ -5161,52 +3954,6 @@
             {
               "kind": "method",
               "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "select",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "radio",
-                  "type": {
-                    "text": "Radio"
-                  }
-                },
-                {
-                  "name": "focus",
-                  "type": {
-                    "text": "boolean"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "syncSelection",
-              "privacy": "private",
               "return": {
                 "type": {
                   "text": "void"
@@ -5439,14 +4186,6 @@
               "attribute": "show-value"
             },
             {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "privacy": "private"
-            },
-            {
               "kind": "method",
               "name": "getFormValue",
               "privacy": "protected",
@@ -5468,34 +4207,6 @@
             {
               "kind": "method",
               "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onChange",
-              "privacy": "private",
               "return": {
                 "type": {
                   "text": "void"
@@ -5631,14 +4342,6 @@
               "attribute": "label"
             },
             {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "privacy": "private"
-            },
-            {
               "kind": "method",
               "name": "getFormValue",
               "privacy": "protected",
@@ -5660,72 +4363,6 @@
             {
               "kind": "method",
               "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onChange",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "emitSearch",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onKeydown",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "KeyboardEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "clear",
-              "privacy": "private",
               "return": {
                 "type": {
                   "text": "void"
@@ -5978,57 +4615,6 @@
               "reflects": true
             },
             {
-              "kind": "field",
-              "name": "trigger",
-              "type": {
-                "text": "HTMLButtonElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "listbox",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "options",
-              "type": {
-                "text": "SelectOption[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "enabledOptions",
-              "type": {
-                "text": "SelectOption[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "selectedOption",
-              "type": {
-                "text": "SelectOption | undefined"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
               "kind": "method",
               "name": "getFormValue",
               "privacy": "protected",
@@ -6055,88 +4641,6 @@
                   "text": "void"
                 }
               }
-            },
-            {
-              "kind": "method",
-              "name": "syncOptions",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "toggle",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "openListbox",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "closeListbox",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onToggle",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "select",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "SelectOption"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "onListboxClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onTriggerKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onListboxKeydown",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "events": [
@@ -6285,70 +4789,6 @@
               "default": "false",
               "description": "Show the current range beside the label.",
               "attribute": "show-values"
-            },
-            {
-              "kind": "method",
-              "name": "percent",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "number"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "value",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "emit",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onMinInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onMaxInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
             }
           ],
           "events": [
@@ -6473,14 +4913,6 @@
             },
             {
               "kind": "field",
-              "name": "track",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
               "name": "validationAnchor",
               "type": {
                 "text": "HTMLElement | undefined"
@@ -6587,14 +5019,6 @@
               "attribute": "auto-grow"
             },
             {
-              "kind": "field",
-              "name": "textarea",
-              "type": {
-                "text": "HTMLTextAreaElement"
-              },
-              "privacy": "private"
-            },
-            {
               "kind": "method",
               "name": "getFormValue",
               "privacy": "protected",
@@ -6616,44 +5040,6 @@
             {
               "kind": "method",
               "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onInput",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onChange",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "grow",
-              "privacy": "private",
               "return": {
                 "type": {
                   "text": "void"
@@ -7771,75 +6157,6 @@
               "default": "90",
               "description": "The maximum position, as a percentage.",
               "attribute": "max"
-            },
-            {
-              "kind": "field",
-              "name": "dragging",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "method",
-              "name": "clamp",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "number"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "value",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "setPosition",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "value",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "onPointerDown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onPointerMove",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onPointerUp",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "events": [
@@ -7953,12 +6270,6 @@
             },
             {
               "kind": "field",
-              "name": "splitStyles",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
               "name": "styleProps",
               "type": {
                 "text": "Record<string, string>"
@@ -8067,30 +6378,6 @@
               },
               "static": true,
               "default": "{ '--switcher-space': 'space', '--switcher-threshold': 'threshold' }"
-            },
-            {
-              "kind": "field",
-              "name": "slotEl",
-              "type": {
-                "text": "HTMLSlotElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "applyLimit",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onSlotChange",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "attributes": [
@@ -8495,39 +6782,6 @@
             },
             {
               "kind": "field",
-              "name": "triggerEl",
-              "type": {
-                "text": "HTMLButtonElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "panel",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "pendingFocus",
-              "type": {
-                "text": "'first' | 'last' | 'none'"
-              },
-              "privacy": "private",
-              "default": "'none'"
-            },
-            {
-              "kind": "field",
               "name": "menu",
               "type": {
                 "text": "Menu | null"
@@ -8579,42 +6833,6 @@
                 }
               ],
               "description": "Close the menu. Pass `true` to return focus to the trigger."
-            },
-            {
-              "kind": "method",
-              "name": "applyMenuFocus",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "focus",
-                  "type": {
-                    "text": "'first' | 'last' | 'none'"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "onToggle",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onTriggerClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onTriggerKeydown",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "events": [
@@ -8712,111 +6930,7 @@
               "name": ""
             }
           ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "activeItem",
-              "type": {
-                "text": "MenuBarItem | null"
-              },
-              "privacy": "private",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "openItem",
-              "type": {
-                "text": "MenuBarItem | null"
-              },
-              "privacy": "private",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "items",
-              "type": {
-                "text": "MenuBarItem[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "onSlotChange",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "setActive",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "item",
-                  "type": {
-                    "text": "MenuBarItem | null"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "onItemOpen",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onItemClose",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onPointerOver",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "move",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "items",
-                  "type": {
-                    "text": "MenuBarItem[]"
-                  }
-                },
-                {
-                  "name": "nextIndex",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            }
-          ],
+          "members": [],
           "superclass": {
             "name": "FilmElement",
             "module": "/src/internal/film-element.js"
@@ -8890,90 +7004,12 @@
             },
             {
               "kind": "field",
-              "name": "hasSubmenu",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "submenuOpen",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "submenuEl",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "submenuSlot",
-              "type": {
-                "text": "HTMLSlotElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "closeTimer",
-              "type": {
-                "text": "number | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
               "name": "submenu",
               "type": {
                 "text": "Menu | null"
               },
               "description": "The nested menu assigned to the `submenu` slot, if any.",
               "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onSubmenuSlotChange",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onActivate",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "toggleSubmenu",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "focusFirst",
-                  "default": "false"
-                }
-              ]
             },
             {
               "kind": "method",
@@ -9000,68 +7036,6 @@
                 }
               },
               "description": "Close the flyout."
-            },
-            {
-              "kind": "field",
-              "name": "onSubmenuToggle",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onPointerEnter",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onPointerLeave",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onSubmenuPointerEnter",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onSubmenuPointerLeave",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "scheduleClose",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "cancelClose",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onDescendantSelect",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "events": [
@@ -9133,15 +7107,6 @@
           ],
           "members": [
             {
-              "kind": "field",
-              "name": "items",
-              "type": {
-                "text": "MenuItem[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
               "kind": "method",
               "name": "focusFirst",
               "return": {
@@ -9160,12 +7125,6 @@
                 }
               },
               "description": "Move focus to the last item."
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "superclass": {
@@ -9395,33 +7354,6 @@
               "default": "'Pagination'",
               "description": "Accessible label for the navigation landmark.",
               "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "items",
-              "type": {
-                "text": "Array<number | 'ellipsis'>"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "go",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "page",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
             }
           ],
           "events": [
@@ -9626,20 +7558,6 @@
               "default": "0",
               "description": "The 0-based index of the active step.",
               "attribute": "current"
-            },
-            {
-              "kind": "field",
-              "name": "steps",
-              "type": {
-                "text": "Step[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "sync",
-              "privacy": "private"
             }
           ],
           "attributes": [
@@ -9896,71 +7814,6 @@
               "default": "''",
               "description": "The `name` of the active panel.",
               "attribute": "active"
-            },
-            {
-              "kind": "field",
-              "name": "tabs",
-              "type": {
-                "text": "Tab[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "panels",
-              "type": {
-                "text": "TabPanel[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "activate",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "name",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "focus",
-                  "optional": true,
-                  "type": {
-                    "text": "Tab"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "sync",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
             }
           ],
           "events": [
@@ -10096,33 +7949,11 @@
             },
             {
               "kind": "field",
-              "name": "lazy",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false",
-              "description": "Whether the consumer declared this a lazy node via the `has-children` attribute."
-            },
-            {
-              "kind": "field",
               "name": "childItems",
               "type": {
                 "text": "TreeItem[]"
               },
               "description": "The immediate child tree items.",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onSlotChange",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onTwist",
-              "privacy": "private",
               "readonly": true
             }
           ],
@@ -10242,91 +8073,6 @@
               "default": "''",
               "description": "The accessible label for the tree.",
               "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "items",
-              "type": {
-                "text": "TreeItem[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "isVisible",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "boolean"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "item",
-                  "type": {
-                    "text": "TreeItem"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "visibleItems",
-              "type": {
-                "text": "TreeItem[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "focusItem",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "item",
-                  "optional": true,
-                  "type": {
-                    "text": "TreeItem"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "select",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "item",
-                  "type": {
-                    "text": "TreeItem"
-                  }
-                }
-              ]
             }
           ],
           "events": [
@@ -10546,39 +8292,6 @@
               "attribute": "align"
             },
             {
-              "kind": "field",
-              "name": "panel",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "triggerSlot",
-              "type": {
-                "text": "HTMLSlotElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "trigger",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
               "kind": "method",
               "name": "show",
               "return": {
@@ -10604,32 +8317,6 @@
                   "text": "void"
                 }
               }
-            },
-            {
-              "kind": "method",
-              "name": "openPanel",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "closePanel",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onToggle",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "events": [
@@ -10811,44 +8498,6 @@
               "default": "'Cancel'",
               "description": "Cancel button label.",
               "attribute": "cancel-label"
-            },
-            {
-              "kind": "field",
-              "name": "popoverEl",
-              "type": {
-                "text": "Popover"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "close",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onConfirm",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "onCancel",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
             }
           ],
           "events": [
@@ -10984,39 +8633,6 @@
               "attribute": "trigger"
             },
             {
-              "kind": "field",
-              "name": "panel",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "triggerSlot",
-              "type": {
-                "text": "HTMLSlotElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "triggerEl",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
               "kind": "method",
               "name": "show",
               "return": {
@@ -11042,50 +8658,6 @@
                   "text": "void"
                 }
               }
-            },
-            {
-              "kind": "method",
-              "name": "openPanel",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "closePanel",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onToggle",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onTriggerClick",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onTriggerEnter",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onTriggerLeave",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "events": [
@@ -11220,67 +8792,11 @@
             },
             {
               "kind": "field",
-              "name": "tip",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "targetSlot",
-              "type": {
-                "text": "HTMLSlotElement"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "counter",
-              "type": {
-                "text": "number"
-              },
-              "privacy": "private",
-              "static": true,
-              "default": "0"
-            },
-            {
-              "kind": "field",
-              "name": "tipId",
-              "privacy": "private",
-              "readonly": true,
-              "default": "`film-tooltip-${(Tooltip.counter += 1)}`"
-            },
-            {
-              "kind": "field",
-              "name": "target",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
               "name": "show"
             },
             {
               "kind": "field",
               "name": "hide"
-            },
-            {
-              "kind": "field",
-              "name": "onKeydown",
-              "privacy": "private",
-              "readonly": true
             }
           ],
           "attributes": [
@@ -11334,1372 +8850,6 @@
           "declaration": {
             "name": "Tooltip",
             "module": "src/overlays/tooltip.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/typography/divider.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Divider — a themed separator, horizontal by default or `vertical`.",
-          "name": "Divider",
-          "members": [
-            {
-              "kind": "field",
-              "name": "vertical",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Render a vertical rule instead of a horizontal one.",
-              "attribute": "vertical",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "space",
-              "type": {
-                "text": "string"
-              },
-              "default": "'var(--s1)'",
-              "description": "The space around the divider.",
-              "attribute": "space"
-            },
-            {
-              "kind": "field",
-              "name": "styleProps",
-              "type": {
-                "text": "Record<string, string>"
-              },
-              "static": true,
-              "default": "{ '--divider-space': 'space' }"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "vertical",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Render a vertical rule instead of a horizontal one.",
-              "fieldName": "vertical"
-            },
-            {
-              "name": "space",
-              "type": {
-                "text": "string"
-              },
-              "default": "'var(--s1)'",
-              "description": "The space around the divider.",
-              "fieldName": "space"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-divider",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Divider",
-          "declaration": {
-            "name": "Divider",
-            "module": "src/typography/divider.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-divider",
-          "declaration": {
-            "name": "Divider",
-            "module": "src/typography/divider.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/typography/heading.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Heading — a semantic `h1`–`h6` sized from the modular scale.",
-          "name": "Heading",
-          "slots": [
-            {
-              "description": "The heading text.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "level",
-              "type": {
-                "text": "number"
-              },
-              "default": "2",
-              "description": "The heading level (1–6), controlling both the tag and the default size.",
-              "attribute": "level"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Override the size with a scale step, e.g. `s5` or `s-1`.",
-              "attribute": "size"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "level",
-              "type": {
-                "text": "number"
-              },
-              "default": "2",
-              "description": "The heading level (1–6), controlling both the tag and the default size.",
-              "fieldName": "level"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Override the size with a scale step, e.g. `s5` or `s-1`.",
-              "fieldName": "size"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-heading",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Heading",
-          "declaration": {
-            "name": "Heading",
-            "module": "src/typography/heading.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-heading",
-          "declaration": {
-            "name": "Heading",
-            "module": "src/typography/heading.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/typography/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Divider",
-          "declaration": {
-            "name": "Divider",
-            "module": "./divider.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Heading",
-          "declaration": {
-            "name": "Heading",
-            "module": "./heading.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Kbd",
-          "declaration": {
-            "name": "Kbd",
-            "module": "./kbd.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Prose",
-          "declaration": {
-            "name": "Prose",
-            "module": "./prose.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Text",
-          "declaration": {
-            "name": "Text",
-            "module": "./text.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "VisuallyHidden",
-          "declaration": {
-            "name": "VisuallyHidden",
-            "module": "./visually-hidden.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/typography/kbd.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Kbd — displays a keyboard key or shortcut.",
-          "name": "Kbd",
-          "slots": [
-            {
-              "description": "The key label (e.g. `⌘`, `Enter`).",
-              "name": ""
-            }
-          ],
-          "members": [],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-kbd",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Kbd",
-          "declaration": {
-            "name": "Kbd",
-            "module": "src/typography/kbd.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-kbd",
-          "declaration": {
-            "name": "Kbd",
-            "module": "src/typography/kbd.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/typography/prose.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Prose — a readable flow container for long-form HTML: constrains line length\nto `--measure` and adds vertical rhythm between top-level blocks.\n\nNote: because slotted content lives in the light DOM, only the direct\nchildren can be styled here (`::slotted` can't reach their descendants), so\nthis handles block rhythm, measure and top-level element styles.",
-          "name": "Prose",
-          "slots": [
-            {
-              "description": "The long-form content (headings, paragraphs, lists, etc.).",
-              "name": ""
-            }
-          ],
-          "members": [],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-prose",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Prose",
-          "declaration": {
-            "name": "Prose",
-            "module": "src/typography/prose.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-prose",
-          "declaration": {
-            "name": "Prose",
-            "module": "src/typography/prose.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/typography/text.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Text — a block of body text sized from the modular scale, with an optional\nmuted tone and weight.",
-          "name": "Text",
-          "slots": [
-            {
-              "description": "The text content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "'s0'",
-              "description": "A modular-scale step, e.g. `s0` (default), `s-1`, `s1`.",
-              "attribute": "size"
-            },
-            {
-              "kind": "field",
-              "name": "tone",
-              "type": {
-                "text": "'default' | 'muted'"
-              },
-              "default": "'default'",
-              "description": "Text tone.",
-              "attribute": "tone",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "weight",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Optional font weight (e.g. `600`, `bold`).",
-              "attribute": "weight"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "'s0'",
-              "description": "A modular-scale step, e.g. `s0` (default), `s-1`, `s1`.",
-              "fieldName": "size"
-            },
-            {
-              "name": "tone",
-              "type": {
-                "text": "'default' | 'muted'"
-              },
-              "default": "'default'",
-              "description": "Text tone.",
-              "fieldName": "tone"
-            },
-            {
-              "name": "weight",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Optional font weight (e.g. `600`, `bold`).",
-              "fieldName": "weight"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-text",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Text",
-          "declaration": {
-            "name": "Text",
-            "module": "src/typography/text.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-text",
-          "declaration": {
-            "name": "Text",
-            "module": "src/typography/text.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/typography/visually-hidden.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "VisuallyHidden — hides content visually while keeping it available to\nassistive technology. Use for skip links, extra labels, and live-region text.",
-          "name": "VisuallyHidden",
-          "slots": [
-            {
-              "description": "The content to hide visually.",
-              "name": ""
-            }
-          ],
-          "members": [],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-visually-hidden",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "VisuallyHidden",
-          "declaration": {
-            "name": "VisuallyHidden",
-            "module": "src/typography/visually-hidden.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-visually-hidden",
-          "declaration": {
-            "name": "VisuallyHidden",
-            "module": "src/typography/visually-hidden.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/windowing/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Window",
-          "declaration": {
-            "name": "Window",
-            "module": "./window.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Workspace",
-          "declaration": {
-            "name": "Workspace",
-            "module": "./workspace.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "WindowLayout",
-          "declaration": {
-            "name": "WindowLayout",
-            "module": "./workspace.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/windowing/window.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Window — a non-modal, stackable, positioned panel with a title bar, move and\nresize (pointer + keyboard), and minimise / maximise / close. Unlike\n`film-dialog`/`film-drawer` it does not use the top layer, so windows can\nstack, sit side by side and be focused independently. Position/size are\nreflected so a consumer can persist layout, and movement is constrained to\nthe offset parent (make the container `position: relative`).",
-          "name": "Window",
-          "slots": [
-            {
-              "description": "The window body.",
-              "name": ""
-            },
-            {
-              "description": "Title-bar content (overrides `title`).",
-              "name": "title"
-            },
-            {
-              "description": "Extra title-bar controls, before minimise/maximise/close.",
-              "name": "actions"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "title",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "title"
-            },
-            {
-              "kind": "field",
-              "name": "x",
-              "type": {
-                "text": "number"
-              },
-              "default": "40",
-              "attribute": "x",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "y",
-              "type": {
-                "text": "number"
-              },
-              "default": "40",
-              "attribute": "y",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "number"
-              },
-              "default": "320",
-              "attribute": "width",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "height",
-              "type": {
-                "text": "number"
-              },
-              "default": "240",
-              "attribute": "height",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "resizable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "attribute": "resizable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "movable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "attribute": "movable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "minimised",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "minimised",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "maximised",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "maximised",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "active",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "active",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "base",
-              "type": {
-                "text": "Rect"
-              },
-              "privacy": "private",
-              "default": "{ x: 0, y: 0, width: 0, height: 0 }"
-            },
-            {
-              "kind": "field",
-              "name": "resizeDir",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private",
-              "default": "'se'"
-            },
-            {
-              "kind": "field",
-              "name": "restore",
-              "type": {
-                "text": "Rect | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "moveDrag",
-              "privacy": "private",
-              "readonly": true,
-              "default": "new DragController(this, { onStart: () => { this.base = this.rect() this.dispatchEvent(new CustomEvent('film-window-movestart', { bubbles: true })) }, onDrag: (dx, dy) => this.setPosition(this.base.x + dx, this.base.y + dy), onStep: (dx, dy) => this.setPosition(this.x + dx, this.y + dy), onEnd: () => this.dispatchEvent(new CustomEvent('film-window-moveend', { bubbles: true })) })"
-            },
-            {
-              "kind": "field",
-              "name": "resizeDrag",
-              "privacy": "private",
-              "readonly": true,
-              "default": "new DragController(this, { onStart: () => { this.base = this.rect() }, onDrag: (dx, dy) => this.applyResize(dx, dy), onStep: (dx, dy) => { this.base = this.rect() this.applyResize(dx, dy) } })"
-            },
-            {
-              "kind": "method",
-              "name": "rect",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "Rect"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "container",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "{ w: number, h: number }"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "setPosition",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "x",
-                  "type": {
-                    "text": "number"
-                  }
-                },
-                {
-                  "name": "y",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "applyResize",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "dx",
-                  "type": {
-                    "text": "number"
-                  }
-                },
-                {
-                  "name": "dy",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "requestFocus",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onTitlePointerDown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onTitleKeydown",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "startResize",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "dir",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "PointerEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "resizeKeydown",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "dir",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "KeyboardEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "toggleMinimise",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "toggleMaximise",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "close",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "film-window-move",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "`detail` is `{ x, y }`."
-            },
-            {
-              "name": "film-window-resize",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "`detail` is `{ x, y, width, height }`."
-            },
-            {
-              "name": "film-window-minimise",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "When minimised state toggles."
-            },
-            {
-              "name": "film-window-maximise",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "When maximised state toggles."
-            },
-            {
-              "name": "film-window-close",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "When the close button is activated."
-            },
-            {
-              "description": "When a pointer move drag begins (for snap previews).",
-              "name": "film-window-movestart"
-            },
-            {
-              "description": "When a pointer move drag ends (commit a snap here).",
-              "name": "film-window-moveend"
-            },
-            {
-              "description": "When the window requests focus (for raising).",
-              "name": "film-window-focus"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "title",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "title"
-            },
-            {
-              "name": "x",
-              "type": {
-                "text": "number"
-              },
-              "default": "40",
-              "fieldName": "x"
-            },
-            {
-              "name": "y",
-              "type": {
-                "text": "number"
-              },
-              "default": "40",
-              "fieldName": "y"
-            },
-            {
-              "name": "width",
-              "type": {
-                "text": "number"
-              },
-              "default": "320",
-              "fieldName": "width"
-            },
-            {
-              "name": "height",
-              "type": {
-                "text": "number"
-              },
-              "default": "240",
-              "fieldName": "height"
-            },
-            {
-              "name": "resizable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "fieldName": "resizable"
-            },
-            {
-              "name": "movable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "fieldName": "movable"
-            },
-            {
-              "name": "minimised",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "minimised"
-            },
-            {
-              "name": "maximised",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "maximised"
-            },
-            {
-              "name": "active",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "active"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-window",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Window",
-          "declaration": {
-            "name": "Window",
-            "module": "src/windowing/window.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-window",
-          "declaration": {
-            "name": "Window",
-            "module": "src/windowing/window.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/windowing/workspace.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Workspace — the container for Windows. Owns what a lone window can't:\nz-order, focus and layout. In `floating` layout, clicking a window raises it\nand makes it active, and dragging one to an edge snaps it to a half or\nquarter (disable with `no-snap`); in `tiled` layout, windows fill the area\nand are pinned — either a uniform `grid` or a recursive `bsp` split.",
-          "name": "Workspace",
-          "slots": [
-            {
-              "description": "The `film-window` children.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "layout",
-              "type": {
-                "text": "'floating' | 'tiled'"
-              },
-              "default": "'floating'",
-              "description": "Layout mode.",
-              "attribute": "layout",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tiling",
-              "type": {
-                "text": "'grid' | 'bsp'"
-              },
-              "default": "'grid'",
-              "description": "Tiling algorithm when `layout=\"tiled\"`.",
-              "attribute": "tiling",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "description": "Gap between windows, in pixels (tiling and snapping).",
-              "attribute": "gap"
-            },
-            {
-              "kind": "field",
-              "name": "noSnap",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Disable drag-to-snap in floating layout.",
-              "attribute": "no-snap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "preview",
-              "type": {
-                "text": "WindowLayout | null"
-              },
-              "privacy": "private",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "z",
-              "type": {
-                "text": "number"
-              },
-              "privacy": "private",
-              "default": "0"
-            },
-            {
-              "kind": "field",
-              "name": "resizeObserver",
-              "type": {
-                "text": "ResizeObserver | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "dragging",
-              "type": {
-                "text": "Window | null"
-              },
-              "privacy": "private",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "pendingSnap",
-              "type": {
-                "text": "SnapZone | null"
-              },
-              "privacy": "private",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "pinned",
-              "privacy": "private",
-              "readonly": true,
-              "default": "new WeakMap<Window, { movable: boolean, resizable: boolean }>()",
-              "description": "Per-window movable/resizable saved before pinning, restored on untile."
-            },
-            {
-              "kind": "field",
-              "name": "windows",
-              "type": {
-                "text": "Window[]"
-              },
-              "description": "The child windows, in DOM order.",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "getLayout",
-              "return": {
-                "type": {
-                  "text": "WindowLayout[]"
-                }
-              },
-              "description": "The current arrangement, suitable for persisting and restoring."
-            },
-            {
-              "kind": "field",
-              "name": "onFocus",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "raise",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "win",
-                  "type": {
-                    "text": "Window"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "emitLayout",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "snappingEnabled",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "boolean"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "onMoveStart",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onPointerMove",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "onMoveEnd",
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "zoneFor",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "SnapZone | null"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "px",
-                  "type": {
-                    "text": "number"
-                  }
-                },
-                {
-                  "name": "py",
-                  "type": {
-                    "text": "number"
-                  }
-                },
-                {
-                  "name": "w",
-                  "type": {
-                    "text": "number"
-                  }
-                },
-                {
-                  "name": "h",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "rectFor",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "WindowLayout"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "zone",
-                  "type": {
-                    "text": "SnapZone"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "applyLayout",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "untile",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "tile",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "layoutGrid",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "wins",
-                  "type": {
-                    "text": "Window[]"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "splitBsp",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "wins",
-                  "type": {
-                    "text": "Window[]"
-                  }
-                },
-                {
-                  "name": "rect",
-                  "type": {
-                    "text": "WindowLayout"
-                  }
-                },
-                {
-                  "name": "horizontal",
-                  "type": {
-                    "text": "boolean"
-                  }
-                }
-              ],
-              "description": "Recursive binary split: the first window takes half the area, the rest\nrecurse into the other half with the orientation flipped — a spiral tiling\nwhere each new window subdivides the previous region."
-            },
-            {
-              "kind": "field",
-              "name": "onSlotChange",
-              "privacy": "private",
-              "readonly": true
-            }
-          ],
-          "events": [
-            {
-              "description": "When the arrangement changes. `detail.windows` is the layout, for persistence.",
-              "name": "film-workspace-layout"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "layout",
-              "type": {
-                "text": "'floating' | 'tiled'"
-              },
-              "default": "'floating'",
-              "description": "Layout mode.",
-              "fieldName": "layout"
-            },
-            {
-              "name": "tiling",
-              "type": {
-                "text": "'grid' | 'bsp'"
-              },
-              "default": "'grid'",
-              "description": "Tiling algorithm when `layout=\"tiled\"`.",
-              "fieldName": "tiling"
-            },
-            {
-              "name": "gap",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "description": "Gap between windows, in pixels (tiling and snapping).",
-              "fieldName": "gap"
-            },
-            {
-              "name": "no-snap",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Disable drag-to-snap in floating layout.",
-              "fieldName": "noSnap"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-workspace",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Workspace",
-          "declaration": {
-            "name": "Workspace",
-            "module": "src/windowing/workspace.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-workspace",
-          "declaration": {
-            "name": "Workspace",
-            "module": "src/windowing/workspace.ts"
           }
         }
       ]
@@ -13704,6 +9854,939 @@
           "declaration": {
             "name": "FilmWorkspace",
             "module": "src/react/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/typography/divider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Divider — a themed separator, horizontal by default or `vertical`.",
+          "name": "Divider",
+          "members": [
+            {
+              "kind": "field",
+              "name": "vertical",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Render a vertical rule instead of a horizontal one.",
+              "attribute": "vertical",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "space",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--s1)'",
+              "description": "The space around the divider.",
+              "attribute": "space"
+            },
+            {
+              "kind": "field",
+              "name": "styleProps",
+              "type": {
+                "text": "Record<string, string>"
+              },
+              "static": true,
+              "default": "{ '--divider-space': 'space' }"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "vertical",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Render a vertical rule instead of a horizontal one.",
+              "fieldName": "vertical"
+            },
+            {
+              "name": "space",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--s1)'",
+              "description": "The space around the divider.",
+              "fieldName": "space"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-divider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Divider",
+          "declaration": {
+            "name": "Divider",
+            "module": "src/typography/divider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-divider",
+          "declaration": {
+            "name": "Divider",
+            "module": "src/typography/divider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/typography/heading.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Heading — a semantic `h1`–`h6` sized from the modular scale.",
+          "name": "Heading",
+          "slots": [
+            {
+              "description": "The heading text.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "level",
+              "type": {
+                "text": "number"
+              },
+              "default": "2",
+              "description": "The heading level (1–6), controlling both the tag and the default size.",
+              "attribute": "level"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Override the size with a scale step, e.g. `s5` or `s-1`.",
+              "attribute": "size"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "level",
+              "type": {
+                "text": "number"
+              },
+              "default": "2",
+              "description": "The heading level (1–6), controlling both the tag and the default size.",
+              "fieldName": "level"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Override the size with a scale step, e.g. `s5` or `s-1`.",
+              "fieldName": "size"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-heading",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Heading",
+          "declaration": {
+            "name": "Heading",
+            "module": "src/typography/heading.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-heading",
+          "declaration": {
+            "name": "Heading",
+            "module": "src/typography/heading.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/typography/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Divider",
+          "declaration": {
+            "name": "Divider",
+            "module": "./divider.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Heading",
+          "declaration": {
+            "name": "Heading",
+            "module": "./heading.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Kbd",
+          "declaration": {
+            "name": "Kbd",
+            "module": "./kbd.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Prose",
+          "declaration": {
+            "name": "Prose",
+            "module": "./prose.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Text",
+          "declaration": {
+            "name": "Text",
+            "module": "./text.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "VisuallyHidden",
+          "declaration": {
+            "name": "VisuallyHidden",
+            "module": "./visually-hidden.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/typography/kbd.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Kbd — displays a keyboard key or shortcut.",
+          "name": "Kbd",
+          "slots": [
+            {
+              "description": "The key label (e.g. `⌘`, `Enter`).",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-kbd",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Kbd",
+          "declaration": {
+            "name": "Kbd",
+            "module": "src/typography/kbd.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-kbd",
+          "declaration": {
+            "name": "Kbd",
+            "module": "src/typography/kbd.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/typography/prose.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Prose — a readable flow container for long-form HTML: constrains line length\nto `--measure` and adds vertical rhythm between top-level blocks.\n\nNote: because slotted content lives in the light DOM, only the direct\nchildren can be styled here (`::slotted` can't reach their descendants), so\nthis handles block rhythm, measure and top-level element styles.",
+          "name": "Prose",
+          "slots": [
+            {
+              "description": "The long-form content (headings, paragraphs, lists, etc.).",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-prose",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Prose",
+          "declaration": {
+            "name": "Prose",
+            "module": "src/typography/prose.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-prose",
+          "declaration": {
+            "name": "Prose",
+            "module": "src/typography/prose.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/typography/text.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Text — a block of body text sized from the modular scale, with an optional\nmuted tone and weight.",
+          "name": "Text",
+          "slots": [
+            {
+              "description": "The text content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'s0'",
+              "description": "A modular-scale step, e.g. `s0` (default), `s-1`, `s1`.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'default' | 'muted'"
+              },
+              "default": "'default'",
+              "description": "Text tone.",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "weight",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Optional font weight (e.g. `600`, `bold`).",
+              "attribute": "weight"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'s0'",
+              "description": "A modular-scale step, e.g. `s0` (default), `s-1`, `s1`.",
+              "fieldName": "size"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "'default' | 'muted'"
+              },
+              "default": "'default'",
+              "description": "Text tone.",
+              "fieldName": "tone"
+            },
+            {
+              "name": "weight",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Optional font weight (e.g. `600`, `bold`).",
+              "fieldName": "weight"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-text",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Text",
+          "declaration": {
+            "name": "Text",
+            "module": "src/typography/text.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-text",
+          "declaration": {
+            "name": "Text",
+            "module": "src/typography/text.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/typography/visually-hidden.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "VisuallyHidden — hides content visually while keeping it available to\nassistive technology. Use for skip links, extra labels, and live-region text.",
+          "name": "VisuallyHidden",
+          "slots": [
+            {
+              "description": "The content to hide visually.",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-visually-hidden",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "VisuallyHidden",
+          "declaration": {
+            "name": "VisuallyHidden",
+            "module": "src/typography/visually-hidden.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-visually-hidden",
+          "declaration": {
+            "name": "VisuallyHidden",
+            "module": "src/typography/visually-hidden.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/windowing/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Window",
+          "declaration": {
+            "name": "Window",
+            "module": "./window.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Workspace",
+          "declaration": {
+            "name": "Workspace",
+            "module": "./workspace.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "WindowLayout",
+          "declaration": {
+            "name": "WindowLayout",
+            "module": "./workspace.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/windowing/window.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Window — a non-modal, stackable, positioned panel with a title bar, move and\nresize (pointer + keyboard), and minimise / maximise / close. Unlike\n`film-dialog`/`film-drawer` it does not use the top layer, so windows can\nstack, sit side by side and be focused independently. Position/size are\nreflected so a consumer can persist layout, and movement is constrained to\nthe offset parent (make the container `position: relative`).",
+          "name": "Window",
+          "slots": [
+            {
+              "description": "The window body.",
+              "name": ""
+            },
+            {
+              "description": "Title-bar content (overrides `title`).",
+              "name": "title"
+            },
+            {
+              "description": "Extra title-bar controls, before minimise/maximise/close.",
+              "name": "actions"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "x",
+              "type": {
+                "text": "number"
+              },
+              "default": "40",
+              "attribute": "x",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "y",
+              "type": {
+                "text": "number"
+              },
+              "default": "40",
+              "attribute": "y",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "320",
+              "attribute": "width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "240",
+              "attribute": "height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "resizable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "resizable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "movable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "movable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "minimised",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "minimised",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maximised",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "maximised",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "toggleMinimise",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toggleMaximise",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "film-window-move",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`detail` is `{ x, y }`."
+            },
+            {
+              "name": "film-window-resize",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`detail` is `{ x, y, width, height }`."
+            },
+            {
+              "name": "film-window-minimise",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When minimised state toggles."
+            },
+            {
+              "name": "film-window-maximise",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When maximised state toggles."
+            },
+            {
+              "name": "film-window-close",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "When the close button is activated."
+            },
+            {
+              "description": "When a pointer move drag begins (for snap previews).",
+              "name": "film-window-movestart"
+            },
+            {
+              "description": "When a pointer move drag ends (the commit point). `detail` is `{ x, y, width, height }`.",
+              "name": "film-window-moveend"
+            },
+            {
+              "description": "When the window requests focus (for raising).",
+              "name": "film-window-focus"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "title"
+            },
+            {
+              "name": "x",
+              "type": {
+                "text": "number"
+              },
+              "default": "40",
+              "fieldName": "x"
+            },
+            {
+              "name": "y",
+              "type": {
+                "text": "number"
+              },
+              "default": "40",
+              "fieldName": "y"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "320",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "240",
+              "fieldName": "height"
+            },
+            {
+              "name": "resizable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "resizable"
+            },
+            {
+              "name": "movable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "movable"
+            },
+            {
+              "name": "minimised",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "minimised"
+            },
+            {
+              "name": "maximised",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "maximised"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-window",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Window",
+          "declaration": {
+            "name": "Window",
+            "module": "src/windowing/window.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-window",
+          "declaration": {
+            "name": "Window",
+            "module": "src/windowing/window.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/windowing/workspace.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Workspace — the container for Windows. Owns what a lone window can't:\nz-order, focus and layout. In `floating` layout, clicking a window raises it\nand makes it active, and dragging one to an edge snaps it to a half or\nquarter (disable with `no-snap`); in `tiled` layout, windows fill the area\nand are pinned — either a uniform `grid` or a recursive `bsp` split.",
+          "name": "Workspace",
+          "slots": [
+            {
+              "description": "The `film-window` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "layout",
+              "type": {
+                "text": "'floating' | 'tiled'"
+              },
+              "default": "'floating'",
+              "description": "Layout mode.",
+              "attribute": "layout",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tiling",
+              "type": {
+                "text": "'grid' | 'bsp'"
+              },
+              "default": "'grid'",
+              "description": "Tiling algorithm when `layout=\"tiled\"`.",
+              "attribute": "tiling",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Gap between windows, in pixels (tiling and snapping).",
+              "attribute": "gap"
+            },
+            {
+              "kind": "field",
+              "name": "noSnap",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disable drag-to-snap in floating layout.",
+              "attribute": "no-snap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "windows",
+              "type": {
+                "text": "Window[]"
+              },
+              "description": "The child windows, in DOM order.",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "getLayout",
+              "return": {
+                "type": {
+                  "text": "WindowLayout[]"
+                }
+              },
+              "description": "The current arrangement, suitable for persisting and restoring."
+            }
+          ],
+          "events": [
+            {
+              "description": "When the arrangement changes. `detail.windows` is the layout, for persistence.",
+              "name": "film-workspace-layout"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "layout",
+              "type": {
+                "text": "'floating' | 'tiled'"
+              },
+              "default": "'floating'",
+              "description": "Layout mode.",
+              "fieldName": "layout"
+            },
+            {
+              "name": "tiling",
+              "type": {
+                "text": "'grid' | 'bsp'"
+              },
+              "default": "'grid'",
+              "description": "Tiling algorithm when `layout=\"tiled\"`.",
+              "fieldName": "tiling"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Gap between windows, in pixels (tiling and snapping).",
+              "fieldName": "gap"
+            },
+            {
+              "name": "no-snap",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disable drag-to-snap in floating layout.",
+              "fieldName": "noSnap"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-workspace",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Workspace",
+          "declaration": {
+            "name": "Workspace",
+            "module": "src/windowing/workspace.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-workspace",
+          "declaration": {
+            "name": "Workspace",
+            "module": "src/windowing/workspace.ts"
           }
         }
       ]
