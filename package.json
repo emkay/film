@@ -1,6 +1,6 @@
 {
   "name": "@mk/film",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Film — an opinionated Lit web component library built on modular scale and every-layout primitives",
   "type": "module",
   "main": "./dist/index.js",
