@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/emkay/film/compare/v1.1.1...v1.2.0) (2026-08-23)
+
+
+### Features
+
+* windowing ([8d6357c](https://github.com/emkay/film/commit/8d6357c43b1f965b30a46a0f9d3c02674d9172e7))
+
 ## [1.1.1](https://github.com/emkay/film/compare/v1.1.0...v1.1.1) (2026-08-22)
 
 
