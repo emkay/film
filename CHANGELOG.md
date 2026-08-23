@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/emkay/film/compare/v1.2.0...v1.2.1) (2026-08-23)
+
+
+### Bug Fixes
+
+* focus for windows ([92875f5](https://github.com/emkay/film/commit/92875f5a3ca16ab79ec4c0293cb3e0c1106da8e4))
+
 ## [1.2.0](https://github.com/emkay/film/compare/v1.1.1...v1.2.0) (2026-08-23)
 
 
