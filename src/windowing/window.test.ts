@@ -48,6 +48,15 @@ describe('film-window', () => {
     expect(event.detail.height).to.equal(150)
   })
 
+  it('delegates focus into the window', async () => {
+    const el = await fixture<Window>(html`<film-window title="T">body</film-window>`)
+    await el.updateComplete
+    el.focus()
+    // With delegatesFocus, focusing the host moves focus to the first focusable
+    // element inside (the titlebar) rather than being a no-op on a non-focusable host.
+    expect(el.shadowRoot?.activeElement).to.not.equal(null)
+  })
+
   it('fires film-window-close', async () => {
     const el = await fixture<Window>(html`<film-window>body</film-window>`)
     const closeBtn = Array.from(el.shadowRoot?.querySelectorAll('button') ?? []).find(

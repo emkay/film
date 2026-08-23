@@ -29,13 +29,23 @@ const MIN_HEIGHT = 100
  * @fires film-window-move - `detail` is `{ x, y }`.
  * @fires film-window-moveend - When a pointer move drag ends (the commit point). `detail` is `{ x, y, width, height }`.
  * @fires film-window-resize - `detail` is `{ x, y, width, height }`.
- * @fires film-window-focus - When the window requests focus (for raising).
+ * @fires film-window-focus - When the window requests focus (for raising). Fires during
+ *   `pointerdown`, before the browser resolves click focus — the shadow root's
+ *   `delegatesFocus` handles moving focus into the window, so don't call `.focus()` in this handler.
  * @fires film-window-minimise - When minimised state toggles.
  * @fires film-window-maximise - When maximised state toggles.
  * @fires film-window-close - When the close button is activated.
  */
 @customElement('film-window')
 export class Window extends FilmElement {
+  // Delegate focus into the window: a click on any non-focusable part moves the
+  // keyboard to the first focusable element inside, so raising and focusing a
+  // window happen together without the consumer deferring a `.focus()`.
+  static shadowRootOptions: ShadowRootInit = {
+    ...FilmElement.shadowRootOptions,
+    delegatesFocus: true
+  }
+
   @property({ type: String }) title = ''
   @property({ type: Number, reflect: true }) x = 40
   @property({ type: Number, reflect: true }) y = 40
