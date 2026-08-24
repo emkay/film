@@ -46,6 +46,20 @@ describe('film-menu submenus', () => {
     expect(parent.getAttribute('aria-expanded')).to.equal('false')
   })
 
+  it('keeps the flyout open when a hover-opened parent is clicked', async () => {
+    const menu = await fixture(menuWithSubmenu())
+    const parent = menu.querySelector<MenuItem>('#parent')!
+    await parent.updateComplete
+    await aTimeout(0)
+    parent.dispatchEvent(new PointerEvent('pointerenter', { bubbles: true }))
+    await parent.updateComplete
+    expect(parent.getAttribute('aria-expanded')).to.equal('true')
+
+    parent.click()
+    await parent.updateComplete
+    expect(parent.getAttribute('aria-expanded')).to.equal('true')
+  })
+
   it('bubbles film-select from a nested item and collapses the flyout', async () => {
     const menu = await fixture(menuWithSubmenu())
     const parent = menu.querySelector<MenuItem>('#parent')!

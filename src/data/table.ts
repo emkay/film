@@ -337,8 +337,12 @@ export class Table extends FilmElement {
 
     const total = rows.length
     const viewport = this.clientHeight || 400
-    const start = Math.max(0, Math.floor(this.scrollOffset / this.rowHeight) - OVERSCAN)
     const count = Math.ceil(viewport / this.rowHeight) + OVERSCAN * 2
+    // Clamp the window start so a stale scrollOffset (e.g. `rows` shrank while
+    // scrolled down, before the browser clamps scrollTop) can't render an empty
+    // viewport with only spacer padding.
+    const maxStart = Math.max(0, total - count)
+    const start = Math.min(maxStart, Math.max(0, Math.floor(this.scrollOffset / this.rowHeight) - OVERSCAN))
     const end = Math.min(total, start + count)
     const colspan = this.columns.length + (this.selectable ? 1 : 0)
     const topPad = start * this.rowHeight

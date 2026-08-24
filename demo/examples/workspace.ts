@@ -35,8 +35,8 @@ export const workspaceExample = (): TemplateResult => html`
         gap="8"
         style="block-size: 24rem; border: var(--border-thin) solid var(--film-color-border); border-radius: var(--film-radius);"
       >
-        <film-window title="Editor" x="16" y="16" width="240" height="150" @film-window-close=${onClose}>
-          <p>Drag me to a screen edge to snap.</p>
+        <film-window title="Editor" focus-content x="16" y="16" width="240" height="150" @film-window-close=${onClose}>
+          <film-textarea label="Notes" placeholder="Raising this window focuses here…"></film-textarea>
         </film-window>
         <film-window title="Preview" x="120" y="90" width="240" height="150" @film-window-close=${onClose}>
           <p>Windows stack and focus independently.</p>

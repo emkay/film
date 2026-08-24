@@ -1,4 +1,4 @@
-import { fixture, html, expect, oneEvent } from '@open-wc/testing'
+import { fixture, html, expect, oneEvent, aTimeout } from '@open-wc/testing'
 import './window.js'
 import type { Window } from './window.js'
 
@@ -48,13 +48,28 @@ describe('film-window', () => {
     expect(event.detail.height).to.equal(150)
   })
 
-  it('delegates focus into the window', async () => {
-    const el = await fixture<Window>(html`<film-window title="T">body</film-window>`)
+  it('focuses slotted content on raise when focus-content is set', async () => {
+    const el = await fixture<Window>(
+      html`<film-window focus-content title="T"><button id="inner">Go</button></film-window>`
+    )
     await el.updateComplete
-    el.focus()
-    // With delegatesFocus, focusing the host moves focus to the first focusable
-    // element inside (the titlebar) rather than being a no-op on a non-focusable host.
-    expect(el.shadowRoot?.activeElement).to.not.equal(null)
+    const frame = el.shadowRoot?.querySelector('.frame') as HTMLElement
+    frame.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }))
+    await aTimeout(20)
+    expect(document.activeElement).to.equal(el.querySelector('#inner'))
+  })
+
+  it('does not move focus on raise without focus-content', async () => {
+    const el = await fixture<Window>(
+      html`<film-window title="T"><button id="inner">Go</button></film-window>`
+    )
+    await el.updateComplete
+    const before = document.activeElement
+    const frame = el.shadowRoot?.querySelector('.frame') as HTMLElement
+    frame.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }))
+    await aTimeout(20)
+    expect(document.activeElement).to.equal(before)
+    expect(document.activeElement).to.not.equal(el.querySelector('#inner'))
   })
 
   it('fires film-window-close', async () => {

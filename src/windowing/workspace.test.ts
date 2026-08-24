@@ -76,4 +76,21 @@ describe('film-workspace', () => {
     expect(a.width).to.be.closeTo(300, 1)
     expect(a.height).to.equal(400)
   })
+
+  it('maximises a window snapped to the top edge', async () => {
+    const ws = await fixture<Workspace>(html`
+      <film-workspace style="display:block;width:600px;height:400px">
+        <film-window title="A" x="100" y="100" width="200" height="150">a</film-window>
+      </film-workspace>
+    `)
+    await ws.updateComplete
+    const [a] = windowsOf(ws)
+    const r = ws.getBoundingClientRect()
+    a.dispatchEvent(new CustomEvent('film-window-movestart', { bubbles: true }))
+    ws.dispatchEvent(new PointerEvent('pointermove', { clientX: r.left + 300, clientY: r.top + 5, bubbles: true }))
+    await ws.updateComplete
+    a.dispatchEvent(new CustomEvent('film-window-moveend', { bubbles: true }))
+    await a.updateComplete
+    expect(a.maximised).to.equal(true)
+  })
 })

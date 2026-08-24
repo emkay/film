@@ -11,8 +11,13 @@ interface Rect {
 }
 
 const DIRECTIONS = ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'] as const
-const MIN_WIDTH = 160
-const MIN_HEIGHT = 100
+
+/** Smallest a window may be sized/snapped to, in pixels. */
+export const MIN_WINDOW_WIDTH = 160
+export const MIN_WINDOW_HEIGHT = 100
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
 /**
  * Window — a non-modal, stackable, positioned panel with a title bar, move and
@@ -30,22 +35,15 @@ const MIN_HEIGHT = 100
  * @fires film-window-moveend - When a pointer move drag ends (the commit point). `detail` is `{ x, y, width, height }`.
  * @fires film-window-resize - `detail` is `{ x, y, width, height }`.
  * @fires film-window-focus - When the window requests focus (for raising). Fires during
- *   `pointerdown`, before the browser resolves click focus — the shadow root's
- *   `delegatesFocus` handles moving focus into the window, so don't call `.focus()` in this handler.
+ *   `pointerdown`, before the browser resolves the click's own focus, so a handler that moves
+ *   focus must defer past that or it won't stick. Set `focus-content` to have the window focus
+ *   its first focusable slotted element on raise instead.
  * @fires film-window-minimise - When minimised state toggles.
  * @fires film-window-maximise - When maximised state toggles.
  * @fires film-window-close - When the close button is activated.
  */
 @customElement('film-window')
 export class Window extends FilmElement {
-  // Delegate focus into the window: a click on any non-focusable part moves the
-  // keyboard to the first focusable element inside, so raising and focusing a
-  // window happen together without the consumer deferring a `.focus()`.
-  static shadowRootOptions: ShadowRootInit = {
-    ...FilmElement.shadowRootOptions,
-    delegatesFocus: true
-  }
-
   @property({ type: String }) title = ''
   @property({ type: Number, reflect: true }) x = 40
   @property({ type: Number, reflect: true }) y = 40
@@ -57,9 +55,18 @@ export class Window extends FilmElement {
   @property({ type: Boolean, reflect: true }) maximised = false
   @property({ type: Boolean, reflect: true }) active = false
 
+  /**
+   * Focus the first focusable slotted element when the window is raised — for a
+   * window whose content is a single interactive surface (a terminal, an
+   * editor). Off by default: most windows shouldn't steal focus into their
+   * content on every raise.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'focus-content' }) focusContent = false
+
   private base: Rect = { x: 0, y: 0, width: 0, height: 0 }
   private resizeDir = 'se'
   private restore?: Rect
+  private focusTimer?: number
 
   private readonly moveDrag = new DragController(this, {
     onStart: () => {
@@ -229,8 +236,8 @@ export class Window extends FilmElement {
     if (dir.includes('s')) height = b.height + dy
     if (dir.includes('n')) height = b.height - dy
 
-    width = Math.max(MIN_WIDTH, width)
-    height = Math.max(MIN_HEIGHT, height)
+    width = Math.max(MIN_WINDOW_WIDTH, width)
+    height = Math.max(MIN_WINDOW_HEIGHT, height)
     if (dir.includes('w')) x = b.x + b.width - width
     if (dir.includes('n')) y = b.y + b.height - height
 
@@ -242,8 +249,8 @@ export class Window extends FilmElement {
 
     this.x = x
     this.y = y
-    this.width = Math.max(MIN_WIDTH, width)
-    this.height = Math.max(MIN_HEIGHT, height)
+    this.width = Math.max(MIN_WINDOW_WIDTH, width)
+    this.height = Math.max(MIN_WINDOW_HEIGHT, height)
     this.dispatchEvent(
       new CustomEvent('film-window-resize', {
         detail: { x: this.x, y: this.y, width: this.width, height: this.height },
@@ -255,6 +262,35 @@ export class Window extends FilmElement {
   private readonly requestFocus = (): void => {
     this.active = true
     this.dispatchEvent(new CustomEvent('film-window-focus', { bubbles: true }))
+    if (this.focusContent) {
+      // requestFocus runs during `pointerdown`, before the browser resolves the
+      // click's own focus — defer past that (setTimeout, not rAF, so it's not
+      // throttled in a background tab) before moving focus into the content.
+      if (this.focusTimer) clearTimeout(this.focusTimer)
+      this.focusTimer = window.setTimeout(() => this.focusFirstContent(), 0)
+    }
+  }
+
+  /** Focus the first focusable slotted element, unless focus is already inside the content. */
+  private focusFirstContent (): void {
+    if (this.hasContentFocus()) return
+    const slot = this.shadowRoot?.querySelector('.body slot') as HTMLSlotElement | null
+    for (const el of slot?.assignedElements() ?? []) {
+      // Try the element itself if it's focusable or a custom element (which may
+      // delegate focus from its shadow), else its first focusable descendant.
+      const candidate =
+        el.matches(FOCUSABLE) || el.localName.includes('-') ? el : el.querySelector(FOCUSABLE)
+      if (!candidate) continue
+      ;(candidate as HTMLElement).focus()
+      // Stop once focus actually landed inside — a non-focusable custom element
+      // is a no-op, so fall through to the next candidate.
+      if (this.hasContentFocus()) return
+    }
+  }
+
+  private hasContentFocus (): boolean {
+    const active = document.activeElement
+    return active != null && active !== this && this.contains(active)
   }
 
   private readonly onTitlePointerDown = (event: PointerEvent): void => {
@@ -299,6 +335,11 @@ export class Window extends FilmElement {
 
   private close (): void {
     this.dispatchEvent(new CustomEvent('film-window-close', { bubbles: true }))
+  }
+
+  disconnectedCallback (): void {
+    if (this.focusTimer) clearTimeout(this.focusTimer)
+    super.disconnectedCallback()
   }
 
   updated (changed: PropertyValues): void {

@@ -1,7 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
-import type { Window } from './window.js'
+import { MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT, type Window } from './window.js'
 
 export interface WindowLayout {
   x: number
@@ -48,6 +48,8 @@ export class Workspace extends FilmElement {
   private resizeObserver?: ResizeObserver
   private dragging: Window | null = null
   private pendingSnap: SnapZone | null = null
+  /** Workspace rect, cached at drag start so pointermove doesn't force a reflow. */
+  private dragRect: DOMRect | null = null
   /** Per-window movable/resizable saved before pinning, restored on untile. */
   private readonly pinned = new WeakMap<Window, { movable: boolean, resizable: boolean }>()
 
@@ -139,11 +141,12 @@ export class Workspace extends FilmElement {
     if (!this.snappingEnabled()) return
     this.dragging = (event.target as Element).closest('film-window') as Window | null
     this.pendingSnap = null
+    this.dragRect = this.getBoundingClientRect()
   }
 
   private readonly onPointerMove = (event: PointerEvent): void => {
-    if (!this.dragging) return
-    const rect = this.getBoundingClientRect()
+    if (!this.dragging || !this.dragRect) return
+    const rect = this.dragRect
     const px = event.clientX - rect.left
     const py = event.clientY - rect.top
     this.pendingSnap = this.zoneFor(px, py, rect.width, rect.height)
@@ -156,12 +159,19 @@ export class Workspace extends FilmElement {
     this.dragging = null
     this.pendingSnap = null
     this.preview = null
+    this.dragRect = null
     if (!win || !zone) return
-    const r = this.rectFor(zone)
-    win.x = r.x
-    win.y = r.y
-    win.width = r.width
-    win.height = r.height
+    if (zone === 'max') {
+      // Reuse the real maximise mechanism (stores restore geometry, hides
+      // handles) rather than just filling the area.
+      if (!win.maximised) win.toggleMaximise()
+    } else {
+      const r = this.rectFor(zone)
+      win.x = r.x
+      win.y = r.y
+      win.width = r.width
+      win.height = r.height
+    }
     this.emitLayout()
   }
 
@@ -180,14 +190,23 @@ export class Workspace extends FilmElement {
     const halfH = (H - g) / 2
     const rightX = halfW + g
     const botY = halfH + g
+    let raw: WindowLayout
     switch (zone) {
-      case 'w': return { x: 0, y: 0, width: halfW, height: H }
-      case 'e': return { x: rightX, y: 0, width: halfW, height: H }
-      case 'nw': return { x: 0, y: 0, width: halfW, height: halfH }
-      case 'ne': return { x: rightX, y: 0, width: halfW, height: halfH }
-      case 'sw': return { x: 0, y: botY, width: halfW, height: halfH }
-      case 'se': return { x: rightX, y: botY, width: halfW, height: halfH }
-      case 'max': return { x: 0, y: 0, width: W, height: H }
+      case 'w': raw = { x: 0, y: 0, width: halfW, height: H }; break
+      case 'e': raw = { x: rightX, y: 0, width: halfW, height: H }; break
+      case 'nw': raw = { x: 0, y: 0, width: halfW, height: halfH }; break
+      case 'ne': raw = { x: rightX, y: 0, width: halfW, height: halfH }; break
+      case 'sw': raw = { x: 0, y: botY, width: halfW, height: halfH }; break
+      case 'se': raw = { x: rightX, y: botY, width: halfW, height: halfH }; break
+      case 'max': raw = { x: 0, y: 0, width: W, height: H }; break
+    }
+    // Honour the window's minimum size, so snapping in a small workspace can't
+    // produce a sub-minimum window.
+    return {
+      x: raw.x,
+      y: raw.y,
+      width: Math.max(MIN_WINDOW_WIDTH, raw.width),
+      height: Math.max(MIN_WINDOW_HEIGHT, raw.height)
     }
   }
 

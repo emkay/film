@@ -119,7 +119,9 @@ export class MenuItem extends FilmElement {
     if (target && target.closest('film-menu-item') !== this) return
     if (this.hasSubmenu) {
       event?.stopPropagation()
-      this.toggleSubmenu(true)
+      // Open (never toggle closed) — hover may have already opened it, and a
+      // click on the parent shouldn't collapse the flyout the pointer just revealed.
+      this.openSubmenu(true)
       return
     }
     this.dispatchEvent(
@@ -129,11 +131,6 @@ export class MenuItem extends FilmElement {
         composed: true
       })
     )
-  }
-
-  private toggleSubmenu (focusFirst = false): void {
-    if (this.submenuOpen) this.closeSubmenu()
-    else this.openSubmenu(focusFirst)
   }
 
   /** Open the flyout. */
