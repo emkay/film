@@ -45,6 +45,8 @@ export class DragController implements ReactiveController {
     this.active = false
     this.pointerId = null
     this.target = null
+    // Drop the capture-failure fallback if the host went away mid-drag.
+    window.removeEventListener('pointerup', this.onPointerUp)
   }
 
   readonly onPointerDown = (event: PointerEvent): void => {

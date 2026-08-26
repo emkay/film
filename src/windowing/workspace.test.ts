@@ -93,4 +93,29 @@ describe('film-workspace', () => {
     await a.updateComplete
     expect(a.maximised).to.equal(true)
   })
+
+  it('restores to the pre-drag position after a top-edge max-snap', async () => {
+    const ws = await fixture<Workspace>(html`
+      <film-workspace style="display:block;width:600px;height:400px">
+        <film-window title="A" x="100" y="120" width="200" height="150">a</film-window>
+      </film-workspace>
+    `)
+    await ws.updateComplete
+    const [a] = windowsOf(ws)
+    const r = ws.getBoundingClientRect()
+    a.dispatchEvent(new CustomEvent('film-window-movestart', { bubbles: true }))
+    // Simulate the window having been dragged near the top edge before release.
+    a.x = 250
+    a.y = 4
+    ws.dispatchEvent(new PointerEvent('pointermove', { clientX: r.left + 300, clientY: r.top + 5, bubbles: true }))
+    await ws.updateComplete
+    a.dispatchEvent(new CustomEvent('film-window-moveend', { bubbles: true }))
+    await a.updateComplete
+    expect(a.maximised).to.equal(true)
+    a.toggleMaximise()
+    await a.updateComplete
+    expect(a.x).to.equal(100)
+    expect(a.y).to.equal(120)
+    expect(a.width).to.equal(200)
+  })
 })

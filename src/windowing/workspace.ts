@@ -50,6 +50,8 @@ export class Workspace extends FilmElement {
   private pendingSnap: SnapZone | null = null
   /** Workspace rect, cached at drag start so pointermove doesn't force a reflow. */
   private dragRect: DOMRect | null = null
+  /** The dragged window's geometry before the drag, for restoring after a max-snap. */
+  private dragStartRect: WindowLayout | null = null
   /** Per-window movable/resizable saved before pinning, restored on untile. */
   private readonly pinned = new WeakMap<Window, { movable: boolean, resizable: boolean }>()
 
@@ -139,9 +141,13 @@ export class Workspace extends FilmElement {
 
   private readonly onMoveStart = (event: Event): void => {
     if (!this.snappingEnabled()) return
-    this.dragging = (event.target as Element).closest('film-window') as Window | null
+    const win = (event.target as Element).closest('film-window') as Window | null
+    this.dragging = win
     this.pendingSnap = null
     this.dragRect = this.getBoundingClientRect()
+    // Remember where the window was before the drag, so a max-snap restores to
+    // its original spot rather than the top-edge drop point.
+    this.dragStartRect = win ? { x: win.x, y: win.y, width: win.width, height: win.height } : null
   }
 
   private readonly onPointerMove = (event: PointerEvent): void => {
@@ -156,15 +162,25 @@ export class Workspace extends FilmElement {
   private readonly onMoveEnd = (): void => {
     const win = this.dragging
     const zone = this.pendingSnap
+    const startRect = this.dragStartRect
     this.dragging = null
     this.pendingSnap = null
     this.preview = null
     this.dragRect = null
+    this.dragStartRect = null
     if (!win || !zone) return
     if (zone === 'max') {
-      // Reuse the real maximise mechanism (stores restore geometry, hides
-      // handles) rather than just filling the area.
-      if (!win.maximised) win.toggleMaximise()
+      if (!win.maximised) {
+        // Restore the pre-drag geometry first, so toggleMaximise snapshots that
+        // (not the drop position) as the restore rect. Then maximise.
+        if (startRect) {
+          win.x = startRect.x
+          win.y = startRect.y
+          win.width = startRect.width
+          win.height = startRect.height
+        }
+        win.toggleMaximise()
+      }
     } else {
       const r = this.rectFor(zone)
       win.x = r.x

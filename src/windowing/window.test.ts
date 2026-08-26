@@ -59,6 +59,20 @@ describe('film-window', () => {
     expect(document.activeElement).to.equal(el.querySelector('#inner'))
   })
 
+  it('does not steal focus from titlebar chrome when focus-content is set', async () => {
+    const el = await fixture<Window>(
+      html`<film-window focus-content title="T"><button id="inner">Go</button></film-window>`
+    )
+    await el.updateComplete
+    const closeBtn = Array.from(el.shadowRoot?.querySelectorAll('button') ?? []).find(
+      (b) => b.getAttribute('aria-label') === 'Close'
+    ) as HTMLButtonElement
+    closeBtn.focus()
+    await aTimeout(20)
+    // Focus stays on the chrome button; content-focus must not hijack it.
+    expect(el.shadowRoot?.activeElement).to.equal(closeBtn)
+  })
+
   it('does not move focus on raise without focus-content', async () => {
     const el = await fixture<Window>(
       html`<film-window title="T"><button id="inner">Go</button></film-window>`

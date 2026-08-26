@@ -609,6 +609,795 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/feedback/alert.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Alert — a callout for contextual messages. Sets an appropriate ARIA role so\nscreen readers announce it (`alert` for warning/danger, `status` otherwise).",
+          "name": "Alert",
+          "slots": [
+            {
+              "description": "The message content.",
+              "name": ""
+            },
+            {
+              "description": "An optional leading icon.",
+              "name": "icon"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The severity / colour treatment.",
+              "attribute": "variant"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The severity / colour treatment.",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-alert",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "src/feedback/alert.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "src/feedback/alert.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/badge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Badge — a small pill for counts, statuses and tags.",
+          "name": "Badge",
+          "slots": [
+            {
+              "description": "The badge content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "BadgeVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "BadgeVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-badge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "src/feedback/badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "src/feedback/badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "./alert.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "AlertVariant",
+          "declaration": {
+            "name": "AlertVariant",
+            "module": "./alert.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "./badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BadgeVariant",
+          "declaration": {
+            "name": "BadgeVariant",
+            "module": "./badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ProgressBar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "./progress-bar.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "./skeleton.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "./spinner.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "./tag.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TagVariant",
+          "declaration": {
+            "name": "TagVariant",
+            "module": "./tag.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "./toast.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "toast",
+          "declaration": {
+            "name": "toast",
+            "module": "./toaster.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ToastOptions",
+          "declaration": {
+            "name": "ToastOptions",
+            "module": "./toaster.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/progress-bar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "ProgressBar — a determinate or indeterminate progress indicator.",
+          "name": "ProgressBar",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The maximum value.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show an indeterminate animation instead of a value.",
+              "attribute": "indeterminate",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value.",
+              "fieldName": "value"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The maximum value.",
+              "fieldName": "max"
+            },
+            {
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show an indeterminate animation instead of a value.",
+              "fieldName": "indeterminate"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-progress-bar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ProgressBar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "src/feedback/progress-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-progress-bar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "src/feedback/progress-bar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/skeleton.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Skeleton — a placeholder shown while content loads. Purely decorative\n(hidden from assistive tech); mark the surrounding region busy instead.",
+          "name": "Skeleton",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "'text' | 'circle' | 'rect'"
+              },
+              "default": "'text'",
+              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'100%'",
+              "description": "Width, as any length.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Height, as any length. Defaults to the current line height for text.",
+              "attribute": "height"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "'text' | 'circle' | 'rect'"
+              },
+              "default": "'text'",
+              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
+              "fieldName": "variant"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'100%'",
+              "description": "Width, as any length.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Height, as any length. Defaults to the current line height for text.",
+              "fieldName": "height"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-skeleton",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "src/feedback/skeleton.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "src/feedback/skeleton.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/spinner.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Spinner — an indeterminate loading indicator.",
+          "name": "Spinner",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--s1)'",
+              "description": "The diameter, as any length. Defaults to a modular-scale step.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "description": "Accessible label announced to assistive tech.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--s1)'",
+              "description": "The diameter, as any length. Defaults to a modular-scale step.",
+              "fieldName": "size"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "description": "Accessible label announced to assistive tech.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-spinner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "src/feedback/spinner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "src/feedback/spinner.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/tag.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tag — a labelled chip, optionally removable.",
+          "name": "Tag",
+          "slots": [
+            {
+              "description": "The tag content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "TagVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "removable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a remove button.",
+              "attribute": "removable",
+              "reflects": true
+            }
+          ],
+          "events": [
+            {
+              "name": "film-remove",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the remove button is activated."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "TagVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "removable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a remove button.",
+              "fieldName": "removable"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-tag",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "src/feedback/tag.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "src/feedback/tag.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/toast.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Toast — a single transient notification. Usually created via the toast\nhelper rather than authored directly. Auto-dismisses after `duration` ms\n(0 keeps it until dismissed); hovering pauses the timer.",
+          "name": "Toast",
+          "slots": [
+            {
+              "description": "The message.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "4000",
+              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
+              "attribute": "duration"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the toast is shown (drives the enter/exit transition).",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "film-close",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When dismissed (after the exit transition)."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "4000",
+              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
+              "fieldName": "duration"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the toast is shown (drives the enter/exit transition).",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-toast",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "src/feedback/toast.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "src/feedback/toast.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/toaster.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "toast",
+          "return": {
+            "type": {
+              "text": "Toast"
+            }
+          },
+          "parameters": [
+            {
+              "name": "message",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "options",
+              "default": "{}",
+              "type": {
+                "text": "ToastOptions"
+              }
+            }
+          ],
+          "description": "Show a toast notification. Lazily creates a single fixed-position live region\nappended to `document.body` and stacks toasts within it. Returns the created\n`film-toast` element."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "toast",
+          "declaration": {
+            "name": "toast",
+            "module": "src/feedback/toaster.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/data/accordion-item.ts",
       "declarations": [
         {
@@ -1586,795 +2375,6 @@
           "declaration": {
             "name": "Table",
             "module": "src/data/table.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/alert.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Alert — a callout for contextual messages. Sets an appropriate ARIA role so\nscreen readers announce it (`alert` for warning/danger, `status` otherwise).",
-          "name": "Alert",
-          "slots": [
-            {
-              "description": "The message content.",
-              "name": ""
-            },
-            {
-              "description": "An optional leading icon.",
-              "name": "icon"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The severity / colour treatment.",
-              "attribute": "variant"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The severity / colour treatment.",
-              "fieldName": "variant"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-alert",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "src/feedback/alert.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "src/feedback/alert.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/badge.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Badge — a small pill for counts, statuses and tags.",
-          "name": "Badge",
-          "slots": [
-            {
-              "description": "The badge content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "BadgeVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "BadgeVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-badge",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "src/feedback/badge.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "src/feedback/badge.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "./alert.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "AlertVariant",
-          "declaration": {
-            "name": "AlertVariant",
-            "module": "./alert.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "./badge.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "BadgeVariant",
-          "declaration": {
-            "name": "BadgeVariant",
-            "module": "./badge.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ProgressBar",
-          "declaration": {
-            "name": "ProgressBar",
-            "module": "./progress-bar.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "./skeleton.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "./spinner.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "./tag.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TagVariant",
-          "declaration": {
-            "name": "TagVariant",
-            "module": "./tag.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "./toast.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "toast",
-          "declaration": {
-            "name": "toast",
-            "module": "./toaster.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ToastOptions",
-          "declaration": {
-            "name": "ToastOptions",
-            "module": "./toaster.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/progress-bar.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "ProgressBar — a determinate or indeterminate progress indicator.",
-          "name": "ProgressBar",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "description": "The current value.",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "100",
-              "description": "The maximum value.",
-              "attribute": "max"
-            },
-            {
-              "kind": "field",
-              "name": "indeterminate",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show an indeterminate animation instead of a value.",
-              "attribute": "indeterminate",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "An accessible label.",
-              "attribute": "label"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "description": "The current value.",
-              "fieldName": "value"
-            },
-            {
-              "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "100",
-              "description": "The maximum value.",
-              "fieldName": "max"
-            },
-            {
-              "name": "indeterminate",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show an indeterminate animation instead of a value.",
-              "fieldName": "indeterminate"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "An accessible label.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-progress-bar",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "ProgressBar",
-          "declaration": {
-            "name": "ProgressBar",
-            "module": "src/feedback/progress-bar.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-progress-bar",
-          "declaration": {
-            "name": "ProgressBar",
-            "module": "src/feedback/progress-bar.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/skeleton.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Skeleton — a placeholder shown while content loads. Purely decorative\n(hidden from assistive tech); mark the surrounding region busy instead.",
-          "name": "Skeleton",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "'text' | 'circle' | 'rect'"
-              },
-              "default": "'text'",
-              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "string"
-              },
-              "default": "'100%'",
-              "description": "Width, as any length.",
-              "attribute": "width"
-            },
-            {
-              "kind": "field",
-              "name": "height",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Height, as any length. Defaults to the current line height for text.",
-              "attribute": "height"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "'text' | 'circle' | 'rect'"
-              },
-              "default": "'text'",
-              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
-              "fieldName": "variant"
-            },
-            {
-              "name": "width",
-              "type": {
-                "text": "string"
-              },
-              "default": "'100%'",
-              "description": "Width, as any length.",
-              "fieldName": "width"
-            },
-            {
-              "name": "height",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Height, as any length. Defaults to the current line height for text.",
-              "fieldName": "height"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-skeleton",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "src/feedback/skeleton.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "src/feedback/skeleton.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/spinner.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Spinner — an indeterminate loading indicator.",
-          "name": "Spinner",
-          "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "'var(--s1)'",
-              "description": "The diameter, as any length. Defaults to a modular-scale step.",
-              "attribute": "size"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Loading'",
-              "description": "Accessible label announced to assistive tech.",
-              "attribute": "label"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "'var(--s1)'",
-              "description": "The diameter, as any length. Defaults to a modular-scale step.",
-              "fieldName": "size"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Loading'",
-              "description": "Accessible label announced to assistive tech.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-spinner",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "src/feedback/spinner.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "src/feedback/spinner.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/tag.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Tag — a labelled chip, optionally removable.",
-          "name": "Tag",
-          "slots": [
-            {
-              "description": "The tag content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "TagVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "removable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show a remove button.",
-              "attribute": "removable",
-              "reflects": true
-            }
-          ],
-          "events": [
-            {
-              "name": "film-remove",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the remove button is activated."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "TagVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            },
-            {
-              "name": "removable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show a remove button.",
-              "fieldName": "removable"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-tag",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "src/feedback/tag.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "src/feedback/tag.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/toast.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Toast — a single transient notification. Usually created via the toast\nhelper rather than authored directly. Auto-dismisses after `duration` ms\n(0 keeps it until dismissed); hovering pauses the timer.",
-          "name": "Toast",
-          "slots": [
-            {
-              "description": "The message.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "duration",
-              "type": {
-                "text": "number"
-              },
-              "default": "4000",
-              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
-              "attribute": "duration"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the toast is shown (drives the enter/exit transition).",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "show",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "close",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "film-close",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When dismissed (after the exit transition)."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            },
-            {
-              "name": "duration",
-              "type": {
-                "text": "number"
-              },
-              "default": "4000",
-              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
-              "fieldName": "duration"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the toast is shown (drives the enter/exit transition).",
-              "fieldName": "open"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-toast",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "src/feedback/toast.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "src/feedback/toast.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/toaster.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "toast",
-          "return": {
-            "type": {
-              "text": "Toast"
-            }
-          },
-          "parameters": [
-            {
-              "name": "message",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "options",
-              "default": "{}",
-              "type": {
-                "text": "ToastOptions"
-              }
-            }
-          ],
-          "description": "Show a toast notification. Lazily creates a single fixed-position live region\nappended to `document.body` and stacks toasts within it. Returns the created\n`film-toast` element."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "toast",
-          "declaration": {
-            "name": "toast",
-            "module": "src/feedback/toaster.ts"
           }
         }
       ]
@@ -6330,738 +6330,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/overlays/dialog.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Dialog — a modal built on the native `<dialog>` element, so it gets top-layer\nrendering, a backdrop, focus trapping and Escape-to-close for free. Clicking\nthe backdrop closes it.",
-          "name": "Dialog",
-          "slots": [
-            {
-              "description": "The dialog body.",
-              "name": ""
-            },
-            {
-              "description": "The header content (defaults to `label`).",
-              "name": "header"
-            },
-            {
-              "description": "The footer content.",
-              "name": "footer"
-            }
-          ],
-          "members": [],
-          "superclass": {
-            "name": "FilmModal",
-            "module": "/src/internal/modal.js"
-          },
-          "tagName": "film-dialog",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Dialog",
-          "declaration": {
-            "name": "Dialog",
-            "module": "src/overlays/dialog.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-dialog",
-          "declaration": {
-            "name": "Dialog",
-            "module": "src/overlays/dialog.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/overlays/drawer.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Drawer — a panel that slides in from an edge, built on the native `<dialog>`\nelement for top-layer rendering, focus trapping and Escape-to-close. Clicking\nthe backdrop closes it.",
-          "name": "Drawer",
-          "slots": [
-            {
-              "description": "The drawer body.",
-              "name": ""
-            },
-            {
-              "description": "The header content (defaults to `label`).",
-              "name": "header"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "placement",
-              "type": {
-                "text": "DrawerPlacement"
-              },
-              "default": "'end'",
-              "description": "The edge the drawer slides in from.",
-              "attribute": "placement",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "placement",
-              "type": {
-                "text": "DrawerPlacement"
-              },
-              "default": "'end'",
-              "description": "The edge the drawer slides in from.",
-              "fieldName": "placement"
-            }
-          ],
-          "superclass": {
-            "name": "FilmModal",
-            "module": "/src/internal/modal.js"
-          },
-          "tagName": "film-drawer",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Drawer",
-          "declaration": {
-            "name": "Drawer",
-            "module": "src/overlays/drawer.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-drawer",
-          "declaration": {
-            "name": "Drawer",
-            "module": "src/overlays/drawer.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/overlays/dropdown.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Dropdown — a trigger that reveals a floating panel (typically a\nMenu). The panel is promoted to the top layer via the Popover API,\ngiving light-dismiss and Escape-to-close for free, and is positioned by a\nsmall hand-rolled anchoring helper.",
-          "name": "Dropdown",
-          "slots": [
-            {
-              "description": "The triggering element (e.g. a button).",
-              "name": "trigger"
-            },
-            {
-              "description": "The panel content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the panel is open.",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "placement",
-              "type": {
-                "text": "Placement"
-              },
-              "default": "'bottom'",
-              "description": "Which side of the trigger the panel prefers.",
-              "attribute": "placement"
-            },
-            {
-              "kind": "field",
-              "name": "align",
-              "type": {
-                "text": "Align"
-              },
-              "default": "'start'",
-              "description": "How the panel aligns along the trigger.",
-              "attribute": "align"
-            },
-            {
-              "kind": "method",
-              "name": "show",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "close",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "toggle",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "film-open",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the panel opens."
-            },
-            {
-              "name": "film-close",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the panel closes."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the panel is open.",
-              "fieldName": "open"
-            },
-            {
-              "name": "placement",
-              "type": {
-                "text": "Placement"
-              },
-              "default": "'bottom'",
-              "description": "Which side of the trigger the panel prefers.",
-              "fieldName": "placement"
-            },
-            {
-              "name": "align",
-              "type": {
-                "text": "Align"
-              },
-              "default": "'start'",
-              "description": "How the panel aligns along the trigger.",
-              "fieldName": "align"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-dropdown",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Dropdown",
-          "declaration": {
-            "name": "Dropdown",
-            "module": "src/overlays/dropdown.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-dropdown",
-          "declaration": {
-            "name": "Dropdown",
-            "module": "src/overlays/dropdown.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/overlays/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Dialog",
-          "declaration": {
-            "name": "Dialog",
-            "module": "./dialog.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Drawer",
-          "declaration": {
-            "name": "Drawer",
-            "module": "./drawer.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "DrawerPlacement",
-          "declaration": {
-            "name": "DrawerPlacement",
-            "module": "./drawer.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Dropdown",
-          "declaration": {
-            "name": "Dropdown",
-            "module": "./dropdown.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Popconfirm",
-          "declaration": {
-            "name": "Popconfirm",
-            "module": "./popconfirm.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Popover",
-          "declaration": {
-            "name": "Popover",
-            "module": "./popover.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Tooltip",
-          "declaration": {
-            "name": "Tooltip",
-            "module": "./tooltip.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/overlays/popconfirm.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Popconfirm — a confirmation bubble anchored to a trigger. Composes\nPopover with a message and confirm/cancel buttons.",
-          "name": "Popconfirm",
-          "slots": [
-            {
-              "description": "The element that opens the confirmation.",
-              "name": "trigger"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "message",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Are you sure?'",
-              "description": "The confirmation prompt.",
-              "attribute": "message"
-            },
-            {
-              "kind": "field",
-              "name": "confirmLabel",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Confirm'",
-              "description": "Confirm button label.",
-              "attribute": "confirm-label"
-            },
-            {
-              "kind": "field",
-              "name": "cancelLabel",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Cancel'",
-              "description": "Cancel button label.",
-              "attribute": "cancel-label"
-            }
-          ],
-          "events": [
-            {
-              "name": "film-confirm",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the confirm button is activated."
-            },
-            {
-              "name": "film-cancel",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When cancelled (button or dismissal)."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "message",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Are you sure?'",
-              "description": "The confirmation prompt.",
-              "fieldName": "message"
-            },
-            {
-              "name": "confirm-label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Confirm'",
-              "description": "Confirm button label.",
-              "fieldName": "confirmLabel"
-            },
-            {
-              "name": "cancel-label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Cancel'",
-              "description": "Cancel button label.",
-              "fieldName": "cancelLabel"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-popconfirm",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Popconfirm",
-          "declaration": {
-            "name": "Popconfirm",
-            "module": "src/overlays/popconfirm.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-popconfirm",
-          "declaration": {
-            "name": "Popconfirm",
-            "module": "src/overlays/popconfirm.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/overlays/popover.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Popover — a generic anchored panel promoted to the top layer via the Popover\nAPI and positioned by the shared anchoring helper. Open it on `click`\n(light-dismiss), on `hover`, or drive it manually via the `open` property.",
-          "name": "Popover",
-          "slots": [
-            {
-              "description": "The element the popover is anchored to.",
-              "name": "trigger"
-            },
-            {
-              "description": "The popover content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the popover is open.",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "placement",
-              "type": {
-                "text": "Placement"
-              },
-              "default": "'bottom'",
-              "description": "Preferred side of the trigger.",
-              "attribute": "placement"
-            },
-            {
-              "kind": "field",
-              "name": "align",
-              "type": {
-                "text": "Align"
-              },
-              "default": "'center'",
-              "description": "Alignment along the trigger.",
-              "attribute": "align"
-            },
-            {
-              "kind": "field",
-              "name": "trigger",
-              "type": {
-                "text": "'click' | 'hover' | 'manual'"
-              },
-              "default": "'click'",
-              "description": "How the popover is triggered.",
-              "attribute": "trigger"
-            },
-            {
-              "kind": "method",
-              "name": "show",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "close",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "toggle",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "film-open",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the popover opens."
-            },
-            {
-              "name": "film-close",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the popover closes."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the popover is open.",
-              "fieldName": "open"
-            },
-            {
-              "name": "placement",
-              "type": {
-                "text": "Placement"
-              },
-              "default": "'bottom'",
-              "description": "Preferred side of the trigger.",
-              "fieldName": "placement"
-            },
-            {
-              "name": "align",
-              "type": {
-                "text": "Align"
-              },
-              "default": "'center'",
-              "description": "Alignment along the trigger.",
-              "fieldName": "align"
-            },
-            {
-              "name": "trigger",
-              "type": {
-                "text": "'click' | 'hover' | 'manual'"
-              },
-              "default": "'click'",
-              "description": "How the popover is triggered.",
-              "fieldName": "trigger"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-popover",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Popover",
-          "declaration": {
-            "name": "Popover",
-            "module": "src/overlays/popover.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-popover",
-          "declaration": {
-            "name": "Popover",
-            "module": "src/overlays/popover.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/overlays/tooltip.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Tooltip — shows a short hint on hover or focus of its slotted target. The\nhint is promoted to the top layer via the Popover API and positioned by the\nanchoring helper.",
-          "name": "Tooltip",
-          "slots": [
-            {
-              "description": "The target element the tooltip describes.",
-              "name": ""
-            },
-            {
-              "description": "Rich tooltip content (overrides `content`).",
-              "name": "content"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "content",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The tooltip text.",
-              "attribute": "content"
-            },
-            {
-              "kind": "field",
-              "name": "placement",
-              "type": {
-                "text": "Placement"
-              },
-              "default": "'top'",
-              "description": "Which side of the target the tooltip prefers.",
-              "attribute": "placement"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "show"
-            },
-            {
-              "kind": "field",
-              "name": "hide"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "content",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The tooltip text.",
-              "fieldName": "content"
-            },
-            {
-              "name": "placement",
-              "type": {
-                "text": "Placement"
-              },
-              "default": "'top'",
-              "description": "Which side of the target the tooltip prefers.",
-              "fieldName": "placement"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "open"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-tooltip",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Tooltip",
-          "declaration": {
-            "name": "Tooltip",
-            "module": "src/overlays/tooltip.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-tooltip",
-          "declaration": {
-            "name": "Tooltip",
-            "module": "src/overlays/tooltip.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/navigation/breadcrumb-item.ts",
       "declarations": [
         {
@@ -8742,6 +8010,738 @@
           "declaration": {
             "name": "Tree",
             "module": "src/navigation/tree.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/overlays/dialog.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Dialog — a modal built on the native `<dialog>` element, so it gets top-layer\nrendering, a backdrop, focus trapping and Escape-to-close for free. Clicking\nthe backdrop closes it.",
+          "name": "Dialog",
+          "slots": [
+            {
+              "description": "The dialog body.",
+              "name": ""
+            },
+            {
+              "description": "The header content (defaults to `label`).",
+              "name": "header"
+            },
+            {
+              "description": "The footer content.",
+              "name": "footer"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "FilmModal",
+            "module": "/src/internal/modal.js"
+          },
+          "tagName": "film-dialog",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Dialog",
+          "declaration": {
+            "name": "Dialog",
+            "module": "src/overlays/dialog.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-dialog",
+          "declaration": {
+            "name": "Dialog",
+            "module": "src/overlays/dialog.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/overlays/drawer.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Drawer — a panel that slides in from an edge, built on the native `<dialog>`\nelement for top-layer rendering, focus trapping and Escape-to-close. Clicking\nthe backdrop closes it.",
+          "name": "Drawer",
+          "slots": [
+            {
+              "description": "The drawer body.",
+              "name": ""
+            },
+            {
+              "description": "The header content (defaults to `label`).",
+              "name": "header"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "DrawerPlacement"
+              },
+              "default": "'end'",
+              "description": "The edge the drawer slides in from.",
+              "attribute": "placement",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "placement",
+              "type": {
+                "text": "DrawerPlacement"
+              },
+              "default": "'end'",
+              "description": "The edge the drawer slides in from.",
+              "fieldName": "placement"
+            }
+          ],
+          "superclass": {
+            "name": "FilmModal",
+            "module": "/src/internal/modal.js"
+          },
+          "tagName": "film-drawer",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Drawer",
+          "declaration": {
+            "name": "Drawer",
+            "module": "src/overlays/drawer.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-drawer",
+          "declaration": {
+            "name": "Drawer",
+            "module": "src/overlays/drawer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/overlays/dropdown.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Dropdown — a trigger that reveals a floating panel (typically a\nMenu). The panel is promoted to the top layer via the Popover API,\ngiving light-dismiss and Escape-to-close for free, and is positioned by a\nsmall hand-rolled anchoring helper.",
+          "name": "Dropdown",
+          "slots": [
+            {
+              "description": "The triggering element (e.g. a button).",
+              "name": "trigger"
+            },
+            {
+              "description": "The panel content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the panel is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "Placement"
+              },
+              "default": "'bottom'",
+              "description": "Which side of the trigger the panel prefers.",
+              "attribute": "placement"
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "Align"
+              },
+              "default": "'start'",
+              "description": "How the panel aligns along the trigger.",
+              "attribute": "align"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "film-open",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the panel opens."
+            },
+            {
+              "name": "film-close",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the panel closes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the panel is open.",
+              "fieldName": "open"
+            },
+            {
+              "name": "placement",
+              "type": {
+                "text": "Placement"
+              },
+              "default": "'bottom'",
+              "description": "Which side of the trigger the panel prefers.",
+              "fieldName": "placement"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "Align"
+              },
+              "default": "'start'",
+              "description": "How the panel aligns along the trigger.",
+              "fieldName": "align"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-dropdown",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Dropdown",
+          "declaration": {
+            "name": "Dropdown",
+            "module": "src/overlays/dropdown.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-dropdown",
+          "declaration": {
+            "name": "Dropdown",
+            "module": "src/overlays/dropdown.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/overlays/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Dialog",
+          "declaration": {
+            "name": "Dialog",
+            "module": "./dialog.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Drawer",
+          "declaration": {
+            "name": "Drawer",
+            "module": "./drawer.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "DrawerPlacement",
+          "declaration": {
+            "name": "DrawerPlacement",
+            "module": "./drawer.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Dropdown",
+          "declaration": {
+            "name": "Dropdown",
+            "module": "./dropdown.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Popconfirm",
+          "declaration": {
+            "name": "Popconfirm",
+            "module": "./popconfirm.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Popover",
+          "declaration": {
+            "name": "Popover",
+            "module": "./popover.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Tooltip",
+          "declaration": {
+            "name": "Tooltip",
+            "module": "./tooltip.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/overlays/popconfirm.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Popconfirm — a confirmation bubble anchored to a trigger. Composes\nPopover with a message and confirm/cancel buttons.",
+          "name": "Popconfirm",
+          "slots": [
+            {
+              "description": "The element that opens the confirmation.",
+              "name": "trigger"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "message",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Are you sure?'",
+              "description": "The confirmation prompt.",
+              "attribute": "message"
+            },
+            {
+              "kind": "field",
+              "name": "confirmLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Confirm'",
+              "description": "Confirm button label.",
+              "attribute": "confirm-label"
+            },
+            {
+              "kind": "field",
+              "name": "cancelLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Cancel'",
+              "description": "Cancel button label.",
+              "attribute": "cancel-label"
+            }
+          ],
+          "events": [
+            {
+              "name": "film-confirm",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the confirm button is activated."
+            },
+            {
+              "name": "film-cancel",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When cancelled (button or dismissal)."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "message",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Are you sure?'",
+              "description": "The confirmation prompt.",
+              "fieldName": "message"
+            },
+            {
+              "name": "confirm-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Confirm'",
+              "description": "Confirm button label.",
+              "fieldName": "confirmLabel"
+            },
+            {
+              "name": "cancel-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Cancel'",
+              "description": "Cancel button label.",
+              "fieldName": "cancelLabel"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-popconfirm",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Popconfirm",
+          "declaration": {
+            "name": "Popconfirm",
+            "module": "src/overlays/popconfirm.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-popconfirm",
+          "declaration": {
+            "name": "Popconfirm",
+            "module": "src/overlays/popconfirm.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/overlays/popover.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Popover — a generic anchored panel promoted to the top layer via the Popover\nAPI and positioned by the shared anchoring helper. Open it on `click`\n(light-dismiss), on `hover`, or drive it manually via the `open` property.",
+          "name": "Popover",
+          "slots": [
+            {
+              "description": "The element the popover is anchored to.",
+              "name": "trigger"
+            },
+            {
+              "description": "The popover content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the popover is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "Placement"
+              },
+              "default": "'bottom'",
+              "description": "Preferred side of the trigger.",
+              "attribute": "placement"
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "Align"
+              },
+              "default": "'center'",
+              "description": "Alignment along the trigger.",
+              "attribute": "align"
+            },
+            {
+              "kind": "field",
+              "name": "trigger",
+              "type": {
+                "text": "'click' | 'hover' | 'manual'"
+              },
+              "default": "'click'",
+              "description": "How the popover is triggered.",
+              "attribute": "trigger"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "film-open",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the popover opens."
+            },
+            {
+              "name": "film-close",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the popover closes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the popover is open.",
+              "fieldName": "open"
+            },
+            {
+              "name": "placement",
+              "type": {
+                "text": "Placement"
+              },
+              "default": "'bottom'",
+              "description": "Preferred side of the trigger.",
+              "fieldName": "placement"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "Align"
+              },
+              "default": "'center'",
+              "description": "Alignment along the trigger.",
+              "fieldName": "align"
+            },
+            {
+              "name": "trigger",
+              "type": {
+                "text": "'click' | 'hover' | 'manual'"
+              },
+              "default": "'click'",
+              "description": "How the popover is triggered.",
+              "fieldName": "trigger"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-popover",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Popover",
+          "declaration": {
+            "name": "Popover",
+            "module": "src/overlays/popover.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-popover",
+          "declaration": {
+            "name": "Popover",
+            "module": "src/overlays/popover.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/overlays/tooltip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tooltip — shows a short hint on hover or focus of its slotted target. The\nhint is promoted to the top layer via the Popover API and positioned by the\nanchoring helper.",
+          "name": "Tooltip",
+          "slots": [
+            {
+              "description": "The target element the tooltip describes.",
+              "name": ""
+            },
+            {
+              "description": "Rich tooltip content (overrides `content`).",
+              "name": "content"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "content",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The tooltip text.",
+              "attribute": "content"
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "Placement"
+              },
+              "default": "'top'",
+              "description": "Which side of the target the tooltip prefers.",
+              "attribute": "placement"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "show"
+            },
+            {
+              "kind": "field",
+              "name": "hide"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "content",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The tooltip text.",
+              "fieldName": "content"
+            },
+            {
+              "name": "placement",
+              "type": {
+                "text": "Placement"
+              },
+              "default": "'top'",
+              "description": "Which side of the target the tooltip prefers.",
+              "fieldName": "placement"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-tooltip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Tooltip",
+          "declaration": {
+            "name": "Tooltip",
+            "module": "src/overlays/tooltip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-tooltip",
+          "declaration": {
+            "name": "Tooltip",
+            "module": "src/overlays/tooltip.ts"
           }
         }
       ]

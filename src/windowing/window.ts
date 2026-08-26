@@ -271,26 +271,25 @@ export class Window extends FilmElement {
     }
   }
 
-  /** Focus the first focusable slotted element, unless focus is already inside the content. */
+  /** Focus the first focusable slotted element, unless focus is already inside the window. */
   private focusFirstContent (): void {
-    if (this.hasContentFocus()) return
+    // `:focus-within` covers both slotted content and shadow chrome (titlebar
+    // buttons, resize handles) — if focus is already anywhere in the window,
+    // leave it, so tabbing to the chrome or clicking a control isn't hijacked.
+    if (this.matches(':focus-within')) return
     const slot = this.shadowRoot?.querySelector('.body slot') as HTMLSlotElement | null
     for (const el of slot?.assignedElements() ?? []) {
-      // Try the element itself if it's focusable or a custom element (which may
-      // delegate focus from its shadow), else its first focusable descendant.
-      const candidate =
-        el.matches(FOCUSABLE) || el.localName.includes('-') ? el : el.querySelector(FOCUSABLE)
-      if (!candidate) continue
-      ;(candidate as HTMLElement).focus()
-      // Stop once focus actually landed inside — a non-focusable custom element
-      // is a no-op, so fall through to the next candidate.
-      if (this.hasContentFocus()) return
+      const candidates: HTMLElement[] = []
+      // A custom element may delegate focus from its own shadow — try it first,
+      // then fall back to a focusable descendant if focusing it was a no-op.
+      if (el.matches(FOCUSABLE) || el.localName.includes('-')) candidates.push(el as HTMLElement)
+      const inner = el.querySelector(FOCUSABLE)
+      if (inner) candidates.push(inner as HTMLElement)
+      for (const candidate of candidates) {
+        candidate.focus()
+        if (this.matches(':focus-within')) return
+      }
     }
-  }
-
-  private hasContentFocus (): boolean {
-    const active = document.activeElement
-    return active != null && active !== this && this.contains(active)
   }
 
   private readonly onTitlePointerDown = (event: PointerEvent): void => {
