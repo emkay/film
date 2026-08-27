@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.2](https://github.com/emkay/film/compare/v1.2.1...v1.2.2) (2026-08-27)
+
+
+### Bug Fixes
+
+* bug hunt ([35773fc](https://github.com/emkay/film/commit/35773fcd0caed7dbecd4bc003458f224fbf3d0ab))
+* don't start a title-bar drag from a window control ([ed5034c](https://github.com/emkay/film/commit/ed5034c46fd98107a3c4796e2b78f36731f00928))
+* window focus ([7840757](https://github.com/emkay/film/commit/7840757267c71986789403cb801c14304c5f7bc4))
+
 ## [1.2.1](https://github.com/emkay/film/compare/v1.2.0...v1.2.1) (2026-08-23)
 
 
