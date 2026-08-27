@@ -34,10 +34,14 @@ export default defineConfig(({ mode }) => {
   }
 
   // Demo site build. `base` is set for project-page hosting on GitHub Pages.
+  // It writes to `dist-site`, NOT `dist`: the library build owns `dist`, and a
+  // site build landing there would replace the published package with a bundled
+  // demo — invisible until someone installs it.
   return {
     base: process.env.GITHUB_ACTIONS ? '/film/' : '/',
     build: {
-      target: 'es2022'
+      target: 'es2022',
+      outDir: 'dist-site'
     }
   }
 })

@@ -4,101 +4,6 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "src/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "module": "src/layout/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "module": "src/actions/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "module": "src/typography/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "module": "src/data/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "module": "src/feedback/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "module": "src/forms/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "module": "src/navigation/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "module": "src/overlays/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "module": "src/windowing/index.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "DragController",
-          "declaration": {
-            "name": "DragController",
-            "module": "./internal/drag-controller.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "DragCallbacks",
-          "declaration": {
-            "name": "DragCallbacks",
-            "module": "./internal/drag-controller.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/actions/button-group.ts",
       "declarations": [
         {
@@ -603,795 +508,6 @@
           "declaration": {
             "name": "Link",
             "module": "src/actions/link.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/alert.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Alert — a callout for contextual messages. Sets an appropriate ARIA role so\nscreen readers announce it (`alert` for warning/danger, `status` otherwise).",
-          "name": "Alert",
-          "slots": [
-            {
-              "description": "The message content.",
-              "name": ""
-            },
-            {
-              "description": "An optional leading icon.",
-              "name": "icon"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The severity / colour treatment.",
-              "attribute": "variant"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The severity / colour treatment.",
-              "fieldName": "variant"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-alert",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "src/feedback/alert.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "src/feedback/alert.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/badge.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Badge — a small pill for counts, statuses and tags.",
-          "name": "Badge",
-          "slots": [
-            {
-              "description": "The badge content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "BadgeVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "BadgeVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-badge",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "src/feedback/badge.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "src/feedback/badge.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Alert",
-          "declaration": {
-            "name": "Alert",
-            "module": "./alert.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "AlertVariant",
-          "declaration": {
-            "name": "AlertVariant",
-            "module": "./alert.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Badge",
-          "declaration": {
-            "name": "Badge",
-            "module": "./badge.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "BadgeVariant",
-          "declaration": {
-            "name": "BadgeVariant",
-            "module": "./badge.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ProgressBar",
-          "declaration": {
-            "name": "ProgressBar",
-            "module": "./progress-bar.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "./skeleton.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "./spinner.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "./tag.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "TagVariant",
-          "declaration": {
-            "name": "TagVariant",
-            "module": "./tag.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "./toast.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "toast",
-          "declaration": {
-            "name": "toast",
-            "module": "./toaster.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ToastOptions",
-          "declaration": {
-            "name": "ToastOptions",
-            "module": "./toaster.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/progress-bar.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "ProgressBar — a determinate or indeterminate progress indicator.",
-          "name": "ProgressBar",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "description": "The current value.",
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "100",
-              "description": "The maximum value.",
-              "attribute": "max"
-            },
-            {
-              "kind": "field",
-              "name": "indeterminate",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show an indeterminate animation instead of a value.",
-              "attribute": "indeterminate",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "An accessible label.",
-              "attribute": "label"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "number"
-              },
-              "default": "0",
-              "description": "The current value.",
-              "fieldName": "value"
-            },
-            {
-              "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "100",
-              "description": "The maximum value.",
-              "fieldName": "max"
-            },
-            {
-              "name": "indeterminate",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show an indeterminate animation instead of a value.",
-              "fieldName": "indeterminate"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "An accessible label.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-progress-bar",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "ProgressBar",
-          "declaration": {
-            "name": "ProgressBar",
-            "module": "src/feedback/progress-bar.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-progress-bar",
-          "declaration": {
-            "name": "ProgressBar",
-            "module": "src/feedback/progress-bar.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/skeleton.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Skeleton — a placeholder shown while content loads. Purely decorative\n(hidden from assistive tech); mark the surrounding region busy instead.",
-          "name": "Skeleton",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "'text' | 'circle' | 'rect'"
-              },
-              "default": "'text'",
-              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "string"
-              },
-              "default": "'100%'",
-              "description": "Width, as any length.",
-              "attribute": "width"
-            },
-            {
-              "kind": "field",
-              "name": "height",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Height, as any length. Defaults to the current line height for text.",
-              "attribute": "height"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "'text' | 'circle' | 'rect'"
-              },
-              "default": "'text'",
-              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
-              "fieldName": "variant"
-            },
-            {
-              "name": "width",
-              "type": {
-                "text": "string"
-              },
-              "default": "'100%'",
-              "description": "Width, as any length.",
-              "fieldName": "width"
-            },
-            {
-              "name": "height",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Height, as any length. Defaults to the current line height for text.",
-              "fieldName": "height"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-skeleton",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "src/feedback/skeleton.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-skeleton",
-          "declaration": {
-            "name": "Skeleton",
-            "module": "src/feedback/skeleton.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/spinner.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Spinner — an indeterminate loading indicator.",
-          "name": "Spinner",
-          "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "'var(--s1)'",
-              "description": "The diameter, as any length. Defaults to a modular-scale step.",
-              "attribute": "size"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Loading'",
-              "description": "Accessible label announced to assistive tech.",
-              "attribute": "label"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "'var(--s1)'",
-              "description": "The diameter, as any length. Defaults to a modular-scale step.",
-              "fieldName": "size"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Loading'",
-              "description": "Accessible label announced to assistive tech.",
-              "fieldName": "label"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-spinner",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "src/feedback/spinner.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-spinner",
-          "declaration": {
-            "name": "Spinner",
-            "module": "src/feedback/spinner.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/tag.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Tag — a labelled chip, optionally removable.",
-          "name": "Tag",
-          "slots": [
-            {
-              "description": "The tag content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "TagVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "removable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show a remove button.",
-              "attribute": "removable",
-              "reflects": true
-            }
-          ],
-          "events": [
-            {
-              "name": "film-remove",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When the remove button is activated."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "TagVariant"
-              },
-              "default": "'neutral'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            },
-            {
-              "name": "removable",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Show a remove button.",
-              "fieldName": "removable"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-tag",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "src/feedback/tag.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-tag",
-          "declaration": {
-            "name": "Tag",
-            "module": "src/feedback/tag.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/toast.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Toast — a single transient notification. Usually created via the toast\nhelper rather than authored directly. Auto-dismisses after `duration` ms\n(0 keeps it until dismissed); hovering pauses the timer.",
-          "name": "Toast",
-          "slots": [
-            {
-              "description": "The message.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The colour treatment.",
-              "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "duration",
-              "type": {
-                "text": "number"
-              },
-              "default": "4000",
-              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
-              "attribute": "duration"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the toast is shown (drives the enter/exit transition).",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "show",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "close",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "film-close",
-              "type": {
-                "text": "Event"
-              },
-              "description": "When dismissed (after the exit transition)."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "AlertVariant"
-              },
-              "default": "'info'",
-              "description": "The colour treatment.",
-              "fieldName": "variant"
-            },
-            {
-              "name": "duration",
-              "type": {
-                "text": "number"
-              },
-              "default": "4000",
-              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
-              "fieldName": "duration"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the toast is shown (drives the enter/exit transition).",
-              "fieldName": "open"
-            }
-          ],
-          "superclass": {
-            "name": "FilmElement",
-            "module": "/src/internal/film-element.js"
-          },
-          "tagName": "film-toast",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "src/feedback/toast.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "film-toast",
-          "declaration": {
-            "name": "Toast",
-            "module": "src/feedback/toast.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/feedback/toaster.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "toast",
-          "return": {
-            "type": {
-              "text": "Toast"
-            }
-          },
-          "parameters": [
-            {
-              "name": "message",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "options",
-              "default": "{}",
-              "type": {
-                "text": "ToastOptions"
-              }
-            }
-          ],
-          "description": "Show a toast notification. Lazily creates a single fixed-position live region\nappended to `document.body` and stacks toasts within it. Returns the created\n`film-toast` element."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "toast",
-          "declaration": {
-            "name": "toast",
-            "module": "src/feedback/toaster.ts"
           }
         }
       ]
@@ -2375,6 +1491,795 @@
           "declaration": {
             "name": "Table",
             "module": "src/data/table.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/alert.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Alert — a callout for contextual messages. Sets an appropriate ARIA role so\nscreen readers announce it (`alert` for warning/danger, `status` otherwise).",
+          "name": "Alert",
+          "slots": [
+            {
+              "description": "The message content.",
+              "name": ""
+            },
+            {
+              "description": "An optional leading icon.",
+              "name": "icon"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The severity / colour treatment.",
+              "attribute": "variant"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The severity / colour treatment.",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-alert",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "src/feedback/alert.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "src/feedback/alert.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/badge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Badge — a small pill for counts, statuses and tags.",
+          "name": "Badge",
+          "slots": [
+            {
+              "description": "The badge content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "BadgeVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "BadgeVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-badge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "src/feedback/badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "src/feedback/badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "./alert.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "AlertVariant",
+          "declaration": {
+            "name": "AlertVariant",
+            "module": "./alert.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Badge",
+          "declaration": {
+            "name": "Badge",
+            "module": "./badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BadgeVariant",
+          "declaration": {
+            "name": "BadgeVariant",
+            "module": "./badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ProgressBar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "./progress-bar.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "./skeleton.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "./spinner.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "./tag.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TagVariant",
+          "declaration": {
+            "name": "TagVariant",
+            "module": "./tag.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "./toast.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "toast",
+          "declaration": {
+            "name": "toast",
+            "module": "./toaster.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ToastOptions",
+          "declaration": {
+            "name": "ToastOptions",
+            "module": "./toaster.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/progress-bar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "ProgressBar — a determinate or indeterminate progress indicator.",
+          "name": "ProgressBar",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The maximum value.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show an indeterminate animation instead of a value.",
+              "attribute": "indeterminate",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value.",
+              "fieldName": "value"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The maximum value.",
+              "fieldName": "max"
+            },
+            {
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show an indeterminate animation instead of a value.",
+              "fieldName": "indeterminate"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-progress-bar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ProgressBar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "src/feedback/progress-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-progress-bar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "src/feedback/progress-bar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/skeleton.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Skeleton — a placeholder shown while content loads. Purely decorative\n(hidden from assistive tech); mark the surrounding region busy instead.",
+          "name": "Skeleton",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "'text' | 'circle' | 'rect'"
+              },
+              "default": "'text'",
+              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'100%'",
+              "description": "Width, as any length.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Height, as any length. Defaults to the current line height for text.",
+              "attribute": "height"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "'text' | 'circle' | 'rect'"
+              },
+              "default": "'text'",
+              "description": "Shape: a text line, a circle (avatar), or a rectangle (block).",
+              "fieldName": "variant"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'100%'",
+              "description": "Width, as any length.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Height, as any length. Defaults to the current line height for text.",
+              "fieldName": "height"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-skeleton",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "src/feedback/skeleton.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-skeleton",
+          "declaration": {
+            "name": "Skeleton",
+            "module": "src/feedback/skeleton.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/spinner.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Spinner — an indeterminate loading indicator.",
+          "name": "Spinner",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--s1)'",
+              "description": "The diameter, as any length. Defaults to a modular-scale step.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "description": "Accessible label announced to assistive tech.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--s1)'",
+              "description": "The diameter, as any length. Defaults to a modular-scale step.",
+              "fieldName": "size"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "description": "Accessible label announced to assistive tech.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-spinner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "src/feedback/spinner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "src/feedback/spinner.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/tag.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tag — a labelled chip, optionally removable.",
+          "name": "Tag",
+          "slots": [
+            {
+              "description": "The tag content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "TagVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "removable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a remove button.",
+              "attribute": "removable",
+              "reflects": true
+            }
+          ],
+          "events": [
+            {
+              "name": "film-remove",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the remove button is activated."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "TagVariant"
+              },
+              "default": "'neutral'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "removable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a remove button.",
+              "fieldName": "removable"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-tag",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "src/feedback/tag.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-tag",
+          "declaration": {
+            "name": "Tag",
+            "module": "src/feedback/tag.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/toast.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Toast — a single transient notification. Usually created via the toast\nhelper rather than authored directly. Auto-dismisses after `duration` ms\n(0 keeps it until dismissed); hovering pauses the timer.",
+          "name": "Toast",
+          "slots": [
+            {
+              "description": "The message.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The colour treatment.",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "4000",
+              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
+              "attribute": "duration"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the toast is shown (drives the enter/exit transition).",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "film-close",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When dismissed (after the exit transition)."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "The colour treatment.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "4000",
+              "description": "Auto-dismiss delay in ms (0 = stay until dismissed).",
+              "fieldName": "duration"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the toast is shown (drives the enter/exit transition).",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "FilmElement",
+            "module": "/src/internal/film-element.js"
+          },
+          "tagName": "film-toast",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "src/feedback/toast.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "film-toast",
+          "declaration": {
+            "name": "Toast",
+            "module": "src/feedback/toast.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/feedback/toaster.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "toast",
+          "return": {
+            "type": {
+              "text": "Toast"
+            }
+          },
+          "parameters": [
+            {
+              "name": "message",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "options",
+              "default": "{}",
+              "type": {
+                "text": "ToastOptions"
+              }
+            }
+          ],
+          "description": "Show a toast notification. Lazily creates a single fixed-position live region\nappended to `document.body` and stacks toasts within it. Returns the created\n`film-toast` element."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "toast",
+          "declaration": {
+            "name": "toast",
+            "module": "src/feedback/toaster.ts"
           }
         }
       ]
@@ -5103,6 +5008,101 @@
           "declaration": {
             "name": "Textarea",
             "module": "src/forms/textarea.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/layout/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/actions/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/typography/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/data/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/feedback/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/forms/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/navigation/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/overlays/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/windowing/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "DragController",
+          "declaration": {
+            "name": "DragController",
+            "module": "./internal/drag-controller.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "DragCallbacks",
+          "declaration": {
+            "name": "DragCallbacks",
+            "module": "./internal/drag-controller.js"
           }
         }
       ]

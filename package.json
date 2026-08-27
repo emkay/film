@@ -1,7 +1,7 @@
 {
   "name": "@mk/film",
   "version": "1.2.2",
-  "description": "Film — an opinionated Lit web component library built on modular scale and every-layout primitives",
+  "description": "Film \u2014 an opinionated Lit web component library built on modular scale and every-layout primitives",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -39,12 +39,14 @@
     "build:lib": "vite build --mode lib",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "analyze": "cem analyze",
+    "analyze": "cem analyze && node scripts/sort-manifest.mjs",
     "gen:react": "node scripts/gen-react.mjs",
     "check:bundle": "node scripts/check-bundle.mjs",
+    "check:dist": "node scripts/check-dist.mjs",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,js,css,md,json}\"",
-    "test": "wtr"
+    "test": "wtr",
+    "prepublishOnly": "rm -rf dist && npm run build:lib && npm run check:dist && npm run check:bundle"
   },
   "repository": {
     "type": "git",
