@@ -10261,7 +10261,7 @@
               "name": "title"
             },
             {
-              "description": "Extra title-bar controls, before minimise/maximise/close.",
+              "description": "Extra title-bar controls, before minimise/maximise/close. A press on anything in this slot activates the control rather than starting a move drag.",
               "name": "actions"
             }
           ],

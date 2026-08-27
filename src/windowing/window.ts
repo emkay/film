@@ -29,7 +29,8 @@ const FOCUSABLE =
  *
  * @slot - The window body.
  * @slot title - Title-bar content (overrides `title`).
- * @slot actions - Extra title-bar controls, before minimise/maximise/close.
+ * @slot actions - Extra title-bar controls, before minimise/maximise/close. A press on
+ *   anything in this slot activates the control rather than starting a move drag.
  * @fires film-window-movestart - When a pointer move drag begins (for snap previews).
  * @fires film-window-move - `detail` is `{ x, y }`.
  * @fires film-window-moveend - When a pointer move drag ends (the commit point). `detail` is `{ x, y, width, height }`.
@@ -292,11 +293,33 @@ export class Window extends FilmElement {
     }
   }
 
+  /**
+   * True when a title-bar event started on a control rather than on the bar
+   * itself. A press on minimise/maximise/close must not begin a drag: the
+   * drag's pointer capture retargets the rest of the gesture to the title bar,
+   * so `click` lands on the bar (the common ancestor of the press and the
+   * release) and the button's own listener never runs.
+   */
+  private fromTitleControl (event: Event): boolean {
+    for (const node of event.composedPath()) {
+      // Stop at the title bar itself — it's `tabindex="0"` when movable, so it
+      // would match FOCUSABLE, and everything above it is the window frame.
+      if (node === event.currentTarget) return false
+      if (!(node instanceof Element)) continue
+      // `.actions` covers slotted controls too, which needn't be natively
+      // focusable to be something the user meant to press rather than drag.
+      if (node.classList.contains('actions') || node.matches(FOCUSABLE)) return true
+    }
+    return false
+  }
+
   private readonly onTitlePointerDown = (event: PointerEvent): void => {
+    if (this.fromTitleControl(event)) return
     if (this.movable && !this.maximised) this.moveDrag.onPointerDown(event)
   }
 
   private readonly onTitleKeydown = (event: KeyboardEvent): void => {
+    if (this.fromTitleControl(event)) return
     if (this.movable && !this.maximised) this.moveDrag.onKeydown(event)
   }
 

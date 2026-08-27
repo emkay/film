@@ -86,6 +86,54 @@ describe('film-window', () => {
     expect(document.activeElement).to.not.equal(el.querySelector('#inner'))
   })
 
+  it('does not start a move drag from a title-bar button', async () => {
+    const el = await fixture<Window>(html`<film-window title="T">body</film-window>`)
+    await el.updateComplete
+    let started = false
+    el.addEventListener('film-window-movestart', () => { started = true })
+    const closeBtn = Array.from(el.shadowRoot?.querySelectorAll('button') ?? []).find(
+      (b) => b.getAttribute('aria-label') === 'Close'
+    ) as HTMLButtonElement
+    const event = new PointerEvent('pointerdown', { button: 0, pointerId: 1, bubbles: true, composed: true, cancelable: true })
+    closeBtn.dispatchEvent(event)
+    expect(started).to.equal(false)
+    // The drag also mustn't preventDefault, or the button never takes focus.
+    expect(event.defaultPrevented).to.equal(false)
+  })
+
+  it('does not start a move drag from a slotted actions control', async () => {
+    const el = await fixture<Window>(
+      html`<film-window title="T"><span slot="actions"><button id="extra">?</button></span>body</film-window>`
+    )
+    await el.updateComplete
+    let started = false
+    el.addEventListener('film-window-movestart', () => { started = true })
+    const extra = el.querySelector('#extra') as HTMLButtonElement
+    extra.dispatchEvent(new PointerEvent('pointerdown', { button: 0, pointerId: 1, bubbles: true, composed: true }))
+    expect(started).to.equal(false)
+  })
+
+  it('still starts a move drag from the title bar itself', async () => {
+    const el = await fixture<Window>(html`<film-window title="T">body</film-window>`)
+    await el.updateComplete
+    let started = false
+    el.addEventListener('film-window-movestart', () => { started = true })
+    const titlebar = el.shadowRoot?.querySelector('.titlebar') as HTMLElement
+    titlebar.dispatchEvent(new PointerEvent('pointerdown', { button: 0, pointerId: 1, bubbles: true }))
+    expect(started).to.equal(true)
+  })
+
+  it('does not keyboard-move the window from a title-bar button', async () => {
+    const el = await fixture<Window>(html`<film-window title="T" x="40" y="40">body</film-window>`)
+    await el.updateComplete
+    const closeBtn = Array.from(el.shadowRoot?.querySelectorAll('button') ?? []).find(
+      (b) => b.getAttribute('aria-label') === 'Close'
+    ) as HTMLButtonElement
+    closeBtn.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, composed: true }))
+    await el.updateComplete
+    expect(el.x).to.equal(40)
+  })
+
   it('fires film-window-close', async () => {
     const el = await fixture<Window>(html`<film-window>body</film-window>`)
     const closeBtn = Array.from(el.shadowRoot?.querySelectorAll('button') ?? []).find(
