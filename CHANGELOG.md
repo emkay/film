@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/emkay/film/compare/v1.2.2...v1.2.3) (2026-08-27)
+
+
+### Bug Fixes
+
+* build the library into dist ([ef4c690](https://github.com/emkay/film/commit/ef4c690816d31c502873866c57158a3ceaaa8db6))
+
 ## [1.2.2](https://github.com/emkay/film/compare/v1.2.1...v1.2.2) (2026-08-27)
 
 
