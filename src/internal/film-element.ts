@@ -1,4 +1,5 @@
 import { LitElement, type PropertyValues } from 'lit'
+import { resolveScale } from './scale.js'
 
 /**
  * Base class for every Film element. Provides a small helper for reflecting
@@ -11,8 +12,10 @@ export class FilmElement extends LitElement {
   /**
    * Declarative map of CSS custom property → reactive property name. The base
    * `updated()` reflects each onto the host whenever its backing property
-   * changes. Subclasses that need transforms or extra work can still override
-   * `updated()` (and call `super.updated(changed)` to keep this behaviour).
+   * changes, resolving a bare modular-scale step (`s1`) to `var(--s1)` on the
+   * way through. Subclasses that need transforms or extra work can still
+   * override `updated()` (and call `super.updated(changed)` to keep this
+   * behaviour).
    */
   static styleProps: Record<string, string> = {}
 
@@ -32,7 +35,7 @@ export class FilmElement extends LitElement {
     const self = this as unknown as Record<string, unknown>
     for (const cssVar in map) {
       const prop = map[cssVar]
-      if (changed.has(prop)) this.style.setProperty(cssVar, String(self[prop]))
+      if (changed.has(prop)) this.style.setProperty(cssVar, resolveScale(String(self[prop])))
     }
   }
 }

@@ -11,7 +11,7 @@ export class Divider extends FilmElement {
   @property({ type: Boolean, reflect: true })
   vertical = false
 
-  /** The space around the divider. */
+  /** The space around the divider. A scale step (`s1`) or any CSS length. */
   @property({ type: String })
   space = 'var(--s1)'
 

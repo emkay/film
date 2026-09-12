@@ -10,7 +10,7 @@ import { FilmElement } from '../internal/film-element.js'
  */
 @customElement('film-icon')
 export class Icon extends FilmElement {
-  /** The gap between the icon and its label. */
+  /** The gap between the icon and its label. A scale step (`s1`) or any CSS length. */
   @property({ type: String })
   space = '0.5em'
 

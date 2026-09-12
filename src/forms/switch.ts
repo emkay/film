@@ -5,7 +5,7 @@ import { FilmToggleControl } from '../internal/toggle-control.js'
 /**
  * Switch — a form-associated on/off toggle (`switch` role).
  *
- * @slot - The label.
+ * @slot - The label. Falls back to the `label` property.
  * @fires change - When the checked state changes.
  */
 @customElement('film-switch')
@@ -73,7 +73,7 @@ export class Switch extends FilmToggleControl {
   render () {
     return html`
       <span class="track" aria-hidden="true"><span class="thumb"></span></span>
-      <slot></slot>
+      <slot>${this.label}</slot>
     `
   }
 }

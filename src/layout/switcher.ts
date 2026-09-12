@@ -11,7 +11,7 @@ import { FilmElement } from '../internal/film-element.js'
  */
 @customElement('film-switcher')
 export class Switcher extends FilmElement {
-  /** The gap between items. */
+  /** The gap between items. A scale step (`s1`) or any CSS length. */
   @property({ type: String })
   space = 'var(--s1)'
 

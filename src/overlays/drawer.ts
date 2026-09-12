@@ -19,6 +19,12 @@ export class Drawer extends FilmModal {
 
   static styles = css`
     dialog {
+      /*
+       * border-box, so the padding and border below are drawn inside the
+       * 100dvh rather than added to it. As content-box the panel measured
+       * taller than the viewport and its lower content sat off-screen.
+       */
+      box-sizing: border-box;
       color: var(--film-color-text);
       background-color: var(--film-color-surface);
       border: var(--border-thin) solid var(--film-color-border);
@@ -63,6 +69,17 @@ export class Drawer extends FilmModal {
       flex-direction: column;
       gap: var(--s0);
       block-size: 100%;
+    }
+
+    /*
+     * The header keeps its natural height and the body takes the rest, scrolling
+     * when the content is taller. min-block-size:0 is what lets a flex item
+     * shrink below its content size and actually overflow.
+     */
+    .body {
+      flex: 1;
+      min-block-size: 0;
+      overflow: auto;
     }
 
     header {

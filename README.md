@@ -62,7 +62,7 @@ tooling.
 | `film-stack`     | Even, scale-based vertical spacing between children.        |
 | `film-box`       | Padded, bordered box (`invert`).                            |
 | `film-center`    | Horizontally centres content within `--measure`.            |
-| `film-cluster`   | Wrapping row of items with an even gap.                     |
+| `film-cluster`   | Wrapping row of items with an even gap (`space`, `justify`, `align`). |
 | `film-sidebar`   | Two-part sidebar/content layout that collapses when tight. `scroll="start\|end\|both"` gives a pane its own scrollbar (needs a bounded host height). |
 | `film-grid`      | Auto-fit responsive grid (`min`, `space`).                  |
 | `film-switcher`  | Row that flips to a stack below a `threshold` (or `limit`). |
@@ -73,7 +73,7 @@ tooling.
 | `film-icon`      | Sizes a slotted SVG to the adjacent text.                   |
 | `film-split-panel` | Two panes with a draggable, keyboard-operable divider.    |
 
-**Actions** (`src/actions`) — `film-button`, `film-button-group`, `film-icon-button`, `film-link`, `film-copy-button`.
+**Actions** (`src/actions`) — `film-button` (`variant`, `size`, form-associated `type`), `film-button-group`, `film-icon-button`, `film-link`, `film-copy-button`.
 
 **Typography** (`src/typography`) — `film-heading`, `film-text`, `film-prose`, `film-divider`, `film-visually-hidden`, `film-kbd`.
 
@@ -97,6 +97,64 @@ Sizes come from CSS custom properties `--s-5` … `--s5`, generated from a singl
 `--ratio`. The scale uses the CSS `pow()` function where supported and falls
 back to a `calc()` chain everywhere else. Override the whole system by setting
 `--ratio` and `--s0` on `:root`.
+
+### `space` vs `size`
+
+Two conventions sit next to each other, and both now accept either form:
+
+- **`size`** on typography (`film-text`, `film-heading`) takes a scale **step** —
+  `size="s1"` — which the component expands to `var(--s1)`.
+- **`space`** on the layout primitives (`film-stack`, `film-cluster`, `film-grid`,
+  `film-sidebar`, …) is a CSS **length**, passed straight through to a custom
+  property.
+
+`space="s0"` used to produce the invalid declaration `gap: s0`, which the browser
+dropped silently, leaving the default gap and looking like a styling bug rather
+than a typo. Bare scale steps are now resolved for every scale-valued property,
+so these are equivalent:
+
+```html
+<film-cluster space="s2">…</film-cluster>
+<film-cluster space="var(--s2)">…</film-cluster>
+```
+
+Anything that isn't a bare step (`1rem`, `0`, `auto`, `clamp(…)`, a `var()`) is
+still passed through untouched.
+
+## Forms
+
+Film's form controls are form-associated via `ElementInternals`, so they submit
+by `name`, take part in constraint validation and respond to reset — in a plain
+`<form>`, with no wrapper needed:
+
+```html
+<form>
+  <film-input name="email" label="Email" type="email" autocomplete="username" required></film-input>
+  <film-input name="password" label="Password" type="password" autocomplete="current-password"></film-input>
+  <film-button type="submit">Sign in</film-button>
+</form>
+```
+
+`film-button` is form-associated too: because its real `<button>` lives in the
+shadow root the browser can't associate it with a light-DOM `<form>`, so it
+drives the form itself. `type="submit"` calls `requestSubmit()` and
+`type="reset"` calls `reset()`. Enter inside a `film-input` submits, as it would
+in a plain `<input>`. Set `autocomplete` (`username`, `current-password`, …) so
+password managers recognise a sign-in pair.
+
+`film-form` is the alternative, for collecting values without a native form. It
+aggregates the slotted controls, exposes `getValues()` / `submit()` / `reset()`
+and fires `film-submit`, `film-invalid` and `film-reset`:
+
+```html
+<film-form @film-submit=${(e) => save(e.detail.values)}>
+  <film-input name="email" label="Email"></film-input>
+  <film-button type="submit">Sign in</film-button>
+</film-form>
+```
+
+Inside a `film-form`, that component owns submission and `film-button` stands
+down, so the two never both fire.
 
 ## Theming
 
@@ -185,6 +243,23 @@ npm run typecheck  # type-check with tsc
 npm run build      # build the demo site into dist/
 npm run build:lib  # build the publishable library into dist/
 ```
+
+### Backticks inside `css` and `html` templates
+
+Styles and templates are tagged template literals, so a backtick anywhere inside
+one — including in a comment — ends the template early. Commenting a rule with
+the element it concerns is the natural thing to reach for, and it breaks the
+file:
+
+```js
+static styles = css`
+  /* `film-cluster` owns the gap */   // ← terminates the template here
+`
+```
+
+The resulting syntax errors point at whatever follows, often far from the cause.
+Write the name without backticks in CSS and HTML comments, or escape it
+(``\` ``). JSDoc comments sit outside the template and are unaffected.
 
 Written in TypeScript with Lit decorators. The library source lives in `src/`
 (grouped into `layout`, `actions`, `typography`, `forms`, `navigation`,

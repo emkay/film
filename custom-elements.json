@@ -92,7 +92,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Button — a themed button. Sizing is expressed in `em` so it scales with the\nsurrounding font size, and its radius comes from the modular scale.",
+          "description": "Button — a themed button. Sizing is expressed in `em` so it scales with the\nsurrounding font size, and its radius comes from the modular scale.\n\nThe button is form-associated: inside a native `<form>`, `type=\"submit\"`\nsubmits it and `type=\"reset\"` resets it, even though the real `<button>`\nlives in the shadow root. Inside a `<film-form>` that component owns\nsubmission instead, so the two never both fire.",
           "name": "Button",
           "slots": [
             {
@@ -108,7 +108,7 @@
                 "text": "boolean"
               },
               "default": "false",
-              "description": "Use the inverted colour treatment.",
+              "description": "Use the inverted colour treatment. Shorthand for the neutral surface; it\ntakes precedence over variant when both are set.",
               "attribute": "invert",
               "reflects": true
             },
@@ -133,6 +133,54 @@
               "description": "The button size (drives `font-size` on the modular scale).",
               "attribute": "size",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'primary'",
+              "description": "The colour treatment. `primary` is the default accent fill.",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "ButtonType"
+              },
+              "default": "'button'",
+              "description": "What activating the button does to its form.",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The form this button belongs to, if any.",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
             }
           ],
           "attributes": [
@@ -142,7 +190,7 @@
                 "text": "boolean"
               },
               "default": "false",
-              "description": "Use the inverted colour treatment.",
+              "description": "Use the inverted colour treatment. Shorthand for the neutral surface; it\ntakes precedence over variant when both are set.",
               "fieldName": "invert"
             },
             {
@@ -162,6 +210,24 @@
               "default": "'medium'",
               "description": "The button size (drives `font-size` on the modular scale).",
               "fieldName": "size"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'primary'",
+              "description": "The colour treatment. `primary` is the default accent fill.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "ButtonType"
+              },
+              "default": "'button'",
+              "description": "What activating the button does to its form.",
+              "fieldName": "type"
             }
           ],
           "superclass": {
@@ -2408,35 +2474,207 @@
           "name": "Checkbox",
           "slots": [
             {
-              "description": "The label.",
+              "description": "The label. Falls back to the `label` property.",
               "name": ""
             }
           ],
           "members": [
             {
               "kind": "field",
-              "name": "toggleRole",
+              "name": "checked",
               "type": {
-                "text": "string"
+                "text": "boolean"
               },
-              "privacy": "protected",
-              "readonly": true,
-              "default": "'checkbox'"
+              "default": "false",
+              "description": "Whether the control is checked / on.",
+              "attribute": "checked",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
             },
             {
               "kind": "field",
-              "name": "validationAnchor",
+              "name": "value",
               "type": {
-                "text": "HTMLElement | undefined"
+                "text": "string"
               },
-              "privacy": "protected",
-              "readonly": true
+              "default": "'on'",
+              "description": "The value submitted when checked.",
+              "attribute": "value",
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's label, for parity with the other form controls. Subclasses\nrender it as the default slot's fallback, so slotted content still wins.",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "events": [
             {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
               "description": "When the checked state changes.",
-              "name": "change"
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -2444,7 +2682,87 @@
             "module": "/src/internal/toggle-control.js"
           },
           "tagName": "film-checkbox",
-          "customElement": true
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is checked / on.",
+              "fieldName": "checked",
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "'on'",
+              "description": "The value submitted when checked.",
+              "fieldName": "value",
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's label, for parity with the other form controls. Subclasses\nrender it as the default slot's fallback, so slotted content still wins.",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -2495,30 +2813,143 @@
             },
             {
               "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
               "name": "formResetCallback",
               "return": {
                 "type": {
                   "text": "void"
                 }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
               }
             }
           ],
@@ -2547,6 +2978,45 @@
               },
               "default": "''",
               "fieldName": "label"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -2633,30 +3103,143 @@
             },
             {
               "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string | null"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
               "name": "formResetCallback",
               "return": {
                 "type": {
                   "text": "void"
                 }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
               }
             }
           ],
@@ -2704,6 +3287,45 @@
               "default": "false",
               "description": "Whether the listbox is open.",
               "fieldName": "open"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -2801,30 +3423,143 @@
             },
             {
               "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string | null"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
               "name": "formResetCallback",
               "return": {
                 "type": {
                   "text": "void"
                 }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
               }
             }
           ],
@@ -2884,6 +3619,45 @@
               "default": "false",
               "description": "Whether the calendar is open.",
               "fieldName": "open"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -3056,21 +3830,143 @@
             },
             {
               "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string | File | FormData | null"
-                }
-              }
-            },
-            {
-              "kind": "method",
               "name": "formResetCallback",
               "return": {
                 "type": {
                   "text": "void"
                 }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
               }
             }
           ],
@@ -3110,6 +4006,45 @@
               "default": "''",
               "description": "A label for the control.",
               "fieldName": "label"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -3453,7 +4388,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Input — a themed, form-associated text input.",
+          "description": "Input — a themed, form-associated text input.\n\nPressing Enter submits the associated native `<form>`, as it would in a plain\n`<input>`; inside a `<film-form>` that component handles it instead.",
           "name": "Input",
           "members": [
             {
@@ -3502,23 +4437,14 @@
               "attribute": "readonly"
             },
             {
-              "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              }
-            },
-            {
               "kind": "field",
-              "name": "validationAnchor",
+              "name": "autocomplete",
               "type": {
-                "text": "HTMLElement | undefined"
+                "text": "string"
               },
-              "privacy": "protected",
-              "readonly": true
+              "default": "''",
+              "description": "The autofill hint passed to the inner input, e.g. `username`,\n`current-password`, `email`. Without it password managers have only the\ninput `type` to go on.",
+              "attribute": "autocomplete"
             },
             {
               "kind": "method",
@@ -3527,6 +4453,138 @@
                 "type": {
                   "text": "void"
                 }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
               }
             }
           ],
@@ -3583,6 +4641,54 @@
               },
               "default": "false",
               "fieldName": "readonly"
+            },
+            {
+              "name": "autocomplete",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The autofill hint passed to the inner input, e.g. `username`,\n`current-password`, `email`. Without it password managers have only the\ninput `type` to go on.",
+              "fieldName": "autocomplete"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -3674,30 +4780,143 @@
             },
             {
               "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
               "name": "formResetCallback",
               "return": {
                 "type": {
                   "text": "void"
                 }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
               }
             }
           ],
@@ -3755,6 +4974,45 @@
               },
               "default": "''",
               "fieldName": "placeholder"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -3821,21 +5079,143 @@
             },
             {
               "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string | null"
-                }
-              }
-            },
-            {
-              "kind": "method",
               "name": "formResetCallback",
               "return": {
                 "type": {
                   "text": "void"
                 }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
               }
             }
           ],
@@ -3866,6 +5246,45 @@
               "default": "''",
               "description": "An accessible label for the group.",
               "fieldName": "label"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -4065,30 +5484,143 @@
             },
             {
               "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
               "name": "formResetCallback",
               "return": {
                 "type": {
                   "text": "void"
                 }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
               }
             }
           ],
@@ -4154,6 +5686,45 @@
               "default": "false",
               "description": "Show the current value beside the label.",
               "fieldName": "showValue"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -4221,30 +5792,143 @@
             },
             {
               "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
               "name": "formResetCallback",
               "return": {
                 "type": {
                   "text": "void"
                 }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
               }
             }
           ],
@@ -4294,6 +5978,45 @@
               },
               "default": "''",
               "fieldName": "label"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -4494,30 +6217,143 @@
             },
             {
               "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string | null"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
               "name": "formResetCallback",
               "return": {
                 "type": {
                   "text": "void"
                 }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
               }
             }
           ],
@@ -4566,6 +6402,45 @@
               "default": "false",
               "description": "Whether the listbox is open.",
               "fieldName": "open"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -4774,35 +6649,207 @@
           "name": "Switch",
           "slots": [
             {
-              "description": "The label.",
+              "description": "The label. Falls back to the `label` property.",
               "name": ""
             }
           ],
           "members": [
             {
               "kind": "field",
-              "name": "toggleRole",
+              "name": "checked",
               "type": {
-                "text": "string"
+                "text": "boolean"
               },
-              "privacy": "protected",
-              "readonly": true,
-              "default": "'switch'"
+              "default": "false",
+              "description": "Whether the control is checked / on.",
+              "attribute": "checked",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
             },
             {
               "kind": "field",
-              "name": "validationAnchor",
+              "name": "value",
               "type": {
-                "text": "HTMLElement | undefined"
+                "text": "string"
               },
-              "privacy": "protected",
-              "readonly": true
+              "default": "'on'",
+              "description": "The value submitted when checked.",
+              "attribute": "value",
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's label, for parity with the other form controls. Subclasses\nrender it as the default slot's fallback, so slotted content still wins.",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "events": [
             {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
               "description": "When the checked state changes.",
-              "name": "change"
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -4810,7 +6857,87 @@
             "module": "/src/internal/toggle-control.js"
           },
           "tagName": "film-switch",
-          "customElement": true
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is checked / on.",
+              "fieldName": "checked",
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "'on'",
+              "description": "The value submitted when checked.",
+              "fieldName": "value",
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's label, for parity with the other form controls. Subclasses\nrender it as the default slot's fallback, so slotted content still wins.",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "FilmToggleControl",
+                "module": "src/internal/toggle-control.ts"
+              }
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -4898,30 +7025,143 @@
             },
             {
               "kind": "method",
-              "name": "getFormValue",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "validationAnchor",
-              "type": {
-                "text": "HTMLElement | undefined"
-              },
-              "privacy": "protected",
-              "readonly": true
-            },
-            {
-              "kind": "method",
               "name": "formResetCallback",
               "return": {
                 "type": {
                   "text": "void"
                 }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "description": "The associated form, if any.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
               }
             }
           ],
@@ -4983,6 +7223,45 @@
               "default": "false",
               "description": "Grow to fit content instead of scrolling.",
               "fieldName": "autoGrow"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The control's form-submission name.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the control is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether a value is required for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
             }
           ],
           "superclass": {
@@ -5236,8 +7515,28 @@
                 "text": "string"
               },
               "default": "'var(--s0)'",
-              "description": "The gap between clustered items. Defaults to a modular-scale step.",
+              "description": "The gap between clustered items. A scale step (`s1`) or any CSS length.",
               "attribute": "space"
+            },
+            {
+              "kind": "field",
+              "name": "justify",
+              "type": {
+                "text": "ClusterJustify"
+              },
+              "default": "'start'",
+              "description": "How items are distributed along the row.",
+              "attribute": "justify"
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "ClusterAlign"
+              },
+              "default": "'center'",
+              "description": "How items are aligned across the row.",
+              "attribute": "align"
             }
           ],
           "attributes": [
@@ -5247,8 +7546,26 @@
                 "text": "string"
               },
               "default": "'var(--s0)'",
-              "description": "The gap between clustered items. Defaults to a modular-scale step.",
+              "description": "The gap between clustered items. A scale step (`s1`) or any CSS length.",
               "fieldName": "space"
+            },
+            {
+              "name": "justify",
+              "type": {
+                "text": "ClusterJustify"
+              },
+              "default": "'start'",
+              "description": "How items are distributed along the row.",
+              "fieldName": "justify"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "ClusterAlign"
+              },
+              "default": "'center'",
+              "description": "How items are aligned across the row.",
+              "fieldName": "align"
             }
           ],
           "superclass": {
@@ -5308,7 +7625,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The minimum space around and between the regions.",
+              "description": "The minimum space around and between the regions. A scale step (`s1`) or any CSS length.",
               "attribute": "space"
             },
             {
@@ -5329,7 +7646,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The minimum space around and between the regions.",
+              "description": "The minimum space around and between the regions. A scale step (`s1`) or any CSS length.",
               "fieldName": "space"
             },
             {
@@ -5455,7 +7772,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The gap between grid items. Defaults to a modular-scale step.",
+              "description": "The gap between grid items. A scale step (`s1`) or any CSS length.",
               "attribute": "space"
             },
             {
@@ -5476,7 +7793,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The gap between grid items. Defaults to a modular-scale step.",
+              "description": "The gap between grid items. A scale step (`s1`) or any CSS length.",
               "fieldName": "space"
             },
             {
@@ -5538,7 +7855,7 @@
                 "text": "string"
               },
               "default": "'0.5em'",
-              "description": "The gap between the icon and its label.",
+              "description": "The gap between the icon and its label. A scale step (`s1`) or any CSS length.",
               "attribute": "space"
             },
             {
@@ -5559,7 +7876,7 @@
                 "text": "string"
               },
               "default": "'0.5em'",
-              "description": "The gap between the icon and its label.",
+              "description": "The gap between the icon and its label. A scale step (`s1`) or any CSS length.",
               "fieldName": "space"
             },
             {
@@ -5844,7 +8161,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The gap between items.",
+              "description": "The gap between items. A scale step (`s1`) or any CSS length.",
               "attribute": "space"
             },
             {
@@ -5865,7 +8182,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The gap between items.",
+              "description": "The gap between items. A scale step (`s1`) or any CSS length.",
               "fieldName": "space"
             },
             {
@@ -5927,7 +8244,7 @@
                 "text": "string"
               },
               "default": "'var(--s3)'",
-              "description": "The gap between the sidebar and the main content.",
+              "description": "The gap between the sidebar and the main content. A scale step (`s1`) or any CSS length.",
               "attribute": "space"
             },
             {
@@ -5959,7 +8276,7 @@
                 "text": "string"
               },
               "default": "'var(--s3)'",
-              "description": "The gap between the sidebar and the main content.",
+              "description": "The gap between the sidebar and the main content. A scale step (`s1`) or any CSS length.",
               "fieldName": "space"
             },
             {
@@ -6165,7 +8482,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The space between children. Any length; defaults to a modular-scale step.",
+              "description": "The space between children. A scale step (`s1`) or any CSS length.",
               "attribute": "space"
             },
             {
@@ -6186,7 +8503,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The space between children. Any length; defaults to a modular-scale step.",
+              "description": "The space between children. A scale step (`s1`) or any CSS length.",
               "fieldName": "space"
             },
             {
@@ -6248,7 +8565,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The gap between items.",
+              "description": "The gap between items. A scale step (`s1`) or any CSS length.",
               "attribute": "space"
             },
             {
@@ -6279,7 +8596,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The gap between items.",
+              "description": "The gap between items. A scale step (`s1`) or any CSS length.",
               "fieldName": "space"
             },
             {
@@ -8036,13 +10353,118 @@
               "name": "footer"
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the overlay is open.",
+              "attribute": "open",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label / default heading.",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            }
+          ],
           "superclass": {
             "name": "FilmModal",
             "module": "/src/internal/modal.js"
           },
           "tagName": "film-dialog",
-          "customElement": true
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the overlay is open.",
+              "fieldName": "open",
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label / default heading.",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "film-open",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the overlay opens.",
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            },
+            {
+              "description": "When the overlay closes.",
+              "name": "film-close",
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -8093,6 +10515,61 @@
               "description": "The edge the drawer slides in from.",
               "attribute": "placement",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the overlay is open.",
+              "attribute": "open",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label / default heading.",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
             }
           ],
           "attributes": [
@@ -8104,6 +10581,32 @@
               "default": "'end'",
               "description": "The edge the drawer slides in from.",
               "fieldName": "placement"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the overlay is open.",
+              "fieldName": "open",
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "An accessible label / default heading.",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
             }
           ],
           "superclass": {
@@ -8111,7 +10614,28 @@
             "module": "/src/internal/modal.js"
           },
           "tagName": "film-drawer",
-          "customElement": true
+          "customElement": true,
+          "events": [
+            {
+              "name": "film-open",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the overlay opens.",
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            },
+            {
+              "description": "When the overlay closes.",
+              "name": "film-close",
+              "inheritedFrom": {
+                "name": "FilmModal",
+                "module": "src/internal/modal.ts"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -9777,7 +12301,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The space around the divider.",
+              "description": "The space around the divider. A scale step (`s1`) or any CSS length.",
               "attribute": "space"
             }
           ],
@@ -9797,7 +12321,7 @@
                 "text": "string"
               },
               "default": "'var(--s1)'",
-              "description": "The space around the divider.",
+              "description": "The space around the divider. A scale step (`s1`) or any CSS length.",
               "fieldName": "space"
             }
           ],

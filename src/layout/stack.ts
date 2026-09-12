@@ -11,7 +11,7 @@ import { FilmElement } from '../internal/film-element.js'
  */
 @customElement('film-stack')
 export class Stack extends FilmElement {
-  /** The space between children. Any length; defaults to a modular-scale step. */
+  /** The space between children. A scale step (`s1`) or any CSS length. */
   @property({ type: String })
   space = 'var(--s1)'
 

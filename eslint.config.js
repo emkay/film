@@ -5,7 +5,14 @@ import globals from 'globals'
 
 export default tseslint.config(
   {
-    ignores: ['dist/**', 'build/**', 'node_modules/**', 'custom-elements.json', 'src/react/index.ts']
+    ignores: [
+      'dist/**',
+      'dist-site/**',
+      'build/**',
+      'node_modules/**',
+      'custom-elements.json',
+      'src/react/index.ts'
+    ]
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

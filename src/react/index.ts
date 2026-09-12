@@ -247,7 +247,11 @@ export const FilmDetails = createComponent({
 export const FilmDialog = createComponent({
   react: React,
   tagName: "film-dialog",
-  elementClass: Dialog
+  elementClass: Dialog,
+  events: {
+      "onFilmOpen": "film-open",
+      "onFilmClose": "film-close"
+  }
 })
 
 export const FilmDivider = createComponent({
@@ -259,7 +263,11 @@ export const FilmDivider = createComponent({
 export const FilmDrawer = createComponent({
   react: React,
   tagName: "film-drawer",
-  elementClass: Drawer
+  elementClass: Drawer,
+  events: {
+      "onFilmOpen": "film-open",
+      "onFilmClose": "film-close"
+  }
 })
 
 export const FilmDropdown = createComponent({

@@ -13,7 +13,7 @@ import { FilmElement } from '../internal/film-element.js'
  */
 @customElement('film-cover')
 export class Cover extends FilmElement {
-  /** The minimum space around and between the regions. */
+  /** The minimum space around and between the regions. A scale step (`s1`) or any CSS length. */
   @property({ type: String })
   space = 'var(--s1)'
 

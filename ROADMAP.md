@@ -96,3 +96,31 @@ the recommended sequence.
 - [x] Manifest hides private members (CEM plugin) — advertises only the public API surface
 - [x] `film-window` establishes a stacking context (`isolation: isolate`) so descendant `z-index` stays contained
 - [x] `film-window` focuses its slotted content on raise via opt-in `focus-content` (replaced `delegatesFocus`, which only reached the titlebar chrome)
+
+## Requested (Comply console)
+
+From feedback building Comply's console against 1.2.3. Most of these shared one
+theme: an attribute that isn't a property is silently ignored, so a typo reads
+as a styling bug.
+
+- [x] `space` accepts a bare scale step — `space="s0"` produced the invalid
+      `gap: s0`; resolved centrally in `FilmElement`, so every scale-valued
+      property takes either form
+- [x] `film-button` `variant` — `primary` / `neutral` / `accent` / `success` /
+      `warning` / `danger`, sharing the `film-badge` / `film-alert` vocabulary
+- [x] `film-button` submits a native `<form>` — form-associated, with
+      `type="submit"` / `"reset"`; Enter in `film-input` submits too
+- [x] `film-drawer` body scrolls instead of clipping unreachable content
+- [x] `film-drawer` dialog is `border-box`, so padding no longer pushes it past
+      the viewport
+- [x] `film-cluster` `justify` / `align`
+- [x] `film-switch` (and `film-checkbox`) take `label`, matching the other form
+      controls
+- [x] `film-input` `autocomplete`, so password managers see a sign-in pair
+- [x] `custom-elements.json` lists inherited properties — the internal base
+      classes are analysed for inheritance, then dropped from the output (this
+      also recovered the `film-open` / `film-close` React event props)
+- [x] Docs — `space` vs `size`, native forms vs `film-form`, and the backticks-in-
+      a-tagged-template footgun
+- [ ] Constrain `variant` / `placement` / `size` style attributes at runtime, so
+      an unknown value warns in dev mode instead of being ignored (P2)

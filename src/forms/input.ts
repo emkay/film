@@ -14,6 +14,9 @@ export type InputType =
 /**
  * Input — a themed, form-associated text input.
  *
+ * Pressing Enter submits the associated native `<form>`, as it would in a plain
+ * `<input>`; inside a `<film-form>` that component handles it instead.
+ *
  * @fires input - When the value changes.
  * @fires change - When the value is committed.
  */
@@ -24,6 +27,13 @@ export class Input extends FilmFormControl {
   @property({ type: String }) placeholder = ''
   @property({ type: String }) label = ''
   @property({ type: Boolean }) readonly = false
+
+  /**
+   * The autofill hint passed to the inner input, e.g. `username`,
+   * `current-password`, `email`. Without it password managers have only the
+   * input `type` to go on.
+   */
+  @property({ type: String }) autocomplete = ''
 
   @query('input') private input!: HTMLInputElement
 
@@ -88,6 +98,16 @@ export class Input extends FilmFormControl {
     this.value = (event.target as HTMLInputElement).value
   }
 
+  // Implicit submission: the inner input is alone in its shadow root, so the
+  // browser has no form to submit on Enter. Do it through the association the
+  // element itself has.
+  private onKeydown (event: KeyboardEvent): void {
+    if (event.key !== 'Enter') return
+    if (this.closest('film-form')) return
+    const form = this.form
+    if (form) form.requestSubmit()
+  }
+
   // The inner input's native `change` is not composed and stays in the shadow
   // root; re-emit a composed one so external listeners hear it.
   private onChange (): void {
@@ -103,12 +123,14 @@ export class Input extends FilmFormControl {
           .type=${this.type}
           .value=${this.value}
           placeholder=${this.placeholder}
+          autocomplete=${this.autocomplete || nothing}
           ?disabled=${this.disabled}
           ?required=${this.required}
           ?readonly=${this.readonly}
           aria-label=${this.label || nothing}
           @input=${this.onInput}
           @change=${this.onChange}
+          @keydown=${this.onKeydown}
         />
       </div>
     `

@@ -6,7 +6,7 @@ import { FilmToggleControl } from '../internal/toggle-control.js'
  * Checkbox — a form-associated checkbox. The host element is the control, so it
  * carries the `checkbox` role and keyboard behaviour.
  *
- * @slot - The label.
+ * @slot - The label. Falls back to the `label` property.
  * @fires change - When the checked state changes.
  */
 @customElement('film-checkbox')
@@ -75,7 +75,7 @@ export class Checkbox extends FilmToggleControl {
           <path d="M3 8.5l3.5 3.5L13 4" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </span>
-      <slot></slot>
+      <slot>${this.label}</slot>
     `
   }
 }

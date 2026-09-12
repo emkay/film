@@ -27,4 +27,16 @@ describe('film-checkbox', () => {
     expect(new FormData(form).get('agree')).to.equal('on')
     form.remove()
   })
+
+  it('takes a label from the property as well as the slot', async () => {
+    const el = await fixture<Checkbox>(html`<film-checkbox label="Agree"></film-checkbox>`)
+    expect(el.shadowRoot?.textContent).to.contain('Agree')
+    expect(el.getAttribute('aria-label')).to.equal('Agree')
+  })
+
+  it('lets slotted content win over the label fallback', async () => {
+    const el = await fixture<Checkbox>(html`<film-checkbox label="Fallback">Slotted</film-checkbox>`)
+    const slot = el.shadowRoot?.querySelector('slot:not([name])') as HTMLSlotElement
+    expect(slot.assignedNodes().map((n) => n.textContent).join('')).to.equal('Slotted')
+  })
 })

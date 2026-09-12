@@ -18,7 +18,7 @@ export type SidebarScroll = 'none' | 'start' | 'end' | 'both'
  */
 @customElement('film-sidebar')
 export class Sidebar extends FilmElement {
-  /** The gap between the sidebar and the main content. */
+  /** The gap between the sidebar and the main content. A scale step (`s1`) or any CSS length. */
   @property({ type: String })
   space = 'var(--s3)'
 

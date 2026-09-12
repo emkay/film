@@ -11,7 +11,7 @@ import { FilmElement } from '../internal/film-element.js'
  */
 @customElement('film-grid')
 export class Grid extends FilmElement {
-  /** The gap between grid items. Defaults to a modular-scale step. */
+  /** The gap between grid items. A scale step (`s1`) or any CSS length. */
   @property({ type: String })
   space = 'var(--s1)'
 
