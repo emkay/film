@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/emkay/film/compare/v1.2.3...v1.3.0) (2026-09-12)
+
+
+### Features
+
+* button varient + form submission + fixes ([7131b43](https://github.com/emkay/film/commit/7131b436d9c40d57e8d23dc7a78d3ab302c5313d))
+
 ## [1.2.3](https://github.com/emkay/film/compare/v1.2.2...v1.2.3) (2026-08-27)
 
 
