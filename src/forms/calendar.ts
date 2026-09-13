@@ -50,7 +50,12 @@ function startOfDay (date: Date): Date {
 
 /**
  * Calendar — a month grid for choosing a date. Keyboard: arrows move by day,
- * Home/End jump to the week edges, PageUp/PageDown change month, Enter selects.
+ * Home/End jump to the week edges, PageUp/PageDown change month,
+ * Shift+PageUp/PageDown change year, Enter selects.
+ *
+ * The header steps by year as well as by month, so a date years away is a few
+ * clicks rather than one per month. Both stop at `min` / `max` instead of
+ * wandering into a fully disabled month.
  *
  * @fires film-change - When a date is chosen. `detail.value` is `YYYY-MM-DD`.
  */
@@ -100,8 +105,18 @@ export class Calendar extends FilmElement {
       border-radius: var(--film-radius-sm);
     }
 
-    .nav:hover {
+    .nav:hover:not([disabled]) {
       background-color: var(--film-color-info);
+    }
+
+    .nav[disabled] {
+      opacity: var(--film-disabled-opacity);
+      cursor: not-allowed;
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: center;
     }
 
     .weekdays,
@@ -188,8 +203,26 @@ export class Calendar extends FilmElement {
     this.pendingFocus = true
   }
 
+  /**
+   * Pull a date back inside `min` / `max`. Landing exactly on the bound keeps
+   * the cursor on a selectable day, where clamping to the start of the month
+   * could leave it on a disabled one.
+   */
+  private clampToRange (date: Date): Date {
+    const lo = parseISO(this.min)
+    const hi = parseISO(this.max)
+    if (lo && startOfDay(date) < startOfDay(lo)) return lo
+    if (hi && startOfDay(date) > startOfDay(hi)) return hi
+    return date
+  }
+
   private moveMonth (months: number): void {
-    this.cursor = addMonths(this.cursor, months)
+    this.cursor = this.clampToRange(addMonths(this.cursor, months))
+  }
+
+  /** Whether stepping by `months` would actually leave the current month. */
+  private canMove (months: number): boolean {
+    return !sameMonth(this.clampToRange(addMonths(this.cursor, months)), this.cursor)
   }
 
   private selectDate (date: Date): void {
@@ -207,8 +240,8 @@ export class Calendar extends FilmElement {
       case 'ArrowDown': event.preventDefault(); this.moveCursor(7); break
       case 'Home': event.preventDefault(); this.moveCursor(-this.cursor.getDay()); break
       case 'End': event.preventDefault(); this.moveCursor(6 - this.cursor.getDay()); break
-      case 'PageUp': event.preventDefault(); this.moveMonth(-1); this.pendingFocus = true; break
-      case 'PageDown': event.preventDefault(); this.moveMonth(1); this.pendingFocus = true; break
+      case 'PageUp': event.preventDefault(); this.moveMonth(event.shiftKey ? -12 : -1); this.pendingFocus = true; break
+      case 'PageDown': event.preventDefault(); this.moveMonth(event.shiftKey ? 12 : 1); this.pendingFocus = true; break
       case 'Enter':
       case ' ': event.preventDefault(); this.selectDate(this.cursor); break
     }
@@ -220,14 +253,30 @@ export class Calendar extends FilmElement {
     return Array.from({ length: 42 }, (_, i) => addDays(start, i))
   }
 
+  private navButton (months: number, label: string, glyph: string) {
+    return html`<button
+      class="nav"
+      type="button"
+      aria-label=${label}
+      ?disabled=${!this.canMove(months)}
+      @click=${() => this.moveMonth(months)}
+    >${glyph}</button>`
+  }
+
   render () {
     const today = new Date()
     const selected = this.selectedDate
     return html`
       <div class="header">
-        <button class="nav" @click=${() => this.moveMonth(-1)} aria-label="Previous month">‹</button>
+        <span class="nav-group">
+          ${this.navButton(-12, 'Previous year', '«')}
+          ${this.navButton(-1, 'Previous month', '‹')}
+        </span>
         <span class="month" aria-live="polite">${MONTHS[this.cursor.getMonth()]} ${this.cursor.getFullYear()}</span>
-        <button class="nav" @click=${() => this.moveMonth(1)} aria-label="Next month">›</button>
+        <span class="nav-group">
+          ${this.navButton(1, 'Next month', '›')}
+          ${this.navButton(12, 'Next year', '»')}
+        </span>
       </div>
       <div class="grid" role="grid" @keydown=${this.onGridKeydown}>
         <div class="weekdays" role="row">

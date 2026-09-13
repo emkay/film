@@ -2356,7 +2356,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Calendar — a month grid for choosing a date. Keyboard: arrows move by day,\nHome/End jump to the week edges, PageUp/PageDown change month, Enter selects.",
+          "description": "Calendar — a month grid for choosing a date. Keyboard: arrows move by day,\nHome/End jump to the week edges, PageUp/PageDown change month,\nShift+PageUp/PageDown change year, Enter selects.\n\nThe header steps by year as well as by month, so a date years away is a few\nclicks rather than one per month. Both stop at `min` / `max` instead of\nwandering into a fully disabled month.",
           "name": "Calendar",
           "members": [
             {
@@ -4388,7 +4388,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Input — a themed, form-associated text input.\n\nPressing Enter submits the associated native `<form>`, as it would in a plain\n`<input>`; inside a `<film-form>` that component handles it instead.",
+          "description": "Input — a themed, form-associated text input.\n\n`type=\"date\"` (and the rest of the date/time family) gives a typeable field\nwith the platform's own picker and keyboard entry, which is the quickest way\nto reach a date far from today. `min` / `max` / `step` bound it, and are\nenforced through the browser's own constraint validation rather than just\nbeing decorative.\n\nPressing Enter submits the associated native `<form>`, as it would in a plain\n`<input>`; inside a `<film-form>` that component handles it instead.",
           "name": "Input",
           "members": [
             {
@@ -4445,6 +4445,36 @@
               "default": "''",
               "description": "The autofill hint passed to the inner input, e.g. `username`,\n`current-password`, `email`. Without it password managers have only the\ninput `type` to go on.",
               "attribute": "autocomplete"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Lower bound for the value. A `YYYY-MM-DD` date for `type=\"date\"`, a number\nfor `type=\"number\"`, and so on — whatever the input type expects.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Upper bound for the value, in the same form as min.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "step",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Granularity of the value, e.g. `1` for whole numbers or `7` for weeks.",
+              "attribute": "step"
             },
             {
               "kind": "method",
@@ -4650,6 +4680,33 @@
               "default": "''",
               "description": "The autofill hint passed to the inner input, e.g. `username`,\n`current-password`, `email`. Without it password managers have only the\ninput `type` to go on.",
               "fieldName": "autocomplete"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Lower bound for the value. A `YYYY-MM-DD` date for `type=\"date\"`, a number\nfor `type=\"number\"`, and so on — whatever the input type expects.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Upper bound for the value, in the same form as min.",
+              "fieldName": "max"
+            },
+            {
+              "name": "step",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Granularity of the value, e.g. `1` for whole numbers or `7` for weeks.",
+              "fieldName": "step"
             },
             {
               "name": "name",

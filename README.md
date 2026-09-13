@@ -142,6 +142,31 @@ drives the form itself. `type="submit"` calls `requestSubmit()` and
 in a plain `<input>`. Set `autocomplete` (`username`, `current-password`, …) so
 password managers recognise a sign-in pair.
 
+### Dates
+
+Two ways in, for two different jobs:
+
+- **`film-input type="date"`** — a real text field, so the date is typeable and
+  gets the platform's own picker and keyboard entry. Quickest for a date far
+  from today. The rest of the family (`time`, `datetime-local`, `month`, `week`)
+  works the same way.
+- **`film-date-picker`** — a trigger plus a `film-calendar` in a popover, for
+  choosing a date near today by eye.
+
+Both take `min` / `max`. On `film-input` these are forwarded to the inner input
+and enforced by the browser's own constraint validation, so an out-of-range
+value fails `checkValidity()` and blocks submission rather than being decorative:
+
+```html
+<film-input name="as-at" type="date" label="Readiness as at"
+            min="2020-01-01" max="2026-12-31"></film-input>
+```
+
+`film-calendar`'s header steps by year (`«` `»`) as well as by month (`‹` `›`),
+with Shift+PageUp / PageDown for the same from the keyboard — a date six years
+back is a handful of clicks rather than one per month. Both stop at `min` /
+`max` instead of wandering into a fully disabled month.
+
 `film-form` is the alternative, for collecting values without a native form. It
 aggregates the slotted controls, exposes `getValues()` / `submit()` / `reset()`
 and fires `film-submit`, `film-invalid` and `film-reset`:

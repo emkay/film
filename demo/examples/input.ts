@@ -17,6 +17,14 @@ export const inputExample = (): TemplateResult => html`
         type="password"
         autocomplete="current-password"
       ></film-input>
+      <p>
+        The date/time types are typeable and bounded — <code>min</code> /
+        <code>max</code> / <code>step</code> are forwarded to the inner input and
+        enforced by constraint validation.
+      </p>
+      <film-input label="As at" type="date" min="2020-01-01" max="2026-12-31"></film-input>
+      <film-input label="Meeting time" type="time"></film-input>
+      <film-input label="Reporting month" type="month"></film-input>
     </film-stack>
   </film-box>
 `

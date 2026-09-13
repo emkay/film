@@ -122,5 +122,14 @@ as a styling bug.
       also recovered the `film-open` / `film-close` React event props)
 - [x] Docs — `space` vs `size`, native forms vs `film-form`, and the backticks-in-
       a-tagged-template footgun
+- [x] `film-input` `type="date"` (plus `time` / `datetime-local` / `month` /
+      `week`) with `min` / `max` / `step` forwarded — a date far from today is
+      typeable, and the bounds are enforced through the inner input's own
+      constraint validation rather than only `required`
+- [x] `film-calendar` steps by year (`«` `»`, Shift+PageUp/PageDown) and clamps
+      to `min` / `max` — reaching January 2020 from 2026 was ~70 month clicks
 - [ ] Constrain `variant` / `placement` / `size` style attributes at runtime, so
       an unknown value warns in dev mode instead of being ignored (P2)
+- [ ] `film-date-picker` typeable trigger — a text field alongside the calendar
+      popover, so the component is usable without `film-input` as the fallback
+      (P2)

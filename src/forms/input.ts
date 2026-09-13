@@ -10,9 +10,32 @@ export type InputType =
   | 'search'
   | 'tel'
   | 'url'
+  | 'date'
+  | 'time'
+  | 'datetime-local'
+  | 'month'
+  | 'week'
+
+/**
+ * Copy a ValidityState's set flags into the plain object `setValidity` takes.
+ * `valid` is derived, so it isn't a flag and must not be forwarded.
+ */
+function validityFlags (validity: ValidityState): ValidityStateFlags {
+  const flags: ValidityStateFlags = {}
+  for (const key of Object.keys(ValidityState.prototype) as (keyof ValidityState)[]) {
+    if (key !== 'valid' && validity[key]) flags[key as keyof ValidityStateFlags] = true
+  }
+  return flags
+}
 
 /**
  * Input — a themed, form-associated text input.
+ *
+ * `type="date"` (and the rest of the date/time family) gives a typeable field
+ * with the platform's own picker and keyboard entry, which is the quickest way
+ * to reach a date far from today. `min` / `max` / `step` bound it, and are
+ * enforced through the browser's own constraint validation rather than just
+ * being decorative.
  *
  * Pressing Enter submits the associated native `<form>`, as it would in a plain
  * `<input>`; inside a `<film-form>` that component handles it instead.
@@ -34,6 +57,18 @@ export class Input extends FilmFormControl {
    * input `type` to go on.
    */
   @property({ type: String }) autocomplete = ''
+
+  /**
+   * Lower bound for the value. A `YYYY-MM-DD` date for `type="date"`, a number
+   * for `type="number"`, and so on — whatever the input type expects.
+   */
+  @property({ type: String }) min = ''
+
+  /** Upper bound for the value, in the same form as {@link min}. */
+  @property({ type: String }) max = ''
+
+  /** Granularity of the value, e.g. `1` for whole numbers or `7` for weeks. */
+  @property({ type: String }) step = ''
 
   @query('input') private input!: HTMLInputElement
 
@@ -81,6 +116,24 @@ export class Input extends FilmFormControl {
     return this.input
   }
 
+  /**
+   * Delegate to the inner input, which already enforces `type`, `required`,
+   * `min`, `max` and `step`. Without this the host reports only `required`, so
+   * a date outside `min`/`max` would submit as valid.
+   */
+  protected override updateValidity (): void {
+    const input = this.input
+    if (!input) {
+      super.updateValidity()
+      return
+    }
+    if (input.validity.valid) {
+      this.internals.setValidity({})
+      return
+    }
+    this.internals.setValidity(validityFlags(input.validity), input.validationMessage, input)
+  }
+
   formResetCallback (): void {
     this.value = this.getAttribute('value') ?? ''
     this.syncForm()
@@ -90,8 +143,11 @@ export class Input extends FilmFormControl {
     this.syncForm()
   }
 
+  // Constraints are forwarded as attributes during render, so re-running
+  // validation here picks up the inner input's freshly applied bounds.
   updated (changed: PropertyValues<this>): void {
-    if (changed.has('value')) this.syncForm()
+    const constraints = ['value', 'min', 'max', 'step', 'type', 'required'] as const
+    if (constraints.some((name) => changed.has(name))) this.syncForm()
   }
 
   private onInput (event: Event): void {
@@ -124,6 +180,9 @@ export class Input extends FilmFormControl {
           .value=${this.value}
           placeholder=${this.placeholder}
           autocomplete=${this.autocomplete || nothing}
+          min=${this.min || nothing}
+          max=${this.max || nothing}
+          step=${this.step || nothing}
           ?disabled=${this.disabled}
           ?required=${this.required}
           ?readonly=${this.readonly}
