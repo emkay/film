@@ -127,4 +127,128 @@ describe('film-table', () => {
     const boxes = el.shadowRoot?.querySelectorAll('tbody input[type="checkbox"]') as NodeListOf<HTMLInputElement>
     expect(Array.from(boxes).map((b) => b.checked)).to.deep.equal([false, false, true])
   })
+
+  describe('row-key', () => {
+    const people = (): TableRow[] => [
+      { id: 1, name: 'Ada', n: 3 },
+      { id: 2, name: 'Grace', n: 1 },
+      { id: 3, name: 'Alan', n: 2 }
+    ]
+    const keyed: TableColumn[] = [
+      { key: 'name', label: 'Name', sortable: true },
+      { key: 'n', label: 'N', sortable: true }
+    ]
+    const bodyBoxes = (el: Table): HTMLInputElement[] =>
+      Array.from(el.shadowRoot?.querySelectorAll('tbody input[type="checkbox"]') ?? [])
+    const headerBox = (el: Table): HTMLInputElement =>
+      el.shadowRoot?.querySelector('thead input[type="checkbox"]') as HTMLInputElement
+
+    async function keyedTable (): Promise<Table> {
+      return fixture<Table>(
+        html`<film-table selectable row-key="id" .columns=${keyed} .rows=${people()}></film-table>`
+      )
+    }
+
+    it('keeps selection when rows are refetched as new objects', async () => {
+      const el = await keyedTable()
+      bodyBoxes(el)[1].click()
+      await el.updateComplete
+
+      el.rows = people()
+      await el.updateComplete
+      expect(bodyBoxes(el).map((b) => b.checked)).to.deep.equal([false, true, false])
+      expect(headerBox(el).indeterminate).to.equal(true)
+    })
+
+    it('does not report a selection change when a refetch keeps every selected key', async () => {
+      const el = await keyedTable()
+      bodyBoxes(el)[0].click()
+      await el.updateComplete
+      let events = 0
+      el.addEventListener('film-selection-change', () => { events += 1 })
+
+      el.rows = people()
+      await el.updateComplete
+      expect(events).to.equal(0)
+    })
+
+    it('reports the current row objects, not the ones that were clicked', async () => {
+      const el = await keyedTable()
+      bodyBoxes(el)[0].click()
+      await el.updateComplete
+
+      const fresh = people()
+      fresh[0].name = 'Ada Lovelace'
+      el.rows = fresh
+      await el.updateComplete
+      setTimeout(() => bodyBoxes(el)[2].click())
+      const event = await oneEvent(el, 'film-selection-change')
+      expect(event.detail.rows).to.deep.equal([fresh[0], fresh[2]])
+      expect(event.detail.rows[0]).to.equal(fresh[0])
+    })
+
+    it('drops keys that are no longer present and reports it', async () => {
+      const el = await keyedTable()
+      bodyBoxes(el)[0].click()
+      bodyBoxes(el)[1].click()
+      await el.updateComplete
+
+      setTimeout(() => { el.rows = people().filter((row) => row.id !== 1) })
+      const event = await oneEvent(el, 'film-selection-change')
+      expect(event.detail.rows.map((row: TableRow) => row.id)).to.deep.equal([2])
+    })
+
+    it('keeps selection on the same rows through a sort', async () => {
+      const el = await keyedTable()
+      bodyBoxes(el)[1].click() // Grace
+      await el.updateComplete
+
+      ;(el.shadowRoot?.querySelector('.sort') as HTMLButtonElement).click() // by name
+      await el.updateComplete
+      const names = Array.from(el.shadowRoot?.querySelectorAll('tbody tr') ?? []).map(
+        (tr) => tr.querySelectorAll('td')[1].textContent
+      )
+      const checked = bodyBoxes(el).map((b) => b.checked)
+      expect(names[checked.indexOf(true)]).to.equal('Grace')
+    })
+
+    it('falls back to identity for a row without the key field', async () => {
+      const loose = { name: 'No id', n: 0 }
+      const el = await fixture<Table>(
+        html`<film-table selectable row-key="id" .columns=${keyed} .rows=${[...people(), loose]}></film-table>`
+      )
+      bodyBoxes(el)[3].click()
+      await el.updateComplete
+
+      el.rows = [...people(), loose]
+      await el.updateComplete
+      expect(bodyBoxes(el)[3].checked, 'same object, still selected').to.equal(true)
+
+      el.rows = [...people(), { name: 'No id', n: 0 }]
+      await el.updateComplete
+      expect(bodyBoxes(el)[3].checked, 'a new object has no key to match').to.equal(false)
+    })
+
+    it('re-checks the selection when row-key itself changes', async () => {
+      const el = await keyedTable()
+      bodyBoxes(el)[0].click()
+      await el.updateComplete
+
+      setTimeout(() => { el.rowKey = 'name' })
+      const event = await oneEvent(el, 'film-selection-change')
+      // The stored key was an id; under `name` nothing matches it any more.
+      expect(event.detail.rows).to.deep.equal([])
+    })
+
+    it('selects every row with the header checkbox, surviving a refetch', async () => {
+      const el = await keyedTable()
+      headerBox(el).click()
+      await el.updateComplete
+
+      el.rows = people()
+      await el.updateComplete
+      expect(headerBox(el).checked).to.equal(true)
+      expect(bodyBoxes(el).every((b) => b.checked)).to.equal(true)
+    })
+  })
 })

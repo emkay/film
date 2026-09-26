@@ -52,8 +52,18 @@ export const tableExample = (): TemplateResult => html`
     <h3 id="film-components-table">Table</h3>
     <film-stack>
       <div>
-        <p>Click a column header to sort; tick rows to select.</p>
-        <film-table caption="Contributors" selectable .columns=${columns} .rows=${rows}></film-table>
+        <p>
+          Click a column header to sort; tick rows to select. <code>row-key</code>
+          names the field that identifies a row, so the selection survives
+          <code>rows</code> being rebuilt from fresh data.
+        </p>
+        <film-table
+          caption="Contributors"
+          selectable
+          row-key="name"
+          .columns=${columns}
+          .rows=${rows}
+        ></film-table>
       </div>
       <div>
         <h4>Activatable rows</h4>
