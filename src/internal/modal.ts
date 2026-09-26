@@ -39,11 +39,12 @@ export abstract class FilmModal extends FilmElement {
     }
   }
 
+  // The native dialog's `close` fires once per close, however it happened:
+  // close(), the ✕ button, a backdrop click (all of which set `open` first) or
+  // Escape (which doesn't). So announce every one, and sync `open` for Escape.
   protected readonly onClose = (): void => {
-    if (this.open) {
-      this.open = false
-      this.dispatchEvent(new Event('film-close'))
-    }
+    this.open = false
+    this.dispatchEvent(new Event('film-close'))
   }
 
   protected readonly onClick = (event: MouseEvent): void => {

@@ -1,3 +1,4 @@
+import type { PropertyValues } from 'lit'
 import { property } from 'lit/decorators.js'
 import { FilmElement } from './film-element.js'
 
@@ -6,11 +7,17 @@ import { FilmElement } from './film-element.js'
  * so subclasses participate in a native `<form>`: they submit a value by name,
  * take part in constraint validation, and respond to form reset / disable.
  *
- * Subclasses implement {@link getFormValue} and {@link formResetCallback}, and
- * call {@link syncForm} whenever their value changes.
+ * It also owns the lifecycle every control shares: the value and validity are
+ * sent to the form on first render and whenever one of {@link formProps}
+ * changes, and a form reset restores the control's default. Subclasses
+ * implement {@link getFormValue}; they call {@link syncForm} themselves only for
+ * state that isn't a reactive property.
  */
 export abstract class FilmFormControl extends FilmElement {
   static formAssociated = true
+
+  /** Properties that feed the submitted value or its validity. */
+  static formProps: readonly string[] = ['value']
 
   static shadowRootOptions: ShadowRootInit = {
     ...FilmElement.shadowRootOptions,
@@ -27,6 +34,10 @@ export abstract class FilmFormControl extends FilmElement {
 
   /** Whether a value is required for the form to be valid. */
   @property({ type: Boolean, reflect: true }) required = false
+
+  /** `value` as the control first connected — the reset fallback. */
+  private initialValue: unknown
+  private initialCaptured = false
 
   /** The associated form, if any. */
   get form (): HTMLFormElement | null {
@@ -78,9 +89,46 @@ export abstract class FilmFormControl extends FilmElement {
     this.updateValidity()
   }
 
+  connectedCallback (): void {
+    super.connectedCallback()
+    if (!this.initialCaptured) {
+      this.initialValue = (this as unknown as Record<string, unknown>).value
+      this.initialCaptured = true
+    }
+  }
+
+  firstUpdated (_changed: PropertyValues): void {
+    this.syncForm()
+  }
+
+  updated (changed: PropertyValues): void {
+    super.updated(changed)
+    const props = (this.constructor as typeof FilmFormControl).formProps
+    if (props.some((name) => changed.has(name))) this.syncForm()
+  }
+
   formDisabledCallback (disabled: boolean): void {
     this.disabled = disabled
   }
 
-  abstract formResetCallback (): void
+  formResetCallback (): void {
+    this.restoreDefault()
+    this.syncForm()
+  }
+
+  /**
+   * Put the control back to its default for a form reset: the `value`
+   * attribute if there is one — as on a native input — otherwise the value it
+   * started with. Override for state beyond `value`.
+   */
+  protected restoreDefault (): void {
+    const self = this as unknown as Record<string, unknown>
+    const attribute = this.getAttribute('value')
+    if (attribute === null) {
+      self.value = this.initialValue
+      return
+    }
+    const ctor = this.constructor as typeof FilmFormControl
+    self.value = ctor.elementProperties.get('value')?.type === Number ? Number(attribute) : attribute
+  }
 }

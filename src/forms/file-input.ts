@@ -79,18 +79,16 @@ export class FileInput extends FilmFormControl {
     return data
   }
 
-  formResetCallback (): void {
+  static formProps = ['files']
+
+  protected override restoreDefault (): void {
     this.files = []
     if (this.input) this.input.value = ''
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
-    this.syncForm()
   }
 
   private setFiles (list: FileList | null): void {
     this.files = list ? Array.from(list) : []
+    // Sync now rather than on update, so `change` listeners see the new files.
     this.syncForm()
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }))
   }

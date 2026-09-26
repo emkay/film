@@ -1,7 +1,7 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
-import { anchorPosition } from '../internal/anchor-position.js'
+import { PopoverController } from '../internal/popover-controller.js'
 import type { Menu } from './menu.js'
 
 /**
@@ -32,7 +32,11 @@ export class MenuBarItem extends FilmElement {
   @query('.trigger') private triggerEl!: HTMLButtonElement
   @query('.panel') private panel!: HTMLElement
 
-  private cleanup?: () => void
+  private readonly floating = new PopoverController(this, {
+    anchor: () => this.triggerEl,
+    panel: () => this.panel,
+    options: () => ({ placement: 'bottom', align: 'start' })
+  })
   private pendingFocus: 'first' | 'last' | 'none' = 'none'
 
   static styles = css`
@@ -116,24 +120,20 @@ export class MenuBarItem extends FilmElement {
   }
 
   updated (changed: PropertyValues<this>): void {
+    super.updated(changed)
     if (!changed.has('open')) return
+    // Announce only real transitions: `open` starts false, so the first render
+    // would otherwise tell the menu bar about a close nobody made.
+    const wasOpen = this.floating.isOpen
     if (this.open) {
-      this.panel.showPopover()
-      this.cleanup = anchorPosition(this.triggerEl, this.panel, { placement: 'bottom', align: 'start' })
+      this.floating.show()
       this.applyMenuFocus(this.pendingFocus)
       this.pendingFocus = 'none'
-      this.dispatchEvent(new Event('film-menubar-open', { bubbles: true }))
+      if (!wasOpen) this.dispatchEvent(new Event('film-menubar-open', { bubbles: true }))
     } else {
-      this.cleanup?.()
-      this.cleanup = undefined
-      if (this.panel?.matches(':popover-open')) this.panel.hidePopover()
-      this.dispatchEvent(new Event('film-menubar-close', { bubbles: true }))
+      this.floating.hide()
+      if (wasOpen) this.dispatchEvent(new Event('film-menubar-close', { bubbles: true }))
     }
-  }
-
-  disconnectedCallback (): void {
-    this.cleanup?.()
-    super.disconnectedCallback()
   }
 
   private readonly onToggle = (event: Event): void => {

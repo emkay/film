@@ -1,7 +1,7 @@
 import { css, html, nothing } from 'lit'
 import { customElement, property, query, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
-import { anchorPosition } from '../internal/anchor-position.js'
+import { PopoverController } from '../internal/popover-controller.js'
 import type { Menu } from './menu.js'
 
 /**
@@ -31,7 +31,11 @@ export class MenuItem extends FilmElement {
   @query('.submenu') private submenuEl!: HTMLElement
   @query('slot[name="submenu"]') private submenuSlot!: HTMLSlotElement
 
-  private cleanup?: () => void
+  private readonly floating = new PopoverController(this, {
+    anchor: () => this,
+    panel: () => this.submenuEl,
+    options: () => ({ placement: 'right', align: 'start', gap: 2 })
+  })
   private closeTimer?: number
 
   static styles = css`
@@ -96,7 +100,6 @@ export class MenuItem extends FilmElement {
   }
 
   disconnectedCallback (): void {
-    this.cleanup?.()
     if (this.closeTimer) clearTimeout(this.closeTimer)
     super.disconnectedCallback()
   }
@@ -137,8 +140,7 @@ export class MenuItem extends FilmElement {
   openSubmenu (focusFirst = false): void {
     if (!this.hasSubmenu) return
     if (!this.submenuOpen) {
-      this.submenuEl.showPopover()
-      this.cleanup = anchorPosition(this, this.submenuEl, { placement: 'right', align: 'start', gap: 2 })
+      this.floating.show()
       this.submenuOpen = true
       this.setAttribute('aria-expanded', 'true')
     }
@@ -148,9 +150,7 @@ export class MenuItem extends FilmElement {
   /** Close the flyout. */
   closeSubmenu (): void {
     if (!this.submenuOpen) return
-    this.cleanup?.()
-    this.cleanup = undefined
-    if (this.submenuEl?.matches(':popover-open')) this.submenuEl.hidePopover()
+    this.floating.hide()
     this.submenuOpen = false
     this.setAttribute('aria-expanded', 'false')
   }
@@ -158,8 +158,7 @@ export class MenuItem extends FilmElement {
   private readonly onSubmenuToggle = (event: Event): void => {
     // Sync when the browser closes the popover (Escape / light-dismiss / ancestor hidden).
     if ((event as ToggleEvent).newState === 'open' || !this.submenuOpen) return
-    this.cleanup?.()
-    this.cleanup = undefined
+    this.floating.hide()
     this.submenuOpen = false
     this.setAttribute('aria-expanded', 'false')
     // Escape moves focus to the body; return it to the item so the menu stays operable.

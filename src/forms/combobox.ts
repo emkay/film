@@ -1,8 +1,9 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property, query, state } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
-import { anchorPosition } from '../internal/anchor-position.js'
+import { PopoverController } from '../internal/popover-controller.js'
 import type { SelectOption } from './select-option.js'
+import { activeElementOf } from '../internal/dom.js'
 
 /**
  * Combobox — a form-associated select with type-to-filter autocomplete. Options
@@ -30,7 +31,11 @@ export class Combobox extends FilmFormControl {
   @query('input') private input!: HTMLInputElement
   @query('.listbox') private listbox!: HTMLElement
 
-  private cleanup?: () => void
+  private readonly floating = new PopoverController(this, {
+    anchor: () => this.input,
+    panel: () => this.listbox,
+    options: () => ({ placement: 'bottom', align: 'start' })
+  })
 
   static styles = css`
     :host {
@@ -108,32 +113,29 @@ export class Combobox extends FilmFormControl {
     return this.input
   }
 
-  formResetCallback (): void {
-    this.value = this.getAttribute('value') ?? ''
-    this.text = this.selectedOption?.label ?? ''
-    this.filter()
-    this.syncOptions()
-    this.syncForm()
+  protected override restoreDefault (): void {
+    super.restoreDefault()
+    this.showSelected()
   }
 
-  firstUpdated (): void {
+  firstUpdated (changed: PropertyValues<this>): void {
+    super.firstUpdated(changed)
+    this.showSelected()
+  }
+
+  /** Show the selected option's label in the field, with the list matching it. */
+  private showSelected (): void {
     this.text = this.selectedOption?.label ?? ''
     this.filter()
     this.syncOptions()
-    this.syncForm()
   }
 
   updated (changed: PropertyValues<this>): void {
-    if (changed.has('value')) this.syncForm()
+    super.updated(changed)
     if (changed.has('open')) {
       if (this.open) this.openListbox()
-      else this.closeListbox()
+      else this.floating.hide()
     }
-  }
-
-  disconnectedCallback (): void {
-    this.cleanup?.()
-    super.disconnectedCallback()
   }
 
   private syncOptions (): void {
@@ -150,15 +152,8 @@ export class Combobox extends FilmFormControl {
   }
 
   private openListbox (): void {
-    this.listbox.showPopover()
     this.listbox.style.minInlineSize = `${this.input.offsetWidth}px`
-    this.cleanup = anchorPosition(this.input, this.listbox, { placement: 'bottom', align: 'start' })
-  }
-
-  private closeListbox (): void {
-    this.cleanup?.()
-    this.cleanup = undefined
-    if (this.listbox?.matches(':popover-open')) this.listbox.hidePopover()
+    this.floating.show()
   }
 
   private readonly onToggle = (event: Event): void => {
@@ -179,8 +174,14 @@ export class Combobox extends FilmFormControl {
     this.syncOptions()
     this.syncForm()
     this.dispatchEvent(new Event('change', { bubbles: true }))
-    this.open = false
+    this.returnFocusAndClose()
+  }
+
+  // Focus first: the input's focus handler opens the listbox, so closing before
+  // focusing would have it reopen straight after a choice or Escape.
+  private returnFocusAndClose (): void {
     this.input.focus()
+    this.open = false
   }
 
   private readonly onListboxClick = (event: MouseEvent): void => {
@@ -190,7 +191,7 @@ export class Combobox extends FilmFormControl {
 
   private readonly onKeydown = (event: KeyboardEvent): void => {
     const options = this.visibleOptions
-    const current = options.indexOf(document.activeElement as SelectOption)
+    const current = options.indexOf(activeElementOf(this) as SelectOption)
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault()
@@ -202,7 +203,7 @@ export class Combobox extends FilmFormControl {
         options[Math.max(current - 1, 0)]?.focus()
         break
       case 'Enter': {
-        const focused = document.activeElement as SelectOption
+        const focused = activeElementOf(this) as SelectOption
         if (options.includes(focused)) {
           event.preventDefault()
           this.select(focused)
@@ -210,8 +211,7 @@ export class Combobox extends FilmFormControl {
         break
       }
       case 'Escape':
-        this.open = false
-        this.input.focus()
+        this.returnFocusAndClose()
         break
     }
   }

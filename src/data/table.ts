@@ -70,7 +70,11 @@ export class Table extends FilmElement {
 
   @state() private sortKey: string | null = null
   @state() private sortDir: 'asc' | 'desc' = 'asc'
-  @state() private selected = new Set<number>()
+  /**
+   * Selected rows, by identity. Indices would silently point at different rows
+   * (or past the end) once `rows` is replaced, reordered or refetched.
+   */
+  @state() private selected = new Set<TableRow>()
   @state() private scrollOffset = 0
 
   private resizeObserver?: ResizeObserver
@@ -185,6 +189,19 @@ export class Table extends FilmElement {
     if (this.virtualized) this.requestUpdate()
   }
 
+  willUpdate (changed: PropertyValues<this>): void {
+    // Drop selections whose rows are gone, and tell listeners the selection
+    // changed rather than leaving them holding rows the table no longer shows.
+    if (changed.has('rows') && this.selected.size > 0) {
+      const present = new Set(this.rows)
+      const kept = new Set([...this.selected].filter((row) => present.has(row)))
+      if (kept.size !== this.selected.size) {
+        this.selected = kept
+        this.emitSelection()
+      }
+    }
+  }
+
   updated (changed: PropertyValues<this>): void {
     super.updated(changed)
     if (changed.has('rowHeight')) this.style.setProperty('--film-row-height', `${this.rowHeight}px`)
@@ -251,22 +268,20 @@ export class Table extends FilmElement {
   }
 
   private toggleAll (checked: boolean): void {
-    this.selected = checked ? new Set(this.rows.map((_, index) => index)) : new Set()
+    this.selected = checked ? new Set(this.rows) : new Set()
     this.emitSelection()
   }
 
-  private toggleRow (index: number): void {
+  private toggleRow (row: TableRow): void {
     const next = new Set(this.selected)
-    if (next.has(index)) next.delete(index)
-    else next.add(index)
+    if (next.has(row)) next.delete(row)
+    else next.add(row)
     this.selected = next
     this.emitSelection()
   }
 
   private emitSelection (): void {
-    const rows = Array.from(this.selected)
-      .sort((a, b) => a - b)
-      .map((index) => this.rows[index])
+    const rows = this.rows.filter((row) => this.selected.has(row))
     this.dispatchEvent(new CustomEvent('film-selection-change', { detail: { rows }, bubbles: true }))
   }
 
@@ -317,8 +332,8 @@ export class Table extends FilmElement {
               <input
                 type="checkbox"
                 aria-label="Select row"
-                .checked=${this.selected.has(index)}
-                @change=${() => this.toggleRow(index)}
+                .checked=${this.selected.has(row)}
+                @change=${() => this.toggleRow(row)}
               />
             </td>`
           : nothing}

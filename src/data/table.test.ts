@@ -91,4 +91,40 @@ describe('film-table', () => {
     expect(dataRows.length).to.be.lessThan(60)
     expect(el.shadowRoot?.querySelector('table')?.getAttribute('aria-rowcount')).to.equal('1001')
   })
+
+  it('drops selection for rows that are no longer present', async () => {
+    const el = await fixture<Table>(
+      html`<film-table selectable .columns=${columns} .rows=${rows}></film-table>`
+    )
+    const boxes = el.shadowRoot?.querySelectorAll('tbody input[type="checkbox"]') as NodeListOf<HTMLInputElement>
+    boxes[1].click()
+    boxes[2].click()
+    await el.updateComplete
+
+    el.rows = [{ name: 'z', n: 9 }]
+    await el.updateComplete
+    const all = el.shadowRoot?.querySelector('thead input[type="checkbox"]') as HTMLInputElement
+    expect(all.indeterminate).to.equal(false)
+    expect(all.checked).to.equal(false)
+
+    const box = el.shadowRoot?.querySelector('tbody input[type="checkbox"]') as HTMLInputElement
+    setTimeout(() => box.click())
+    const event = await oneEvent(el, 'film-selection-change')
+    expect(event.detail.rows).to.deep.equal([{ name: 'z', n: 9 }])
+  })
+
+  it('keeps selection attached to the same row objects when rows are reordered', async () => {
+    const data = [...rows]
+    const el = await fixture<Table>(
+      html`<film-table selectable .columns=${columns} .rows=${data}></film-table>`
+    )
+    const first = el.shadowRoot?.querySelector('tbody input[type="checkbox"]') as HTMLInputElement
+    first.click()
+    await el.updateComplete
+
+    el.rows = [data[2], data[1], data[0]]
+    await el.updateComplete
+    const boxes = el.shadowRoot?.querySelectorAll('tbody input[type="checkbox"]') as NodeListOf<HTMLInputElement>
+    expect(Array.from(boxes).map((b) => b.checked)).to.deep.equal([false, false, true])
+  })
 })
