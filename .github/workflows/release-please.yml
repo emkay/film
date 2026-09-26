@@ -11,3 +11,6 @@ jobs:
         with:
           release-type: node
           package-name: release-please-action
+          # Bumps the `x-release-please-version` line so the version Film
+          # reports at runtime matches the published package.
+          extra-files: src/internal/version.ts

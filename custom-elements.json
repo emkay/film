@@ -7447,6 +7447,14 @@
         },
         {
           "kind": "js",
+          "name": "version",
+          "declaration": {
+            "name": "version",
+            "module": "./internal/version.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "setFilmWarnings",
           "declaration": {
             "name": "setFilmWarnings",

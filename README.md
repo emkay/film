@@ -281,6 +281,74 @@ Each palette only overrides the `--film-color-*` roles (and, for some, the
 corner radius), so adding a new one is a single CSS block. That file is the
 config a theme picker can enumerate.
 
+## Writing your own Lit components
+
+Most apps built on Film also write their own Lit elements around it. Two
+language pitfalls come up constantly there, and both fail far from the cause.
+
+### Backticks inside `css` and `html` templates
+
+Styles and templates are tagged template literals, so a backtick anywhere inside
+one — including in a comment — ends the template early. Commenting a rule with
+the element it concerns is the natural thing to reach for, and with Film
+element names all over your styles the temptation is constant:
+
+```js
+static styles = css`
+  /* `film-cluster` owns the gap */   // ← terminates the template here
+`
+```
+
+The resulting syntax errors point at whatever follows, often far below the
+cause. Write the name without backticks in CSS and HTML comments, or escape it
+(``\` ``). JSDoc comments sit outside the template and are unaffected.
+
+### Property names that `HTMLElement` already uses
+
+A Lit element *is* an `HTMLElement`, so a reactive property named `title`,
+`id`, `hidden`, `role`, `slot`, `lang`, `dir`, `style`, `part`, `popover`,
+`inert` — or a method name like `remove`, `focus` or `click` — collides with the
+built-in one. How it fails depends on the declaration:
+
+- **Private, or a different type** (`@state() private title`,
+  `@property() hidden = 0`): TypeScript reports
+  `TS1238: Unable to resolve signature of class decorator` at the *decorator*.
+  The real cause is the error listed right after it — `TS2415: Class '…'
+  incorrectly extends base class` or `TS2416: Property '…' is not assignable` —
+  which names the field.
+- **Public, same type** (`@property() title = ''`): it compiles, and silently
+  takes over the native property — here the browser tooltip that `title`
+  drives.
+
+Pick a name that says what it's for instead: `heading`, `panelRole`,
+`isHidden`. Film follows the same rule (its popover controller field is called
+`floating` because `popover` is taken).
+
+## Troubleshooting
+
+### A fix doesn't seem to have landed after upgrading
+
+Dev servers that pre-bundle dependencies can keep serving the old copy of Film
+after an upgrade: Vite keeps them in `node_modules/.vite/deps/`. The package on
+disk is new; the browser runs the old components, and every symptom looks like
+a Film regression.
+
+Check which version the page actually loaded — every copy of Film that runs
+records itself on a global, so in the browser console:
+
+```js
+filmVersions   // ['1.4.0']
+```
+
+If that's older than the installed package, clear the cache and restart —
+`rm -rf node_modules/.vite`, or start Vite with `--force`. Two entries mean two
+copies of Film are loaded, which usually has the same cause. You can also read
+the version in code:
+
+```js
+import { version } from '@mk/film'
+```
+
 ## Development
 
 ```sh
@@ -291,26 +359,11 @@ npm run build      # build the demo site into dist/
 npm run build:lib  # build the publishable library into dist/
 ```
 
-### Backticks inside `css` and `html` templates
-
-Styles and templates are tagged template literals, so a backtick anywhere inside
-one — including in a comment — ends the template early. Commenting a rule with
-the element it concerns is the natural thing to reach for, and it breaks the
-file:
-
-```js
-static styles = css`
-  /* `film-cluster` owns the gap */   // ← terminates the template here
-`
-```
-
-The resulting syntax errors point at whatever follows, often far from the cause.
-Write the name without backticks in CSS and HTML comments, or escape it
-(``\` ``). JSDoc comments sit outside the template and are unaffected.
-
 Written in TypeScript with Lit decorators. The library source lives in `src/`
 (grouped into `layout`, `actions`, `typography`, `forms`, `navigation`,
 `overlays`, `data`, `feedback`, with shared internals in `internal`), the demo
 site in `demo/`, and the theme/scale CSS in `css/` (palette in
 `definitions/colors.css`, semantic tokens in `application/theme.css`). Every
-component extends `FilmElement`; form controls extend `FilmFormControl`.
+component extends `FilmElement`; form controls extend `FilmFormControl`. The
+pitfalls under [Writing your own Lit components](#writing-your-own-lit-components)
+apply to Film's own source too.

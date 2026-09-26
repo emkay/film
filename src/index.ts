@@ -11,6 +11,9 @@ export * from './navigation/index.js'
 export * from './overlays/index.js'
 export * from './windowing/index.js'
 
+// This copy's version (also recorded on globalThis.filmVersions)
+export { version } from './internal/version.js'
+
 // Attribute warnings (on by default)
 export { setFilmWarnings } from './internal/attribute-check.js'
 

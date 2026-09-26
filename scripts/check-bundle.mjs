@@ -26,7 +26,8 @@ const result = await build({
 const output = result.outputFiles[0].text
 // The tag strings only survive if the (side-effectful) modules weren't dropped.
 // customElements.define itself lives in the external Lit lib, not this bundle.
-const expected = ['film-button', 'film-dialog', 'film-input']
+// `filmVersions` is the version registry, which nothing imports a value from.
+const expected = ['film-button', 'film-dialog', 'film-input', 'filmVersions']
 const missing = expected.filter((token) => !output.includes(token))
 
 if (missing.length > 0) {
