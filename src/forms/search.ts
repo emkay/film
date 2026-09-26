@@ -132,7 +132,7 @@ export class Search extends FilmFormControl {
             .value=${this.value}
             placeholder=${this.placeholder}
             ?disabled=${this.disabled}
-            aria-label=${this.label || 'Search'}
+            aria-label=${this.accessibleName('Search')}
             @input=${this.onInput}
             @change=${this.onChange}
             @keydown=${this.onKeydown}

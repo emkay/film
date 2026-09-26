@@ -160,7 +160,7 @@ export class NumberInput extends FilmFormControl {
             placeholder=${this.placeholder}
             ?disabled=${this.disabled}
             ?required=${this.required}
-            aria-label=${this.label || nothing}
+            aria-label=${this.accessibleName() || nothing}
             @input=${this.onInput}
             @change=${this.onChange}
           />

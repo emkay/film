@@ -10,11 +10,25 @@ interface Rect {
   height: number
 }
 
-const DIRECTIONS = ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'] as const
+// East and south first: they're the keyboard handles (see render), so they
+// come first in the tab order — width, then height.
+const DIRECTIONS = ['e', 's', 'n', 'w', 'ne', 'nw', 'se', 'sw'] as const
 
 /** Smallest a window may be sized/snapped to, in pixels. */
 export const MIN_WINDOW_WIDTH = 160
 export const MIN_WINDOW_HEIGHT = 100
+
+/**
+ * The handles keyboard and assistive-tech users get. Each is a focusable
+ * separator reporting one dimension, which together cover every size change;
+ * the other six are pointer conveniences. A corner can't be described as a
+ * separator at all — it changes two values — and eight tab stops per window
+ * would be a slog.
+ */
+const KEYBOARD_HANDLES: Record<string, { label: string, dimension: 'width' | 'height', orientation: 'vertical' | 'horizontal', min: number }> = {
+  e: { label: 'Resize width', dimension: 'width', orientation: 'vertical', min: MIN_WINDOW_WIDTH },
+  s: { label: 'Resize height', dimension: 'height', orientation: 'horizontal', min: MIN_WINDOW_HEIGHT }
+}
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -217,6 +231,12 @@ export class Window extends FilmElement {
     }
   }
 
+  /** The most a dimension can grow to — the container — for the resize handles' range. */
+  private maxSize (dimension: 'width' | 'height'): number {
+    const { w, h } = this.container()
+    return Math.max(dimension === 'width' ? w : h, this[dimension])
+  }
+
   private setPosition (x: number, y: number): void {
     const { w, h } = this.container()
     this.x = Math.max(0, Math.min(x, w - this.width))
@@ -395,19 +415,25 @@ export class Window extends FilmElement {
         <div class="body" ?hidden=${this.minimised}><slot></slot></div>
       </div>
       ${this.resizable && !this.maximised && !this.minimised
-        ? DIRECTIONS.map(
-            (dir) => html`<span
+        ? DIRECTIONS.map((dir) => {
+            const keyboard = KEYBOARD_HANDLES[dir]
+            return html`<span
               class="handle ${dir}"
-              role="separator"
-              tabindex="0"
-              aria-label="Resize ${dir}"
+              role=${keyboard ? 'separator' : nothing}
+              tabindex=${keyboard ? '0' : nothing}
+              aria-hidden=${keyboard ? nothing : 'true'}
+              aria-label=${keyboard?.label ?? nothing}
+              aria-orientation=${keyboard?.orientation ?? nothing}
+              aria-valuenow=${keyboard ? this[keyboard.dimension] : nothing}
+              aria-valuemin=${keyboard?.min ?? nothing}
+              aria-valuemax=${keyboard ? this.maxSize(keyboard.dimension) : nothing}
               @pointerdown=${(e: PointerEvent) => this.startResize(dir, e)}
               @pointermove=${this.resizeDrag.onPointerMove}
               @pointerup=${this.resizeDrag.onPointerUp}
               @focusin=${this.requestFocus}
               @keydown=${(e: KeyboardEvent) => this.resizeKeydown(dir, e)}
             ></span>`
-          )
+          })
         : nothing}
     `
   }

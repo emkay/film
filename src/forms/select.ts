@@ -221,7 +221,7 @@ export class Select extends FilmFormControl {
           aria-haspopup="listbox"
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-labelledby=${this.label ? 'label' : nothing}
-          aria-label=${this.label ? nothing : this.placeholder}
+          aria-label=${this.label ? nothing : this.accessibleName(this.placeholder)}
           ?disabled=${this.disabled}
           @click=${this.toggle}
           @keydown=${this.onTriggerKeydown}

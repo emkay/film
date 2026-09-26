@@ -32,12 +32,29 @@ export abstract class FilmFormControl extends FilmElement {
   /** Whether the control is disabled. */
   @property({ type: Boolean, reflect: true }) disabled = false
 
+  /**
+   * The host's own `aria-label` — set by a consumer, or by `film-field`. On the
+   * host it names nothing useful: assistive tech lands on the inner input, a
+   * shadow-root element the host's label doesn't reach. Controls forward it
+   * there through {@link accessibleName}.
+   */
+  @property({ attribute: 'aria-label' }) protected hostLabel: string | null = null
+
   /** Whether a value is required for the form to be valid. */
   @property({ type: Boolean, reflect: true }) required = false
 
   /** `value` as the control first connected — the reset fallback. */
   private initialValue: unknown
   private initialCaptured = false
+
+  /**
+   * The name for the element that takes focus: the control's visible `label`,
+   * else the host's `aria-label`, else `fallback`.
+   */
+  protected accessibleName (fallback = ''): string {
+    const visible = (this as unknown as { label?: string }).label
+    return visible || this.hostLabel || fallback
+  }
 
   /** The associated form, if any. */
   get form (): HTMLFormElement | null {

@@ -1,4 +1,4 @@
-import { css, html, nothing } from 'lit'
+import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property, query, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 import { PopoverController } from '../internal/popover-controller.js'
@@ -102,6 +102,15 @@ export class MenuItem extends FilmElement {
   disconnectedCallback (): void {
     if (this.closeTimer) clearTimeout(this.closeTimer)
     super.disconnectedCallback()
+  }
+
+  // A disabled item stays focusable, as the menu pattern asks, so the state has
+  // to be announced rather than implied by the item being skipped.
+  updated (changed: PropertyValues<this>): void {
+    super.updated(changed)
+    if (!changed.has('disabled')) return
+    if (this.disabled) this.setAttribute('aria-disabled', 'true')
+    else this.removeAttribute('aria-disabled')
   }
 
   private readonly onSubmenuSlotChange = (): void => {

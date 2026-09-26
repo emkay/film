@@ -3,6 +3,10 @@ import { customElement, property, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 
 const WEEKDAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+const WEEKDAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+/** How a day is announced: "Friday, 21 August 2026" rather than "2026-08-21". */
+const spoken = new Intl.DateTimeFormat(undefined, { dateStyle: 'full' })
 const MONTHS = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
@@ -120,7 +124,7 @@ export class Calendar extends FilmElement {
     }
 
     .weekdays,
-    .days {
+    .week {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
     }
@@ -260,6 +264,12 @@ export class Calendar extends FilmElement {
     return Array.from({ length: 42 }, (_, i) => addDays(start, i))
   }
 
+  /** The grid as six weeks: a grid's cells have to sit inside rows. */
+  private get weeks (): Date[][] {
+    const days = this.grid
+    return Array.from({ length: 6 }, (_, w) => days.slice(w * 7, w * 7 + 7))
+  }
+
   private navButton (months: number, label: string, glyph: string) {
     return html`<button
       class="nav"
@@ -279,18 +289,17 @@ export class Calendar extends FilmElement {
           ${this.navButton(-12, 'Previous year', '«')}
           ${this.navButton(-1, 'Previous month', '‹')}
         </span>
-        <span class="month" aria-live="polite">${MONTHS[this.cursor.getMonth()]} ${this.cursor.getFullYear()}</span>
+        <span class="month" id="month" aria-live="polite">${MONTHS[this.cursor.getMonth()]} ${this.cursor.getFullYear()}</span>
         <span class="nav-group">
           ${this.navButton(1, 'Next month', '›')}
           ${this.navButton(12, 'Next year', '»')}
         </span>
       </div>
-      <div class="grid" role="grid" @keydown=${this.onGridKeydown}>
+      <div class="grid" role="grid" aria-labelledby="month" @keydown=${this.onGridKeydown}>
         <div class="weekdays" role="row">
-          ${WEEKDAYS.map((w) => html`<span class="weekday" role="columnheader">${w}</span>`)}
+          ${WEEKDAYS.map((w, i) => html`<span class="weekday" role="columnheader" aria-label=${WEEKDAY_NAMES[i]}>${w}</span>`)}
         </div>
-        <div class="days">
-          ${this.grid.map((date) => {
+        ${this.weeks.map((week) => html`<div class="week" role="row">${week.map((date) => {
             const outside = date.getMonth() !== this.cursor.getMonth()
             const focused = sameDay(date, this.cursor)
             const isSelected = selected ? sameDay(date, selected) : false
@@ -310,12 +319,12 @@ export class Calendar extends FilmElement {
               tabindex=${focused ? '0' : '-1'}
               aria-selected=${isSelected ? 'true' : 'false'}
               aria-current=${isToday ? 'date' : nothing}
-              aria-label=${formatISO(date)}
+              aria-label=${spoken.format(date)}
+              data-date=${formatISO(date)}
               ?disabled=${this.isDisabled(date)}
               @click=${() => this.selectDate(date)}
             >${date.getDate()}</button>`
-          })}
-        </div>
+          })}</div>`)}
       </div>
     `
   }

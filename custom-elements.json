@@ -2769,6 +2769,19 @@
               }
             },
             {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
               "name": "required",
               "type": {
                 "text": "boolean"
@@ -3019,6 +3032,19 @@
               "default": "false",
               "description": "Whether the control is disabled.",
               "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -3328,6 +3354,19 @@
               "default": "false",
               "description": "Whether the control is disabled.",
               "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -3666,6 +3705,19 @@
               }
             },
             {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
               "name": "required",
               "type": {
                 "text": "boolean"
@@ -3712,7 +3764,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Field — wraps a single form control with a label, optional hint, a required\nmarker, and an error message that appears when the control reports invalid\n(via the native `invalid` event). Set `error` to show a message manually.\n\nNote: because the control is slotted (light DOM) while the label lives in the\nshadow root, cross-root `aria-describedby` isn't possible yet, so the error\nregion is marked `role=\"alert\"` (announced when it appears) and the label is\napplied as the control's `aria-label`. For controls that render their own\ninner input (input, textarea, select), their own `label` still gives the most\nprecise accessible name.",
+          "description": "Field — wraps a single form control with a label, optional hint, a required\nmarker, and an error message that appears when the control reports invalid\n(via the native `invalid` event). Set `error` to show a message manually.\n\nThe label names the control through its `aria-label`, which Film's form\ncontrols forward to the inner element that takes focus. The error region is\n`role=\"alert\"`, so it's announced when it appears: `aria-describedby` can't\npoint from the slotted control into this element's shadow root.",
           "name": "Field",
           "slots": [
             {
@@ -4047,6 +4099,19 @@
               "default": "false",
               "description": "Whether the control is disabled.",
               "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -4755,6 +4820,19 @@
               }
             },
             {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
               "name": "required",
               "type": {
                 "text": "boolean"
@@ -5079,6 +5157,19 @@
               }
             },
             {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
               "name": "required",
               "type": {
                 "text": "boolean"
@@ -5345,6 +5436,19 @@
               "default": "false",
               "description": "Whether the control is disabled.",
               "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -5791,6 +5895,19 @@
               }
             },
             {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
               "name": "required",
               "type": {
                 "text": "boolean"
@@ -6077,6 +6194,19 @@
               "default": "false",
               "description": "Whether the control is disabled.",
               "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -6501,6 +6631,19 @@
               "default": "false",
               "description": "Whether the control is disabled.",
               "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -7002,6 +7145,19 @@
               }
             },
             {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
               "name": "required",
               "type": {
                 "text": "boolean"
@@ -7322,6 +7478,19 @@
               "default": "false",
               "description": "Whether the control is disabled.",
               "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's own `aria-label` — set by a consumer, or by `film-field`. On the\nhost it names nothing useful: assistive tech lands on the inner input, a\nshadow-root element the host's label doesn't reach. Controls forward it\nthere through accessibleName.",
+              "fieldName": "hostLabel",
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -8238,7 +8407,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Reel — a horizontally scrolling strip of items with scroll snapping. Useful\nfor carousels, galleries and any \"scroll sideways\" list.",
+          "description": "Reel — a horizontally scrolling strip of items with scroll snapping. Useful\nfor carousels, galleries and any \"scroll sideways\" list.\n\nWhen its items overflow, the reel joins the tab order so it can be scrolled\nwith the arrow keys, and leaves it again when everything fits. Give it a\n`label` so the focused region is announced by name.",
           "name": "Reel",
           "slots": [
             {
@@ -8266,6 +8435,16 @@
               "default": "'auto'",
               "description": "The width of each item; `auto` lets items size to their content.",
               "attribute": "item-width"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Names the reel as a region, announced when it takes keyboard focus.",
+              "attribute": "label"
             }
           ],
           "attributes": [
@@ -8286,6 +8465,15 @@
               "default": "'auto'",
               "description": "The width of each item; `auto` lets items size to their content.",
               "fieldName": "itemWidth"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Names the reel as a region, announced when it takes keyboard focus.",
+              "fieldName": "label"
             }
           ],
           "superclass": {
@@ -9088,7 +9276,6 @@
               "type": {
                 "text": "Menu | null"
               },
-              "description": "The menu assigned to the default slot, if any.",
               "readonly": true
             },
             {

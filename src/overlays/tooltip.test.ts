@@ -12,10 +12,13 @@ async function tooltip (): Promise<{ el: Tooltip, target: HTMLButtonElement, tip
 }
 
 describe('film-tooltip', () => {
-  it('starts hidden', async () => {
-    const { tip, target } = await tooltip()
+  it('starts hidden, but already describes its target', async () => {
+    const { el, tip, target } = await tooltip()
     expect(tip.matches(':popover-open')).to.equal(false)
-    expect(target.hasAttribute('aria-describedby')).to.equal(false)
+    // Described from the start (see accessibility.test.ts): by a light-DOM copy
+    // of the text, since an ID can't reach the tip inside the shadow root.
+    const description = el.querySelector(`#${target.getAttribute('aria-describedby') ?? ''}`)
+    expect(description?.textContent).to.equal('Save changes')
   })
 
   it('shows on hover and describes its target', async () => {
@@ -24,7 +27,7 @@ describe('film-tooltip', () => {
     await el.updateComplete
     expect(tip.matches(':popover-open')).to.equal(true)
     expect(tip.getAttribute('role')).to.equal('tooltip')
-    expect(target.getAttribute('aria-describedby')).to.equal(tip.id)
+    expect(target.hasAttribute('aria-describedby')).to.equal(true)
     expect(tip.textContent?.trim()).to.equal('Save changes')
   })
 
@@ -35,7 +38,7 @@ describe('film-tooltip', () => {
     el.dispatchEvent(new MouseEvent('mouseleave'))
     await el.updateComplete
     expect(tip.matches(':popover-open')).to.equal(false)
-    expect(target.hasAttribute('aria-describedby')).to.equal(false)
+    expect(target.hasAttribute('aria-describedby'), 'the description stays').to.equal(true)
   })
 
   it('shows on keyboard focus and hides on Escape', async () => {

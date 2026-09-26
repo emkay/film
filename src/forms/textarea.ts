@@ -103,7 +103,7 @@ export class Textarea extends FilmFormControl {
           ?disabled=${this.disabled}
           ?required=${this.required}
           ?readonly=${this.readonly}
-          aria-label=${this.label || nothing}
+          aria-label=${this.accessibleName() || nothing}
           @input=${this.onInput}
           @change=${this.onChange}
         ></textarea>

@@ -144,7 +144,7 @@ export class DatePicker extends FilmFormControl {
           aria-haspopup="dialog"
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-labelledby=${this.label ? 'label' : nothing}
-          aria-label=${this.label ? nothing : 'Select a date'}
+          aria-label=${this.label ? nothing : this.accessibleName('Select a date')}
           ?disabled=${this.disabled}
           @click=${() => (this.open = !this.open)}
         >

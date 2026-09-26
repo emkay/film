@@ -232,7 +232,7 @@ export class Combobox extends FilmFormControl {
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-controls="listbox"
           aria-labelledby=${this.label ? 'label' : nothing}
-          aria-label=${this.label ? nothing : this.placeholder}
+          aria-label=${this.label ? nothing : this.accessibleName(this.placeholder)}
           .value=${this.text}
           placeholder=${this.placeholder}
           ?disabled=${this.disabled}

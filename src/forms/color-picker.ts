@@ -106,7 +106,7 @@ export class ColorPicker extends FilmFormControl {
           type="color"
           .value=${this.value}
           ?disabled=${this.disabled}
-          aria-label=${this.label || 'Colour'}
+          aria-label=${this.accessibleName('Colour')}
           @input=${this.onColorInput}
         />
         <input

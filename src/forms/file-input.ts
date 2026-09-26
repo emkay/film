@@ -123,7 +123,7 @@ export class FileInput extends FilmFormControl {
           class="dropzone ${this.dragging ? 'dragging' : ''}"
           role="button"
           tabindex="0"
-          aria-label=${this.label || 'Choose files'}
+          aria-label=${this.accessibleName('Choose files')}
           @click=${this.browse}
           @keydown=${this.onKeydown}
           @dragover=${this.onDragOver}

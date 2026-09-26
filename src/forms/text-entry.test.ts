@@ -82,7 +82,7 @@ describe('film-date-picker', () => {
 
     const calendar = el.shadowRoot?.querySelector('film-calendar') as HTMLElement & { updateComplete: Promise<boolean> }
     await calendar.updateComplete
-    const day = calendar.shadowRoot?.querySelector('.day[aria-label="2026-01-15"]') as HTMLButtonElement
+    const day = calendar.shadowRoot?.querySelector('.day[data-date="2026-01-15"]') as HTMLButtonElement
     setTimeout(() => day.click())
     await oneEvent(el, 'change')
     await el.updateComplete
