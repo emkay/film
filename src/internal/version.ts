@@ -2,7 +2,7 @@
  * The version of this copy of Film. Kept in step with package.json by
  * release-please (the annotation below), and checked against it by a test.
  */
-export const version = '1.4.0' // x-release-please-version
+export const version = '1.5.0' // x-release-please-version
 
 declare global {
   /** Every copy of Film loaded on the page, by version. See the README's Troubleshooting. */
