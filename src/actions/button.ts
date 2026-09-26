@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 import { variantSurface } from '../internal/variant-surface.js'
 
 export type ButtonSize = 'small' | 'medium' | 'large'
@@ -28,6 +29,12 @@ export type ButtonType = 'button' | 'submit' | 'reset'
  */
 @customElement('film-button')
 export class Button extends FilmElement {
+  static allowedValues = {
+    size: oneOf<ButtonSize>()('small', 'medium', 'large'),
+    variant: oneOf<ButtonVariant>()('primary', 'neutral', 'accent', 'success', 'warning', 'danger'),
+    type: oneOf<ButtonType>()('button', 'submit', 'reset')
+  }
+
   static formAssociated = true
 
   private readonly internals = this.attachInternals()

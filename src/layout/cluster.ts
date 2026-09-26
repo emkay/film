@@ -1,6 +1,7 @@
 import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 
 export type ClusterJustify =
   | 'start'
@@ -20,6 +21,11 @@ export type ClusterAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch'
  */
 @customElement('film-cluster')
 export class Cluster extends FilmElement {
+  static allowedValues = {
+    justify: oneOf<ClusterJustify>()('start', 'center', 'end', 'space-between', 'space-around', 'space-evenly'),
+    align: oneOf<ClusterAlign>()('start', 'center', 'end', 'baseline', 'stretch')
+  }
+
   /** The gap between clustered items. A scale step (`s1`) or any CSS length. */
   @property({ type: String })
   space = 'var(--s0)'

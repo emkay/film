@@ -53,6 +53,28 @@ A [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-ma
 (`custom-elements.json`) is published for IDE autocomplete and documentation
 tooling.
 
+### Attribute warnings
+
+A mistyped attribute or value on a Film element would otherwise be ignored
+without a sound, and look like a styling problem. Film logs a console warning
+once for each distinct mistake instead:
+
+```
+film-cluster has no "variant" attribute, so it is ignored.
+film-button: "primray" is not a valid variant; expected one of: primary, neutral, accent, success, warning, danger.
+film-text: "1.5rem" is not a valid size; expected a value matching /^s-?[0-5]$/.
+```
+
+Only plain-word attribute names are checked, so `aria-*`, `data-*` and
+framework-generated attributes (`_ngcontent-…`, `data-v-…`, `x-data`) never
+trigger one. The warnings stay on in production builds, since a wrong value is
+a bug there too. To silence them:
+
+```js
+import { setFilmWarnings } from '@mk/film'
+setFilmWarnings(false)
+```
+
 ## Components
 
 **Layout** (`src/layout`)

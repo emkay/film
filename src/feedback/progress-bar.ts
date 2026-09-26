@@ -58,6 +58,9 @@ export class ProgressBar extends FilmElement {
   `
 
   private get percent (): number {
+    // A zero or negative max has no meaningful progress; show it empty rather
+    // than dividing by zero into an invalid NaN% width.
+    if (!(this.max > 0)) return 0
     return Math.max(0, Math.min(100, (this.value / this.max) * 100))
   }
 
@@ -67,7 +70,10 @@ export class ProgressBar extends FilmElement {
   }
 
   updated (changed: PropertyValues<this>): void {
-    if (this.label && changed.has('label')) this.setAttribute('aria-label', this.label)
+    if (changed.has('label')) {
+      if (this.label) this.setAttribute('aria-label', this.label)
+      else this.removeAttribute('aria-label')
+    }
     if (this.indeterminate) {
       this.removeAttribute('aria-valuenow')
     } else {

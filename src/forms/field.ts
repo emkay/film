@@ -37,6 +37,12 @@ export class Field extends FilmElement {
 
   private control: FieldControl | null = null
 
+  // The required marker follows the control's `required`, which can change
+  // after it's slotted. Form controls reflect it, so watch the attribute.
+  private readonly requiredObserver = new MutationObserver(() => {
+    this.controlRequired = Boolean(this.control?.required)
+  })
+
   static styles = css`
     :host {
       display: block;
@@ -88,11 +94,13 @@ export class Field extends FilmElement {
     if (this.control) {
       this.control.removeEventListener('invalid', this.onInvalid)
       this.control.removeEventListener('input', this.onControlInput)
+      this.requiredObserver.disconnect()
     }
     this.control = next
     if (this.control) {
       this.control.addEventListener('invalid', this.onInvalid)
       this.control.addEventListener('input', this.onControlInput)
+      this.requiredObserver.observe(this.control, { attributes: true, attributeFilter: ['required'] })
       this.controlRequired = Boolean(this.control.required)
       this.nameControl()
     }

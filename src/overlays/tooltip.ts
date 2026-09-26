@@ -1,7 +1,7 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
-import type { Placement } from '../internal/anchor-position.js'
+import { PLACEMENTS, type Placement } from '../internal/anchor-position.js'
 import { PopoverController } from '../internal/popover-controller.js'
 
 /**
@@ -14,6 +14,8 @@ import { PopoverController } from '../internal/popover-controller.js'
  */
 @customElement('film-tooltip')
 export class Tooltip extends FilmElement {
+  static allowedValues = { placement: PLACEMENTS }
+
   /** The tooltip text. */
   @property({ type: String }) content = ''
 

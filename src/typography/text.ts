@@ -1,6 +1,7 @@
 import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 
 /**
  * Text — a block of body text sized from the modular scale, with an optional
@@ -10,6 +11,11 @@ import { FilmElement } from '../internal/film-element.js'
  */
 @customElement('film-text')
 export class Text extends FilmElement {
+  static allowedValues = {
+    tone: oneOf<Text['tone']>()('default', 'muted'),
+    size: /^s-?[0-5]$/
+  }
+
   /** A modular-scale step, e.g. `s0` (default), `s-1`, `s1`. */
   @property({ type: String }) size = 's0'
 

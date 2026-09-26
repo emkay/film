@@ -1,7 +1,8 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
-import type { Align, Placement } from '../internal/anchor-position.js'
+import { oneOf } from '../internal/attribute-check.js'
+import { ALIGNS, PLACEMENTS, type Align, type Placement } from '../internal/anchor-position.js'
 import { PopoverController } from '../internal/popover-controller.js'
 
 /**
@@ -16,6 +17,12 @@ import { PopoverController } from '../internal/popover-controller.js'
  */
 @customElement('film-popover')
 export class Popover extends FilmElement {
+  static allowedValues = {
+    placement: PLACEMENTS,
+    align: ALIGNS,
+    trigger: oneOf<Popover['trigger']>()('click', 'hover', 'manual')
+  }
+
   /** Whether the popover is open. */
   @property({ type: Boolean, reflect: true }) open = false
 
@@ -83,20 +90,26 @@ export class Popover extends FilmElement {
     this.open = !this.open
   }
 
-  connectedCallback (): void {
-    super.connectedCallback()
+  // On slotchange rather than connect: on first connect the trigger slot isn't
+  // rendered yet, so there's no trigger to label. This also covers a trigger
+  // that's swapped for another.
+  private readonly onTriggerSlotChange = (): void => {
     this.triggerEl?.setAttribute('aria-haspopup', 'dialog')
+    this.triggerEl?.setAttribute('aria-expanded', String(this.open))
   }
 
   updated (changed: PropertyValues<this>): void {
     super.updated(changed)
     if (!changed.has('open')) return
     this.triggerEl?.setAttribute('aria-expanded', String(this.open))
-    // Announce only real transitions: `open` starts false, so the first render
-    // would otherwise report a close nobody made.
-    const wasOpen = this.floating.isOpen
+    // Announce only real transitions. `open` starts false, so the first render
+    // must not report a close; and when the browser dismisses the panel (Escape,
+    // click outside) it is already hidden, so the DOM can't say it was open —
+    // the previous value of `open` can.
+    const wasOpen = changed.get('open') === true
+    const alreadyShown = this.floating.isOpen
     if (this.open) {
-      if (this.floating.show() && !wasOpen) this.dispatchEvent(new Event('film-open'))
+      if (this.floating.show() && !alreadyShown) this.dispatchEvent(new Event('film-open'))
     } else {
       this.floating.hide()
       if (wasOpen) this.dispatchEvent(new Event('film-close'))
@@ -125,6 +138,7 @@ export class Popover extends FilmElement {
     return html`
       <slot
         name="trigger"
+        @slotchange=${this.onTriggerSlotChange}
         @click=${this.onTriggerClick}
         @mouseenter=${this.onTriggerEnter}
         @mouseleave=${this.onTriggerLeave}

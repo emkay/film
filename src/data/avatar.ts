@@ -1,6 +1,7 @@
 import { css, html, nothing } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 
 /**
  * Avatar — a user image with graceful fallback to initials derived from
@@ -8,6 +9,8 @@ import { FilmElement } from '../internal/film-element.js'
  */
 @customElement('film-avatar')
 export class Avatar extends FilmElement {
+  static allowedValues = { shape: oneOf<Avatar['shape']>()('circle', 'square') }
+
   /** The image URL. When absent (or it fails to load), initials are shown. */
   @property({ type: String }) src = ''
 
@@ -64,7 +67,11 @@ export class Avatar extends FilmElement {
   render () {
     return this.src
       ? html`<img src=${this.src} alt=${this.label || nothing} @error=${this.onError} />`
-      : html`<span aria-hidden=${this.label ? nothing : 'true'}>${this.initials}</span>`
+      : this.label
+        // Named by the full label, like the image's alt, rather than read out
+        // as its initials.
+        ? html`<span role="img" aria-label=${this.label}>${this.initials}</span>`
+        : html`<span aria-hidden="true"></span>`
   }
 }
 

@@ -7447,6 +7447,14 @@
         },
         {
           "kind": "js",
+          "name": "setFilmWarnings",
+          "declaration": {
+            "name": "setFilmWarnings",
+            "module": "./internal/attribute-check.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "DragController",
           "declaration": {
             "name": "DragController",

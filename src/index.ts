@@ -11,5 +11,8 @@ export * from './navigation/index.js'
 export * from './overlays/index.js'
 export * from './windowing/index.js'
 
+// Attribute warnings (on by default)
+export { setFilmWarnings } from './internal/attribute-check.js'
+
 // Shared controllers
 export { DragController, type DragCallbacks } from './internal/drag-controller.js'

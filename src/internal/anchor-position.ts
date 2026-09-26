@@ -1,5 +1,10 @@
+import { oneOf } from './attribute-check.js'
+
 export type Placement = 'top' | 'bottom' | 'left' | 'right'
 export type Align = 'start' | 'center' | 'end'
+
+export const PLACEMENTS = oneOf<Placement>()('top', 'bottom', 'left', 'right')
+export const ALIGNS = oneOf<Align>()('start', 'center', 'end')
 
 export interface AnchorOptions {
   placement?: Placement

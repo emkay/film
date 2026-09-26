@@ -1,6 +1,7 @@
 import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 
 /** Which pane(s) get their own scrollbar when the Sidebar has a bounded height. */
 export type SidebarScroll = 'none' | 'start' | 'end' | 'both'
@@ -18,6 +19,8 @@ export type SidebarScroll = 'none' | 'start' | 'end' | 'both'
  */
 @customElement('film-sidebar')
 export class Sidebar extends FilmElement {
+  static allowedValues = { scrollPane: oneOf<SidebarScroll>()('none', 'start', 'end', 'both') }
+
   /** The gap between the sidebar and the main content. A scale step (`s1`) or any CSS length. */
   @property({ type: String })
   space = 'var(--s3)'

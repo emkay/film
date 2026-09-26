@@ -35,11 +35,11 @@ export class Switcher extends FilmElement {
       flex-basis: calc((var(--switcher-threshold, 30rem) - 100%) * 999);
     }
 
-    :host(.over-limit) {
+    :host(:state(over-limit)) {
       flex-direction: column;
     }
 
-    :host(.over-limit) ::slotted(*) {
+    :host(:state(over-limit)) ::slotted(*) {
       flex-basis: auto;
     }
   `
@@ -51,9 +51,14 @@ export class Switcher extends FilmElement {
 
   @query('slot') private slotEl!: HTMLSlotElement
 
+  // A custom state rather than a host class: `class` belongs to the consumer,
+  // and a React className or Lit class binding would silently wipe ours.
+  private readonly internals = this.attachInternals()
+
   private applyLimit (): void {
     const count = this.slotEl?.assignedElements().length ?? 0
-    this.classList.toggle('over-limit', this.limit > 0 && count > this.limit)
+    if (this.limit > 0 && count > this.limit) this.internals.states.add('over-limit')
+    else this.internals.states.delete('over-limit')
   }
 
   private readonly onSlotChange = (): void => this.applyLimit()

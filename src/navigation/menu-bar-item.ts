@@ -122,14 +122,17 @@ export class MenuBarItem extends FilmElement {
   updated (changed: PropertyValues<this>): void {
     super.updated(changed)
     if (!changed.has('open')) return
-    // Announce only real transitions: `open` starts false, so the first render
-    // would otherwise tell the menu bar about a close nobody made.
-    const wasOpen = this.floating.isOpen
+    // Announce only real transitions. `open` starts false, so the first render
+    // must not report a close; and when the browser dismisses the menu (Escape,
+    // click outside) it is already hidden, so the DOM can't say it was open —
+    // the previous value of `open` can.
+    const wasOpen = changed.get('open') === true
+    const alreadyShown = this.floating.isOpen
     if (this.open) {
       this.floating.show()
       this.applyMenuFocus(this.pendingFocus)
       this.pendingFocus = 'none'
-      if (!wasOpen) this.dispatchEvent(new Event('film-menubar-open', { bubbles: true }))
+      if (!alreadyShown) this.dispatchEvent(new Event('film-menubar-open', { bubbles: true }))
     } else {
       this.floating.hide()
       if (wasOpen) this.dispatchEvent(new Event('film-menubar-close', { bubbles: true }))

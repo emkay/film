@@ -40,4 +40,54 @@ describe('film-combobox', () => {
     await el.updateComplete
     expect(el.open).to.equal(false)
   })
+
+  describe('value set from code', () => {
+    const field = (el: Combobox): HTMLInputElement =>
+      el.shadowRoot?.querySelector('input') as HTMLInputElement
+
+    async function combobox (): Promise<Combobox> {
+      return fixture<Combobox>(html`
+        <film-combobox value="a">
+          <film-select-option value="a">Apple</film-select-option>
+          <film-select-option value="b">Banana</film-select-option>
+        </film-combobox>
+      `)
+    }
+
+    it('shows the initial value\'s label', async () => {
+      const el = await combobox()
+      expect(field(el).value).to.equal('Apple')
+    })
+
+    it('shows the new label when value is set', async () => {
+      const el = await combobox()
+      el.value = 'b'
+      await el.updateComplete
+      expect(field(el).value).to.equal('Banana')
+    })
+
+    it('marks the matching option selected', async () => {
+      const el = await combobox()
+      el.value = 'b'
+      await el.updateComplete
+      const [apple, banana] = Array.from(el.querySelectorAll('film-select-option')) as Array<HTMLElement & { selected: boolean }>
+      expect([apple.selected, banana.selected]).to.deep.equal([false, true])
+    })
+
+    it('clears the field when value is cleared', async () => {
+      const el = await combobox()
+      el.value = ''
+      await el.updateComplete
+      expect(field(el).value).to.equal('')
+    })
+
+    it('does not overwrite what the user is typing', async () => {
+      const el = await combobox()
+      const input = field(el)
+      input.value = 'Ban'
+      input.dispatchEvent(new Event('input'))
+      await el.updateComplete
+      expect(input.value).to.equal('Ban')
+    })
+  })
 })

@@ -1,4 +1,4 @@
-import { css, html } from 'lit'
+import { css, html, nothing } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 
@@ -25,7 +25,8 @@ export class Link extends FilmElement {
   `
 
   render () {
-    return html`<a href=${this.href}><slot></slot></a>`
+    // No href means no destination: `href=""` would link to the current page.
+    return html`<a href=${this.href || nothing}><slot></slot></a>`
   }
 }
 

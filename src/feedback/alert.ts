@@ -1,6 +1,7 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 import { variantSurface } from '../internal/variant-surface.js'
 
 export type AlertVariant = 'info' | 'success' | 'warning' | 'danger'
@@ -14,6 +15,8 @@ export type AlertVariant = 'info' | 'success' | 'warning' | 'danger'
  */
 @customElement('film-alert')
 export class Alert extends FilmElement {
+  static allowedValues = { variant: oneOf<AlertVariant>()('info', 'success', 'warning', 'danger') }
+
   /** The severity / colour treatment. */
   @property({ type: String })
   variant: AlertVariant = 'info'

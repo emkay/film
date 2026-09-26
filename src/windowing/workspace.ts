@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 import { MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT, type Window } from './window.js'
 
 export interface WindowLayout {
@@ -30,6 +31,11 @@ const SNAP_CORNER = 96
  */
 @customElement('film-workspace')
 export class Workspace extends FilmElement {
+  static allowedValues = {
+    layout: oneOf<Workspace['layout']>()('floating', 'tiled'),
+    tiling: oneOf<Workspace['tiling']>()('grid', 'bsp')
+  }
+
   /** Layout mode. */
   @property({ type: String, reflect: true }) layout: 'floating' | 'tiled' = 'floating'
 
