@@ -1,6 +1,7 @@
 import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 
 /**
  * Skeleton — a placeholder shown while content loads. Purely decorative
@@ -8,6 +9,8 @@ import { FilmElement } from '../internal/film-element.js'
  */
 @customElement('film-skeleton')
 export class Skeleton extends FilmElement {
+  static allowedValues = { variant: oneOf<Skeleton['variant']>()('text', 'circle', 'rect') }
+
   /** Shape: a text line, a circle (avatar), or a rectangle (block). */
   @property({ type: String, reflect: true }) variant: 'text' | 'circle' | 'rect' = 'text'
 

@@ -118,9 +118,13 @@ export class Combobox extends FilmFormControl {
     this.showSelected()
   }
 
-  firstUpdated (changed: PropertyValues<this>): void {
-    super.firstUpdated(changed)
-    this.showSelected()
+  // However `value` was set — first render, a choice, code or a parent
+  // re-render — show its label. In willUpdate, so the new text renders in this
+  // pass rather than scheduling another. Typing changes `text`, not `value`, so
+  // it's never overwritten.
+  willUpdate (changed: PropertyValues<this>): void {
+    super.willUpdate(changed)
+    if (changed.has('value')) this.showSelected()
   }
 
   /** Show the selected option's label in the field, with the list matching it. */

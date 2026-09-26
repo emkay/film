@@ -1,6 +1,7 @@
 import { css, html, nothing } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmModal } from '../internal/modal.js'
+import { oneOf } from '../internal/attribute-check.js'
 
 export type DrawerPlacement = 'start' | 'end' | 'top' | 'bottom'
 
@@ -14,6 +15,8 @@ export type DrawerPlacement = 'start' | 'end' | 'top' | 'bottom'
  */
 @customElement('film-drawer')
 export class Drawer extends FilmModal {
+  static allowedValues = { placement: oneOf<DrawerPlacement>()('start', 'end', 'top', 'bottom') }
+
   /** The edge the drawer slides in from. */
   @property({ type: String, reflect: true }) placement: DrawerPlacement = 'end'
 

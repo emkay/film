@@ -38,6 +38,17 @@ for (const tag of ['film-dropdown', 'film-popover'] as const) {
       expect(events).to.deep.equal(['film-open', 'film-close'])
     })
 
+    it('fires film-close when the browser dismisses it (Escape, click outside)', async () => {
+      const { el, events } = await mount(tag)
+      el.open = true
+      await el.updateComplete
+      ;(el.shadowRoot?.querySelector('.panel') as HTMLElement).hidePopover()
+      await new Promise((resolve) => setTimeout(resolve, 50))
+      await el.updateComplete
+      expect(el.open).to.equal(false)
+      expect(events).to.deep.equal(['film-open', 'film-close'])
+    })
+
     it('leaves no positioning listeners behind after being reopened', async () => {
       const { el } = await mount(tag)
       const added: string[] = []
@@ -86,5 +97,23 @@ describe('film-menu-bar-item open / close events', () => {
     const item = bar.querySelector('film-menu-bar-item') as LitElement
     await item.updateComplete
     expect(events).to.deep.equal([])
+  })
+
+  it('fires film-menubar-close when the browser dismisses the menu', async () => {
+    const events: string[] = []
+    const bar = document.createElement('film-menu-bar')
+    bar.addEventListener('film-menubar-open', (e) => events.push(e.type))
+    bar.addEventListener('film-menubar-close', (e) => events.push(e.type))
+    bar.innerHTML = '<film-menu-bar-item label="File"><film-menu><film-menu-item>New</film-menu-item></film-menu></film-menu-bar-item>'
+    const wrapper = await fixture<HTMLElement>(html`<film-box></film-box>`)
+    wrapper.append(bar)
+    const item = bar.querySelector('film-menu-bar-item') as Toggleable
+    await item.updateComplete
+    item.open = true
+    await item.updateComplete
+    ;(item.shadowRoot?.querySelector('.panel') as HTMLElement).hidePopover()
+    await new Promise((resolve) => setTimeout(resolve, 50))
+    await item.updateComplete
+    expect(events).to.deep.equal(['film-menubar-open', 'film-menubar-close'])
   })
 })

@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 import { variantSurface } from '../internal/variant-surface.js'
 
 export type TagVariant = 'neutral' | 'accent' | 'success' | 'warning' | 'danger'
@@ -13,6 +14,8 @@ export type TagVariant = 'neutral' | 'accent' | 'success' | 'warning' | 'danger'
  */
 @customElement('film-tag')
 export class Tag extends FilmElement {
+  static allowedValues = { variant: oneOf<TagVariant>()('neutral', 'accent', 'success', 'warning', 'danger') }
+
   /** The colour treatment. */
   @property({ type: String }) variant: TagVariant = 'neutral'
 

@@ -17,7 +17,13 @@
  */
 
 /** Framework-config statics that aren't part of a component's public API. */
-const CONFIG_MEMBERS = new Set(['shadowRootOptions', 'styleProps', 'formAssociated', 'formProps'])
+const CONFIG_MEMBERS = new Set([
+  'shadowRootOptions',
+  'styleProps',
+  'formAssociated',
+  'formProps',
+  'allowedValues'
+])
 
 const INTERNAL = /^(\.\/)?src\/internal\//
 

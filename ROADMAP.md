@@ -128,8 +128,8 @@ as a styling bug.
       constraint validation rather than only `required`
 - [x] `film-calendar` steps by year (`«` `»`, Shift+PageUp/PageDown) and clamps
       to `min` / `max` — reaching January 2020 from 2026 was ~70 month clicks
-- [ ] Constrain `variant` / `placement` / `size` style attributes at runtime, so
-      an unknown value warns in dev mode instead of being ignored (P2)
+- [x] Warn about unknown attributes and unrecognised enumerated values
+      (`setFilmWarnings(false)` to silence), once per distinct mistake
 - [ ] `film-date-picker` typeable trigger — a text field alongside the calendar
       popover, so the component is usable without `film-input` as the fallback
       (P2)

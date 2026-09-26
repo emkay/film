@@ -1,6 +1,7 @@
 import { css, html, nothing } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
+import { oneOf } from '../internal/attribute-check.js'
 
 export type InputType =
   | 'text'
@@ -45,6 +46,13 @@ function validityFlags (validity: ValidityState): ValidityStateFlags {
  */
 @customElement('film-input')
 export class Input extends FilmFormControl {
+  static allowedValues = {
+    type: oneOf<InputType>()(
+      'text', 'email', 'password', 'number', 'search', 'tel', 'url',
+      'date', 'time', 'datetime-local', 'month', 'week'
+    )
+  }
+
   @property({ type: String }) type: InputType = 'text'
   @property({ type: String }) value = ''
   @property({ type: String }) placeholder = ''

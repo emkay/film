@@ -26,6 +26,9 @@ export class Popconfirm extends FilmElement {
 
   @query('film-popover') private popoverEl!: Popover
 
+  /** Set once a button has answered, so the close that follows isn't a cancel. */
+  private answered = false
+
   static styles = css`
     :host {
       display: inline-block;
@@ -50,18 +53,26 @@ export class Popconfirm extends FilmElement {
   }
 
   private onConfirm (): void {
+    this.answered = true
     this.close()
     this.dispatchEvent(new Event('film-confirm', { bubbles: true }))
   }
 
   private onCancel (): void {
+    this.answered = true
     this.close()
     this.dispatchEvent(new Event('film-cancel', { bubbles: true }))
   }
 
+  // Closing without an answer — Escape, or a click outside — is a cancel.
+  private onClosed (): void {
+    if (!this.answered) this.dispatchEvent(new Event('film-cancel', { bubbles: true }))
+    this.answered = false
+  }
+
   render () {
     return html`
-      <film-popover placement="top" align="center">
+      <film-popover placement="top" align="center" @film-close=${this.onClosed}>
         <slot name="trigger" slot="trigger"></slot>
         <div class="body">
           <span>${this.message}</span>

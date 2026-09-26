@@ -1,6 +1,7 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 
 /**
  * Step — a single step within a {@link Steps}. Its index and state are managed
@@ -10,6 +11,8 @@ import { FilmElement } from '../internal/film-element.js'
  */
 @customElement('film-step')
 export class Step extends FilmElement {
+  static allowedValues = { state: oneOf<Step['state']>()('complete', 'active', 'upcoming') }
+
   /** The step label. */
   @property({ type: String }) label = ''
 

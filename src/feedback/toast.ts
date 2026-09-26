@@ -1,6 +1,7 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 import { variantSurface } from '../internal/variant-surface.js'
 import type { AlertVariant } from './alert.js'
 
@@ -14,6 +15,8 @@ import type { AlertVariant } from './alert.js'
  */
 @customElement('film-toast')
 export class Toast extends FilmElement {
+  static allowedValues = { variant: oneOf<AlertVariant>()('info', 'success', 'warning', 'danger') }
+
   /** The colour treatment. */
   @property({ type: String }) variant: AlertVariant = 'info'
 
@@ -24,6 +27,9 @@ export class Toast extends FilmElement {
   @property({ type: Boolean, reflect: true }) open = false
 
   private timer?: ReturnType<typeof setTimeout>
+
+  /** Whether the role is derived from `variant`, rather than set by the consumer. */
+  private manageRole = true
 
   static styles = css`
     :host {
@@ -73,8 +79,9 @@ export class Toast extends FilmElement {
 
   connectedCallback (): void {
     super.connectedCallback()
-    const assertive = this.variant === 'danger' || this.variant === 'warning'
-    this.setAttribute('role', assertive ? 'alert' : 'status')
+    // As film-alert: respect a consumer-provided role, otherwise derive it
+    // from `variant` whenever that changes.
+    this.manageRole = !this.hasAttribute('role')
   }
 
   disconnectedCallback (): void {
@@ -85,6 +92,10 @@ export class Toast extends FilmElement {
   updated (changed: PropertyValues<this>): void {
     if (changed.has('variant')) {
       this.reflectStyleProps({ '--toast-surface': variantSurface(this.variant, 'var(--film-color-info)') })
+      if (this.manageRole) {
+        const assertive = this.variant === 'danger' || this.variant === 'warning'
+        this.setAttribute('role', assertive ? 'alert' : 'status')
+      }
     }
   }
 

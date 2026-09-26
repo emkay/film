@@ -1,6 +1,7 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { oneOf } from '../internal/attribute-check.js'
 import { variantSurface } from '../internal/variant-surface.js'
 
 export type BadgeVariant = 'neutral' | 'accent' | 'success' | 'warning' | 'danger'
@@ -12,6 +13,8 @@ export type BadgeVariant = 'neutral' | 'accent' | 'success' | 'warning' | 'dange
  */
 @customElement('film-badge')
 export class Badge extends FilmElement {
+  static allowedValues = { variant: oneOf<BadgeVariant>()('neutral', 'accent', 'success', 'warning', 'danger') }
+
   /** The colour treatment. */
   @property({ type: String })
   variant: BadgeVariant = 'neutral'

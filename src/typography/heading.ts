@@ -31,6 +31,9 @@ const SIZES: Record<number, string> = {
  */
 @customElement('film-heading')
 export class Heading extends FilmElement {
+  // Empty means "size from the level".
+  static allowedValues = { size: /^(s-?[0-5])?$/ }
+
   /** The heading level (1–6), controlling both the tag and the default size. */
   @property({ type: Number }) level = 2
 

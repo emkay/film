@@ -1,7 +1,7 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
-import type { Align, Placement } from '../internal/anchor-position.js'
+import { ALIGNS, PLACEMENTS, type Align, type Placement } from '../internal/anchor-position.js'
 import { PopoverController } from '../internal/popover-controller.js'
 import type { Menu } from '../navigation/menu.js'
 
@@ -18,6 +18,8 @@ import type { Menu } from '../navigation/menu.js'
  */
 @customElement('film-dropdown')
 export class Dropdown extends FilmElement {
+  static allowedValues = { placement: PLACEMENTS, align: ALIGNS }
+
   /** Whether the panel is open. */
   @property({ type: Boolean, reflect: true }) open = false
 
@@ -76,11 +78,14 @@ export class Dropdown extends FilmElement {
     super.updated(changed)
     if (!changed.has('open')) return
     this.trigger?.setAttribute('aria-expanded', String(this.open))
-    // Announce only real transitions: `open` starts false, so the first render
-    // would otherwise report a close nobody made.
-    const wasOpen = this.floating.isOpen
+    // Announce only real transitions. `open` starts false, so the first render
+    // must not report a close; and when the browser dismisses the panel (Escape,
+    // click outside) it is already hidden, so the DOM can't say it was open —
+    // the previous value of `open` can.
+    const wasOpen = changed.get('open') === true
+    const alreadyShown = this.floating.isOpen
     if (this.open) {
-      if (!this.floating.show() || wasOpen) return
+      if (!this.floating.show() || alreadyShown) return
       ;(this.querySelector('film-menu') as Menu | null)?.focusFirst()
       this.dispatchEvent(new Event('film-open'))
     } else {
@@ -89,9 +94,12 @@ export class Dropdown extends FilmElement {
     }
   }
 
-  connectedCallback (): void {
-    super.connectedCallback()
+  // On slotchange rather than connect: on first connect the trigger slot isn't
+  // rendered yet, so there's no trigger to label. This also covers a trigger
+  // that's swapped for another.
+  private readonly onTriggerSlotChange = (): void => {
     this.trigger?.setAttribute('aria-haspopup', 'menu')
+    this.trigger?.setAttribute('aria-expanded', String(this.open))
   }
 
   private readonly onToggle = (event: Event): void => {
@@ -102,7 +110,7 @@ export class Dropdown extends FilmElement {
 
   render () {
     return html`
-      <slot name="trigger" @click=${this.toggle}></slot>
+      <slot name="trigger" @click=${this.toggle} @slotchange=${this.onTriggerSlotChange}></slot>
       <div
         class="panel"
         popover="auto"

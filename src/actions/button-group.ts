@@ -1,4 +1,4 @@
-import { css, html } from 'lit'
+import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 
@@ -38,8 +38,11 @@ export class ButtonGroup extends FilmElement {
     this.setAttribute('role', 'group')
   }
 
-  updated (): void {
+  updated (changed: PropertyValues<this>): void {
+    super.updated(changed)
+    if (!changed.has('label')) return
     if (this.label) this.setAttribute('aria-label', this.label)
+    else this.removeAttribute('aria-label')
   }
 
   render () {
