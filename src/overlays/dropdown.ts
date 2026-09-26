@@ -1,7 +1,8 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
-import { anchorPosition, type Align, type Placement } from '../internal/anchor-position.js'
+import type { Align, Placement } from '../internal/anchor-position.js'
+import { PopoverController } from '../internal/popover-controller.js'
 import type { Menu } from '../navigation/menu.js'
 
 /**
@@ -29,7 +30,11 @@ export class Dropdown extends FilmElement {
   @query('.panel') private panel!: HTMLElement
   @query('slot[name="trigger"]') private triggerSlot!: HTMLSlotElement
 
-  private cleanup?: () => void
+  private readonly floating = new PopoverController(this, {
+    anchor: () => this.trigger,
+    panel: () => this.panel,
+    options: () => ({ placement: this.placement, align: this.align })
+  })
 
   static styles = css`
     :host {
@@ -68,40 +73,25 @@ export class Dropdown extends FilmElement {
   }
 
   updated (changed: PropertyValues<this>): void {
+    super.updated(changed)
     if (!changed.has('open')) return
     this.trigger?.setAttribute('aria-expanded', String(this.open))
-    if (this.open) this.openPanel()
-    else this.closePanel()
+    // Announce only real transitions: `open` starts false, so the first render
+    // would otherwise report a close nobody made.
+    const wasOpen = this.floating.isOpen
+    if (this.open) {
+      if (!this.floating.show() || wasOpen) return
+      ;(this.querySelector('film-menu') as Menu | null)?.focusFirst()
+      this.dispatchEvent(new Event('film-open'))
+    } else {
+      this.floating.hide()
+      if (wasOpen) this.dispatchEvent(new Event('film-close'))
+    }
   }
 
   connectedCallback (): void {
     super.connectedCallback()
     this.trigger?.setAttribute('aria-haspopup', 'menu')
-  }
-
-  disconnectedCallback (): void {
-    this.cleanup?.()
-    super.disconnectedCallback()
-  }
-
-  private openPanel (): void {
-    const trigger = this.trigger
-    if (!trigger || !this.panel) return
-    this.panel.showPopover()
-    this.cleanup = anchorPosition(trigger, this.panel, {
-      placement: this.placement,
-      align: this.align
-    })
-    const menu = this.querySelector('film-menu') as Menu | null
-    menu?.focusFirst()
-    this.dispatchEvent(new Event('film-open'))
-  }
-
-  private closePanel (): void {
-    this.cleanup?.()
-    this.cleanup = undefined
-    if (this.panel?.matches(':popover-open')) this.panel.hidePopover()
-    this.dispatchEvent(new Event('film-close'))
   }
 
   private readonly onToggle = (event: Event): void => {

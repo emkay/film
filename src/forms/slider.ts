@@ -109,13 +109,20 @@ export class Slider extends FilmElement {
     )
   }
 
+  // Write the clamped value back to the dragged input. When a thumb is pinned
+  // against the other one its stored value doesn't change, so Lit doesn't
+  // re-render and the thumb would stay drawn past its partner.
   private onMinInput (event: Event): void {
-    this.valueMin = Math.min(Number((event.target as HTMLInputElement).value), this.valueMax)
+    const input = event.target as HTMLInputElement
+    this.valueMin = Math.min(Number(input.value), this.valueMax)
+    input.value = String(this.valueMin)
     this.emit()
   }
 
   private onMaxInput (event: Event): void {
-    this.valueMax = Math.max(Number((event.target as HTMLInputElement).value), this.valueMin)
+    const input = event.target as HTMLInputElement
+    this.valueMax = Math.max(Number(input.value), this.valueMin)
+    input.value = String(this.valueMax)
     this.emit()
   }
 

@@ -38,6 +38,11 @@ const OVERSCAN = 4
  * node passes through; use `column.render` for a per-column cell renderer. Set
  * `activatable` to make rows focusable and clickable (fires `film-row-activate`).
  *
+ * Selection follows row objects by identity. If `rows` is rebuilt with new
+ * objects for the same records — a refetch, or a framework re-render that maps
+ * data into fresh objects — set `row-key` to a field that identifies each
+ * record (e.g. `row-key="id"`) so the selection carries across.
+ *
  * @fires film-sort - When the sort changes. `detail` is `{ key, direction }`.
  * @fires film-selection-change - When row selection changes. `detail.rows` is the selected rows.
  * @fires film-row-activate - When an activatable row is clicked or Enter/Space is pressed. `detail` is `{ row, index }`.
@@ -68,9 +73,23 @@ export class Table extends FilmElement {
   /** Fixed row height in pixels, used for virtualisation. */
   @property({ type: Number, attribute: 'row-height' }) rowHeight = 36
 
+  /**
+   * The field that uniquely identifies each row, e.g. `id`. Selection is
+   * tracked by its value, so it survives `rows` being replaced with new objects
+   * for the same records. Rows sharing a value select together, and a row
+   * without the field falls back to object identity. Without `row-key`, every
+   * row is identified by object identity.
+   */
+  @property({ type: String, attribute: 'row-key' }) rowKey = ''
+
   @state() private sortKey: string | null = null
   @state() private sortDir: 'asc' | 'desc' = 'asc'
-  @state() private selected = new Set<number>()
+  /**
+   * The keys of the selected rows (see {@link keyOf}). Indices would silently
+   * point at different rows, or past the end, once `rows` is replaced,
+   * reordered or refetched.
+   */
+  @state() private selected = new Set<unknown>()
   @state() private scrollOffset = 0
 
   private resizeObserver?: ResizeObserver
@@ -185,6 +204,20 @@ export class Table extends FilmElement {
     if (this.virtualized) this.requestUpdate()
   }
 
+  willUpdate (changed: PropertyValues<this>): void {
+    // Drop selections whose rows are gone, and tell listeners the selection
+    // changed rather than leaving them holding rows the table no longer shows.
+    // Changing `row-key` changes what a key is, so it re-checks too.
+    if ((changed.has('rows') || changed.has('rowKey')) && this.selected.size > 0) {
+      const present = new Set(this.rows.map((row) => this.keyOf(row)))
+      const kept = new Set([...this.selected].filter((key) => present.has(key)))
+      if (kept.size !== this.selected.size) {
+        this.selected = kept
+        this.emitSelection()
+      }
+    }
+  }
+
   updated (changed: PropertyValues<this>): void {
     super.updated(changed)
     if (changed.has('rowHeight')) this.style.setProperty('--film-row-height', `${this.rowHeight}px`)
@@ -246,27 +279,39 @@ export class Table extends FilmElement {
     )
   }
 
+  /**
+   * What selection tracks a row by: its `row-key` field when one is set and the
+   * row has it, otherwise the row object itself.
+   */
+  private keyOf (row: TableRow): unknown {
+    return this.rowKey ? (row[this.rowKey] ?? row) : row
+  }
+
+  private isSelected (row: TableRow): boolean {
+    return this.selected.has(this.keyOf(row))
+  }
+
   private get allSelected (): boolean {
-    return this.rows.length > 0 && this.selected.size === this.rows.length
+    return this.rows.length > 0 && this.rows.every((row) => this.isSelected(row))
   }
 
   private toggleAll (checked: boolean): void {
-    this.selected = checked ? new Set(this.rows.map((_, index) => index)) : new Set()
+    this.selected = checked ? new Set(this.rows.map((row) => this.keyOf(row))) : new Set()
     this.emitSelection()
   }
 
-  private toggleRow (index: number): void {
+  private toggleRow (row: TableRow): void {
+    const key = this.keyOf(row)
     const next = new Set(this.selected)
-    if (next.has(index)) next.delete(index)
-    else next.add(index)
+    if (next.has(key)) next.delete(key)
+    else next.add(key)
     this.selected = next
     this.emitSelection()
   }
 
+  // Always the current row objects, so listeners get fresh data after a refetch.
   private emitSelection (): void {
-    const rows = Array.from(this.selected)
-      .sort((a, b) => a - b)
-      .map((index) => this.rows[index])
+    const rows = this.rows.filter((row) => this.isSelected(row))
     this.dispatchEvent(new CustomEvent('film-selection-change', { detail: { rows }, bubbles: true }))
   }
 
@@ -317,8 +362,8 @@ export class Table extends FilmElement {
               <input
                 type="checkbox"
                 aria-label="Select row"
-                .checked=${this.selected.has(index)}
-                @change=${() => this.toggleRow(index)}
+                .checked=${this.isSelected(row)}
+                @change=${() => this.toggleRow(row)}
               />
             </td>`
           : nothing}

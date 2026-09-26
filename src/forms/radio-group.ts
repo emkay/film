@@ -45,24 +45,15 @@ export class RadioGroup extends FilmFormControl {
     return this.value || null
   }
 
-  formResetCallback (): void {
-    this.value = this.getAttribute('value') ?? ''
-    this.syncSelection()
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
+  firstUpdated (changed: PropertyValues<this>): void {
+    super.firstUpdated(changed)
     if (this.label) this.setAttribute('aria-label', this.label)
-    this.syncSelection()
-    this.syncForm()
   }
 
   updated (changed: PropertyValues<this>): void {
-    // Keep selection + form value in sync with programmatic `value` changes.
-    if (changed.has('value')) {
-      this.syncSelection()
-      this.syncForm()
-    }
+    super.updated(changed)
+    // Keep the radios in step with `value`, however it was set.
+    if (changed.has('value')) this.syncSelection()
   }
 
   private readonly onClick = (event: MouseEvent): void => {

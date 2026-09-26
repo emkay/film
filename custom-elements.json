@@ -1370,7 +1370,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Table — a themed, data-driven table with optional sorting, row selection, a\nsticky header, and opt-in row virtualisation for large datasets. Provide\n`columns` and `rows` as properties.\n\nFor `virtualized`, give the table a bounded height (e.g. `style=\"height:20rem\"`)\nso it scrolls; a fixed `row-height` drives the windowing. Pair it with\n`sticky-header` for the best result.\n\nCells render the raw `row[key]` value directly, so a `TemplateResult` or DOM\nnode passes through; use `column.render` for a per-column cell renderer. Set\n`activatable` to make rows focusable and clickable (fires `film-row-activate`).",
+          "description": "Table — a themed, data-driven table with optional sorting, row selection, a\nsticky header, and opt-in row virtualisation for large datasets. Provide\n`columns` and `rows` as properties.\n\nFor `virtualized`, give the table a bounded height (e.g. `style=\"height:20rem\"`)\nso it scrolls; a fixed `row-height` drives the windowing. Pair it with\n`sticky-header` for the best result.\n\nCells render the raw `row[key]` value directly, so a `TemplateResult` or DOM\nnode passes through; use `column.render` for a per-column cell renderer. Set\n`activatable` to make rows focusable and clickable (fires `film-row-activate`).\n\nSelection follows row objects by identity. If `rows` is rebuilt with new\nobjects for the same records — a refetch, or a framework re-render that maps\ndata into fresh objects — set `row-key` to a field that identifies each\nrecord (e.g. `row-key=\"id\"`) so the selection carries across.",
           "name": "Table",
           "members": [
             {
@@ -1453,6 +1453,16 @@
               "default": "36",
               "description": "Fixed row height in pixels, used for virtualisation.",
               "attribute": "row-height"
+            },
+            {
+              "kind": "field",
+              "name": "rowKey",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The field that uniquely identifies each row, e.g. `id`. Selection is\ntracked by its value, so it survives `rows` being replaced with new objects\nfor the same records. Rows sharing a value select together, and a row\nwithout the field falls back to object identity. Without `row-key`, every\nrow is identified by object identity.",
+              "attribute": "row-key"
             }
           ],
           "events": [
@@ -1532,6 +1542,15 @@
               "default": "36",
               "description": "Fixed row height in pixels, used for virtualisation.",
               "fieldName": "rowHeight"
+            },
+            {
+              "name": "row-key",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The field that uniquely identifies each row, e.g. `id`. Selection is\ntracked by its value, so it survives `rows` being replaced with new objects\nfor the same records. Rows sharing a value select together, and a row\nwithout the field falls back to object identity. Without `row-key`, every\nrow is identified by object identity.",
+              "fieldName": "rowKey"
             }
           ],
           "superclass": {
@@ -2523,19 +2542,6 @@
               }
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -2658,6 +2664,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -2812,19 +2831,6 @@
               "attribute": "label"
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -2947,6 +2953,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -3102,19 +3121,6 @@
               "reflects": true
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -3237,6 +3243,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -3422,19 +3441,6 @@
               "reflects": true
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -3557,6 +3563,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -3829,19 +3848,6 @@
               "attribute": "label"
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -3964,6 +3970,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -4105,6 +4124,7 @@
               "type": {
                 "text": "FormControl[]"
               },
+              "description": "Every Film form control inside the form. Found by type rather than by a tag\nlist, which had fallen behind the library and silently skipped five of them.",
               "readonly": true
             },
             {
@@ -4477,19 +4497,6 @@
               "attribute": "step"
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -4612,6 +4619,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -4836,19 +4856,6 @@
               "attribute": "placeholder"
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -4971,6 +4978,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -5135,19 +5155,6 @@
               "attribute": "label"
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -5270,6 +5277,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -5540,19 +5560,6 @@
               "attribute": "show-value"
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -5675,6 +5682,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -5848,19 +5868,6 @@
               "attribute": "label"
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -5983,6 +5990,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -6273,19 +6293,6 @@
               "reflects": true
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -6408,6 +6415,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -6755,19 +6775,6 @@
               }
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -6890,6 +6897,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"
@@ -7081,19 +7101,6 @@
               "attribute": "auto-grow"
             },
             {
-              "kind": "method",
-              "name": "formResetCallback",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "FilmFormControl",
-                "module": "src/internal/form-control.ts"
-              }
-            },
-            {
               "kind": "field",
               "name": "name",
               "type": {
@@ -7216,6 +7223,19 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "FilmFormControl",
+                "module": "src/internal/form-control.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "inheritedFrom": {
                 "name": "FilmFormControl",
                 "module": "src/internal/form-control.ts"

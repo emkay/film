@@ -1,4 +1,4 @@
-import { css, html, nothing, type PropertyValues } from 'lit'
+import { css, html, nothing } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
 
@@ -89,19 +89,6 @@ export class Search extends FilmFormControl {
 
   protected override get validationAnchor (): HTMLElement | undefined {
     return this.input
-  }
-
-  formResetCallback (): void {
-    this.value = this.getAttribute('value') ?? ''
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
-    this.syncForm()
-  }
-
-  updated (changed: PropertyValues<this>): void {
-    if (changed.has('value')) this.syncForm()
   }
 
   private onInput (event: Event): void {

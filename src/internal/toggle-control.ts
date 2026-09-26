@@ -13,6 +13,8 @@ import { FilmFormControl } from './form-control.js'
  * `film-select` do.
  */
 export abstract class FilmToggleControl extends FilmFormControl {
+  static formProps = ['checked']
+
   /** Whether the control is checked / on. */
   @property({ type: Boolean, reflect: true }) checked = false
 
@@ -24,6 +26,13 @@ export abstract class FilmToggleControl extends FilmFormControl {
    * render it as the default slot's fallback, so slotted content still wins.
    */
   @property({ type: String }) label = ''
+
+  /**
+   * The state a form reset returns to, captured when the control first connects.
+   * `checked` reflects to its attribute, so the attribute tracks the current
+   * state and can't serve as the default the way it does on a native checkbox.
+   */
+  private defaultChecked: boolean | null = null
 
   /** The ARIA role for the control, e.g. `checkbox` or `switch`. */
   protected abstract readonly toggleRole: string
@@ -41,6 +50,7 @@ export abstract class FilmToggleControl extends FilmFormControl {
 
   connectedCallback (): void {
     super.connectedCallback()
+    this.defaultChecked ??= this.checked
     this.setAttribute('role', this.getAttribute('role') ?? this.toggleRole)
     if (!this.hasAttribute('tabindex')) this.tabIndex = 0
   }
@@ -49,20 +59,13 @@ export abstract class FilmToggleControl extends FilmFormControl {
     return this.checked ? this.value : null
   }
 
-  formResetCallback (): void {
-    this.checked = this.hasAttribute('checked')
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
-    this.syncForm()
+  protected override restoreDefault (): void {
+    this.checked = this.defaultChecked ?? false
   }
 
   updated (changed: PropertyValues<this>): void {
-    if (changed.has('checked')) {
-      this.setAttribute('aria-checked', String(this.checked))
-      this.syncForm()
-    }
+    super.updated(changed)
+    if (changed.has('checked')) this.setAttribute('aria-checked', String(this.checked))
     if (changed.has('disabled')) {
       this.setAttribute('aria-disabled', String(this.disabled))
       this.tabIndex = this.disabled ? -1 : 0

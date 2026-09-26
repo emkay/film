@@ -1,6 +1,7 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { DragController } from '../internal/drag-controller.js'
 
 /**
  * SplitPanel — two panes separated by a draggable divider the user can move to
@@ -24,7 +25,21 @@ export class SplitPanel extends FilmElement {
   /** The maximum position, as a percentage. */
   @property({ type: Number }) max = 90
 
-  private dragging = false
+  /** The position when the current drag began; drags apply deltas to it. */
+  private dragBase = 0
+
+  // Shares the pointer mechanics with film-window: primary button only,
+  // pointer capture with a fallback, and pointercancel ending the drag.
+  private readonly drag = new DragController(this, {
+    onStart: () => {
+      this.dragBase = this.clamp(this.position)
+    },
+    onDrag: (dx, dy) => {
+      const rect = this.getBoundingClientRect()
+      const fraction = this.vertical ? dy / rect.height : dx / rect.width
+      this.setPosition(this.dragBase + fraction * 100)
+    }
+  })
 
   static styles = css`
     :host {
@@ -88,25 +103,6 @@ export class SplitPanel extends FilmElement {
     )
   }
 
-  private readonly onPointerDown = (event: PointerEvent): void => {
-    this.dragging = true
-    ;(event.target as HTMLElement).setPointerCapture(event.pointerId)
-  }
-
-  private readonly onPointerMove = (event: PointerEvent): void => {
-    if (!this.dragging) return
-    const rect = this.getBoundingClientRect()
-    const percent = this.vertical
-      ? ((event.clientY - rect.top) / rect.height) * 100
-      : ((event.clientX - rect.left) / rect.width) * 100
-    this.setPosition(percent)
-  }
-
-  private readonly onPointerUp = (event: PointerEvent): void => {
-    this.dragging = false
-    ;(event.target as HTMLElement).releasePointerCapture(event.pointerId)
-  }
-
   private readonly onKeydown = (event: KeyboardEvent): void => {
     const decrease = this.vertical ? 'ArrowUp' : 'ArrowLeft'
     const increase = this.vertical ? 'ArrowDown' : 'ArrowRight'
@@ -131,9 +127,9 @@ export class SplitPanel extends FilmElement {
         aria-valuenow=${Math.round(this.clamp(this.position))}
         aria-valuemin=${this.min}
         aria-valuemax=${this.max}
-        @pointerdown=${this.onPointerDown}
-        @pointermove=${this.onPointerMove}
-        @pointerup=${this.onPointerUp}
+        @pointerdown=${this.drag.onPointerDown}
+        @pointermove=${this.drag.onPointerMove}
+        @pointerup=${this.drag.onPointerUp}
         @keydown=${this.onKeydown}
       ></div>
       <div class="end" part="end"><slot name="end"></slot></div>
