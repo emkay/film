@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.5.0](https://github.com/emkay/film/compare/v1.4.0...v1.5.0) (2026-09-26)
+
+
+### Features
+
+* expose version and document ([eabc229](https://github.com/emkay/film/commit/eabc22998ce5bdd8966dd3e10fcb6b5d44d4dd82))
+
+
+### Bug Fixes
+
+* **a11y:** keyboard patterns, focus, motion, forced colors, tap-to-place ([5094299](https://github.com/emkay/film/commit/5094299324b9e6b7bd983e514840b2cb2cf1f96f))
+* **a11y:** meet WCAG 2.5.8 target size ([af43dd9](https://github.com/emkay/film/commit/af43dd9e080dbbe4f442e66786fc0015c8aa5c19))
+* **a11y:** meet WCAG AA contrast ([6c39272](https://github.com/emkay/film/commit/6c39272dedde080e7242ce73599d51ab7b04bd6c))
+* **a11y:** resolve the accessibility issues from the audit ([06fb0b2](https://github.com/emkay/film/commit/06fb0b23b94b5112f7e8d752f40cc505aa966b06))
+
 ## [1.4.0](https://github.com/emkay/film/compare/v1.3.0...v1.4.0) (2026-09-26)
 
 
