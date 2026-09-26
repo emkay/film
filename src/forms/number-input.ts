@@ -76,7 +76,9 @@ export class NumberInput extends FilmFormControl {
 
     input {
       flex: 1;
-      min-inline-size: 0;
+      /* Room for a few digits, and never a target too small to hit: in a
+         tight layout it used to collapse to a sliver between the steppers. */
+      min-inline-size: max(4ch, var(--film-target-size, 24px));
       inline-size: 100%;
       font: inherit;
       text-align: center;

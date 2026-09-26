@@ -176,6 +176,8 @@ export class Window extends FilmElement {
     }
 
     .titlebar button {
+      min-inline-size: var(--film-target-size, 24px);
+      min-block-size: var(--film-target-size, 24px);
       border: none;
       background: none;
       color: inherit;

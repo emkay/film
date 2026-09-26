@@ -25,6 +25,9 @@
   --film-disabled-opacity: 0.6;
   --film-focus-ring-width: var(--border-thin);
 
+  /* Smallest pointer target, per WCAG 2.2 SC 2.5.8 (24×24 CSS px). */
+  --film-target-size: 24px;
+
   /* Elevation — shadows for floating surfaces (menus, dialogs, toasts…). */
   --film-shadow-color: light-dark(oklch(0 0 0 / 0.14), oklch(0 0 0 / 0.5));
   --film-shadow-1: 0 1px 2px var(--film-shadow-color);
