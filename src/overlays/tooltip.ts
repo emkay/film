@@ -35,6 +35,20 @@ export class Tooltip extends FilmElement {
   private static counter = 0
   private readonly tipId = `film-tooltip-${(Tooltip.counter += 1)}`
 
+  /**
+   * The `content` text, kept in the light DOM beside the trigger. The visible
+   * tip lives in this element's shadow root, and an `aria-describedby` ID can't
+   * reach into a shadow root — so the trigger is described by this copy
+   * instead. It's slotted into a hidden container: unslotted content isn't in
+   * the flat tree at all, so it would have no accessibility node to read.
+   */
+  private readonly description = Object.assign(document.createElement('span'), {
+    id: `${this.tipId}-description`
+  })
+
+  /** The trigger we last described, and the ID tokens we added to it. */
+  private described?: { target: HTMLElement, ids: string[] }
+
   static styles = css`
     :host {
       display: inline-block;
@@ -52,10 +66,20 @@ export class Tooltip extends FilmElement {
       border-radius: var(--film-radius-sm);
       box-shadow: var(--film-shadow-1);
     }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      .tip {
+        border: var(--border-thin) solid CanvasText;
+      }
+    }
   `
 
   connectedCallback (): void {
     super.connectedCallback()
+    this.description.setAttribute('slot', 'film-tooltip-description')
+    if (this.description.parentNode !== this) this.append(this.description)
     this.addEventListener('mouseenter', this.show)
     this.addEventListener('mouseleave', this.hide)
     this.addEventListener('focusin', this.show)
@@ -90,22 +114,52 @@ export class Tooltip extends FilmElement {
 
   updated (changed: PropertyValues<this>): void {
     super.updated(changed)
-    if (!changed.has('open')) return
-    if (this.open) {
-      this.target?.setAttribute('aria-describedby', this.tipId)
-      this.floating.show()
-    } else {
-      this.target?.removeAttribute('aria-describedby')
-      this.floating.hide()
+    if (changed.has('content')) {
+      this.description.textContent = this.content
+      this.describe()
     }
+    if (!changed.has('open')) return
+    if (this.open) this.floating.show()
+    else this.floating.hide()
+  }
+
+  /**
+   * Point the trigger's `aria-describedby` at the description: the `content`
+   * copy and any rich `slot="content"` elements, which are already light DOM.
+   * Always, not only while open — a screen reader announces the focused
+   * element straight away, before the tip would have opened. The trigger's own
+   * describedby tokens are kept.
+   */
+  private readonly describe = (): void => {
+    const rich = (this.shadowRoot?.querySelector('slot[name="content"]') as HTMLSlotElement | null)
+      ?.assignedElements() ?? []
+    rich.forEach((el, i) => { el.id ||= `${this.tipId}-content-${i}` })
+    const ids = [...(this.content ? [this.description.id] : []), ...rich.map((el) => el.id)]
+
+    const target = this.target
+    const previous = this.described
+    if (previous) {
+      const kept = (previous.target.getAttribute('aria-describedby') ?? '')
+        .split(/\s+/).filter((id) => id && !previous.ids.includes(id))
+      if (kept.length) previous.target.setAttribute('aria-describedby', kept.join(' '))
+      else previous.target.removeAttribute('aria-describedby')
+    }
+    if (!target || ids.length === 0) {
+      this.described = undefined
+      return
+    }
+    const own = (target.getAttribute('aria-describedby') ?? '').split(/\s+/).filter(Boolean)
+    target.setAttribute('aria-describedby', [...own, ...ids.filter((id) => !own.includes(id))].join(' '))
+    this.described = { target, ids }
   }
 
   render () {
     return html`
-      <slot></slot>
+      <slot @slotchange=${this.describe}></slot>
       <div class="tip" id=${this.tipId} role="tooltip" popover="manual">
-        ${this.content}<slot name="content"></slot>
+        ${this.content}<slot name="content" @slotchange=${this.describe}></slot>
       </div>
+      <div hidden><slot name="film-tooltip-description"></slot></div>
     `
   }
 }

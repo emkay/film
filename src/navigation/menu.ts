@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 import type { MenuItem } from './menu-item.js'
 import { activeElementOf } from '../internal/dom.js'
+import { TypeAhead } from '../internal/type-ahead.js'
 
 /**
  * Menu — a themed list of {@link MenuItem}s with arrow-key navigation. Can be
@@ -51,6 +52,8 @@ export class Menu extends FilmElement {
     items[items.length - 1]?.focus()
   }
 
+  private readonly typeAhead = new TypeAhead()
+
   private readonly onKeydown = (event: KeyboardEvent): void => {
     const items = this.items
     if (items.length === 0) return
@@ -77,6 +80,14 @@ export class Menu extends FilmElement {
         event.stopPropagation()
         items[items.length - 1]?.focus()
         break
+      default: {
+        const match = this.typeAhead.find(event, items.map((item) => item.textContent ?? ''), current)
+        if (match >= 0) {
+          event.preventDefault()
+          event.stopPropagation()
+          items[match]?.focus()
+        }
+      }
     }
   }
 

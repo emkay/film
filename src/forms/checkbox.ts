@@ -36,7 +36,7 @@ export class Checkbox extends FilmToggleControl {
       inline-size: 1.15em;
       block-size: 1.15em;
       flex: 0 0 auto;
-      border: var(--border-thin) solid var(--film-color-border);
+      border: var(--border-thin) solid var(--film-color-control-border);
       border-radius: var(--film-radius-sm);
       background-color: var(--film-color-surface);
       display: grid;

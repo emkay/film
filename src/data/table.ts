@@ -119,6 +119,17 @@ export class Table extends FilmElement {
       opacity: 0.8;
     }
 
+    /* A full-size hit area around the native checkbox; clicking anywhere in
+       it toggles the box, and never activates the row by near-miss. */
+    .select {
+      display: inline-grid;
+      place-content: center;
+      min-inline-size: var(--film-target-size, 24px);
+      min-block-size: var(--film-target-size, 24px);
+      margin-block: -4px;
+      cursor: pointer;
+    }
+
     th,
     td {
       padding: var(--s-2) var(--s0);
@@ -359,12 +370,14 @@ export class Table extends FilmElement {
       >
         ${this.selectable
           ? html`<td>
-              <input
-                type="checkbox"
-                aria-label="Select row"
-                .checked=${this.isSelected(row)}
-                @change=${() => this.toggleRow(row)}
-              />
+              <label class="select">
+                <input
+                  type="checkbox"
+                  aria-label="Select row"
+                  .checked=${this.isSelected(row)}
+                  @change=${() => this.toggleRow(row)}
+                />
+              </label>
             </td>`
           : nothing}
         ${this.columns.map(
@@ -415,13 +428,15 @@ export class Table extends FilmElement {
           <tr aria-rowindex=${this.virtualized ? 1 : nothing}>
             ${this.selectable
               ? html`<th scope="col">
-                  <input
-                    type="checkbox"
-                    aria-label="Select all rows"
-                    .checked=${this.allSelected}
-                    .indeterminate=${someSelected}
-                    @change=${(e: Event) => this.toggleAll((e.target as HTMLInputElement).checked)}
-                  />
+                  <label class="select">
+                    <input
+                      type="checkbox"
+                      aria-label="Select all rows"
+                      .checked=${this.allSelected}
+                      .indeterminate=${someSelected}
+                      @change=${(e: Event) => this.toggleAll((e.target as HTMLInputElement).checked)}
+                    />
+                  </label>
                 </th>`
               : nothing}
             ${this.columns.map(

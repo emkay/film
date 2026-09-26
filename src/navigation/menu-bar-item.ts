@@ -84,6 +84,13 @@ export class MenuBarItem extends FilmElement {
   `
 
   /** The menu assigned to the default slot, if any. */
+  // The trigger inside is the menubar's item; the host is just a wrapper, so it
+  // stays out of the accessibility tree rather than sit between the two.
+  connectedCallback (): void {
+    super.connectedCallback()
+    if (!this.hasAttribute('role')) this.setAttribute('role', 'none')
+  }
+
   get menu (): Menu | null {
     return this.querySelector('film-menu')
   }
@@ -179,6 +186,7 @@ export class MenuBarItem extends FilmElement {
       <button
         class="trigger"
         part="trigger"
+        role="menuitem"
         ?disabled=${this.disabled}
         aria-haspopup="menu"
         aria-expanded=${this.open ? 'true' : 'false'}

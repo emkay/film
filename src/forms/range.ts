@@ -71,7 +71,7 @@ export class Range extends FilmFormControl {
         step=${this.step}
         .value=${String(this.value)}
         ?disabled=${this.disabled}
-        aria-label=${this.label || nothing}
+        aria-label=${this.accessibleName() || nothing}
         @input=${this.onInput}
         @change=${this.onChange}
       />

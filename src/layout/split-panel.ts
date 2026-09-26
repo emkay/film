@@ -1,5 +1,5 @@
 import { css, html, type PropertyValues } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 import { DragController } from '../internal/drag-controller.js'
 
@@ -30,7 +30,14 @@ export class SplitPanel extends FilmElement {
 
   // Shares the pointer mechanics with film-window: primary button only,
   // pointer capture with a fallback, and pointercancel ending the drag.
+  /** Tap-to-place is waiting for the click that moves the divider. */
+  @state() private armed = false
+
   private readonly drag = new DragController(this, {
+    // A click on the divider arms it and the next click places it: moving it
+    // without dragging (WCAG 2.5.7).
+    tapToPlace: true,
+    onArm: (armed) => { this.armed = armed },
     onStart: () => {
       this.dragBase = this.clamp(this.position)
     },
@@ -80,9 +87,24 @@ export class SplitPanel extends FilmElement {
       cursor: row-resize;
     }
 
+    /* Armed by a click: the next click moves it there. */
+    .divider.armed {
+      outline: var(--border-thick) solid var(--film-color-focus);
+      outline-offset: 2px;
+    }
+
     .divider:focus-visible {
       outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: 2px;
+    }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      .divider {
+        forced-color-adjust: none;
+        background-color: CanvasText;
+      }
     }
   `
 
@@ -119,7 +141,7 @@ export class SplitPanel extends FilmElement {
     return html`
       <div class="start" part="start"><slot name="start"></slot></div>
       <div
-        class="divider"
+        class="divider ${this.armed ? 'armed' : ''}"
         part="divider"
         role="separator"
         tabindex="0"

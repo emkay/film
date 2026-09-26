@@ -104,7 +104,7 @@ export class Input extends FilmFormControl {
       font: inherit;
       color: var(--film-color-text);
       background-color: var(--film-color-surface);
-      border: var(--border-thin) solid var(--film-color-border);
+      border: var(--border-thin) solid var(--film-color-control-border);
       border-radius: var(--film-radius);
       padding: 0.4em 0.6em;
     }
@@ -182,7 +182,7 @@ export class Input extends FilmFormControl {
           ?disabled=${this.disabled}
           ?required=${this.required}
           ?readonly=${this.readonly}
-          aria-label=${this.label || nothing}
+          aria-label=${this.accessibleName() || nothing}
           @input=${this.onInput}
           @change=${this.onChange}
           @keydown=${this.onKeydown}

@@ -37,7 +37,7 @@ export class Switch extends FilmToggleControl {
       flex: 0 0 auto;
       border-radius: var(--film-radius-pill);
       background-color: var(--film-color-surface);
-      border: var(--border-thin) solid var(--film-color-border);
+      border: var(--border-thin) solid var(--film-color-control-border);
       padding: 0.1em;
       display: flex;
       transition: background-color var(--film-duration-fast) var(--film-ease);
@@ -67,6 +67,30 @@ export class Switch extends FilmToggleControl {
     :host(:focus-visible) .track {
       outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: 2px;
+    }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      .track {
+        forced-color-adjust: none;
+        background-color: Canvas;
+        border-color: CanvasText;
+      }
+
+      .thumb {
+        forced-color-adjust: none;
+        background-color: CanvasText;
+      }
+
+      :host([checked]) .track {
+        background-color: Highlight;
+        border-color: Highlight;
+      }
+
+      :host([checked]) .thumb {
+        background-color: HighlightText;
+      }
     }
   `
 

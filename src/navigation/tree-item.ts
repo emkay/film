@@ -71,8 +71,12 @@ export class TreeItem extends FilmElement {
       background: none;
       cursor: pointer;
       padding: 0;
-      inline-size: 1em;
-      block-size: 1em;
+      /* A full-size hit area around the small arrow, with negative margins so
+         the row lays out as if it were still 1em: a near-miss would otherwise
+         select the row instead of expanding it. */
+      inline-size: var(--film-target-size, 24px);
+      block-size: var(--film-target-size, 24px);
+      margin: calc((1em - var(--film-target-size, 24px)) / 2);
       display: grid;
       place-content: center;
       color: inherit;
@@ -109,6 +113,15 @@ export class TreeItem extends FilmElement {
   }
 
   /** The immediate child tree items. */
+  /** This item's own label: its text and `slot="label"` content, not its children's. */
+  get labelText (): string {
+    return Array.from(this.childNodes)
+      .filter((node) => node.nodeType === Node.TEXT_NODE || (node as Element).slot === 'label')
+      .map((node) => node.textContent ?? '')
+      .join('')
+      .trim()
+  }
+
   get childItems (): TreeItem[] {
     return Array.from(this.querySelectorAll(':scope > film-tree-item'))
   }

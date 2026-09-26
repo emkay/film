@@ -70,7 +70,17 @@ export class Pagination extends FilmElement {
       display: inline-grid;
       place-content: center;
       min-inline-size: 2.25em;
-      opacity: 0.6;
+      color: var(--film-color-text-muted);
+    }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      button[aria-current] {
+        forced-color-adjust: none;
+        background-color: Highlight;
+        color: HighlightText;
+      }
     }
   `
 

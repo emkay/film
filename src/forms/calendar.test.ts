@@ -104,7 +104,7 @@ describe('film-calendar', () => {
     await el.updateComplete
     const focused = el.shadowRoot?.querySelector('.day.focused') as HTMLButtonElement
     expect(focused.disabled).to.equal(false)
-    expect(focused.getAttribute('aria-label')).to.equal('2026-08-10')
+    expect(focused.dataset.date).to.equal('2026-08-10')
   })
 
   it('keeps a tabbable day when today is outside min / max', async () => {

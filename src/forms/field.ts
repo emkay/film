@@ -12,12 +12,10 @@ interface FieldControl extends HTMLElement {
  * marker, and an error message that appears when the control reports invalid
  * (via the native `invalid` event). Set `error` to show a message manually.
  *
- * Note: because the control is slotted (light DOM) while the label lives in the
- * shadow root, cross-root `aria-describedby` isn't possible yet, so the error
- * region is marked `role="alert"` (announced when it appears) and the label is
- * applied as the control's `aria-label`. For controls that render their own
- * inner input (input, textarea, select), their own `label` still gives the most
- * precise accessible name.
+ * The label names the control through its `aria-label`, which Film's form
+ * controls forward to the inner element that takes focus. The error region is
+ * `role="alert"`, so it's announced when it appears: `aria-describedby` can't
+ * point from the slotted control into this element's shadow root.
  *
  * @slot - The single form control.
  */

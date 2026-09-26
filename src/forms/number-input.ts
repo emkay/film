@@ -45,7 +45,7 @@ export class NumberInput extends FilmFormControl {
     .control {
       display: flex;
       align-items: stretch;
-      border: var(--border-thin) solid var(--film-color-border);
+      border: var(--border-thin) solid var(--film-color-control-border);
       border-radius: var(--film-radius);
       background-color: var(--film-color-surface);
       overflow: hidden;
@@ -76,7 +76,9 @@ export class NumberInput extends FilmFormControl {
 
     input {
       flex: 1;
-      min-inline-size: 0;
+      /* Room for a few digits, and never a target too small to hit: in a
+         tight layout it used to collapse to a sliver between the steppers. */
+      min-inline-size: max(4ch, var(--film-target-size, 24px));
       inline-size: 100%;
       font: inherit;
       text-align: center;
@@ -160,7 +162,7 @@ export class NumberInput extends FilmFormControl {
             placeholder=${this.placeholder}
             ?disabled=${this.disabled}
             ?required=${this.required}
-            aria-label=${this.label || nothing}
+            aria-label=${this.accessibleName() || nothing}
             @input=${this.onInput}
             @change=${this.onChange}
           />

@@ -4,6 +4,7 @@ import { FilmFormControl } from '../internal/form-control.js'
 import { PopoverController } from '../internal/popover-controller.js'
 import type { SelectOption } from './select-option.js'
 import { activeElementOf } from '../internal/dom.js'
+import { TypeAhead } from '../internal/type-ahead.js'
 
 /**
  * Select — a form-associated select: a trigger showing the current choice and a
@@ -61,7 +62,7 @@ export class Select extends FilmFormControl {
       text-align: start;
       color: var(--film-color-text);
       background-color: var(--film-color-surface);
-      border: var(--border-thin) solid var(--film-color-border);
+      border: var(--border-thin) solid var(--film-color-control-border);
       border-radius: var(--film-radius);
       padding: 0.4em 0.6em;
       cursor: pointer;
@@ -169,6 +170,8 @@ export class Select extends FilmFormControl {
     }
   }
 
+  private readonly typeAhead = new TypeAhead()
+
   private readonly onListboxKeydown = (event: KeyboardEvent): void => {
     const options = this.enabledOptions
     if (options.length === 0) return
@@ -206,6 +209,13 @@ export class Select extends FilmFormControl {
       case 'Tab':
         this.open = false
         break
+      default: {
+        const match = this.typeAhead.find(event, options.map((option) => option.label), current)
+        if (match >= 0) {
+          event.preventDefault()
+          options[match]?.focus()
+        }
+      }
     }
   }
 
@@ -221,7 +231,7 @@ export class Select extends FilmFormControl {
           aria-haspopup="listbox"
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-labelledby=${this.label ? 'label' : nothing}
-          aria-label=${this.label ? nothing : this.placeholder}
+          aria-label=${this.label ? nothing : this.accessibleName(this.placeholder)}
           ?disabled=${this.disabled}
           @click=${this.toggle}
           @keydown=${this.onTriggerKeydown}

@@ -45,6 +45,16 @@ export class NavItem extends FilmElement {
       outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: -2px;
     }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      :host([active]) a {
+        forced-color-adjust: none;
+        background-color: Highlight;
+        color: HighlightText;
+      }
+    }
   `
 
   render () {

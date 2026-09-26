@@ -1,5 +1,5 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 import { DragController } from '../internal/drag-controller.js'
 
@@ -10,11 +10,25 @@ interface Rect {
   height: number
 }
 
-const DIRECTIONS = ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'] as const
+// East and south first: they're the keyboard handles (see render), so they
+// come first in the tab order — width, then height.
+const DIRECTIONS = ['e', 's', 'n', 'w', 'ne', 'nw', 'se', 'sw'] as const
 
 /** Smallest a window may be sized/snapped to, in pixels. */
 export const MIN_WINDOW_WIDTH = 160
 export const MIN_WINDOW_HEIGHT = 100
+
+/**
+ * The handles keyboard and assistive-tech users get. Each is a focusable
+ * separator reporting one dimension, which together cover every size change;
+ * the other six are pointer conveniences. A corner can't be described as a
+ * separator at all — it changes two values — and eight tab stops per window
+ * would be a slog.
+ */
+const KEYBOARD_HANDLES: Record<string, { label: string, dimension: 'width' | 'height', orientation: 'vertical' | 'horizontal', min: number }> = {
+  e: { label: 'Resize width', dimension: 'width', orientation: 'vertical', min: MIN_WINDOW_WIDTH },
+  s: { label: 'Resize height', dimension: 'height', orientation: 'horizontal', min: MIN_WINDOW_HEIGHT }
+}
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -85,7 +99,15 @@ export class Window extends FilmElement {
       )
   })
 
+  /** The resize handle tap-to-place has armed, if any. */
+  @state() private armedHandle = ''
+
   private readonly resizeDrag = new DragController(this, {
+    // A click on a resize handle arms it and the next click resizes to that
+    // point: resizing without dragging (WCAG 2.5.7). Moving stays drag-only,
+    // since a click on the title bar has to keep meaning "raise this window".
+    tapToPlace: true,
+    onArm: (armed) => { this.armedHandle = armed ? this.resizeDir : '' },
     onStart: () => {
       this.base = this.rect()
     },
@@ -162,6 +184,8 @@ export class Window extends FilmElement {
     }
 
     .titlebar button {
+      min-inline-size: var(--film-target-size, 24px);
+      min-block-size: var(--film-target-size, 24px);
       border: none;
       background: none;
       color: inherit;
@@ -201,7 +225,14 @@ export class Window extends FilmElement {
     .handle.w { inset-inline-start: -3px; inset-block: 0; inline-size: 6px; cursor: ew-resize; }
     .handle.ne { inset-block-start: -4px; inset-inline-end: -4px; inline-size: 12px; block-size: 12px; cursor: nesw-resize; }
     .handle.nw { inset-block-start: -4px; inset-inline-start: -4px; inline-size: 12px; block-size: 12px; cursor: nwse-resize; }
-    .handle.se { inset-block-end: -4px; inset-inline-end: -4px; inline-size: 12px; block-size: 12px; cursor: nwse-resize; }
+    /* Full-size (WCAG 2.5.8), so the thin edges have an equivalent target that
+       meets it: this corner resizes both ways, by drag or by tap-to-place. */
+    .handle.se { inset-block-end: -8px; inset-inline-end: -8px; inline-size: 24px; block-size: 24px; cursor: nwse-resize; }
+
+    .handle.armed {
+      outline: var(--border-thick) solid var(--film-color-focus);
+      outline-offset: -2px;
+    }
     .handle.sw { inset-block-end: -4px; inset-inline-start: -4px; inline-size: 12px; block-size: 12px; cursor: nesw-resize; }
   `
 
@@ -215,6 +246,12 @@ export class Window extends FilmElement {
       w: parent?.clientWidth ?? window.innerWidth,
       h: parent?.clientHeight ?? window.innerHeight
     }
+  }
+
+  /** The most a dimension can grow to — the container — for the resize handles' range. */
+  private maxSize (dimension: 'width' | 'height'): number {
+    const { w, h } = this.container()
+    return Math.max(dimension === 'width' ? w : h, this[dimension])
   }
 
   private setPosition (x: number, y: number): void {
@@ -395,19 +432,25 @@ export class Window extends FilmElement {
         <div class="body" ?hidden=${this.minimised}><slot></slot></div>
       </div>
       ${this.resizable && !this.maximised && !this.minimised
-        ? DIRECTIONS.map(
-            (dir) => html`<span
-              class="handle ${dir}"
-              role="separator"
-              tabindex="0"
-              aria-label="Resize ${dir}"
+        ? DIRECTIONS.map((dir) => {
+            const keyboard = KEYBOARD_HANDLES[dir]
+            return html`<span
+              class="handle ${dir} ${this.armedHandle === dir ? 'armed' : ''}"
+              role=${keyboard ? 'separator' : nothing}
+              tabindex=${keyboard ? '0' : nothing}
+              aria-hidden=${keyboard ? nothing : 'true'}
+              aria-label=${keyboard?.label ?? nothing}
+              aria-orientation=${keyboard?.orientation ?? nothing}
+              aria-valuenow=${keyboard ? this[keyboard.dimension] : nothing}
+              aria-valuemin=${keyboard?.min ?? nothing}
+              aria-valuemax=${keyboard ? this.maxSize(keyboard.dimension) : nothing}
               @pointerdown=${(e: PointerEvent) => this.startResize(dir, e)}
               @pointermove=${this.resizeDrag.onPointerMove}
               @pointerup=${this.resizeDrag.onPointerUp}
               @focusin=${this.requestFocus}
               @keydown=${(e: KeyboardEvent) => this.resizeKeydown(dir, e)}
             ></span>`
-          )
+          })
         : nothing}
     `
   }

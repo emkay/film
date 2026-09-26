@@ -46,6 +46,14 @@ export class CopyButton extends FilmElement {
       outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: 2px;
     }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      button {
+        border: var(--border-thin) solid ButtonText;
+      }
+    }
   `
 
   disconnectedCallback (): void {

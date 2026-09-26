@@ -57,7 +57,7 @@ export class DatePicker extends FilmFormControl {
       text-align: start;
       color: var(--film-color-text);
       background-color: var(--film-color-surface);
-      border: var(--border-thin) solid var(--film-color-border);
+      border: var(--border-thin) solid var(--film-color-control-border);
       border-radius: var(--film-radius);
       padding: 0.4em 0.6em;
       cursor: pointer;
@@ -144,7 +144,7 @@ export class DatePicker extends FilmFormControl {
           aria-haspopup="dialog"
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-labelledby=${this.label ? 'label' : nothing}
-          aria-label=${this.label ? nothing : 'Select a date'}
+          aria-label=${this.label ? nothing : this.accessibleName('Select a date')}
           ?disabled=${this.disabled}
           @click=${() => (this.open = !this.open)}
         >

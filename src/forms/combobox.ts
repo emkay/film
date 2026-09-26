@@ -28,6 +28,9 @@ export class Combobox extends FilmFormControl {
 
   @state() private text = ''
 
+  /** The highlighted option, which the field names as its active descendant. */
+  private active: SelectOption | null = null
+
   @query('input') private input!: HTMLInputElement
   @query('.listbox') private listbox!: HTMLElement
 
@@ -57,7 +60,7 @@ export class Combobox extends FilmFormControl {
       font: inherit;
       color: var(--film-color-text);
       background-color: var(--film-color-surface);
-      border: var(--border-thin) solid var(--film-color-border);
+      border: var(--border-thin) solid var(--film-color-control-border);
       border-radius: var(--film-radius);
       padding: 0.4em 0.6em;
     }
@@ -153,6 +156,25 @@ export class Combobox extends FilmFormControl {
     this.options.forEach((option) => {
       option.hidden = query !== '' && !option.label.toLowerCase().includes(query)
     })
+    if (this.active?.hidden) this.setActive(null)
+  }
+
+  /**
+   * Highlight an option without moving focus: the text field keeps it, so
+   * typing keeps filtering, and points assistive tech at the option through
+   * aria-activedescendant. The option is light DOM and the field is in this
+   * shadow root, which an ID can't cross — element reflection can, since it
+   * points out to the host's own tree.
+   */
+  private setActive (option: SelectOption | null): void {
+    if (this.active) this.active.highlighted = false
+    this.active = option
+    if (option) {
+      option.highlighted = true
+      option.scrollIntoView({ block: 'nearest' })
+    }
+    ;(this.input as HTMLInputElement & { ariaActiveDescendantElement: Element | null })
+      .ariaActiveDescendantElement = option
   }
 
   private openListbox (): void {
@@ -172,6 +194,7 @@ export class Combobox extends FilmFormControl {
 
   private select (option: SelectOption): void {
     if (option.disabled) return
+    this.setActive(null)
     this.value = option.value
     this.text = option.label
     this.filter()
@@ -186,6 +209,7 @@ export class Combobox extends FilmFormControl {
   private returnFocusAndClose (): void {
     this.input.focus()
     this.open = false
+    this.setActive(null)
   }
 
   private readonly onListboxClick = (event: MouseEvent): void => {
@@ -195,22 +219,26 @@ export class Combobox extends FilmFormControl {
 
   private readonly onKeydown = (event: KeyboardEvent): void => {
     const options = this.visibleOptions
-    const current = options.indexOf(activeElementOf(this) as SelectOption)
+    // Focus normally stays in the field; an option can still hold it if
+    // something focused one directly.
+    const focused = activeElementOf(this) as SelectOption
+    const current = options.indexOf(options.includes(focused) ? focused : (this.active as SelectOption))
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault()
         this.open = true
-        ;(options[current + 1] ?? options[0])?.focus()
+        this.setActive(options[current + 1] ?? options[0] ?? null)
         break
       case 'ArrowUp':
         event.preventDefault()
-        options[Math.max(current - 1, 0)]?.focus()
+        this.open = true
+        this.setActive(options[current - 1] ?? options[options.length - 1] ?? null)
         break
       case 'Enter': {
-        const focused = activeElementOf(this) as SelectOption
-        if (options.includes(focused)) {
+        const choice = options[current]
+        if (choice) {
           event.preventDefault()
-          this.select(focused)
+          this.select(choice)
         }
         break
       }
@@ -232,7 +260,7 @@ export class Combobox extends FilmFormControl {
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-controls="listbox"
           aria-labelledby=${this.label ? 'label' : nothing}
-          aria-label=${this.label ? nothing : this.placeholder}
+          aria-label=${this.label ? nothing : this.accessibleName(this.placeholder)}
           .value=${this.text}
           placeholder=${this.placeholder}
           ?disabled=${this.disabled}
@@ -249,6 +277,7 @@ export class Combobox extends FilmFormControl {
           role="listbox"
           @toggle=${this.onToggle}
           @click=${this.onListboxClick}
+          @mousedown=${(e: MouseEvent) => e.preventDefault() /* clicks don't take focus from the field */}
           @keydown=${this.onKeydown}
         >
           <slot

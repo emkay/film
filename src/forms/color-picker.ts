@@ -30,7 +30,7 @@ export class ColorPicker extends FilmFormControl {
       display: inline-flex;
       align-items: center;
       gap: var(--s-1);
-      border: var(--border-thin) solid var(--film-color-border);
+      border: var(--border-thin) solid var(--film-color-control-border);
       border-radius: var(--film-radius);
       padding: 0.2em;
       background-color: var(--film-color-surface);
@@ -106,7 +106,7 @@ export class ColorPicker extends FilmFormControl {
           type="color"
           .value=${this.value}
           ?disabled=${this.disabled}
-          aria-label=${this.label || 'Colour'}
+          aria-label=${this.accessibleName('Colour')}
           @input=${this.onColorInput}
         />
         <input

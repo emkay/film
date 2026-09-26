@@ -1,4 +1,5 @@
 import { esbuildPlugin } from '@web/dev-server-esbuild'
+import { a11ySnapshotPlugin } from '@web/test-runner-commands/plugins'
 import { fileURLToPath } from 'node:url'
 
 export default {
@@ -9,6 +10,8 @@ export default {
   concurrency: 1,
   nodeResolve: true,
   plugins: [
+    // Chrome's accessibility tree: what screen readers actually get.
+    a11ySnapshotPlugin(),
     esbuildPlugin({
       ts: true,
       target: 'es2022',
