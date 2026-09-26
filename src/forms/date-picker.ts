@@ -1,7 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
-import { anchorPosition } from '../internal/anchor-position.js'
+import { PopoverController } from '../internal/popover-controller.js'
 import './calendar.js'
 
 /**
@@ -26,7 +26,11 @@ export class DatePicker extends FilmFormControl {
   @query('.trigger') private trigger!: HTMLButtonElement
   @query('.panel') private panel!: HTMLElement
 
-  private cleanup?: () => void
+  private readonly floating = new PopoverController(this, {
+    anchor: () => this.trigger,
+    panel: () => this.panel,
+    options: () => ({ placement: 'bottom', align: 'start' })
+  })
 
   static styles = css`
     :host {
@@ -114,14 +118,9 @@ export class DatePicker extends FilmFormControl {
     if (changed.has('value')) this.syncForm()
     if (changed.has('open')) {
       this.trigger?.setAttribute('aria-expanded', String(this.open))
-      if (this.open) this.openPanel()
-      else this.closePanel()
+      if (this.open) this.floating.show()
+      else this.floating.hide()
     }
-  }
-
-  disconnectedCallback (): void {
-    this.cleanup?.()
-    super.disconnectedCallback()
   }
 
   private get display (): string {
@@ -129,17 +128,6 @@ export class DatePicker extends FilmFormControl {
     if (!parts) return this.placeholder
     const date = new Date(Number(parts[1]), Number(parts[2]) - 1, Number(parts[3]))
     return new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(date)
-  }
-
-  private openPanel (): void {
-    this.panel.showPopover()
-    this.cleanup = anchorPosition(this.trigger, this.panel, { placement: 'bottom', align: 'start' })
-  }
-
-  private closePanel (): void {
-    this.cleanup?.()
-    this.cleanup = undefined
-    if (this.panel?.matches(':popover-open')) this.panel.hidePopover()
   }
 
   private readonly onToggle = (event: Event): void => {

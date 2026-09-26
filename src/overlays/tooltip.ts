@@ -1,7 +1,8 @@
 import { css, html, type PropertyValues } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
-import { anchorPosition, type Placement } from '../internal/anchor-position.js'
+import type { Placement } from '../internal/anchor-position.js'
+import { PopoverController } from '../internal/popover-controller.js'
 
 /**
  * Tooltip — shows a short hint on hover or focus of its slotted target. The
@@ -24,7 +25,11 @@ export class Tooltip extends FilmElement {
   @query('.tip') private tip!: HTMLElement
   @query('slot:not([name])') private targetSlot!: HTMLSlotElement
 
-  private cleanup?: () => void
+  private readonly floating = new PopoverController(this, {
+    anchor: (): HTMLElement => this.target ?? this,
+    panel: () => this.tip,
+    options: () => ({ placement: this.placement, align: 'center' })
+  })
   private static counter = 0
   private readonly tipId = `film-tooltip-${(Tooltip.counter += 1)}`
 
@@ -62,7 +67,6 @@ export class Tooltip extends FilmElement {
     this.removeEventListener('focusin', this.show)
     this.removeEventListener('focusout', this.hide)
     this.removeEventListener('keydown', this.onKeydown)
-    this.cleanup?.()
     super.disconnectedCallback()
   }
 
@@ -83,19 +87,14 @@ export class Tooltip extends FilmElement {
   }
 
   updated (changed: PropertyValues<this>): void {
+    super.updated(changed)
     if (!changed.has('open')) return
-    if (this.open) this.target?.setAttribute('aria-describedby', this.tipId)
-    else this.target?.removeAttribute('aria-describedby')
     if (this.open) {
-      this.tip.showPopover()
-      this.cleanup = anchorPosition(this.target ?? this, this.tip, {
-        placement: this.placement,
-        align: 'center'
-      })
+      this.target?.setAttribute('aria-describedby', this.tipId)
+      this.floating.show()
     } else {
-      this.cleanup?.()
-      this.cleanup = undefined
-      if (this.tip?.matches(':popover-open')) this.tip.hidePopover()
+      this.target?.removeAttribute('aria-describedby')
+      this.floating.hide()
     }
   }
 

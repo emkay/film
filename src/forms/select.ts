@@ -1,7 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
-import { anchorPosition } from '../internal/anchor-position.js'
+import { PopoverController } from '../internal/popover-controller.js'
 import type { SelectOption } from './select-option.js'
 import { activeElementOf } from '../internal/dom.js'
 
@@ -30,7 +30,11 @@ export class Select extends FilmFormControl {
   @query('.trigger') private trigger!: HTMLButtonElement
   @query('.listbox') private listbox!: HTMLElement
 
-  private cleanup?: () => void
+  private readonly floating = new PopoverController(this, {
+    anchor: () => this.trigger,
+    panel: () => this.listbox,
+    options: () => ({ placement: 'bottom', align: 'start' })
+  })
 
   static styles = css`
     :host {
@@ -132,13 +136,8 @@ export class Select extends FilmFormControl {
     }
     if (changed.has('open')) {
       if (this.open) this.openListbox()
-      else this.closeListbox()
+      else this.floating.hide()
     }
-  }
-
-  disconnectedCallback (): void {
-    this.cleanup?.()
-    super.disconnectedCallback()
   }
 
   private syncOptions (): void {
@@ -152,16 +151,9 @@ export class Select extends FilmFormControl {
   }
 
   private openListbox (): void {
-    this.listbox.showPopover()
     this.listbox.style.minInlineSize = `${this.trigger.offsetWidth}px`
-    this.cleanup = anchorPosition(this.trigger, this.listbox, { placement: 'bottom', align: 'start' })
+    this.floating.show()
     ;(this.selectedOption ?? this.enabledOptions[0])?.focus()
-  }
-
-  private closeListbox (): void {
-    this.cleanup?.()
-    this.cleanup = undefined
-    if (this.listbox?.matches(':popover-open')) this.listbox.hidePopover()
   }
 
   private readonly onToggle = (event: Event): void => {

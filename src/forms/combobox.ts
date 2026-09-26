@@ -1,7 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property, query, state } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
-import { anchorPosition } from '../internal/anchor-position.js'
+import { PopoverController } from '../internal/popover-controller.js'
 import type { SelectOption } from './select-option.js'
 import { activeElementOf } from '../internal/dom.js'
 
@@ -31,7 +31,11 @@ export class Combobox extends FilmFormControl {
   @query('input') private input!: HTMLInputElement
   @query('.listbox') private listbox!: HTMLElement
 
-  private cleanup?: () => void
+  private readonly floating = new PopoverController(this, {
+    anchor: () => this.input,
+    panel: () => this.listbox,
+    options: () => ({ placement: 'bottom', align: 'start' })
+  })
 
   static styles = css`
     :host {
@@ -128,13 +132,8 @@ export class Combobox extends FilmFormControl {
     if (changed.has('value')) this.syncForm()
     if (changed.has('open')) {
       if (this.open) this.openListbox()
-      else this.closeListbox()
+      else this.floating.hide()
     }
-  }
-
-  disconnectedCallback (): void {
-    this.cleanup?.()
-    super.disconnectedCallback()
   }
 
   private syncOptions (): void {
@@ -151,17 +150,8 @@ export class Combobox extends FilmFormControl {
   }
 
   private openListbox (): void {
-    // Never stack a second pair of scroll/resize listeners on the old ones.
-    this.cleanup?.()
-    if (!this.listbox.matches(':popover-open')) this.listbox.showPopover()
     this.listbox.style.minInlineSize = `${this.input.offsetWidth}px`
-    this.cleanup = anchorPosition(this.input, this.listbox, { placement: 'bottom', align: 'start' })
-  }
-
-  private closeListbox (): void {
-    this.cleanup?.()
-    this.cleanup = undefined
-    if (this.listbox?.matches(':popover-open')) this.listbox.hidePopover()
+    this.floating.show()
   }
 
   private readonly onToggle = (event: Event): void => {
