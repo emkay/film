@@ -1,4 +1,5 @@
 import { LitElement, type PropertyValues } from 'lit'
+import './version.js'
 import { resolveScale } from './scale.js'
 import {
   describeAllowed,
