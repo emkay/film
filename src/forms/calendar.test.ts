@@ -94,4 +94,25 @@ describe('film-calendar', () => {
     expect(header(el)).to.equal('September 2026')
     expect(nav(el, 'Next year').disabled).to.equal(true)
   })
+
+  it('does not move the cursor onto a disabled day', async () => {
+    const el = await fixture<Calendar>(
+      html`<film-calendar value="2026-08-10" min="2026-08-10"></film-calendar>`
+    )
+    const grid = el.shadowRoot?.querySelector('.grid') as HTMLElement
+    grid.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }))
+    await el.updateComplete
+    const focused = el.shadowRoot?.querySelector('.day.focused') as HTMLButtonElement
+    expect(focused.disabled).to.equal(false)
+    expect(focused.getAttribute('aria-label')).to.equal('2026-08-10')
+  })
+
+  it('keeps a tabbable day when today is outside min / max', async () => {
+    const el = await fixture<Calendar>(
+      html`<film-calendar min="2020-01-01" max="2020-12-31"></film-calendar>`
+    )
+    const stop = el.shadowRoot?.querySelector('.day[tabindex="0"]') as HTMLButtonElement
+    expect(stop, 'no tab stop in the grid').to.exist
+    expect(stop.disabled).to.equal(false)
+  })
 })

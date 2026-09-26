@@ -3,6 +3,7 @@ import { customElement, property, query, state } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
 import { anchorPosition } from '../internal/anchor-position.js'
 import type { SelectOption } from './select-option.js'
+import { activeElementOf } from '../internal/dom.js'
 
 /**
  * Combobox — a form-associated select with type-to-filter autocomplete. Options
@@ -150,7 +151,9 @@ export class Combobox extends FilmFormControl {
   }
 
   private openListbox (): void {
-    this.listbox.showPopover()
+    // Never stack a second pair of scroll/resize listeners on the old ones.
+    this.cleanup?.()
+    if (!this.listbox.matches(':popover-open')) this.listbox.showPopover()
     this.listbox.style.minInlineSize = `${this.input.offsetWidth}px`
     this.cleanup = anchorPosition(this.input, this.listbox, { placement: 'bottom', align: 'start' })
   }
@@ -179,8 +182,14 @@ export class Combobox extends FilmFormControl {
     this.syncOptions()
     this.syncForm()
     this.dispatchEvent(new Event('change', { bubbles: true }))
-    this.open = false
+    this.returnFocusAndClose()
+  }
+
+  // Focus first: the input's focus handler opens the listbox, so closing before
+  // focusing would have it reopen straight after a choice or Escape.
+  private returnFocusAndClose (): void {
     this.input.focus()
+    this.open = false
   }
 
   private readonly onListboxClick = (event: MouseEvent): void => {
@@ -190,7 +199,7 @@ export class Combobox extends FilmFormControl {
 
   private readonly onKeydown = (event: KeyboardEvent): void => {
     const options = this.visibleOptions
-    const current = options.indexOf(document.activeElement as SelectOption)
+    const current = options.indexOf(activeElementOf(this) as SelectOption)
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault()
@@ -202,7 +211,7 @@ export class Combobox extends FilmFormControl {
         options[Math.max(current - 1, 0)]?.focus()
         break
       case 'Enter': {
-        const focused = document.activeElement as SelectOption
+        const focused = activeElementOf(this) as SelectOption
         if (options.includes(focused)) {
           event.preventDefault()
           this.select(focused)
@@ -210,8 +219,7 @@ export class Combobox extends FilmFormControl {
         break
       }
       case 'Escape':
-        this.open = false
-        this.input.focus()
+        this.returnFocusAndClose()
         break
     }
   }

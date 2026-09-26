@@ -18,4 +18,14 @@ describe('film-slider', () => {
     await el.updateComplete
     expect(el.valueMin).to.equal(50)
   })
+
+  it('snaps a clamped thumb back so it never sits past the other one', async () => {
+    const el = await fixture<Slider>(html`<film-slider value-min="50" value-max="50"></film-slider>`)
+    const minInput = el.shadowRoot?.querySelector('input[type="range"]') as HTMLInputElement
+    minInput.value = '70'
+    minInput.dispatchEvent(new Event('input'))
+    await el.updateComplete
+    expect(el.valueMin).to.equal(50)
+    expect(minInput.value, 'the dragged thumb is left beyond the max thumb').to.equal('50')
+  })
 })

@@ -1,5 +1,5 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
-import { customElement, property, query } from 'lit/decorators.js'
+import { customElement, property, query, state } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
 
 /**
@@ -17,6 +17,13 @@ export class NumberInput extends FilmFormControl {
   @property({ type: String }) placeholder = ''
 
   @query('input') private input!: HTMLInputElement
+
+  /**
+   * Whether the field has been cleared. `value` is a number, and `Number('')`
+   * is 0, so without this an empty field submitted 0 and `required` could never
+   * fail.
+   */
+  @state() private empty = false
 
   static styles = css`
     :host {
@@ -90,7 +97,7 @@ export class NumberInput extends FilmFormControl {
   `
 
   protected getFormValue (): string {
-    return String(this.value)
+    return this.empty ? '' : String(this.value)
   }
 
   protected override get validationAnchor (): HTMLElement | undefined {
@@ -98,6 +105,7 @@ export class NumberInput extends FilmFormControl {
   }
 
   formResetCallback (): void {
+    this.empty = false
     this.value = Number(this.getAttribute('value') ?? 0)
     this.syncForm()
   }
@@ -106,8 +114,9 @@ export class NumberInput extends FilmFormControl {
     this.syncForm()
   }
 
-  updated (changed: PropertyValues<this>): void {
-    if (changed.has('value')) this.syncForm()
+  // Untyped: `empty` is private state, which PropertyValues<this> can't name.
+  updated (changed: PropertyValues): void {
+    if (changed.has('value') || changed.has('empty')) this.syncForm()
   }
 
   private clamp (n: number): number {
@@ -116,17 +125,24 @@ export class NumberInput extends FilmFormControl {
 
   private stepBy (direction: number): void {
     if (this.disabled) return
+    this.empty = false
     this.value = this.clamp(this.value + direction * this.step)
     this.input?.focus()
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }))
   }
 
   private onInput (event: Event): void {
-    const n = Number((event.target as HTMLInputElement).value)
-    if (!Number.isNaN(n)) this.value = n
+    const raw = (event.target as HTMLInputElement).value
+    this.empty = raw === ''
+    const n = Number(raw)
+    if (!this.empty && !Number.isNaN(n)) this.value = n
   }
 
   private onChange (): void {
+    if (this.empty) {
+      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }))
+      return
+    }
     this.value = this.clamp(this.value)
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }))
   }
@@ -145,7 +161,7 @@ export class NumberInput extends FilmFormControl {
           <input
             id="control"
             type="number"
-            .value=${String(this.value)}
+            .value=${this.empty ? '' : String(this.value)}
             min=${Number.isFinite(this.min) ? this.min : nothing}
             max=${Number.isFinite(this.max) ? this.max : nothing}
             step=${this.step}

@@ -93,7 +93,10 @@ export class ColorPicker extends FilmFormControl {
   private onHexInput (event: Event): void {
     const next = (event.target as HTMLInputElement).value
     if (/^#[0-9a-fA-F]{6}$/.test(next)) {
-      this.commit(next) // clears validity via syncForm -> updateValidity
+      this.commit(next)
+      // Re-validate directly: re-entering the current value doesn't change it,
+      // so updated() never runs and the custom error would otherwise stick.
+      this.syncForm()
     } else {
       this.internals.setValidity(
         { customError: true },

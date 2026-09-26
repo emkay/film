@@ -3,6 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
 import { anchorPosition } from '../internal/anchor-position.js'
 import type { SelectOption } from './select-option.js'
+import { activeElementOf } from '../internal/dom.js'
 
 /**
  * Select — a form-associated select: a trigger showing the current choice and a
@@ -192,7 +193,7 @@ export class Select extends FilmFormControl {
   private readonly onListboxKeydown = (event: KeyboardEvent): void => {
     const options = this.enabledOptions
     if (options.length === 0) return
-    const current = options.indexOf(document.activeElement as SelectOption)
+    const current = options.indexOf(activeElementOf(this) as SelectOption)
 
     switch (event.key) {
       case 'ArrowDown':
@@ -214,7 +215,7 @@ export class Select extends FilmFormControl {
       case 'Enter':
       case ' ': {
         event.preventDefault()
-        const focused = document.activeElement as SelectOption
+        const focused = activeElementOf(this) as SelectOption
         if (options.includes(focused)) this.select(focused)
         break
       }

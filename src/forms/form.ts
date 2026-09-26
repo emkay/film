@@ -1,6 +1,7 @@
 import { html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { FilmFormControl } from '../internal/form-control.js'
 
 interface FormControl extends HTMLElement {
   name: string
@@ -11,8 +12,6 @@ interface FormControl extends HTMLElement {
   formResetCallback?: () => void
 }
 
-const CONTROL_SELECTOR =
-  'film-input, film-textarea, film-select, film-checkbox, film-switch, film-radio-group, film-range, film-color-picker'
 
 /**
  * Form — aggregates Film's form-associated controls. Slotted custom elements
@@ -33,8 +32,14 @@ export class Form extends FilmElement {
   /** Skip validation before submitting. */
   @property({ type: Boolean }) novalidate = false
 
+  /**
+   * Every Film form control inside the form. Found by type rather than by a tag
+   * list, which had fallen behind the library and silently skipped five of them.
+   */
   get controls (): FormControl[] {
-    return Array.from(this.querySelectorAll(CONTROL_SELECTOR)) as FormControl[]
+    return Array.from(this.querySelectorAll('*')).filter(
+      (el): el is FilmFormControl => el instanceof FilmFormControl
+    ) as unknown as FormControl[]
   }
 
   connectedCallback (): void {

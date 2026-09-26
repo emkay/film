@@ -2,6 +2,7 @@ import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 import type { TreeItem } from './tree-item.js'
+import { activeElementOf } from '../internal/dom.js'
 
 /**
  * Tree — a hierarchical list of {@link TreeItem}s with single selection and
@@ -58,7 +59,7 @@ export class Tree extends FilmElement {
   }
 
   private readonly onKeydown = (event: KeyboardEvent): void => {
-    const focused = document.activeElement as TreeItem | null
+    const focused = activeElementOf(this) as TreeItem | null
     if (!focused || focused.tagName !== 'FILM-TREE-ITEM') return
     const visible = this.visibleItems
     const index = visible.indexOf(focused)

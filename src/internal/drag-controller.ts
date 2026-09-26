@@ -14,8 +14,10 @@ export interface DragCallbacks {
 /**
  * DragController — the shared pointer + keyboard drag mechanics used by
  * draggable/resizable UI (windows, resize handles, dividers): pointer capture,
- * drift-free cumulative deltas, and arrow-key stepping. Spread its handlers onto
- * a handle element:
+ * drift-free cumulative deltas, and arrow-key stepping. A cancelled gesture
+ * (pointercancel — a touch taken over by scrolling, say) ends the drag like a
+ * release; the controller listens for it itself. Spread its handlers onto a
+ * handle element:
  *
  *     <div
  *       @pointerdown=${drag.onPointerDown}
@@ -44,9 +46,14 @@ export class DragController implements ReactiveController {
   hostDisconnected (): void {
     this.active = false
     this.pointerId = null
-    this.target = null
-    // Drop the capture-failure fallback if the host went away mid-drag.
+    this.detach()
+  }
+
+  /** Remove the listeners a drag adds beyond the handle's own bindings. */
+  private detach (): void {
+    this.target?.removeEventListener('pointercancel', this.onPointerUp)
     window.removeEventListener('pointerup', this.onPointerUp)
+    this.target = null
   }
 
   readonly onPointerDown = (event: PointerEvent): void => {
@@ -56,6 +63,9 @@ export class DragController implements ReactiveController {
     this.startY = event.clientY
     this.pointerId = event.pointerId
     this.target = event.currentTarget as HTMLElement
+    // Without this a cancelled touch leaves the drag active, and every later
+    // pointermove over the handle keeps moving whatever it drags.
+    this.target.addEventListener('pointercancel', this.onPointerUp)
     // Best-effort: capture keeps events flowing if the pointer leaves the handle,
     // but can throw for a stale/synthetic pointer id — degrade gracefully.
     let captured = false
@@ -84,6 +94,7 @@ export class DragController implements ReactiveController {
       this.target.releasePointerCapture(this.pointerId)
     }
     this.pointerId = null
+    this.detach()
     this.callbacks.onEnd?.()
   }
 

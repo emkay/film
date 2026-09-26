@@ -25,6 +25,13 @@ export abstract class FilmToggleControl extends FilmFormControl {
    */
   @property({ type: String }) label = ''
 
+  /**
+   * The state a form reset returns to, captured when the control first connects.
+   * `checked` reflects to its attribute, so the attribute tracks the current
+   * state and can't serve as the default the way it does on a native checkbox.
+   */
+  private defaultChecked: boolean | null = null
+
   /** The ARIA role for the control, e.g. `checkbox` or `switch`. */
   protected abstract readonly toggleRole: string
 
@@ -41,6 +48,7 @@ export abstract class FilmToggleControl extends FilmFormControl {
 
   connectedCallback (): void {
     super.connectedCallback()
+    this.defaultChecked ??= this.checked
     this.setAttribute('role', this.getAttribute('role') ?? this.toggleRole)
     if (!this.hasAttribute('tabindex')) this.tabIndex = 0
   }
@@ -50,7 +58,7 @@ export abstract class FilmToggleControl extends FilmFormControl {
   }
 
   formResetCallback (): void {
-    this.checked = this.hasAttribute('checked')
+    this.checked = this.defaultChecked ?? false
     this.syncForm()
   }
 

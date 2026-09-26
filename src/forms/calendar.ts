@@ -179,6 +179,13 @@ export class Calendar extends FilmElement {
     if (selected) this.cursor = selected
   }
 
+  // The cursor is the grid's only tab stop, so it must sit on a selectable day:
+  // with today outside min/max it would otherwise land on a disabled button and
+  // leave the grid unreachable from the keyboard.
+  willUpdate (changed: PropertyValues<this>): void {
+    if (changed.has('min') || changed.has('max')) this.cursor = this.clampToRange(this.cursor)
+  }
+
   updated (changed: PropertyValues<this>): void {
     if (changed.has('value')) {
       const selected = this.selectedDate
@@ -199,7 +206,7 @@ export class Calendar extends FilmElement {
   }
 
   private moveCursor (days: number): void {
-    this.cursor = addDays(this.cursor, days)
+    this.cursor = this.clampToRange(addDays(this.cursor, days))
     this.pendingFocus = true
   }
 

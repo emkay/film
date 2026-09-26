@@ -1,6 +1,7 @@
 import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { ownDescendants } from '../internal/dom.js'
 import type { AccordionItem } from './accordion-item.js'
 
 /**
@@ -24,7 +25,7 @@ export class Accordion extends FilmElement {
   `
 
   private get items (): AccordionItem[] {
-    return Array.from(this.querySelectorAll('film-accordion-item'))
+    return ownDescendants<AccordionItem>(this, 'film-accordion-item')
   }
 
   connectedCallback (): void {
@@ -34,7 +35,10 @@ export class Accordion extends FilmElement {
 
   private readonly onToggle = (event: CustomEvent<{ open: boolean }>): void => {
     if (this.multiple || !event.detail.open) return
+    // film-toggle also bubbles from film-details and nested accordions inside a
+    // panel; only one of this accordion's own items opening should close the rest.
     const opened = event.target as AccordionItem
+    if (!this.items.includes(opened)) return
     for (const item of this.items) {
       if (item !== opened) item.open = false
     }

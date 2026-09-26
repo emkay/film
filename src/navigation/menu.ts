@@ -2,6 +2,7 @@ import { css, html } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 import type { MenuItem } from './menu-item.js'
+import { activeElementOf } from '../internal/dom.js'
 
 /**
  * Menu — a themed list of {@link MenuItem}s with arrow-key navigation. Can be
@@ -53,7 +54,7 @@ export class Menu extends FilmElement {
   private readonly onKeydown = (event: KeyboardEvent): void => {
     const items = this.items
     if (items.length === 0) return
-    const current = items.indexOf(document.activeElement as MenuItem)
+    const current = items.indexOf(activeElementOf(this) as MenuItem)
 
     switch (event.key) {
       case 'ArrowDown':

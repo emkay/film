@@ -39,4 +39,22 @@ describe('film-checkbox', () => {
     const slot = el.shadowRoot?.querySelector('slot:not([name])') as HTMLSlotElement
     expect(slot.assignedNodes().map((n) => n.textContent).join('')).to.equal('Slotted')
   })
+
+  it('restores its initial state on form reset', async () => {
+    const form = document.createElement('form')
+    form.innerHTML = '<film-checkbox name="a"></film-checkbox><film-checkbox name="b" checked></film-checkbox>'
+    document.body.append(form)
+    const [a, b] = Array.from(form.querySelectorAll('film-checkbox')) as Checkbox[]
+    await Promise.all([a.updateComplete, b.updateComplete])
+
+    a.click()
+    b.click()
+    await Promise.all([a.updateComplete, b.updateComplete])
+    expect([a.checked, b.checked]).to.deep.equal([true, false])
+
+    form.reset()
+    await Promise.all([a.updateComplete, b.updateComplete])
+    expect([a.checked, b.checked]).to.deep.equal([false, true])
+    form.remove()
+  })
 })

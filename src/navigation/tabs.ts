@@ -1,6 +1,7 @@
-import { css, html } from 'lit'
+import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { ownDescendants, ownTarget } from '../internal/dom.js'
 import type { Tab } from './tab.js'
 import type { TabPanel } from './tab-panel.js'
 
@@ -31,12 +32,14 @@ export class Tabs extends FilmElement {
     }
   `
 
+  // Only this component's own tabs and panels — a film-tabs nested in a panel
+  // manages its own.
   private get tabs (): Tab[] {
-    return Array.from(this.querySelectorAll('film-tab'))
+    return ownDescendants<Tab>(this, 'film-tab')
   }
 
   private get panels (): TabPanel[] {
-    return Array.from(this.querySelectorAll('film-tab-panel'))
+    return ownDescendants<TabPanel>(this, 'film-tab-panel')
   }
 
   connectedCallback (): void {
@@ -47,17 +50,25 @@ export class Tabs extends FilmElement {
 
   firstUpdated (): void {
     if (!this.active) this.active = this.tabs[0]?.panel ?? ''
-    this.sync()
+  }
+
+  updated (changed: PropertyValues<this>): void {
+    super.updated(changed)
+    // However `active` was set — a click, the keyboard, code or a parent
+    // re-render — the tabs and panels follow it.
+    if (changed.has('active')) this.sync()
   }
 
   private readonly onClick = (event: MouseEvent): void => {
-    const tab = (event.target as Element).closest('film-tab') as Tab | null
+    const tab = ownTarget<Tab>(this, event, 'film-tab')
     if (tab && !tab.disabled) this.activate(tab.panel, tab)
   }
 
   private readonly onKeydown = (event: KeyboardEvent): void => {
     const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End']
     if (!keys.includes(event.key)) return
+    // Arrow keys inside a panel belong to its content (a text field's cursor).
+    if (!ownTarget(this, event, 'film-tab')) return
     const enabled = this.tabs.filter((tab) => !tab.disabled)
     if (enabled.length === 0) return
     event.preventDefault()
@@ -75,6 +86,7 @@ export class Tabs extends FilmElement {
 
   private activate (name: string, focus?: Tab): void {
     this.active = name
+    // Sync now rather than in updated(), so the tab is focusable before focus().
     this.sync()
     focus?.focus()
     this.dispatchEvent(new CustomEvent('film-tab-change', { detail: { name }, bubbles: true }))
