@@ -18,6 +18,12 @@ export class SelectOption extends FilmElement {
   /** Whether this option is disabled. */
   @property({ type: Boolean, reflect: true }) disabled = false
 
+  /**
+   * The option a combobox's arrow keys have reached. Keyboard focus stays in
+   * the combobox's text field, so this — not :focus — is what's drawn.
+   */
+  @property({ type: Boolean, reflect: true }) highlighted = false
+
   static styles = css`
     :host {
       display: block;
@@ -40,6 +46,16 @@ export class SelectOption extends FilmElement {
     :host(:focus-visible) {
       background-color: var(--film-color-info);
       outline: none;
+    }
+
+    /* The tint alone is too faint to find focus by, and forced-colours mode
+       drops backgrounds; an inset ring survives both and can't be clipped by
+       the scrolling listbox. */
+    :host(:focus-visible),
+    :host([highlighted]) {
+      background-color: var(--film-color-info);
+      outline: var(--border-thin) solid var(--film-color-focus);
+      outline-offset: calc(-1 * var(--border-thin));
     }
 
     :host([disabled]) {

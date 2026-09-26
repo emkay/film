@@ -1,5 +1,5 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 import { DragController } from '../internal/drag-controller.js'
 
@@ -99,7 +99,15 @@ export class Window extends FilmElement {
       )
   })
 
+  /** The resize handle tap-to-place has armed, if any. */
+  @state() private armedHandle = ''
+
   private readonly resizeDrag = new DragController(this, {
+    // A click on a resize handle arms it and the next click resizes to that
+    // point: resizing without dragging (WCAG 2.5.7). Moving stays drag-only,
+    // since a click on the title bar has to keep meaning "raise this window".
+    tapToPlace: true,
+    onArm: (armed) => { this.armedHandle = armed ? this.resizeDir : '' },
     onStart: () => {
       this.base = this.rect()
     },
@@ -217,7 +225,14 @@ export class Window extends FilmElement {
     .handle.w { inset-inline-start: -3px; inset-block: 0; inline-size: 6px; cursor: ew-resize; }
     .handle.ne { inset-block-start: -4px; inset-inline-end: -4px; inline-size: 12px; block-size: 12px; cursor: nesw-resize; }
     .handle.nw { inset-block-start: -4px; inset-inline-start: -4px; inline-size: 12px; block-size: 12px; cursor: nwse-resize; }
-    .handle.se { inset-block-end: -4px; inset-inline-end: -4px; inline-size: 12px; block-size: 12px; cursor: nwse-resize; }
+    /* Full-size (WCAG 2.5.8), so the thin edges have an equivalent target that
+       meets it: this corner resizes both ways, by drag or by tap-to-place. */
+    .handle.se { inset-block-end: -8px; inset-inline-end: -8px; inline-size: 24px; block-size: 24px; cursor: nwse-resize; }
+
+    .handle.armed {
+      outline: var(--border-thick) solid var(--film-color-focus);
+      outline-offset: -2px;
+    }
     .handle.sw { inset-block-end: -4px; inset-inline-start: -4px; inline-size: 12px; block-size: 12px; cursor: nesw-resize; }
   `
 
@@ -420,7 +435,7 @@ export class Window extends FilmElement {
         ? DIRECTIONS.map((dir) => {
             const keyboard = KEYBOARD_HANDLES[dir]
             return html`<span
-              class="handle ${dir}"
+              class="handle ${dir} ${this.armedHandle === dir ? 'armed' : ''}"
               role=${keyboard ? 'separator' : nothing}
               tabindex=${keyboard ? '0' : nothing}
               aria-hidden=${keyboard ? nothing : 'true'}

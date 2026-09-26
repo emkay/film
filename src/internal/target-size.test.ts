@@ -21,12 +21,13 @@ const TARGET = [
 ].join(', ')
 
 /**
- * Known exceptions, each with its reason. Window resize edges are drag
- * handles; making them WCAG-compliant (2.5.7 needs a non-drag way to resize
- * too) is a design decision still open, so they're listed rather than hidden.
+ * Known exceptions, each with the part of 2.5.8 that allows it. A window's
+ * resize edges are thin, but its south-east corner resizes both ways and is a
+ * full-size target — the "equivalent" exception. The window's own test checks
+ * the corner really is 24px, so the exception can't outlive its reason.
  */
 const KNOWN: Array<[RegExp, string]> = [
-  [/^film-window › span\.handle/, 'window resize edges — pending a non-drag resize design (2.5.7)']
+  [/^film-window › span\.handle/, 'window resize edges — the 24×24 corner handle is an equivalent target']
 ]
 
 // States the demo never renders, and layouts that stress spacing.

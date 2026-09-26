@@ -113,6 +113,15 @@ export class TreeItem extends FilmElement {
   }
 
   /** The immediate child tree items. */
+  /** This item's own label: its text and `slot="label"` content, not its children's. */
+  get labelText (): string {
+    return Array.from(this.childNodes)
+      .filter((node) => node.nodeType === Node.TEXT_NODE || (node as Element).slot === 'label')
+      .map((node) => node.textContent ?? '')
+      .join('')
+      .trim()
+  }
+
   get childItems (): TreeItem[] {
     return Array.from(this.querySelectorAll(':scope > film-tree-item'))
   }

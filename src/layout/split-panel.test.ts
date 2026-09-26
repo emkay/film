@@ -3,7 +3,8 @@ import './split-panel.js'
 import type { SplitPanel } from './split-panel.js'
 
 const pointer = (target: Element, type: string, init: PointerEventInit = {}): void => {
-  target.dispatchEvent(new PointerEvent(type, { bubbles: true, button: 0, pointerId: 1, ...init }))
+  // composed, as real pointer events are: they cross shadow boundaries.
+  target.dispatchEvent(new PointerEvent(type, { bubbles: true, composed: true, button: 0, pointerId: 1, ...init }))
 }
 
 async function panel (): Promise<{ el: SplitPanel, divider: HTMLElement }> {
@@ -47,5 +48,19 @@ describe('film-split-panel', () => {
     const { el, divider } = await panel()
     divider.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }))
     expect(el.position).to.equal(52)
+  })
+
+  it('moves by tap-to-place, without dragging (WCAG 2.5.7)', async () => {
+    const { el, divider } = await panel()
+    const box = el.getBoundingClientRect()
+    const at = box.left + box.width / 2
+    pointer(divider, 'pointerdown', { clientX: at })
+    pointer(divider, 'pointerup', { clientX: at })
+    await el.updateComplete
+    expect(divider.classList.contains('armed'), 'shows it is armed').to.equal(true)
+    pointer(el, 'pointerdown', { clientX: box.left + box.width * 0.25 })
+    await el.updateComplete
+    expect(el.position).to.be.closeTo(25, 1)
+    expect(divider.classList.contains('armed')).to.equal(false)
   })
 })

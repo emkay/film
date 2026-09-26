@@ -45,7 +45,7 @@ export class NumberInput extends FilmFormControl {
     .control {
       display: flex;
       align-items: stretch;
-      border: var(--border-thin) solid var(--film-color-border);
+      border: var(--border-thin) solid var(--film-color-control-border);
       border-radius: var(--film-radius);
       background-color: var(--film-color-surface);
       overflow: hidden;

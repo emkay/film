@@ -1,5 +1,6 @@
 import { fixture, html, expect } from '@open-wc/testing'
-import { a11ySnapshot, findAccessibilityNode } from '@web/test-runner-commands'
+import type { TemplateResult } from 'lit'
+import { a11ySnapshot, emulateMedia, findAccessibilityNode, sendKeys } from '@web/test-runner-commands'
 import '../index.js'
 
 // Regression tests for the blocking issues from the accessibility audit. Each
@@ -185,4 +186,140 @@ describe('accessibility: blocking issues', () => {
       expect((el as HTMLElement).hasAttribute('tabindex')).to.equal(false)
     })
   })
+})
+
+describe('accessibility: focus indicators (WCAG 1.4.11)', () => {
+  // The ring is drawn with Film's tokens (--border-thin, --film-color-focus),
+  // so load the stylesheets an app would: without them the outline is invalid.
+  before(async () => {
+    await Promise.all(['/css/base.css', '/css/themes/default/index.css'].map((href) => {
+      if (document.querySelector(`link[href="${href}"]`)) return undefined
+      const link = Object.assign(document.createElement('link'), { rel: 'stylesheet', href })
+      document.head.append(link)
+      return new Promise((resolve) => { link.onload = resolve })
+    }))
+  })
+
+  // A tint alone is too faint to find focus by, and disappears in forced-colours
+  // mode; the ring uses the focus token, which the palette test holds to 3:1.
+  const focusColour = (): string => {
+    const probe = document.createElement('span')
+    probe.style.color = 'var(--film-color-focus)'
+    document.body.append(probe)
+    const colour = getComputedStyle(probe).color
+    probe.remove()
+    return colour
+  }
+
+  it('film-select-option shows a focus ring', async () => {
+    // Keyboard all the way: Tab inside an open select closes it, as it should.
+    const el = await fixture(html`<film-select><film-select-option value="a">A</film-select-option><film-select-option value="b">B</film-select-option></film-select>`)
+    ;(el.shadowRoot?.querySelector('.trigger') as HTMLElement).focus()
+    await sendKeys({ press: 'ArrowDown' }) // opens, focusing the first option
+    await settle()
+    await sendKeys({ press: 'ArrowDown' })
+    await settle()
+    const option = el.querySelectorAll('film-select-option')[1] as HTMLElement
+    expect(option.matches(':focus-visible'), 'second option has keyboard focus').to.equal(true)
+    const style = getComputedStyle(option)
+    expect(style.outlineStyle).to.equal('solid')
+    expect(style.outlineColor).to.equal(focusColour())
+  })
+
+  it('film-menu-item shows a focus ring', async () => {
+    // Reach it with the arrow key, as a user would. (Not Tab: with nothing else
+    // focusable, Tab leaves the page for the browser's own UI, and the next
+    // test file's page then never gets focus events.)
+    const el = await fixture(html`<film-menu><film-menu-item>A</film-menu-item><film-menu-item>B</film-menu-item></film-menu>`)
+    ;(el.querySelector('film-menu-item') as HTMLElement).focus()
+    await sendKeys({ press: 'ArrowDown' })
+    await settle()
+    const item = el.querySelectorAll('film-menu-item')[1] as HTMLElement
+    expect(item.matches(':focus-visible'), 'second item has keyboard focus').to.equal(true)
+    const style = getComputedStyle(item)
+    expect(style.outlineStyle).to.equal('solid')
+    expect(style.outlineColor).to.equal(focusColour())
+  })
+})
+
+describe('accessibility: reduced motion', () => {
+  before(async () => {
+    await Promise.all(['/css/base.css', '/css/themes/default/index.css'].map((href) => {
+      if (document.querySelector(`link[href="${href}"]`)) return undefined
+      const link = Object.assign(document.createElement('link'), { rel: 'stylesheet', href })
+      document.head.append(link)
+      return new Promise((resolve) => { link.onload = resolve })
+    }))
+  })
+  afterEach(async () => { await emulateMedia({ reducedMotion: 'no-preference' }) })
+
+  // Every transition takes its duration from the motion tokens, so the tokens
+  // are where reduced motion is honoured — including the workspace's snap
+  // preview, which only exists mid-drag.
+  it('zeroes the motion tokens', async () => {
+    const read = (): number[] => ['--film-duration-fast', '--film-duration'].map((token) => {
+      const probe = document.createElement('span')
+      probe.style.transitionDuration = `var(${token})`
+      document.body.append(probe)
+      const value = parseFloat(getComputedStyle(probe).transitionDuration)
+      probe.remove()
+      return value
+    })
+    expect(Math.min(...read()), 'animates by default').to.be.greaterThan(0)
+    await emulateMedia({ reducedMotion: 'reduce' })
+    await settle()
+    expect(read()).to.deep.equal([0, 0])
+  })
+
+  const cases: Array<[string, TemplateResult, (el: HTMLElement) => CSSStyleDeclaration]> = [
+    ['film-switch thumb', html`<film-switch>x</film-switch>`,
+      (el) => getComputedStyle(el.shadowRoot?.querySelector('.thumb') as Element)],
+    ['film-radio dot', html`<film-radio-group><film-radio value="a">A</film-radio></film-radio-group>`,
+      (el) => getComputedStyle(el.querySelector('film-radio')?.shadowRoot?.querySelector('.dot') as Element, '::after')],
+    ['film-tree-item arrow', html`<film-tree><film-tree-item>x<film-tree-item>y</film-tree-item></film-tree-item></film-tree>`,
+      (el) => getComputedStyle(el.querySelector('film-tree-item')?.shadowRoot?.querySelector('.twist') as Element)]
+  ]
+  for (const [name, markup, style] of cases) {
+    it(`${name} stops animating`, async () => {
+      const el = await fixture<HTMLElement>(markup)
+      await settle()
+      const longest = (): number => Math.max(...style(el).transitionDuration.split(',').map((d) => parseFloat(d)))
+      expect(longest(), 'animates by default').to.be.greaterThan(0)
+      await emulateMedia({ reducedMotion: 'reduce' })
+      await settle()
+      expect(longest()).to.equal(0)
+    })
+  }
+})
+
+describe('accessibility: forced colours (Windows High Contrast)', () => {
+  // In forced-colours mode the browser replaces author colours and drops
+  // backgrounds, so anything shown only by a fill disappears. These components
+  // must carry a forced-colors rule painting it with system colours.
+  // Headless Chrome won't emulate the mode (matchMedia stays false), so this
+  // checks each component ships the rule; rendering needs a check on Windows.
+  const SYSTEM_COLOUR = /\b(Canvas|CanvasText|Highlight|HighlightText|ButtonText|ButtonBorder|GrayText)\b/i // serialised in lowercase
+  const needs: Record<string, string> = {
+    'film-switch': 'thumb and on-state track',
+    'film-radio': 'checked dot',
+    'film-calendar': 'selected day',
+    'film-slider': 'selected range',
+    'film-split-panel': 'divider',
+    'film-pagination': 'current page',
+    'film-nav-item': 'active item',
+    'film-progress-bar': 'fill',
+    'film-button': 'edge of a fill-only button',
+    'film-copy-button': 'edge of a fill-only button',
+    'film-tooltip': 'edge of the tip'
+  }
+  for (const [tag, what] of Object.entries(needs)) {
+    it(`${tag} keeps its ${what}`, () => {
+      const ctor = customElements.get(tag) as unknown as { elementStyles: Array<{ styleSheet?: CSSStyleSheet }> }
+      const rules = ctor.elementStyles.flatMap((style) => Array.from(style.styleSheet?.cssRules ?? []))
+      const forced = rules.filter((rule): rule is CSSMediaRule =>
+        rule instanceof CSSMediaRule && rule.conditionText.includes('forced-colors: active'))
+      expect(forced.length, 'has a forced-colors rule').to.be.greaterThan(0)
+      expect(forced.some((rule) => SYSTEM_COLOUR.test(rule.cssText)), 'paints with system colours').to.equal(true)
+    })
+  }
 })

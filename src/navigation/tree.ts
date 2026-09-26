@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 import type { TreeItem } from './tree-item.js'
 import { activeElementOf } from '../internal/dom.js'
+import { TypeAhead } from '../internal/type-ahead.js'
 
 /**
  * Tree — a hierarchical list of {@link TreeItem}s with single selection and
@@ -58,6 +59,8 @@ export class Tree extends FilmElement {
     if (item && !item.disabled) this.select(item)
   }
 
+  private readonly typeAhead = new TypeAhead()
+
   private readonly onKeydown = (event: KeyboardEvent): void => {
     const focused = activeElementOf(this) as TreeItem | null
     if (!focused || focused.tagName !== 'FILM-TREE-ITEM') return
@@ -88,11 +91,30 @@ export class Tree extends FilmElement {
         }
         break
       }
-      case 'Enter':
-      case ' ':
+      case 'Home':
         event.preventDefault()
-        this.select(focused)
+        this.focusItem(visible[0])
         break
+      case 'End':
+        event.preventDefault()
+        this.focusItem(visible[visible.length - 1])
+        break
+      case 'Enter':
+      case ' ': {
+        // Space mid-word belongs to type-ahead.
+        const match = event.key === ' ' ? this.typeAhead.find(event, visible.map((i) => i.labelText), index) : -1
+        event.preventDefault()
+        if (match >= 0) this.focusItem(visible[match])
+        else this.select(focused)
+        break
+      }
+      default: {
+        const match = this.typeAhead.find(event, visible.map((item) => item.labelText), index)
+        if (match >= 0) {
+          event.preventDefault()
+          this.focusItem(visible[match])
+        }
+      }
     }
   }
 

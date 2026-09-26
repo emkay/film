@@ -57,6 +57,13 @@ export class MenuItem extends FilmElement {
       outline: none;
     }
 
+    /* The tint marks hover and an open submenu too, so on its own it can't say
+       where focus is; the ring can, and survives forced-colours mode. */
+    :host(:focus-visible) {
+      outline: var(--border-thin) solid var(--film-color-focus);
+      outline-offset: calc(-1 * var(--border-thin));
+    }
+
     :host([disabled]) {
       opacity: var(--film-disabled-opacity);
       cursor: not-allowed;

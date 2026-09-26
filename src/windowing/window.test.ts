@@ -142,4 +142,26 @@ describe('film-window', () => {
     setTimeout(() => closeBtn.click())
     await oneEvent(el, 'film-window-close')
   })
+
+  it('resizes by tap-to-place from its corner, without dragging (WCAG 2.5.7)', async () => {
+    // A sized container, as a window has in a real layout: resizing clamps to it.
+    const box = await fixture<HTMLElement>(html`<div style="position: relative; inline-size: 800px; block-size: 600px">
+      <film-window title="W" width="320" height="240">x</film-window>
+    </div>`)
+    const el = box.querySelector('film-window') as HTMLElement & { width: number, height: number, updateComplete: Promise<boolean> }
+    await el.updateComplete
+    const corner = el.shadowRoot?.querySelector('.handle.se') as HTMLElement
+    const r = corner.getBoundingClientRect()
+    expect(Math.min(r.width, r.height), 'the corner is a full-size target').to.be.at.least(24)
+    const [x, y] = [r.left + r.width / 2, r.top + r.height / 2]
+    const pointer = (t: Element, type: string, px: number, py: number): void => {
+      t.dispatchEvent(new PointerEvent(type, { bubbles: true, composed: true, button: 0, pointerId: 1, clientX: px, clientY: py }))
+    }
+    pointer(corner, 'pointerdown', x, y)
+    pointer(corner, 'pointerup', x, y)
+    await el.updateComplete
+    pointer(document.body, 'pointerdown', x + 40, y + 30)
+    await el.updateComplete
+    expect([el.width, el.height]).to.deep.equal([360, 270])
+  })
 })

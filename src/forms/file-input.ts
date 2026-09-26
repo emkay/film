@@ -48,7 +48,7 @@ export class FileInput extends FilmFormControl {
       text-align: center;
       color: var(--film-color-text-muted);
       background-color: var(--film-color-surface);
-      border: var(--border-thick) dashed var(--film-color-border);
+      border: var(--border-thick) dashed var(--film-color-control-border);
       border-radius: var(--film-radius);
       cursor: pointer;
     }

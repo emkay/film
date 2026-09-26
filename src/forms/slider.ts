@@ -94,6 +94,20 @@ export class Slider extends FilmElement {
     input[type='range']:focus-visible::-moz-range-thumb {
       outline: var(--border-thin) solid var(--film-color-focus);
     }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      .track {
+        forced-color-adjust: none;
+        background-color: GrayText;
+      }
+
+      .fill {
+        forced-color-adjust: none;
+        background-color: Highlight;
+      }
+    }
   `
 
   private percent (value: number): number {

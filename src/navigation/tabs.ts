@@ -92,7 +92,11 @@ export class Tabs extends FilmElement {
     this.dispatchEvent(new CustomEvent('film-tab-change', { detail: { name }, bubbles: true }))
   }
 
+  private static counter = 0
+  private readonly idPrefix = `film-tabs-${(Tabs.counter += 1)}`
+
   private sync (): void {
+    this.link()
     this.tabs.forEach((tab) => {
       tab.active = tab.panel === this.active
       tab.tabIndex = tab.active && !tab.disabled ? 0 : -1
@@ -100,6 +104,23 @@ export class Tabs extends FilmElement {
     this.panels.forEach((panel) => {
       panel.active = panel.name === this.active
     })
+  }
+
+  /**
+   * Tie each tab to its panel: the tab controls the panel, and the panel is
+   * named by the tab. Both are this element's light-DOM children, so plain IDs
+   * work; missing ones are generated, and the consumer's are kept.
+   */
+  private link (): void {
+    const panels = this.panels
+    for (const tab of this.tabs) {
+      const panel = panels.find((p) => p.name === tab.panel)
+      if (!panel) continue
+      tab.id ||= `${this.idPrefix}-tab-${tab.panel}`
+      panel.id ||= `${this.idPrefix}-panel-${panel.name}`
+      tab.setAttribute('aria-controls', panel.id)
+      panel.setAttribute('aria-labelledby', tab.id)
+    }
   }
 
   render () {

@@ -66,6 +66,14 @@ export class Tooltip extends FilmElement {
       border-radius: var(--film-radius-sm);
       box-shadow: var(--film-shadow-1);
     }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      .tip {
+        border: var(--border-thin) solid CanvasText;
+      }
+    }
   `
 
   connectedCallback (): void {

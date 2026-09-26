@@ -129,9 +129,10 @@
   --film-color-success: light-dark(oklch(0.9 0.05 140), oklch(0.45 0.07 140));
   --film-color-warning: light-dark(oklch(0.9 0.07 80), oklch(0.47 0.08 80));
 
-  /* Polaroid's faded, low-contrast look leaves muted text too little room at
-     the global mix, so it takes a stronger one. */
+  /* Polaroid's faded, low-contrast look leaves muted text and control outlines
+     too little room at the global mix, so they take stronger ones. */
   --film-color-text-muted: color-mix(in oklch, var(--film-color-text) 80%, var(--film-color-surface));
+  --film-color-control-border: color-mix(in oklch, var(--film-color-text) 60%, var(--film-color-surface));
   --film-color-danger: light-dark(oklch(0.87 0.06 35), oklch(0.47 0.08 35));
 
   /* soft, rounded — Polaroid frames */

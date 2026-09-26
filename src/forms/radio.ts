@@ -36,7 +36,7 @@ export class Radio extends FilmElement {
       inline-size: 1.15em;
       block-size: 1.15em;
       flex: 0 0 auto;
-      border: var(--border-thin) solid var(--film-color-border);
+      border: var(--border-thin) solid var(--film-color-control-border);
       border-radius: 50%;
       background-color: var(--film-color-surface);
       display: grid;
@@ -64,6 +64,15 @@ export class Radio extends FilmElement {
     :host(:focus-visible) .dot {
       outline: var(--border-thin) solid var(--film-color-focus);
       outline-offset: 2px;
+    }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      .dot::after {
+        forced-color-adjust: none;
+        background-color: CanvasText;
+      }
     }
   `
 

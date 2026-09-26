@@ -72,6 +72,16 @@ export class Pagination extends FilmElement {
       min-inline-size: 2.25em;
       color: var(--film-color-text-muted);
     }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      button[aria-current] {
+        forced-color-adjust: none;
+        background-color: Highlight;
+        color: HighlightText;
+      }
+    }
   `
 
   private get items (): Array<number | 'ellipsis'> {

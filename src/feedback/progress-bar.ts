@@ -55,6 +55,21 @@ export class ProgressBar extends FilmElement {
         inline-size: 100% !important;
       }
     }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      .track {
+        forced-color-adjust: none;
+        background-color: Canvas;
+        border: var(--border-thin) solid CanvasText;
+      }
+
+      .fill {
+        forced-color-adjust: none;
+        background-color: Highlight;
+      }
+    }
   `
 
   private get percent (): number {

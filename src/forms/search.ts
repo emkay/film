@@ -37,7 +37,7 @@ export class Search extends FilmFormControl {
       gap: var(--s-2);
       color: var(--film-color-text);
       background-color: var(--film-color-surface);
-      border: var(--border-thin) solid var(--film-color-border);
+      border: var(--border-thin) solid var(--film-color-control-border);
       border-radius: var(--film-radius);
       padding: 0.3em 0.5em;
     }

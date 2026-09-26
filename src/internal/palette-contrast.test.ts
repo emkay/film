@@ -24,6 +24,8 @@ export const PAIRS: Array<[string, string, number, string]> = [
   ['text', 'success', 4.5, 'success alerts, toasts, badges'],
   ['text', 'warning', 4.5, 'warning alerts, toasts, badges'],
   ['text', 'danger', 4.5, 'danger alerts, toasts, badges'],
+  ['control-border', 'surface', 3, 'outlines of inputs, selects, checkboxes, switches'],
+  ['control-border', 'background', 3, 'control outlines on the page'],
   ['focus', 'surface', 3, 'focus rings'],
   ['focus', 'background', 3, 'focus rings on the page']
 ]
@@ -44,6 +46,11 @@ const ctx = canvas.getContext('2d', { willReadFrequently: true }) as CanvasRende
 function rgb (token: string): [number, number, number] {
   // A detached element has no computed colour, so every token would read alike.
   if (!probe.isConnected) document.body.append(probe)
+  // An undefined token makes the probe inherit its parent's colour and read as
+  // some other colour entirely — so a missing token must fail, not pass.
+  if (!getComputedStyle(document.documentElement).getPropertyValue(`--film-color-${token}`).trim()) {
+    throw new Error(`--film-color-${token} is not defined`)
+  }
   probe.style.color = `var(--film-color-${token})`
   const resolved = getComputedStyle(probe).color
   ctx.clearRect(0, 0, 1, 1)

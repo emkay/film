@@ -6302,6 +6302,17 @@
             },
             {
               "kind": "field",
+              "name": "highlighted",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The option a combobox's arrow keys have reached. Keyboard focus stays in\nthe combobox's text field, so this — not :focus — is what's drawn.",
+              "attribute": "highlighted",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "label",
               "type": {
                 "text": "string"
@@ -6337,6 +6348,15 @@
               "default": "false",
               "description": "Whether this option is disabled.",
               "fieldName": "disabled"
+            },
+            {
+              "name": "highlighted",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The option a combobox's arrow keys have reached. Keyboard focus stays in\nthe combobox's text field, so this — not :focus — is what's drawn.",
+              "fieldName": "highlighted"
             }
           ],
           "superclass": {
@@ -10438,11 +10458,19 @@
             },
             {
               "kind": "field",
+              "name": "labelText",
+              "type": {
+                "text": "string"
+              },
+              "description": "This item's own label: its text and `slot=\"label\"` content, not its children's.",
+              "readonly": true
+            },
+            {
+              "kind": "field",
               "name": "childItems",
               "type": {
                 "text": "TreeItem[]"
               },
-              "description": "The immediate child tree items.",
               "readonly": true
             }
           ],

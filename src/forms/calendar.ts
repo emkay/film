@@ -174,6 +174,16 @@ export class Calendar extends FilmElement {
     .day:focus-visible {
       outline: var(--border-thin) solid var(--film-color-focus);
     }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      .day.selected {
+        forced-color-adjust: none;
+        background-color: Highlight;
+        color: HighlightText;
+      }
+    }
   `
 
   /** The currently selected date, if valid. */

@@ -115,6 +115,14 @@ export class Button extends FilmElement {
     button.invert:focus {
       background-color: color-mix(in oklch, var(--film-color-inverted-surface), var(--film-color-primary) 30%);
     }
+
+    /* Windows High Contrast drops backgrounds; paint what carries meaning
+       with system colours so it survives whatever theme the user picked. */
+    @media (forced-colors: active) {
+      button {
+        border: var(--border-thin) solid ButtonText;
+      }
+    }
   `
 
   constructor () {

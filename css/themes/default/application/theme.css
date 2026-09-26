@@ -14,6 +14,10 @@
   /* Muted text, derived from the active palette. */
   --film-color-text-muted: color-mix(in oklch, var(--film-color-text) 66%, var(--film-color-surface));
 
+  /* Outlines that show a form control is there (WCAG 1.4.11: 3:1). Darker than
+     --film-color-border, which stays subtle for cards, dividers and tables. */
+  --film-color-control-border: color-mix(in oklch, var(--film-color-text) 52%, var(--film-color-surface));
+
   /* Radii — square by default; the pill stays a capsule (switch, progress). */
   --film-radius-sm: 0;
   --film-radius: 0;
@@ -47,6 +51,16 @@
   --film-font-sans: "Fira Sans", system-ui, sans-serif;
   --film-font-serif: "Serif 420", Georgia, serif;
   --film-font-mono: "Fira Mono", ui-monospace, monospace;
+}
+
+/* Honour a request for reduced motion everywhere at once: every component's
+   transitions take their duration from these tokens. Looping animations
+   (spinner, skeleton, progress) carry their own guards. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --film-duration-fast: 0s;
+    --film-duration: 0s;
+  }
 }
 
 /* Force a colour scheme regardless of the OS preference. */
