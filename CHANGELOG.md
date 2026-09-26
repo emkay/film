@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.0](https://github.com/emkay/film/compare/v1.3.0...v1.4.0) (2026-09-26)
+
+
+### Features
+
+* typable date entry ([7b90380](https://github.com/emkay/film/commit/7b9038037611dc2b8c3df81250a6bbfe94dd30d5))
+
+
+### Bug Fixes
+
+* fixin' bugs and makin' tests baby ([01a10b7](https://github.com/emkay/film/commit/01a10b736edb0cf266bd2effe57653dc062abce6))
+* row-key for tables ([3126042](https://github.com/emkay/film/commit/312604243ce50366426e604e4c7839debb6afc5a))
+* warn when attributes passed in are incorrect ([b8157d6](https://github.com/emkay/film/commit/b8157d6d432ac6acaba596a0cb26568e91fdb8c8))
+
 ## [1.3.0](https://github.com/emkay/film/compare/v1.2.3...v1.3.0) (2026-09-12)
 
 
