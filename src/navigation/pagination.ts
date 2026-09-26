@@ -70,7 +70,7 @@ export class Pagination extends FilmElement {
       display: inline-grid;
       place-content: center;
       min-inline-size: 2.25em;
-      opacity: 0.6;
+      color: var(--film-color-text-muted);
     }
   `
 

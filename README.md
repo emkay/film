@@ -281,6 +281,14 @@ Each palette only overrides the `--film-color-*` roles (and, for some, the
 corner radius), so adding a new one is a single CSS block. That file is the
 config a theme picker can enumerate.
 
+Every palette meets WCAG AA contrast in light and dark mode — text, links,
+muted text, button states, status surfaces and focus rings — and
+`src/internal/palette-contrast.test.ts` checks it on every test run. It's
+self-contained, so to hold a palette of your own to the same bar, copy it into
+your project and add your palette's id to its `PALETTES` list. In dark
+mode the accent buttons carry dark text on a light fill, and hover/pressed
+lighten rather than darken, so the text stays readable in every state.
+
 ## Writing your own Lit components
 
 Most apps built on Film also write their own Lit elements around it. Two

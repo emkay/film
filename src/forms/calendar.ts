@@ -149,8 +149,10 @@ export class Calendar extends FilmElement {
       background-color: var(--film-color-info);
     }
 
+    /* Muted rather than faded: these are real, clickable days, so the text
+       needs full contrast, and the muted token is checked to have it. */
     .day.outside {
-      opacity: 0.4;
+      color: var(--film-color-text-muted);
     }
 
     .day.today {
