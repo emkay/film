@@ -1,4 +1,4 @@
-import { css, html, nothing, type PropertyValues } from 'lit'
+import { css, html, nothing } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
 
@@ -70,6 +70,10 @@ export class Input extends FilmFormControl {
   /** Granularity of the value, e.g. `1` for whole numbers or `7` for weeks. */
   @property({ type: String }) step = ''
 
+  // The constraints are forwarded to the inner input as attributes, so any of
+  // them changing re-runs validation against its freshly applied bounds.
+  static formProps = ['value', 'min', 'max', 'step', 'type', 'required']
+
   @query('input') private input!: HTMLInputElement
 
   static styles = css`
@@ -132,22 +136,6 @@ export class Input extends FilmFormControl {
       return
     }
     this.internals.setValidity(validityFlags(input.validity), input.validationMessage, input)
-  }
-
-  formResetCallback (): void {
-    this.value = this.getAttribute('value') ?? ''
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
-    this.syncForm()
-  }
-
-  // Constraints are forwarded as attributes during render, so re-running
-  // validation here picks up the inner input's freshly applied bounds.
-  updated (changed: PropertyValues<this>): void {
-    const constraints = ['value', 'min', 'max', 'step', 'type', 'required'] as const
-    if (constraints.some((name) => changed.has(name))) this.syncForm()
   }
 
   private onInput (event: Event): void {

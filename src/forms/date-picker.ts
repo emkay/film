@@ -105,17 +105,8 @@ export class DatePicker extends FilmFormControl {
     return this.trigger
   }
 
-  formResetCallback (): void {
-    this.value = this.getAttribute('value') ?? ''
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
-    this.syncForm()
-  }
-
   updated (changed: PropertyValues<this>): void {
-    if (changed.has('value')) this.syncForm()
+    super.updated(changed)
     if (changed.has('open')) {
       this.trigger?.setAttribute('aria-expanded', String(this.open))
       if (this.open) this.floating.show()

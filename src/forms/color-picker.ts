@@ -1,4 +1,4 @@
-import { css, html, nothing, type PropertyValues } from 'lit'
+import { css, html, nothing } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
 
@@ -71,19 +71,6 @@ export class ColorPicker extends FilmFormControl {
 
   protected override get validationAnchor (): HTMLElement | undefined {
     return this.colorInput
-  }
-
-  formResetCallback (): void {
-    this.value = this.getAttribute('value') ?? '#000000'
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
-    this.syncForm()
-  }
-
-  updated (changed: PropertyValues<this>): void {
-    if (changed.has('value')) this.syncForm()
   }
 
   private onColorInput (event: Event): void {

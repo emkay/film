@@ -1,4 +1,4 @@
-import { css, html, nothing, type PropertyValues } from 'lit'
+import { css, html, nothing } from 'lit'
 import { customElement, property, query, state } from 'lit/decorators.js'
 import { FilmFormControl } from '../internal/form-control.js'
 
@@ -24,6 +24,8 @@ export class NumberInput extends FilmFormControl {
    * fail.
    */
   @state() private empty = false
+
+  static formProps = ['value', 'empty']
 
   static styles = css`
     :host {
@@ -104,19 +106,9 @@ export class NumberInput extends FilmFormControl {
     return this.input
   }
 
-  formResetCallback (): void {
+  protected override restoreDefault (): void {
     this.empty = false
-    this.value = Number(this.getAttribute('value') ?? 0)
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
-    this.syncForm()
-  }
-
-  // Untyped: `empty` is private state, which PropertyValues<this> can't name.
-  updated (changed: PropertyValues): void {
-    if (changed.has('value') || changed.has('empty')) this.syncForm()
+    super.restoreDefault()
   }
 
   private clamp (n: number): number {

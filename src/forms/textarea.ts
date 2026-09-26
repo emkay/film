@@ -70,21 +70,9 @@ export class Textarea extends FilmFormControl {
     return this.textarea
   }
 
-  formResetCallback (): void {
-    this.value = this.getAttribute('value') ?? ''
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
-    this.syncForm()
-    this.grow()
-  }
-
   updated (changed: PropertyValues<this>): void {
-    if (changed.has('value')) {
-      this.syncForm()
-      this.grow()
-    }
+    super.updated(changed)
+    if (changed.has('value')) this.grow()
   }
 
   private onInput (event: Event): void {

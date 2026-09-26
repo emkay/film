@@ -113,23 +113,25 @@ export class Combobox extends FilmFormControl {
     return this.input
   }
 
-  formResetCallback (): void {
-    this.value = this.getAttribute('value') ?? ''
-    this.text = this.selectedOption?.label ?? ''
-    this.filter()
-    this.syncOptions()
-    this.syncForm()
+  protected override restoreDefault (): void {
+    super.restoreDefault()
+    this.showSelected()
   }
 
-  firstUpdated (): void {
+  firstUpdated (changed: PropertyValues<this>): void {
+    super.firstUpdated(changed)
+    this.showSelected()
+  }
+
+  /** Show the selected option's label in the field, with the list matching it. */
+  private showSelected (): void {
     this.text = this.selectedOption?.label ?? ''
     this.filter()
     this.syncOptions()
-    this.syncForm()
   }
 
   updated (changed: PropertyValues<this>): void {
-    if (changed.has('value')) this.syncForm()
+    super.updated(changed)
     if (changed.has('open')) {
       if (this.open) this.openListbox()
       else this.floating.hide()

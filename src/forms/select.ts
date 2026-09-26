@@ -118,22 +118,9 @@ export class Select extends FilmFormControl {
     return this.trigger
   }
 
-  formResetCallback (): void {
-    this.value = this.getAttribute('value') ?? ''
-    this.syncOptions()
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
-    this.syncOptions()
-    this.syncForm()
-  }
-
   updated (changed: PropertyValues<this>): void {
-    if (changed.has('value')) {
-      this.syncOptions()
-      this.syncForm()
-    }
+    super.updated(changed)
+    if (changed.has('value')) this.syncOptions()
     if (changed.has('open')) {
       if (this.open) this.openListbox()
       else this.floating.hide()

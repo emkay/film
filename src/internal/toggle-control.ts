@@ -13,6 +13,8 @@ import { FilmFormControl } from './form-control.js'
  * `film-select` do.
  */
 export abstract class FilmToggleControl extends FilmFormControl {
+  static formProps = ['checked']
+
   /** Whether the control is checked / on. */
   @property({ type: Boolean, reflect: true }) checked = false
 
@@ -57,20 +59,13 @@ export abstract class FilmToggleControl extends FilmFormControl {
     return this.checked ? this.value : null
   }
 
-  formResetCallback (): void {
+  protected override restoreDefault (): void {
     this.checked = this.defaultChecked ?? false
-    this.syncForm()
-  }
-
-  firstUpdated (): void {
-    this.syncForm()
   }
 
   updated (changed: PropertyValues<this>): void {
-    if (changed.has('checked')) {
-      this.setAttribute('aria-checked', String(this.checked))
-      this.syncForm()
-    }
+    super.updated(changed)
+    if (changed.has('checked')) this.setAttribute('aria-checked', String(this.checked))
     if (changed.has('disabled')) {
       this.setAttribute('aria-disabled', String(this.disabled))
       this.tabIndex = this.disabled ? -1 : 0
