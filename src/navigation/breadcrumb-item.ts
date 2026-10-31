@@ -26,7 +26,8 @@ export class BreadcrumbItem extends FilmElement {
     }
 
     :host(:not(:first-child))::before {
-      content: var(--breadcrumb-separator, '/');
+      /* The empty alt text keeps the separator out of what's read aloud. */
+      content: var(--breadcrumb-separator, '/') / '';
       opacity: 0.5;
     }
 

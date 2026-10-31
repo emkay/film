@@ -31,6 +31,11 @@ export class Toast extends FilmElement {
   /** Whether the role is derived from `variant`, rather than set by the consumer. */
   private manageRole = true
 
+  // The countdown pauses while the pointer is over the toast or focus is in it
+  // (WCAG 2.2.1): someone tabbing to Dismiss mustn't lose the message first.
+  private hovered = false
+  private focused = false
+
   static styles = css`
     :host {
       display: block;
@@ -79,6 +84,8 @@ export class Toast extends FilmElement {
 
   connectedCallback (): void {
     super.connectedCallback()
+    this.addEventListener('focusin', this.onFocusIn)
+    this.addEventListener('focusout', this.onFocusOut)
     // As film-alert: respect a consumer-provided role, otherwise derive it
     // from `variant` whenever that changes.
     this.manageRole = !this.hasAttribute('role')
@@ -114,14 +121,32 @@ export class Toast extends FilmElement {
 
   private restart (): void {
     if (this.timer) clearTimeout(this.timer)
-    if (this.duration > 0) this.timer = setTimeout(() => this.close(), this.duration)
+    if (this.duration > 0 && !this.hovered && !this.focused) {
+      this.timer = setTimeout(() => this.close(), this.duration)
+    }
   }
 
   private readonly onEnter = (): void => {
-    if (this.timer) clearTimeout(this.timer)
+    this.hovered = true
+    this.restart()
   }
 
-  private readonly onLeave = (): void => this.restart()
+  private readonly onLeave = (): void => {
+    this.hovered = false
+    this.restart()
+  }
+
+  private readonly onFocusIn = (): void => {
+    this.focused = true
+    this.restart()
+  }
+
+  private readonly onFocusOut = (event: FocusEvent): void => {
+    // Moving between the toast's own controls isn't leaving it.
+    if (event.relatedTarget instanceof Node && this.contains(event.relatedTarget)) return
+    this.focused = false
+    this.restart()
+  }
 
   render () {
     return html`

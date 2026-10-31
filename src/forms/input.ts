@@ -118,6 +118,13 @@ export class Input extends FilmFormControl {
       opacity: var(--film-disabled-opacity);
       cursor: not-allowed;
     }
+
+    /* The muted token, held to 4.5:1 by the palette test; the browser's
+       default grey isn't. opacity: 1 because Firefox fades placeholders. */
+    input::placeholder {
+      color: var(--film-color-text-muted);
+      opacity: 1;
+    }
   `
 
   protected getFormValue (): string {

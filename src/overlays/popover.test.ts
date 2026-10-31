@@ -46,6 +46,8 @@ describe('film-popover', () => {
     await el.updateComplete
     expect(panelOpen(el), 'opens on hover').to.equal(true)
     await sendMouse({ type: 'move', position: [0, window.innerHeight - 1] })
+    // After a short grace period, which lets the pointer cross onto the panel.
+    await new Promise((resolve) => setTimeout(resolve, 250))
     await el.updateComplete
     expect(panelOpen(el), 'closes on leave').to.equal(false)
     await resetMouse()

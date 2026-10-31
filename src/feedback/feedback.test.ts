@@ -32,7 +32,7 @@ describe('film-tag', () => {
   it('fires film-remove from its remove button', async () => {
     const el = await fixture<Tag>(html`<film-tag removable>css</film-tag>`)
     const remove = el.shadowRoot?.querySelector('.remove') as HTMLButtonElement
-    expect(remove.getAttribute('aria-label')).to.equal('Remove')
+    expect(remove.getAttribute('aria-label')).to.equal('Remove css')
     setTimeout(() => remove.click())
     await oneEvent(el, 'film-remove')
   })

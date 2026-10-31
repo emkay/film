@@ -86,14 +86,17 @@ export class Button extends FilmElement {
       font-size: var(--s1);
     }
 
-    button:focus {
-      outline: solid;
+    button:hover,
+    button:focus-visible {
       background-color: var(--button-surface-hover, var(--film-color-primary-hover));
     }
 
-    button:hover {
-      outline: solid;
-      background-color: var(--button-surface-hover, var(--film-color-primary-hover));
+    /* The focus token, which the palette test holds to 3:1 against the page.
+       outline: solid alone used the button's own text colour — near-white on
+       a light page — and also showed on mouse hover and click. */
+    button:focus-visible {
+      outline: var(--border-thin) solid var(--film-color-focus);
+      outline-offset: 2px;
     }
 
     button:active {
@@ -112,7 +115,7 @@ export class Button extends FilmElement {
     }
 
     button.invert:hover,
-    button.invert:focus {
+    button.invert:focus-visible {
       background-color: color-mix(in oklch, var(--film-color-inverted-surface), var(--film-color-primary) 30%);
     }
 

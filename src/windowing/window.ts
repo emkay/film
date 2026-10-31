@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { warningsEnabled, warnOnce } from '../internal/attribute-check.js'
 import { DragController } from '../internal/drag-controller.js'
 
 interface Rect {
@@ -59,7 +60,33 @@ const FOCUSABLE =
  */
 @customElement('film-window')
 export class Window extends FilmElement {
+  /** The window's name: shown in its title bar and announced by assistive tech. */
+  @property({ type: String }) label = ''
+
+  /**
+   * @deprecated Use `label`. Kept as an alias; as an attribute it also gives the
+   * whole window the browser's native tooltip, which `label` doesn't.
+   */
   @property({ type: String }) title = ''
+
+  /** The window's name, from `label` or the older `title`. */
+  private get name (): string {
+    return this.label || this.title
+  }
+
+  /** Tap-to-place is waiting for the click that moves the window. */
+  @state() private moveArmed = false
+
+  // The Move button: drag it, step it with the arrow keys, or click it and then
+  // click where the window should go (WCAG 2.5.7). A click on the title bar
+  // itself still just raises the window.
+  private readonly placeDrag = new DragController(this, {
+    tapToPlace: true,
+    onArm: (armed) => { this.moveArmed = armed },
+    onStart: () => { this.base = this.rect() },
+    onDrag: (dx, dy) => this.setPosition(this.base.x + dx, this.base.y + dy),
+    onStep: (dx, dy) => this.setPosition(this.x + dx, this.y + dy)
+  })
   @property({ type: Number, reflect: true }) x = 40
   @property({ type: Number, reflect: true }) y = 40
   @property({ type: Number, reflect: true }) width = 320
@@ -229,6 +256,7 @@ export class Window extends FilmElement {
        meets it: this corner resizes both ways, by drag or by tap-to-place. */
     .handle.se { inset-block-end: -8px; inset-inline-end: -8px; inline-size: 24px; block-size: 24px; cursor: nwse-resize; }
 
+    .titlebar button.move.armed,
     .handle.armed {
       outline: var(--border-thick) solid var(--film-color-focus);
       outline-offset: -2px;
@@ -396,6 +424,11 @@ export class Window extends FilmElement {
     this.dispatchEvent(new CustomEvent('film-window-close', { bubbles: true }))
   }
 
+  connectedCallback (): void {
+    super.connectedCallback()
+    if (!this.hasAttribute('role')) this.setAttribute('role', 'dialog')
+  }
+
   disconnectedCallback (): void {
     if (this.focusTimer) clearTimeout(this.focusTimer)
     super.disconnectedCallback()
@@ -403,6 +436,14 @@ export class Window extends FilmElement {
 
   updated (changed: PropertyValues): void {
     super.updated(changed)
+    // A non-modal dialog, named by its label, so its controls belong to it.
+    if (changed.has('label') || changed.has('title')) {
+      if (this.name) this.setAttribute('aria-label', this.name)
+      else this.removeAttribute('aria-label')
+      if (this.hasAttribute('title') && warningsEnabled()) {
+        warnOnce('film-window @title', 'film-window: use the label attribute instead of title, which also gives the whole window a native tooltip.')
+      }
+    }
     this.style.insetInlineStart = `${this.x}px`
     this.style.insetBlockStart = `${this.y}px`
     this.style.inlineSize = `${this.width}px`
@@ -421,9 +462,18 @@ export class Window extends FilmElement {
           @keydown=${this.onTitleKeydown}
           @dblclick=${this.toggleMaximise}
         >
-          <span class="title"><slot name="title">${this.title}</slot></span>
+          <span class="title"><slot name="title">${this.name}</slot></span>
           <span class="actions">
             <slot name="actions"></slot>
+            <button
+              class="move ${this.moveArmed ? 'armed' : ''}"
+              aria-label="Move"
+              ?hidden=${!this.movable || this.maximised}
+              @pointerdown=${this.placeDrag.onPointerDown}
+              @pointermove=${this.placeDrag.onPointerMove}
+              @pointerup=${this.placeDrag.onPointerUp}
+              @keydown=${this.placeDrag.onKeydown}
+            >✥</button>
             <button aria-label="Minimise" @click=${this.toggleMinimise}>—</button>
             <button aria-label="Maximise" @click=${this.toggleMaximise}>▢</button>
             <button aria-label="Close" @click=${this.close}>✕</button>
