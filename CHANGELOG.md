@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.5.1](https://github.com/emkay/film/compare/v1.5.0...v1.5.1) (2026-10-31)
+
+
+### Bug Fixes
+
+* **a11y:** resolve the WCAG 2.2 AA code-review findings ([6bc2803](https://github.com/emkay/film/commit/6bc280336faa2db09b3b2bb5250064d43723ea0d))
+* **a11y:** resolve the WCAG 2.2 AA code-review findings ([b9c5cc2](https://github.com/emkay/film/commit/b9c5cc25a4cb3ee050cc2144431f8d9704b6a070))
+* **security:** block script URLs, support strict CSP, least-privilege CI ([0ca8208](https://github.com/emkay/film/commit/0ca8208ea4c238dc4e8018ff3c5d1f1df1a760d7))
+* **security:** block script URLs, support strict CSP, least-privilege CI ([8498610](https://github.com/emkay/film/commit/8498610cd064340bcf50f96cb17a4f87b8a72443))
+
 ## [1.5.0](https://github.com/emkay/film/compare/v1.4.0...v1.5.0) (2026-09-26)
 
 
