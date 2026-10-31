@@ -1,6 +1,7 @@
 import { css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { safeHref } from '../internal/url.js'
 
 /**
  * ListItem — a row within a {@link List}. Renders as a link when `href` is set.
@@ -53,8 +54,9 @@ export class ListItem extends FilmElement {
       <span class="content"><slot></slot></span>
       <slot name="end"></slot>
     `
-    return this.href
-      ? html`<a class="row" href=${this.href}>${inner}</a>`
+    const href = safeHref(this.href)
+    return href
+      ? html`<a class="row" href=${href}>${inner}</a>`
       : html`<div class="row">${inner}</div>`
   }
 }

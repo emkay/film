@@ -1,4 +1,4 @@
-import { css, html } from 'lit'
+import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 
@@ -31,21 +31,31 @@ export class Stack extends FilmElement {
     }
   `
 
-  private get splitStyles () {
-    if (!this.splitAfter) return html``
-    return html`
-      <style>
-        ::slotted(:nth-child(${this.splitAfter})) {
-          margin-block-end: auto;
-        }
-      </style>
-    `
+  /**
+   * The split rule lives in a constructed stylesheet, not a <style> element: a
+   * strict Content-Security-Policy blocks inline <style>, and text written
+   * into one could carry rules of its own. Only a positive whole number gets
+   * through, whatever `splitAfter` was set to from JavaScript.
+   */
+  private readonly splitSheet = new CSSStyleSheet()
+
+  updated (changed: PropertyValues<this>): void {
+    super.updated(changed)
+    if (!changed.has('splitAfter')) return
+    const n = Number(this.splitAfter)
+    this.splitSheet.replaceSync(Number.isInteger(n) && n > 0
+      ? `::slotted(:nth-child(${n})) { margin-block-end: auto; }`
+      : '')
+    const root = this.shadowRoot as ShadowRoot
+    if (!root.adoptedStyleSheets.includes(this.splitSheet)) {
+      root.adoptedStyleSheets = [...root.adoptedStyleSheets, this.splitSheet]
+    }
   }
 
   static styleProps: Record<string, string> = { '--stack-space': 'space' }
 
   render () {
-    return html`${this.splitStyles}<slot></slot>`
+    return html`<slot></slot>`
   }
 }
 

@@ -1,6 +1,7 @@
 import { css, html, nothing } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { safeHref } from '../internal/url.js'
 
 /**
  * NavItem — a link within a {@link Nav}. Marks itself as the current page when
@@ -59,7 +60,7 @@ export class NavItem extends FilmElement {
 
   render () {
     return html`
-      <a href=${this.href || nothing} aria-current=${this.active ? 'page' : nothing}>
+      <a href=${safeHref(this.href) ?? nothing} aria-current=${this.active ? 'page' : nothing}>
         <slot name="start"></slot>
         <slot></slot>
       </a>

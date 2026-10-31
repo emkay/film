@@ -1,6 +1,7 @@
 import { css, html, nothing } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { safeHref } from '../internal/url.js'
 
 /**
  * Link — a themed anchor.
@@ -26,7 +27,7 @@ export class Link extends FilmElement {
 
   render () {
     // No href means no destination: `href=""` would link to the current page.
-    return html`<a href=${this.href || nothing}><slot></slot></a>`
+    return html`<a href=${safeHref(this.href) ?? nothing}><slot></slot></a>`
   }
 }
 

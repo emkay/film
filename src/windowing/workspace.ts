@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { cssomStyle } from '../internal/cssom-style.js'
 import { oneOf } from '../internal/attribute-check.js'
 import { MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT, type Window } from './window.js'
 
@@ -333,7 +334,12 @@ export class Workspace extends FilmElement {
       ${this.preview
         ? html`<div
             class="snap-preview"
-            style="inset-inline-start:${this.preview.x}px;inset-block-start:${this.preview.y}px;inline-size:${this.preview.width}px;block-size:${this.preview.height}px"
+            ${cssomStyle({
+              'inset-inline-start': `${this.preview.x}px`,
+              'inset-block-start': `${this.preview.y}px`,
+              'inline-size': `${this.preview.width}px`,
+              'block-size': `${this.preview.height}px`
+            })}
           ></div>`
         : nothing}
     `

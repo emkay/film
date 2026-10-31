@@ -3,14 +3,19 @@ on:
     branches:
       - main
 name: release-please
+
+# Nothing by default; the job below asks for exactly what it needs.
+permissions: {}
+
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    # Opening and updating the release PR, and tagging a release. This job runs
+    # only the action itself — no npm install — so no dependency code ever
+    # holds this token.
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
-      - uses: google-github-actions/release-please-action@v3
-        with:
-          release-type: node
-          package-name: release-please-action
-          # Bumps the `x-release-please-version` line so the version Film
-          # reports at runtime matches the published package.
-          extra-files: src/internal/version.ts
+      # Configured by release-please-config.json and .release-please-manifest.json.
+      - uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4
