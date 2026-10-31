@@ -1,6 +1,7 @@
 import { css, html, nothing } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { safeHref } from '../internal/url.js'
 
 /**
  * BreadcrumbItem — one step in a {@link Breadcrumb}. Renders a link unless it is
@@ -44,8 +45,9 @@ export class BreadcrumbItem extends FilmElement {
   `
 
   render () {
-    if (this.href && !this.current) {
-      return html`<a href=${this.href}><slot></slot></a>`
+    const href = safeHref(this.href)
+    if (href && !this.current) {
+      return html`<a href=${href}><slot></slot></a>`
     }
     return html`<span aria-current=${this.current ? 'page' : nothing}><slot></slot></span>`
   }

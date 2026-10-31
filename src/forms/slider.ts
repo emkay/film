@@ -1,6 +1,7 @@
 import { css, html, nothing } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { cssomStyle } from '../internal/cssom-style.js'
 
 /**
  * Slider — a two-thumb range slider producing a `[valueMin, valueMax]` range.
@@ -152,7 +153,7 @@ export class Slider extends FilmElement {
         : nothing}
       <div class="slider">
         <div class="track"></div>
-        <div class="fill" style="inset-inline-start:${left}%; inset-inline-end:${100 - right}%"></div>
+        <div class="fill" ${cssomStyle({ 'inset-inline-start': `${left}%`, 'inset-inline-end': `${100 - right}%` })}></div>
         <input
           type="range"
           min=${this.min}

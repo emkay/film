@@ -51,12 +51,17 @@ export class Form extends FilmElement {
   /** The current values, keyed by each control's `name`. */
   getValues (): Record<string, unknown> {
     const values: Record<string, unknown> = {}
+    // Define, don't assign: assigning values.__proto__ would hit the prototype
+    // setter and silently drop the control. Any name is just a key here.
+    const set = (name: string, value: unknown): void => {
+      Object.defineProperty(values, name, { value, enumerable: true, writable: true, configurable: true })
+    }
     for (const control of this.controls) {
       if (!control.name) continue
       if (typeof control.checked === 'boolean') {
-        if (control.checked) values[control.name] = control.value ?? true
+        if (control.checked) set(control.name, control.value ?? true)
       } else {
-        values[control.name] = control.value
+        set(control.name, control.value)
       }
     }
     return values

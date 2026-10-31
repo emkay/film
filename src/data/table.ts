@@ -1,6 +1,7 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { cssomStyle } from '../internal/cssom-style.js'
 
 export interface TableColumn {
   key: string
@@ -409,11 +410,11 @@ export class Table extends FilmElement {
     return html`
       <tbody>
         ${topPad > 0
-          ? html`<tr aria-hidden="true" style="block-size:${topPad}px"><td colspan=${colspan}></td></tr>`
+          ? html`<tr aria-hidden="true" ${cssomStyle({ 'block-size': `${topPad}px` })}><td colspan=${colspan}></td></tr>`
           : nothing}
         ${rows.slice(start, end).map((r, i) => this.renderRow(r, start + i + 2))}
         ${bottomPad > 0
-          ? html`<tr aria-hidden="true" style="block-size:${bottomPad}px"><td colspan=${colspan}></td></tr>`
+          ? html`<tr aria-hidden="true" ${cssomStyle({ 'block-size': `${bottomPad}px` })}><td colspan=${colspan}></td></tr>`
           : nothing}
       </tbody>
     `

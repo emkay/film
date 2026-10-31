@@ -26,6 +26,7 @@
     "dist",
     "css",
     "src",
+    "!src/**/*.test.ts",
     "custom-elements.json"
   ],
   "sideEffects": [

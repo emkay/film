@@ -9,11 +9,22 @@ describe('film-stack', () => {
     expect(el.style.getPropertyValue('--stack-space')).to.equal('var(--s2)')
   })
 
-  it('renders a split-after style when set', async () => {
+  it('pushes the items after split-after to the end', async () => {
     const el = await fixture<Stack>(
-      html`<film-stack split-after="1"><p>a</p><p>b</p></film-stack>`
+      html`<film-stack split-after="1" style="block-size: 300px"><p>a</p><p>b</p></film-stack>`
     )
     await el.updateComplete
-    expect(el.shadowRoot?.querySelector('style')).to.exist
+    const [first, second] = Array.from(el.querySelectorAll('p'))
+    expect(second.getBoundingClientRect().top - first.getBoundingClientRect().bottom).to.be.greaterThan(150)
+  })
+
+  it('drops the split when split-after is cleared', async () => {
+    const el = await fixture<Stack>(
+      html`<film-stack split-after="1" style="block-size: 300px"><p>a</p><p>b</p></film-stack>`
+    )
+    el.splitAfter = null
+    await el.updateComplete
+    const [first, second] = Array.from(el.querySelectorAll('p'))
+    expect(second.getBoundingClientRect().top - first.getBoundingClientRect().bottom).to.be.lessThan(100)
   })
 })

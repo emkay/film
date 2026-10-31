@@ -1,0 +1,8 @@
+# Keeps the SHA-pinned actions current: Dependabot proposes the new commit for
+# each pin, with the version tag in its comment, as a normal reviewed PR.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

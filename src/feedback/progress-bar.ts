@@ -1,6 +1,7 @@
-import { css, html, nothing, type PropertyValues } from 'lit'
+import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { cssomStyle } from '../internal/cssom-style.js'
 
 /**
  * ProgressBar — a determinate or indeterminate progress indicator.
@@ -101,7 +102,7 @@ export class ProgressBar extends FilmElement {
   render () {
     return html`
       <div class="track">
-        <div class="fill" style=${this.indeterminate ? nothing : `inline-size: ${this.percent}%`}></div>
+        <div class="fill" ${cssomStyle({ 'inline-size': this.indeterminate ? null : `${this.percent}%` })}></div>
       </div>
     `
   }
