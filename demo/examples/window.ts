@@ -23,7 +23,7 @@ export const windowExample = (): TemplateResult => html`
     <p>Drag the title bar to move, edges/corners to resize (or focus them and use arrows). Double-click the bar to maximise.</p>
     <div style="position: relative; block-size: 24rem; overflow: hidden; border: var(--border-thin) solid var(--film-color-border); border-radius: var(--film-radius);">
       <film-window
-        title="Notes"
+        label="Notes"
         x="24"
         y="24"
         width="260"
@@ -35,7 +35,7 @@ export const windowExample = (): TemplateResult => html`
         <p>A non-modal window. Move, resize, minimise, maximise, or close it.</p>
       </film-window>
       <film-window
-        title="Files"
+        label="Files"
         x="200"
         y="120"
         width="280"

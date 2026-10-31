@@ -1,5 +1,5 @@
 import { css, html, nothing, type PropertyValues } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property, state } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
 import { oneOf } from '../internal/attribute-check.js'
 import { variantSurface } from '../internal/variant-surface.js'
@@ -21,6 +21,14 @@ export class Tag extends FilmElement {
 
   /** Show a remove button. */
   @property({ type: Boolean, reflect: true }) removable = false
+
+  /** The tag's text, so its remove button can say which tag it removes. */
+  @state() private text = ''
+
+  private readonly onSlotChange = (event: Event): void => {
+    const slot = event.target as HTMLSlotElement
+    this.text = slot.assignedNodes({ flatten: true }).map((n) => n.textContent ?? '').join('').trim()
+  }
 
   static styles = css`
     :host {
@@ -68,9 +76,9 @@ export class Tag extends FilmElement {
 
   render () {
     return html`
-      <slot></slot>
+      <slot @slotchange=${this.onSlotChange}></slot>
       ${this.removable
-        ? html`<button class="remove" aria-label="Remove" @click=${this.onRemove}>✕</button>`
+        ? html`<button class="remove" aria-label=${this.text ? `Remove ${this.text}` : 'Remove'} @click=${this.onRemove}>✕</button>`
         : nothing}
     `
   }

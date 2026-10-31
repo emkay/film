@@ -35,13 +35,13 @@ export const workspaceExample = (): TemplateResult => html`
         gap="8"
         style="block-size: 24rem; border: var(--border-thin) solid var(--film-color-border); border-radius: var(--film-radius);"
       >
-        <film-window title="Editor" focus-content x="16" y="16" width="240" height="150" @film-window-close=${onClose}>
+        <film-window label="Editor" focus-content x="16" y="16" width="240" height="150" @film-window-close=${onClose}>
           <film-textarea label="Notes" placeholder="Raising this window focuses here…"></film-textarea>
         </film-window>
-        <film-window title="Preview" x="120" y="90" width="240" height="150" @film-window-close=${onClose}>
+        <film-window label="Preview" x="120" y="90" width="240" height="150" @film-window-close=${onClose}>
           <p>Windows stack and focus independently.</p>
         </film-window>
-        <film-window title="Console" x="220" y="150" width="240" height="150" @film-window-close=${onClose}>
+        <film-window label="Console" x="220" y="150" width="240" height="150" @film-window-close=${onClose}>
           <film-code code="film build --watch"></film-code>
         </film-window>
       </film-workspace>

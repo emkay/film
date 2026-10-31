@@ -28,6 +28,7 @@ export class Text extends FilmElement {
   static styles = css`
     :host {
       display: block;
+      overflow-wrap: break-word;
       font-size: var(--film-text-size, var(--s0));
       line-height: 1.5;
       color: var(--film-color-text);

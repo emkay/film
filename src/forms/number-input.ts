@@ -98,6 +98,13 @@ export class NumberInput extends FilmFormControl {
     :host([disabled]) .control {
       opacity: var(--film-disabled-opacity);
     }
+
+    /* The muted token, held to 4.5:1 by the palette test; the browser's
+       default grey isn't. opacity: 1 because Firefox fades placeholders. */
+    input::placeholder {
+      color: var(--film-color-text-muted);
+      opacity: 1;
+    }
   `
 
   protected getFormValue (): string {

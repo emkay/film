@@ -74,6 +74,12 @@ export class Popover extends FilmElement {
     }
   `
 
+  disconnectedCallback (): void {
+    clearTimeout(this.closeTimer)
+    document.removeEventListener('keydown', this.onDocumentKeydown)
+    super.disconnectedCallback()
+  }
+
   private get triggerEl (): HTMLElement | undefined {
     return this.triggerSlot?.assignedElements()[0] as HTMLElement | undefined
   }
@@ -108,6 +114,8 @@ export class Popover extends FilmElement {
     // the previous value of `open` can.
     const wasOpen = changed.get('open') === true
     const alreadyShown = this.floating.isOpen
+    if (this.open && this.trigger !== 'click') document.addEventListener('keydown', this.onDocumentKeydown)
+    else document.removeEventListener('keydown', this.onDocumentKeydown)
     if (this.open) {
       if (this.floating.show() && !alreadyShown) this.dispatchEvent(new Event('film-open'))
     } else {
@@ -126,12 +134,41 @@ export class Popover extends FilmElement {
     if (this.trigger === 'click') this.toggle()
   }
 
+  /**
+   * Hover mode (WCAG 1.4.13): the panel must stay open while the pointer is on
+   * it, so leaving the trigger only closes after a short grace period — long
+   * enough to cross onto the panel, which cancels it.
+   */
+  private closeTimer?: ReturnType<typeof setTimeout>
+
   private readonly onTriggerEnter = (): void => {
-    if (this.trigger === 'hover') this.open = true
+    if (this.trigger !== 'hover') return
+    clearTimeout(this.closeTimer)
+    this.open = true
   }
 
   private readonly onTriggerLeave = (): void => {
-    if (this.trigger === 'hover') this.open = false
+    if (this.trigger === 'hover') this.closeSoon()
+  }
+
+  private readonly onPanelEnter = (): void => {
+    if (this.trigger === 'hover') clearTimeout(this.closeTimer)
+  }
+
+  private readonly onPanelLeave = (): void => {
+    if (this.trigger === 'hover') this.closeSoon()
+  }
+
+  private closeSoon (): void {
+    clearTimeout(this.closeTimer)
+    this.closeTimer = setTimeout(() => { this.open = false }, 150)
+  }
+
+  // A click popover is popover="auto", so the browser closes it on Escape.
+  // Hover and manual ones aren't, so Escape is handled here — on the document,
+  // since focus can be anywhere while the pointer holds it open.
+  private readonly onDocumentKeydown = (event: KeyboardEvent): void => {
+    if (event.key === 'Escape' && this.open) this.open = false
   }
 
   render () {
@@ -146,6 +183,8 @@ export class Popover extends FilmElement {
       <div
         class="panel"
         popover=${this.trigger === 'click' ? 'auto' : 'manual'}
+        @mouseenter=${this.onPanelEnter}
+        @mouseleave=${this.onPanelLeave}
         @toggle=${this.onToggle}
       >
         <div class="content"><slot></slot></div>

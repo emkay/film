@@ -84,7 +84,6 @@ export class Tooltip extends FilmElement {
     this.addEventListener('mouseleave', this.hide)
     this.addEventListener('focusin', this.show)
     this.addEventListener('focusout', this.hide)
-    this.addEventListener('keydown', this.onKeydown)
   }
 
   disconnectedCallback (): void {
@@ -92,7 +91,7 @@ export class Tooltip extends FilmElement {
     this.removeEventListener('mouseleave', this.hide)
     this.removeEventListener('focusin', this.show)
     this.removeEventListener('focusout', this.hide)
-    this.removeEventListener('keydown', this.onKeydown)
+    document.removeEventListener('keydown', this.onKeydown)
     super.disconnectedCallback()
   }
 
@@ -108,8 +107,10 @@ export class Tooltip extends FilmElement {
     this.open = false
   }
 
+  // On the document while open, not just this element: a tooltip opened by
+  // hover must be dismissible wherever focus is (WCAG 1.4.13).
   private readonly onKeydown = (event: KeyboardEvent): void => {
-    if (event.key === 'Escape') this.hide()
+    if (event.key === 'Escape' && this.open) this.hide()
   }
 
   updated (changed: PropertyValues<this>): void {
@@ -119,8 +120,13 @@ export class Tooltip extends FilmElement {
       this.describe()
     }
     if (!changed.has('open')) return
-    if (this.open) this.floating.show()
-    else this.floating.hide()
+    if (this.open) {
+      document.addEventListener('keydown', this.onKeydown)
+      this.floating.show()
+    } else {
+      document.removeEventListener('keydown', this.onKeydown)
+      this.floating.hide()
+    }
   }
 
   /**

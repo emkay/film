@@ -47,6 +47,8 @@ export class Heading extends FilmElement {
 
     .heading {
       margin: 0;
+      /* Break a word too long for the line rather than overflow (WCAG 1.4.10). */
+      overflow-wrap: break-word;
       font-family: inherit;
       line-height: 1.2;
       color: var(--film-color-text);

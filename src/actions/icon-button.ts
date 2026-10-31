@@ -1,6 +1,7 @@
-import { css, html } from 'lit'
+import { css, html, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FilmElement } from '../internal/film-element.js'
+import { warningsEnabled, warnOnce } from '../internal/attribute-check.js'
 
 /**
  * IconButton — a compact, square button for a single icon. The `label` is
@@ -54,6 +55,15 @@ export class IconButton extends FilmElement {
       block-size: 1.25em;
     }
   `
+
+  // With no visible text, a missing label leaves the button with no name at
+  // all (WCAG 4.1.2) — say so, like Film's other attribute warnings.
+  updated (changed: PropertyValues<this>): void {
+    super.updated(changed)
+    if (changed.has('label') && !this.label && !this.hasAttribute('aria-label') && warningsEnabled()) {
+      warnOnce('film-icon-button @label', 'film-icon-button has no label, so assistive tech announces it as an unnamed button.')
+    }
+  }
 
   render () {
     return html`

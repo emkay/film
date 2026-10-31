@@ -19,6 +19,8 @@ export class ButtonGroup extends FilmElement {
   static styles = css`
     :host {
       display: inline-flex;
+      /* Wrap rather than run off a narrow screen (WCAG 1.4.10). */
+      flex-wrap: wrap;
       gap: var(--s-2);
     }
 

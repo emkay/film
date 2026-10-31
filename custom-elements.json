@@ -13100,11 +13100,22 @@
           "members": [
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The window's name: shown in its title bar and announced by assistive tech.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
               "name": "title",
               "type": {
                 "text": "string"
               },
               "default": "''",
+              "deprecated": "Use `label`. Kept as an alias; as an attribute it also gives the\nwhole window the browser's native tooltip, which `label` doesn't.",
               "attribute": "title"
             },
             {
@@ -13278,11 +13289,21 @@
           ],
           "attributes": [
             {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The window's name: shown in its title bar and announced by assistive tech.",
+              "fieldName": "label"
+            },
+            {
               "name": "title",
               "type": {
                 "text": "string"
               },
               "default": "''",
+              "deprecated": "Use `label`. Kept as an alias; as an attribute it also gives the\nwhole window the browser's native tooltip, which `label` doesn't.",
               "fieldName": "title"
             },
             {

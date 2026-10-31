@@ -18,6 +18,8 @@ export class Prose extends FilmElement {
     :host {
       display: flex;
       flex-direction: column;
+      /* Break a word too long for the line rather than overflow (WCAG 1.4.10). */
+      overflow-wrap: break-word;
       gap: var(--s1);
       max-inline-size: var(--measure);
       color: var(--film-color-text);

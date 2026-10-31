@@ -85,6 +85,34 @@ export abstract class FilmFormControl extends FilmElement {
     return undefined
   }
 
+  /**
+   * Where `aria-invalid` goes: the element that takes focus, so it's announced
+   * there. That's the validation anchor (the inner input or trigger), or the
+   * host for controls whose host carries the role.
+   */
+  protected get invalidTarget (): Element {
+    return this.validationAnchor ?? this
+  }
+
+  /** Set once validation has been attempted, so a pristine field isn't announced as invalid. */
+  private validationAttempted = false
+
+  private readonly onInvalid = (): void => {
+    this.validationAttempted = true
+    this.syncInvalid()
+  }
+
+  /**
+   * Expose the invalid state to assistive tech (WCAG 3.3.1, 4.1.2) once
+   * validation has been attempted — a submit, reportValidity() or
+   * checkValidity(), all of which fire `invalid` — and keep it current after.
+   */
+  protected syncInvalid (): void {
+    const target = this.invalidTarget
+    if (this.validationAttempted && !this.internals.validity.valid) target.setAttribute('aria-invalid', 'true')
+    else target.removeAttribute('aria-invalid')
+  }
+
   /** Recompute validity. Override for control-specific rules; the default only checks `required`. */
   protected updateValidity (): void {
     const value = this.getFormValue()
@@ -104,10 +132,12 @@ export abstract class FilmFormControl extends FilmElement {
   protected syncForm (): void {
     this.internals.setFormValue(this.getFormValue())
     this.updateValidity()
+    this.syncInvalid()
   }
 
   connectedCallback (): void {
     super.connectedCallback()
+    this.addEventListener('invalid', this.onInvalid)
     if (!this.initialCaptured) {
       this.initialValue = (this as unknown as Record<string, unknown>).value
       this.initialCaptured = true

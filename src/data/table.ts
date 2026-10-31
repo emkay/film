@@ -361,6 +361,17 @@ export class Table extends FilmElement {
     this.dispatchEvent(new CustomEvent('film-row-activate', { detail: { row, index }, bubbles: true }))
   }
 
+  /**
+   * "Select Ada" rather than one "Select row" per row: the first column names
+   * the row. A value that isn't plain text (a rendered cell) falls back to the
+   * row's number.
+   */
+  private rowLabel (row: TableRow, index: number): string {
+    const first = this.columns[0] ? row[this.columns[0].key] : undefined
+    const text = typeof first === 'string' || typeof first === 'number' ? String(first).trim() : ''
+    return text ? `Select ${text}` : `Select row ${index + 1}`
+  }
+
   private renderRow ({ row, index }: IndexedRow, ariaRowIndex?: number) {
     return html`
       <tr
@@ -374,7 +385,7 @@ export class Table extends FilmElement {
               <label class="select">
                 <input
                   type="checkbox"
-                  aria-label="Select row"
+                  aria-label=${this.rowLabel(row, index)}
                   .checked=${this.isSelected(row)}
                   @change=${() => this.toggleRow(row)}
                 />

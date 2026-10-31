@@ -94,6 +94,22 @@ export class Combobox extends FilmFormControl {
       padding: var(--s-2) var(--s0);
       color: var(--film-color-text-muted);
     }
+
+    /* The muted token, held to 4.5:1 by the palette test; the browser's
+       default grey isn't. opacity: 1 because Firefox fades placeholders. */
+    input::placeholder {
+      color: var(--film-color-text-muted);
+      opacity: 1;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
   `
 
   private get options (): SelectOption[] {
@@ -248,6 +264,17 @@ export class Combobox extends FilmFormControl {
     }
   }
 
+  /**
+   * What the status region announces as the user filters (WCAG 4.1.3): the
+   * number of matches, or that there are none. Silent until they've typed.
+   */
+  private get resultsMessage (): string {
+    if (!this.text.trim()) return ''
+    const count = this.visibleOptions.length
+    if (count === 0) return 'No matches'
+    return `${count} ${count === 1 ? 'result' : 'results'}`
+  }
+
   render () {
     const hasMatches = this.visibleOptions.length > 0
     return html`
@@ -288,6 +315,9 @@ export class Combobox extends FilmFormControl {
           ></slot>
           ${hasMatches ? nothing : html`<div class="empty">No matches</div>`}
         </div>
+        <!-- Always rendered: a live region added at the moment it has news is
+             often not announced. -->
+        <div class="visually-hidden" role="status">${this.resultsMessage}</div>
       </div>
     `
   }

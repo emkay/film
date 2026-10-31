@@ -59,6 +59,12 @@ export abstract class FilmToggleControl extends FilmFormControl {
     return this.checked ? this.value : null
   }
 
+  // The host carries the role and takes focus, so the invalid state goes there,
+  // not on the decorative box the validation bubble points at.
+  protected override get invalidTarget (): Element {
+    return this
+  }
+
   protected override restoreDefault (): void {
     this.checked = this.defaultChecked ?? false
   }
